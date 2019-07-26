@@ -1,0 +1,82 @@
+* {
+  box-sizing: border-box;
+}
+
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  display: flex;
+}
+
+nav {
+  width: 300px;
+  /*fposition: fixed;*/
+}
+
+.all-content {
+  margin-left: 20px;
+}
+
+ul {
+  list-style: none;
+}
+
+h1 {
+  font-size: 55px;
+  /*font-family: 'Bangers', cursive;*/
+}
+
+h2 {
+  font-size: 40px;
+  /*font-family: 'Bangers', cursive;*/
+}
+
+.game-block {
+  border: 2px solid black;
+  text-align: center;
+  padding: 10px;
+  margin: 5px;
+  min-width: 150px;
+}
+
+#completed {
+  background-color: rgba(97, 189, 79, 1);
+}
+
+#completed:hover {
+  background-color: rgba(97, 189, 79, 0.5);
+}
+
+#put-aside {
+  background-color: rgba(242, 214, 0, 1);
+}
+
+#put-aside:hover {
+  background-color: rgba(242, 214, 0, 0.5);
+}
+
+#dropped {
+  background-color: rgba(0, 194, 224, 1);
+}
+
+#dropped:hover {
+  background-color: rgba(0, 194, 224, 0.5);
+}
+
+#shit {
+  background-color: rgba(235, 90, 70, 1);
+}
+
+#shit:hover {
+  background-color: rgba(235, 90, 70, 0.5);
+}
+
+/*.game-block:hover {
+  background-color: rgba(165, 42, 42, 0.5);
+}*/
+
+.inner-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
