@@ -13,6 +13,10 @@ nav {
   /*fposition: fixed;*/
 }
 
+img {
+  width: 200px;
+}
+
 .all-content {
   margin-left: 20px;
 }
