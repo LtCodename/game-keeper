@@ -2,15 +2,20 @@
   box-sizing: border-box;
 }
 
-
 body {
   font-family: 'Open Sans', sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+.appDiv {
   display: flex;
 }
 
 nav {
   width: 300px;
-  /*fposition: fixed;*/
+  height: 100vh;
+  /*position: fixed;*/
 }
 
 img {
@@ -35,12 +40,25 @@ h2 {
   /*font-family: 'Bangers', cursive;*/
 }
 
+.all-content {
+  height: 100vh;
+  overflow: auto;
+}
+
 .game-block {
   border: 2px solid black;
   text-align: center;
   padding: 10px;
   margin: 5px;
   min-width: 150px;
+}
+
+.game-block_roster {
+  background-color: rgba(218, 223, 225, 1)
+}
+
+.game-block_roster:hover {
+  background-color: rgba(218, 223, 225, 0.5);
 }
 
 #completed {
