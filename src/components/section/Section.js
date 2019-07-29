@@ -1,30 +1,25 @@
 import React from 'react';
+import Block from '../block/Block.js';
 
 class Section extends React.Component {
-  constructor(props) {
-    super(props);
+  static defaultProps = {
+    games: []
   }
 
+  //constructor(props) {
+    //super(props);
+  //}
+
   render() {
+    let gamesToRender = this.props.games.map(elem => {
+      return <Block key={elem.id} color={this.props.color} gameName={elem.name}/>;
+    })
+
     return (
       <div className="section">
-        <h2>{this.props.name}</h2>
+        <h2>{this.props.sectionName}</h2>
         <div className="inner-section">
-          <div className="game-block game-block_roster">
-            <p>World Of Warcraft: Battle For Azeroth 8.2</p>
-          </div>
-          <div className="game-block game-block_roster">
-            <p>F1 2019</p>
-          </div>
-          <div className="game-block game-block_roster">
-            <p>Hearthstone</p>
-          </div>
-          <div className="game-block game-block_roster">
-            <p>Rocket League</p>
-          </div>
-          <div className="game-block game-block_roster">
-            <p>Heroes Of The Storm</p>
-          </div>
+        {gamesToRender}
         </div>
       </div>
     )

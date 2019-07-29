@@ -1,15 +1,77 @@
 import React from 'react';
 import './App.css';
-import Sections from './components/sections/Sections.js';
+import List from './components/list/List.js';
 import Nav from './components/nav/Nav.js';
+import lists from './mocks/lists.js';
 
-function App() {
-  return (
-    <div className="appDiv">
-      <Nav />
-      <Sections />
-    </div>
-  );
+class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.changeSelectedListIndex = this.changeSelectedListIndex.bind(this);
+    this.renameList = this.renameList.bind(this);
+    this.deleteList = this.deleteList.bind(this);
+
+    this.state = {
+      selectedListIndex: 0,
+      lists: lists
+    };
+  }
+
+  changeSelectedListIndex(newIndex) {
+    if (this.state.selectedListIndex !== newIndex && newIndex >= 0 && newIndex < this.state.lists.length) {
+      this.setState({
+        selectedListIndex: newIndex
+      });
+    }
+  }
+
+  renameList(newName) {
+    console.log("new list name is " + newName);
+
+    const copy = this.deepCopy(this.state.lists);
+    copy[this.state.selectedListIndex].name = newName;
+
+    this.setState({
+      lists: copy
+    });
+  }
+
+  deleteList(index) {
+    console.log("deleted 100% with index " + index);
+
+    if (this.state.lists.length === 1) {
+      console.log("DO NOT DELETE LAST ITEM IN THE ARRAY!");
+      return;
+    }
+
+
+    const copy = this.deepCopy(this.state.lists);
+    copy.splice(index, 1);
+
+    this.setState({
+      lists: copy,
+      selectedListIndex: 0 
+    });
+  }
+
+  deepCopy(objectToCopy) {
+    return JSON.parse(JSON.stringify(objectToCopy));
+  }
+
+  render() {
+    return (
+      <div className="appDiv">
+        <Nav content={this.state.lists} indexToHighligth={this.state.selectedListIndex} doOnClick={this.changeSelectedListIndex}/>
+        <List
+          listName={this.state.lists[this.state.selectedListIndex].name}
+          content={this.state.lists[this.state.selectedListIndex].content}
+          doOnRename={this.renameList}
+          doOnDelete={() => this.deleteList(this.state.selectedListIndex)} />
+      </div>
+    );
+  }
 }
 
 export default App;
