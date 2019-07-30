@@ -13,6 +13,7 @@ class App extends React.Component {
     this.renameList = this.renameList.bind(this);
     this.renameSection= this.renameSection.bind(this);
     this.deleteList = this.deleteList.bind(this);
+    this.addList = this.addList.bind(this);
 
     this.state = {
       selectedListIndex: 0,
@@ -62,7 +63,7 @@ class App extends React.Component {
   }
 
   deleteList(index) {
-    console.log("deleted 100% with index " + index);
+    //console.log("deleted 100% with index " + index);
 
     if (this.state.lists.length === 1) {
       console.log("DO NOT DELETE LAST ITEM IN THE ARRAY!");
@@ -78,6 +79,22 @@ class App extends React.Component {
     });
   }
 
+  addList(listName) {
+    //console.log(listName);
+    //console.log("added 100%");
+
+    const copy = this.deepCopy(this.state.lists);
+    copy.push({
+      id: copy.length + 1,
+      name: listName,
+      content: []
+    });
+
+    this.setState({
+      lists: copy
+    });
+  }
+
   deepCopy(objectToCopy) {
     return JSON.parse(JSON.stringify(objectToCopy));
   }
@@ -85,7 +102,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="appDiv">
-        <Nav content={this.state.lists} indexToHighligth={this.state.selectedListIndex} doOnClick={this.changeSelectedListIndex}/>
+        <Nav content={this.state.lists} indexToHighligth={this.state.selectedListIndex} doOnClick={this.changeSelectedListIndex} doOnAdd={this.addList}/>
         <List
           listName={this.state.lists[this.state.selectedListIndex].name}
           content={this.state.lists[this.state.selectedListIndex].content}

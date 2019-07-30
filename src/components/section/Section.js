@@ -1,5 +1,6 @@
 import React from 'react';
 import Block from '../block/Block.js';
+import Colors from '../colors/Colors.js';
 
 class Section extends React.Component {
   static defaultProps = {
@@ -70,7 +71,7 @@ class Section extends React.Component {
       <div>
         <h2>{this.props.sectionName}</h2>
         <div className="actionButtons">
-          <button onClick={this.doOnEdit}>Edit name</button>
+          <button onClick={this.doOnEdit}>Edit</button>
           <button onClick={this.doOnDelete}>Delete section</button>
         </div>
       </div>
@@ -81,6 +82,7 @@ class Section extends React.Component {
           <input type="text" placeholder="Enter new name" value={this.state.inputValue} onChange={this.inputValueChange}></input>
           <button className="submitButtons" onClick={this.doOnSubmit}>Submit name</button>
           <button className="submitButtons" onClick={this.doOnCancel}>Cancel</button>
+          <Colors />
         </div>
 
     );

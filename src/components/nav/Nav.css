@@ -9,3 +9,10 @@
   background-color: #333;
   color: #fff;
 }
+
+input {
+  margin-top: 50px;
+  margin-right: 20px;
+  padding: 5px;
+  font-size: 14px;
+}
