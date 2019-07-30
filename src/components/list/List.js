@@ -49,7 +49,7 @@ class List extends React.Component {
   doOnAccept() {
     console.log("On Accept");
 
-    this.props.doOnRename(this.state.inputValue);
+    this.props.doOnListRename(this.state.inputValue);
     this.setState({
       editMode: false
     });
@@ -63,8 +63,15 @@ class List extends React.Component {
 
   render() {
 
-    let sectionsToRender = this.props.content.map(elem => {
-      return <Section key={elem.id} sectionName={elem.name} color={elem.color} games={elem.games} />;
+    let sectionsToRender = this.props.content.map((elem, index) => {
+      return (
+        <Section
+          key={elem.id}
+          id={index}
+          sectionName={elem.name}
+          color={elem.color}
+          doOnSectionRename={this.props.doOnSectionRename}
+          games={elem.games} />);
     })
 
     const nameBlock = (

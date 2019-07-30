@@ -11,6 +11,7 @@ class App extends React.Component {
 
     this.changeSelectedListIndex = this.changeSelectedListIndex.bind(this);
     this.renameList = this.renameList.bind(this);
+    this.renameSection= this.renameSection.bind(this);
     this.deleteList = this.deleteList.bind(this);
 
     this.state = {
@@ -38,6 +39,17 @@ class App extends React.Component {
     });
   }
 
+  renameSection(newName, id) {
+    console.log("new section name is " + newName);
+
+    const copy = this.deepCopy(this.state.lists);
+    copy[this.state.selectedListIndex].content[id].name = newName;
+
+    this.setState({
+      lists: copy
+    });
+  }
+
   deleteList(index) {
     console.log("deleted 100% with index " + index);
 
@@ -52,7 +64,7 @@ class App extends React.Component {
 
     this.setState({
       lists: copy,
-      selectedListIndex: 0 
+      selectedListIndex: 0
     });
   }
 
@@ -67,7 +79,8 @@ class App extends React.Component {
         <List
           listName={this.state.lists[this.state.selectedListIndex].name}
           content={this.state.lists[this.state.selectedListIndex].content}
-          doOnRename={this.renameList}
+          doOnListRename={this.renameList}
+          doOnSectionRename={this.renameSection}
           doOnDelete={() => this.deleteList(this.state.selectedListIndex)} />
       </div>
     );

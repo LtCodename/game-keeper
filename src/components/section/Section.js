@@ -17,7 +17,8 @@ class Section extends React.Component {
 
     this.state = {
       editMode: false,
-      inputValue: this.props.sectionName
+      inputValue: this.props.sectionName,
+      id: this.props.id
     };
   }
 
@@ -45,7 +46,7 @@ class Section extends React.Component {
   doOnAccept() {
     console.log("On Accept");
 
-    //this.props.doOnRename(this.state.inputValue);
+    this.props.doOnSectionRename(this.state.inputValue, this.state.id);
     this.setState({
       editMode: false
     });
