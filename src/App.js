@@ -14,6 +14,7 @@ class App extends React.Component {
     this.renameSection= this.renameSection.bind(this);
     this.deleteList = this.deleteList.bind(this);
     this.addList = this.addList.bind(this);
+    this.deleteSection = this.deleteSection.bind(this);
 
     this.state = {
       selectedListIndex: 0,
@@ -30,8 +31,6 @@ class App extends React.Component {
   }
 
   renameList(newName) {
-    console.log("new list name is " + newName);
-
     const copy = this.deepCopy(this.state.lists);
     copy[this.state.selectedListIndex].name = newName;
 
@@ -40,22 +39,18 @@ class App extends React.Component {
     });
   }
 
-  renameSection(newName, id) {
-    console.log("new section name is " + newName);
-
+  renameSection(newName, sectionId, listId) {
     const copy = this.deepCopy(this.state.lists);
-    copy[this.state.selectedListIndex].content[id].name = newName;
+    copy[listId].content[sectionId].name = newName;
 
     this.setState({
       lists: copy
     });
   }
 
-  deleteSection(index) {
-    console.log("deleted 100% with id " + index);
-
+  deleteSection(listIndex, sectionIndex) {
     const copy = this.deepCopy(this.state.lists);
-    copy[this.state.selectedListIndex].content.splice(index, 1);
+    copy[listIndex].content.splice(sectionIndex, 1);
 
     this.setState({
       lists: copy
@@ -63,8 +58,6 @@ class App extends React.Component {
   }
 
   deleteList(index) {
-    //console.log("deleted 100% with index " + index);
-
     if (this.state.lists.length === 1) {
       console.log("DO NOT DELETE LAST ITEM IN THE ARRAY!");
       return;
@@ -80,10 +73,8 @@ class App extends React.Component {
   }
 
   addList(listName) {
-    //console.log(listName);
-    //console.log("added 100%");
-
     const copy = this.deepCopy(this.state.lists);
+
     copy.push({
       id: copy.length + 1,
       name: listName,
@@ -102,14 +93,18 @@ class App extends React.Component {
   render() {
     return (
       <div className="appDiv">
-        <Nav content={this.state.lists} indexToHighligth={this.state.selectedListIndex} doOnClick={this.changeSelectedListIndex} doOnAdd={this.addList}/>
+        <Nav
+          content={this.state.lists}
+          indexToHighligth={this.state.selectedListIndex}
+          doOnClick={this.changeSelectedListIndex}
+          doOnAdd={this.addList}/>
         <List
           listName={this.state.lists[this.state.selectedListIndex].name}
           content={this.state.lists[this.state.selectedListIndex].content}
           doOnListRename={this.renameList}
-          doOnSectionRename={this.renameSection}
-          doOnSectionDelete={this.deleteSection}
-          doOnDelete={() => this.deleteList(this.state.selectedListIndex)} />
+          doOnSectionRename={(newSectionName, sectionIndex) => this.renameSection(newSectionName, sectionIndex, this.state.selectedListIndex)}
+          doOnSectionDelete={(sectionIndex) => this.deleteSection(this.state.selectedListIndex, sectionIndex)}
+          doOnDelete={() => this.deleteList(this.state.selectedListIndex)}/>
       </div>
     );
   }

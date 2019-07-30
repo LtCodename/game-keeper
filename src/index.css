@@ -65,43 +65,43 @@ h2 {
   min-width: 150px;
 }
 
-.game-block_roster {
+.game-block_orange {
   background-color: rgba(255, 159, 26, 1);
 }
 
-.game-block_roster:hover {
+.game-block_orange:hover {
   background-color: rgba(255, 159, 26, 0.5);
 }
 
-.game-block_completed {
+.game-block_green {
   background-color: rgba(97, 189, 79, 1);
 }
 
-.game-block_completed:hover {
+.game-block_green:hover {
   background-color: rgba(97, 189, 79, 0.5);
 }
 
-.game-block_put-aside {
+.game-block_yellow {
   background-color: rgba(242, 214, 0, 1);
 }
 
-.game-block_put-aside:hover {
+.game-block_yellow:hover {
   background-color: rgba(242, 214, 0, 0.5);
 }
 
-.game-block_dropped {
+.game-block_blue {
   background-color: rgba(0, 194, 224, 1);
 }
 
-.game-block_dropped:hover {
+.game-block_blue:hover {
   background-color: rgba(0, 194, 224, 0.5);
 }
 
-.game-block_shit-game {
+.game-block_red {
   background-color: rgba(235, 90, 70, 1);
 }
 
-.game-block_shit-game:hover {
+.game-block_red:hover {
   background-color: rgba(235, 90, 70, 0.5);
 }
 
@@ -113,4 +113,5 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
+  clear: both;
 }

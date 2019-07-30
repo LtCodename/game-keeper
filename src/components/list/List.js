@@ -22,6 +22,13 @@ class List extends React.Component {
     newListName: ""
   }
 
+  componentWillReceiveProps(newProps){
+    this.setState({
+      editMode: false,
+      inputValue: newProps.listName
+    });
+  }
+
   doOnDelete() {
     console.log("On Delete");
     this.props.doOnDelete();
@@ -68,11 +75,10 @@ class List extends React.Component {
       return (
         <Section
           key={elem.id}
-          id={index}
           sectionName={elem.name}
           color={elem.color}
-          doOnSectionRename={this.props.doOnSectionRename}
-          doOnSectionDelete={this.props.doOnSectionDelete}
+          doOnSectionRename={(newSectionName) => this.props.doOnSectionRename(newSectionName, index)}
+          doOnSectionDelete={() => this.props.doOnSectionDelete(index)}
           games={elem.games} />);
     })
 

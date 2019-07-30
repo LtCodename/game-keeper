@@ -10,7 +10,6 @@ class Section extends React.Component {
   constructor(props) {
     super(props);
 
-    this.doOnDelete = this.doOnDelete.bind(this);
     this.doOnEdit = this.doOnEdit.bind(this);
     this.inputValueChange = this.inputValueChange.bind(this);
     this.doOnSubmit = this.doOnSubmit.bind(this);
@@ -18,19 +17,11 @@ class Section extends React.Component {
 
     this.state = {
       editMode: false,
-      inputValue: this.props.sectionName,
-      id: this.props.id
+      inputValue: this.props.sectionName
     };
   }
 
-  doOnDelete() {
-    console.log("On Delete");
-    this.props.doOnSectionDelete(this.state.id);
-  }
-
   doOnEdit() {
-    console.log("On Edit");
-
     if (!this.state.editMode) {
       this.setState({
         editMode: true
@@ -45,17 +36,13 @@ class Section extends React.Component {
   }
 
   doOnSubmit() {
-    console.log("On Submit");
-
-    this.props.doOnSectionRename(this.state.inputValue, this.state.id);
+    this.props.doOnSectionRename(this.state.inputValue);
     this.setState({
       editMode: false
     });
   }
 
   doOnCancel() {
-    console.log("On Cancel");
-
     this.setState({
       editMode: false,
       inputValue: this.props.sectionName
@@ -72,7 +59,7 @@ class Section extends React.Component {
         <h2>{this.props.sectionName}</h2>
         <div className="actionButtons">
           <button onClick={this.doOnEdit}>Edit</button>
-          <button onClick={this.doOnDelete}>Delete section</button>
+          <button onClick={this.props.doOnSectionDelete}>Delete section</button>
         </div>
       </div>
     );
@@ -82,7 +69,7 @@ class Section extends React.Component {
           <input type="text" placeholder="Enter new name" value={this.state.inputValue} onChange={this.inputValueChange}></input>
           <button className="submitButtons" onClick={this.doOnSubmit}>Submit name</button>
           <button className="submitButtons" onClick={this.doOnCancel}>Cancel</button>
-          <Colors />
+          <Colors currentColor={this.props.color}/>
         </div>
 
     );

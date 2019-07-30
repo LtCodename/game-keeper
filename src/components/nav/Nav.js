@@ -30,6 +30,13 @@ class Nav extends React.Component {
   }
 
   submitNewList() {
+    if (!this.state.inputValue.length) {
+      this.setState({
+        addMode: false
+      })
+      return;
+    }
+
     this.props.doOnAdd(this.state.inputValue);
 
     this.setState({
@@ -65,9 +72,9 @@ class Nav extends React.Component {
     );
 
     const buttonBit = (
-      <nav>
+      <div>
         <button onClick={this.doOnAdd}>Add list</button>
-      </nav>
+      </div>
     );
 
     return (

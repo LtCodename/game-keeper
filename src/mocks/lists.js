@@ -6,7 +6,7 @@ const lists = [
       {
         id: 1,
         name: "Roster",
-        color: "roster",
+        color: "orange",
         games: [
           {id: 1, name:"World Of Warcraft: Battle For Azeroth 8.2"},
           {id: 2, name:"F1 2019"},
@@ -18,7 +18,7 @@ const lists = [
       {
         id: 2,
         name: "Completed",
-        color: "completed",
+        color: "green",
         games: [
           {id: 1, name:"Metro Exodus"},
           {id: 2, name:"Pokémon: Let's Go Eevee!"},
@@ -36,7 +36,7 @@ const lists = [
       {
         id: 3,
         name: "Put Aside",
-        color: "put-aside",
+        color: "yellow",
         games: [
           {id: 1, name:"The Binding of Isaac: Afterbirth +"},
           {id: 2, name:"Prime World: Defenders"},
@@ -52,7 +52,7 @@ const lists = [
       {
         id: 4,
         name: "Dropped",
-        color: "dropped",
+        color: "blue",
         games: [
           {id: 1, name:"SOMA"},
           {id: 2, name:"Dishonored 2"}
@@ -61,7 +61,7 @@ const lists = [
       {
         id: 5,
         name: "Shit Game",
-        color: "shit-game",
+        color: "red",
         games: [
           {id: 1, name:"Borderlands: The Pre-Sequel"}
         ]

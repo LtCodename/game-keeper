@@ -10,6 +10,7 @@ class Colors extends React.Component {
     this.onPickColor = this.onPickColor.bind(this);
 
     this.state = {
+      currentColor: this.props.currentColor
     };
   }
 
@@ -23,7 +24,11 @@ class Colors extends React.Component {
       classNameReal += elem.name;
 
       return (
-        <span key={elem.id} className={classNameReal} onClick={() => this.onPickColor(classNameReal)}>
+        <span
+          key={elem.id}
+          className={classNameReal}
+          onClick={() => this.onPickColor(classNameReal)}>
+          {(this.state.currentColor === elem.name) ? "X" : ""}
         </span>
       );
     })
