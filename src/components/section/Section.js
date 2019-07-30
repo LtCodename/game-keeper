@@ -6,23 +6,92 @@ class Section extends React.Component {
     games: []
   }
 
-  //constructor(props) {
-    //super(props);
-  //}
+  constructor(props) {
+    super(props);
+
+    this.doOnDelete = this.doOnDelete.bind(this);
+    this.doOnEdit = this.doOnEdit.bind(this);
+    this.inputValueChange = this.inputValueChange.bind(this);
+    this.doOnAccept = this.doOnAccept.bind(this);
+    this.doOnCancel = this.doOnCancel.bind(this);
+
+    this.state = {
+      editMode: false,
+      inputValue: this.props.sectionName
+    };
+  }
+
+  doOnDelete() {
+    console.log("On Delete");
+    //this.props.doOnDelete();
+  }
+
+  doOnEdit() {
+    console.log("On Edit");
+
+    if (!this.state.editMode) {
+      this.setState({
+        editMode: true
+      });
+    }
+  }
+
+  inputValueChange(event) {
+    this.setState({
+      inputValue: event.target.value
+    });
+  }
+
+  doOnAccept() {
+    console.log("On Accept");
+
+    //this.props.doOnRename(this.state.inputValue);
+    this.setState({
+      editMode: false
+    });
+  }
+
+  doOnCancel() {
+    console.log("On Cancel");
+
+    this.setState({
+      editMode: false,
+      inputValue: this.props.sectionName
+    });
+  }
 
   render() {
     let gamesToRender = this.props.games.map(elem => {
       return <Block key={elem.id} color={this.props.color} gameName={elem.name}/>;
     })
 
-    return (
-      <div className="section">
+    const nameBlock = (
+      <div>
         <h2>{this.props.sectionName}</h2>
-        <div className="inner-section">
-        {gamesToRender}
+        <div className="actionButtons">
+          <button onClick={this.doOnEdit}>Edit name</button>
+          <button onClick={this.doOnDelete}>Delete section</button>
         </div>
       </div>
-    )
+    );
+
+    const editForm = (
+        <div>
+          <input type="text" placeholder="Enter new name" value={this.state.inputValue} onChange={this.inputValueChange}></input>
+          <button className="submitButtons" onClick={this.doOnAccept}>Submit name</button>
+          <button className="submitButtons" onClick={this.doOnCancel}>Cancel</button>
+        </div>
+
+    );
+
+    return (
+      <div className="section">
+        {(this.state.editMode) ? editForm : nameBlock}
+        <div className="inner-section">
+          {gamesToRender}
+        </div>
+      </div>
+    );
   }
 }
 
