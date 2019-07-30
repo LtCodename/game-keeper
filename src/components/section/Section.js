@@ -12,7 +12,7 @@ class Section extends React.Component {
     this.doOnDelete = this.doOnDelete.bind(this);
     this.doOnEdit = this.doOnEdit.bind(this);
     this.inputValueChange = this.inputValueChange.bind(this);
-    this.doOnAccept = this.doOnAccept.bind(this);
+    this.doOnSubmit = this.doOnSubmit.bind(this);
     this.doOnCancel = this.doOnCancel.bind(this);
 
     this.state = {
@@ -24,7 +24,7 @@ class Section extends React.Component {
 
   doOnDelete() {
     console.log("On Delete");
-    //this.props.doOnDelete();
+    this.props.doOnSectionDelete(this.state.id);
   }
 
   doOnEdit() {
@@ -43,8 +43,8 @@ class Section extends React.Component {
     });
   }
 
-  doOnAccept() {
-    console.log("On Accept");
+  doOnSubmit() {
+    console.log("On Submit");
 
     this.props.doOnSectionRename(this.state.inputValue, this.state.id);
     this.setState({
@@ -79,7 +79,7 @@ class Section extends React.Component {
     const editForm = (
         <div>
           <input type="text" placeholder="Enter new name" value={this.state.inputValue} onChange={this.inputValueChange}></input>
-          <button className="submitButtons" onClick={this.doOnAccept}>Submit name</button>
+          <button className="submitButtons" onClick={this.doOnSubmit}>Submit name</button>
           <button className="submitButtons" onClick={this.doOnCancel}>Cancel</button>
         </div>
 

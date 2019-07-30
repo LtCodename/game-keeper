@@ -8,7 +8,7 @@ class List extends React.Component {
     this.doOnDelete = this.doOnDelete.bind(this);
     this.doOnEdit = this.doOnEdit.bind(this);
     this.doOnCancel = this.doOnCancel.bind(this);
-    this.doOnAccept = this.doOnAccept.bind(this);
+    this.doOnSubmit = this.doOnSubmit.bind(this);
     this.inputValueChange = this.inputValueChange.bind(this);
 
     this.state = {
@@ -32,7 +32,8 @@ class List extends React.Component {
 
     if (!this.state.editMode) {
       this.setState({
-        editMode: true
+        editMode: true,
+        inputValue: this.props.listName
       });
     }
   }
@@ -46,8 +47,8 @@ class List extends React.Component {
     });
   }
 
-  doOnAccept() {
-    console.log("On Accept");
+  doOnSubmit() {
+    console.log("On Submit");
 
     this.props.doOnListRename(this.state.inputValue);
     this.setState({
@@ -71,6 +72,7 @@ class List extends React.Component {
           sectionName={elem.name}
           color={elem.color}
           doOnSectionRename={this.props.doOnSectionRename}
+          doOnSectionDelete={this.props.doOnSectionDelete}
           games={elem.games} />);
     })
 
@@ -87,7 +89,7 @@ class List extends React.Component {
     const editForm = (
       <div>
         <input type="text" placeholder="Enter new name" value={this.state.inputValue} onChange={this.inputValueChange}></input>
-        <button className="submitButtons" onClick={this.doOnAccept}>Submit name</button>
+        <button className="submitButtons" onClick={this.doOnSubmit}>Submit name</button>
         <button className="submitButtons" onClick={this.doOnCancel}>Cancel</button>
       </div>
     );

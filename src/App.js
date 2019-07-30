@@ -50,6 +50,17 @@ class App extends React.Component {
     });
   }
 
+  deleteSection(index) {
+    console.log("deleted 100% with id " + index);
+
+    const copy = this.deepCopy(this.state.lists);
+    copy[this.state.selectedListIndex].content.splice(index, 1);
+
+    this.setState({
+      lists: copy
+    });
+  }
+
   deleteList(index) {
     console.log("deleted 100% with index " + index);
 
@@ -57,7 +68,6 @@ class App extends React.Component {
       console.log("DO NOT DELETE LAST ITEM IN THE ARRAY!");
       return;
     }
-
 
     const copy = this.deepCopy(this.state.lists);
     copy.splice(index, 1);
@@ -81,6 +91,7 @@ class App extends React.Component {
           content={this.state.lists[this.state.selectedListIndex].content}
           doOnListRename={this.renameList}
           doOnSectionRename={this.renameSection}
+          doOnSectionDelete={this.deleteSection}
           doOnDelete={() => this.deleteList(this.state.selectedListIndex)} />
       </div>
     );
