@@ -73,8 +73,8 @@ const lists = [
     content: [
       {
         id: 1,
-        name: "Roster",
-        color: "roster",
+        name: "Completed",
+        color: "orange",
         games: [
           {id: 1, name:"World Of Warcraft: Battle For Azeroth 8.2"},
           {id: 2, name:"F1 2019"}

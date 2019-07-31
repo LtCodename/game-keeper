@@ -5,15 +5,19 @@ class List extends React.Component {
   constructor(props) {
     super(props);
 
-    this.doOnDelete = this.doOnDelete.bind(this);
     this.doOnEdit = this.doOnEdit.bind(this);
     this.doOnCancel = this.doOnCancel.bind(this);
-    this.doOnSubmit = this.doOnSubmit.bind(this);
-    this.inputValueChange = this.inputValueChange.bind(this);
+    this.doOnSubmitListName = this.doOnSubmitListName.bind(this);
+    this.doOnAddSection = this.doOnAddSection.bind(this);
+    this.doOnSubmitSection = this.doOnSubmitSection.bind(this);
+    this.listNameInputValueChange = this.listNameInputValueChange.bind(this);
+    this.sectionNameInputValueChange = this.sectionNameInputValueChange.bind(this);
 
     this.state = {
-      editMode: false,
-      inputValue: this.props.listName
+      renameListMode: false,
+      addSectionMode: false,
+      listNameInputValue: this.props.listName,
+      sectionNameInputValue: ""
     };
   }
 
@@ -24,85 +28,112 @@ class List extends React.Component {
 
   componentWillReceiveProps(newProps){
     this.setState({
-      editMode: false,
-      inputValue: newProps.listName
+      renameListMode: false,
+      listNameInputValue: newProps.listName
     });
   }
 
-  doOnDelete() {
-    console.log("On Delete");
-    this.props.doOnDelete();
+  doOnAddSection() {
+    console.log("I want to add section mate");
+
+    if (!this.state.addSectionMode) {
+      this.setState({
+        addSectionMode: true,
+        listNameInputValue: ""
+      });
+    }
+  }
+
+  doOnSubmitSection() {
+    console.log("I want to sumbit section mate");
   }
 
   doOnEdit() {
-    console.log("On Edit");
+    //console.log("On Edit");
 
-    if (!this.state.editMode) {
+    if (!this.state.renameListMode) {
       this.setState({
-        editMode: true,
-        inputValue: this.props.listName
+        renameListMode: true,
+        listNameInputValue: this.props.listName
       });
     }
   }
 
   doOnCancel() {
-    console.log("On Cancel");
+    //console.log("On Cancel");
 
     this.setState({
-      editMode: false,
-      inputValue: this.props.listName
+      renameListMode: false,
+      addSectionMode: false,
+      listNameInputValue: this.props.listName,
+      sectionNameInputValue: ""
     });
   }
 
-  doOnSubmit() {
-    console.log("On Submit");
+  doOnSubmitListName() {
+    //console.log("On Submit");
 
-    this.props.doOnListRename(this.state.inputValue);
+    this.props.doOnListRename(this.state.listNameInputValue);
     this.setState({
-      editMode: false
+      renameListMode: false
     });
   }
 
-  inputValueChange(event) {
+  listNameInputValueChange(event) {
     this.setState({
-      inputValue: event.target.value
+      listNameInputValue: event.target.value
+    });
+  }
+
+  sectionNameInputValueChange(event) {
+    this.setState({
+      sectionNameInputValue: event.target.value
     });
   }
 
   render() {
-
     let sectionsToRender = this.props.content.map((elem, index) => {
       return (
         <Section
           key={elem.id}
           sectionName={elem.name}
           color={elem.color}
+          passColorUp={(newColor) => this.props.doOnColorChange(index, newColor)}
           doOnSectionRename={(newSectionName) => this.props.doOnSectionRename(newSectionName, index)}
           doOnSectionDelete={() => this.props.doOnSectionDelete(index)}
           games={elem.games} />);
     })
 
-    const nameBlock = (
+    const nameAndButtonsBlock = (
       <div>
         <h1>{this.props.listName}</h1>
         <div className="actionButtons">
           <button onClick={this.doOnEdit}>Edit name</button>
-          <button onClick={this.doOnDelete}>Delete list</button>
+          <button onClick={this.props.doOnDelete}>Delete list</button>
+          <button onClick={this.doOnAddSection}>Add section</button>
         </div>
       </div>
     );
 
-    const editForm = (
+    const editListNameForm = (
       <div>
-        <input type="text" placeholder="Enter new name" value={this.state.inputValue} onChange={this.inputValueChange}></input>
-        <button className="submitButtons" onClick={this.doOnSubmit}>Submit name</button>
+        <input type="text" placeholder="Enter new name" value={this.state.listNameInputValue} onChange={this.listNameInputValueChange}></input>
+        <button className="submitButtons" onClick={this.doOnSubmitListName}>Submit name</button>
+        <button className="submitButtons" onClick={this.doOnCancel}>Cancel</button>
+      </div>
+    );
+
+    const addNewSectionForm = (
+      <div>
+        <input type="text" placeholder="Enter section name" value={this.state.sectionNameInputValue} onChange={this.sectionNameInputValueChange}></input>
+        <button className="submitButtons" onClick={this.doOnSubmitSection}>Submit section</button>
         <button className="submitButtons" onClick={this.doOnCancel}>Cancel</button>
       </div>
     );
 
     return (
       <div className="all-content">
-        {(this.state.editMode) ? editForm : nameBlock}
+        {this.state.renameListMode ? editListNameForm : this.state.addSectionMode ? addNewSectionForm : nameAndButtonsBlock}
         {sectionsToRender}
       </div>
     );

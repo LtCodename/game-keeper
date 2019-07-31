@@ -69,7 +69,7 @@ class Section extends React.Component {
           <input type="text" placeholder="Enter new name" value={this.state.inputValue} onChange={this.inputValueChange}></input>
           <button className="submitButtons" onClick={this.doOnSubmit}>Submit name</button>
           <button className="submitButtons" onClick={this.doOnCancel}>Cancel</button>
-          <Colors currentColor={this.props.color}/>
+          <Colors currentColor={this.props.color} passColorToSection={this.props.passColorUp}/>
         </div>
 
     );

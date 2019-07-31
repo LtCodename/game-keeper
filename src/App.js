@@ -15,11 +15,25 @@ class App extends React.Component {
     this.deleteList = this.deleteList.bind(this);
     this.addList = this.addList.bind(this);
     this.deleteSection = this.deleteSection.bind(this);
+    this.changeColor = this.changeColor.bind(this);
 
     this.state = {
       selectedListIndex: 0,
       lists: lists
     };
+  }
+
+  changeColor(listIndex, sectionIndex, newColor) {
+    //console.log("App here! I got list " + listIndex + " section " + sectionIndex + " and color " + newColor);
+    
+    const copy = this.deepCopy(this.state.lists);
+    //console.log("this section color is: " + copy[listIndex].content[sectionIndex].color);
+    copy[listIndex].content[sectionIndex].color = newColor;
+    //console.log("and now in is: " + copy[listIndex].content[sectionIndex].color);
+
+    this.setState({
+      lists: copy
+    });
   }
 
   changeSelectedListIndex(newIndex) {
@@ -104,6 +118,7 @@ class App extends React.Component {
           doOnListRename={this.renameList}
           doOnSectionRename={(newSectionName, sectionIndex) => this.renameSection(newSectionName, sectionIndex, this.state.selectedListIndex)}
           doOnSectionDelete={(sectionIndex) => this.deleteSection(this.state.selectedListIndex, sectionIndex)}
+          doOnColorChange={(sectionIndex, newColor) => this.changeColor(this.state.selectedListIndex, sectionIndex, newColor)}
           doOnDelete={() => this.deleteList(this.state.selectedListIndex)}/>
       </div>
     );

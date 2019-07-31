@@ -7,15 +7,19 @@ class Colors extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onPickColor = this.onPickColor.bind(this);
+    this.colorMagic = this.colorMagic.bind(this);
 
     this.state = {
       currentColor: this.props.currentColor
     };
   }
 
-  onPickColor(color) {
-    console.log("I am color " + color)
+  colorMagic(color) {
+    this.props.passColorToSection(color);
+
+    this.setState({
+      currentColor: color
+    })
   }
 
   render() {
@@ -27,8 +31,8 @@ class Colors extends React.Component {
         <span
           key={elem.id}
           className={classNameReal}
-          onClick={() => this.onPickColor(classNameReal)}>
-          {(this.state.currentColor === elem.name) ? "X" : ""}
+          onClick={() => this.colorMagic(elem.name)}>
+          {(this.state.currentColor === elem.name) ? "V" : ""}
         </span>
       );
     })
