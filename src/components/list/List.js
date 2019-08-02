@@ -29,7 +29,9 @@ class List extends React.Component {
   componentWillReceiveProps(newProps){
     this.setState({
       renameListMode: false,
-      listNameInputValue: newProps.listName
+      addSectionMode: false,
+      listNameInputValue: newProps.listName,
+      sectionNameInputValue: ""
     });
   }
 
