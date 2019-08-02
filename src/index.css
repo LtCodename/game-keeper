@@ -55,11 +55,11 @@ h2 {
 }
 
 .game-block {
-  border: 2px solid black;
-  border-radius: 20px;
+  border: 0px solid black;
+  /*border-radius: 20px;*/
   text-align: center;
   padding: 10px;
-  margin: 5px;
+  margin: 1px 2px 1px 0;
   min-width: 150px;
 }
 
