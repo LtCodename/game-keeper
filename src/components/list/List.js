@@ -29,8 +29,6 @@ class List extends React.Component {
   }
 
   holdColorForNewSection(color) {
-    console.log("I'm holding color " + color);
-
     this.setState({
       colorForNewSection: color
     });
@@ -46,8 +44,6 @@ class List extends React.Component {
   }
 
   doOnAddSection() {
-    console.log("I want to add section mate");
-
     if (!this.state.addSectionMode) {
       this.setState({
         addSectionMode: true,
@@ -57,8 +53,6 @@ class List extends React.Component {
   }
 
   doOnEdit() {
-    //console.log("On Edit");
-
     if (!this.state.renameListMode) {
       this.setState({
         renameListMode: true,
@@ -68,8 +62,6 @@ class List extends React.Component {
   }
 
   doOnCancel() {
-    //console.log("On Cancel");
-
     this.setState({
       renameListMode: false,
       addSectionMode: false,
@@ -79,8 +71,6 @@ class List extends React.Component {
   }
 
   doOnSubmitListName() {
-    //console.log("On Submit");
-
     this.props.doOnListRename(this.state.listNameInputValue);
     this.setState({
       renameListMode: false

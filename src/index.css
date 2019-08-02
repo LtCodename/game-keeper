@@ -43,12 +43,10 @@ ul {
 
 h1 {
   font-size: 55px;
-  /*font-family: 'Bangers', cursive;*/
 }
 
 h2 {
   font-size: 40px;
-  /*font-family: 'Bangers', cursive;*/
 }
 
 .all-content {
@@ -104,10 +102,6 @@ h2 {
 .game-block_red:hover {
   background-color: rgba(235, 90, 70, 0.5);
 }
-
-/*.game-block:hover {
-  background-color: rgba(165, 42, 42, 0.5);
-}*/
 
 .inner-section {
   display: flex;

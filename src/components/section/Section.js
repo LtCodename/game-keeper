@@ -65,7 +65,6 @@ class Section extends React.Component {
   doOnGameAdd() {
     if(this.state.gameInputValue) {
       this.props.addNewGame(this.state.gameInputValue);
-      console.log("game adding initiated with name " + this.state.gameInputValue);
     }
 
     this.setState({

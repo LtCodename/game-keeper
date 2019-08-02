@@ -27,13 +27,9 @@ class App extends React.Component {
   }
 
   changeColor(listIndex, sectionIndex, newColor) {
-    //console.log("App here! I got list " + listIndex + " section " + sectionIndex + " and color " + newColor);
-
     const copy = this.deepCopy(this.state.lists);
-    //console.log("this section color is: " + copy[listIndex].content[sectionIndex].color);
     copy[listIndex].content[sectionIndex].color = newColor;
-    //console.log("and now in is: " + copy[listIndex].content[sectionIndex].color);
-
+    
     this.rewriteLists(copy);
   }
 
@@ -78,7 +74,7 @@ class App extends React.Component {
 
   deleteList(index) {
     if (this.state.lists.length === 1) {
-      console.log("DO NOT DELETE LAST ITEM IN THE ARRAY!");
+      console.log("Warning: You can't delete last list. Yet.");
       return;
     }
 
