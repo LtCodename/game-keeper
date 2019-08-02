@@ -1,5 +1,6 @@
 import React from 'react';
 import Section from '../section/Section.js';
+import Colors from '../colors/Colors.js';
 
 class List extends React.Component {
   constructor(props) {
@@ -9,21 +10,30 @@ class List extends React.Component {
     this.doOnCancel = this.doOnCancel.bind(this);
     this.doOnSubmitListName = this.doOnSubmitListName.bind(this);
     this.doOnAddSection = this.doOnAddSection.bind(this);
-    this.doOnSubmitSection = this.doOnSubmitSection.bind(this);
     this.listNameInputValueChange = this.listNameInputValueChange.bind(this);
     this.sectionNameInputValueChange = this.sectionNameInputValueChange.bind(this);
+    this.holdColorForNewSection = this.holdColorForNewSection.bind(this);
 
     this.state = {
       renameListMode: false,
       addSectionMode: false,
       listNameInputValue: this.props.listName,
-      sectionNameInputValue: ""
+      sectionNameInputValue: "",
+      colorFofNewSection: ""
     };
   }
 
   static defaultProps = {
     content: [],
     newListName: ""
+  }
+
+  holdColorForNewSection(color) {
+    console.log("I'm holding color " + color);
+
+    this.setState({
+      colorForNewSection: color
+    });
   }
 
   componentWillReceiveProps(newProps){
@@ -44,10 +54,6 @@ class List extends React.Component {
         listNameInputValue: ""
       });
     }
-  }
-
-  doOnSubmitSection() {
-    console.log("I want to sumbit section mate");
   }
 
   doOnEdit() {
@@ -102,6 +108,7 @@ class List extends React.Component {
           color={elem.color}
           passColorUp={(newColor) => this.props.doOnColorChange(index, newColor)}
           doOnSectionRename={(newSectionName) => this.props.doOnSectionRename(newSectionName, index)}
+          addNewGame={(gameName) => this.props.doOnAddGame(gameName, index)}
           doOnSectionDelete={() => this.props.doOnSectionDelete(index)}
           games={elem.games} />);
     })
@@ -128,8 +135,9 @@ class List extends React.Component {
     const addNewSectionForm = (
       <div>
         <input type="text" placeholder="Enter section name" value={this.state.sectionNameInputValue} onChange={this.sectionNameInputValueChange}></input>
-        <button className="submitButtons" onClick={this.doOnSubmitSection}>Submit section</button>
+        <button className="submitButtons" onClick={() => this.props.doOnAddSection(this.state.sectionNameInputValue, this.state.colorForNewSection)}>Submit section</button>
         <button className="submitButtons" onClick={this.doOnCancel}>Cancel</button>
+        <Colors passColorToSection={this.holdColorForNewSection}/><br />
       </div>
     );
 

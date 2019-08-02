@@ -12,13 +12,27 @@ class Section extends React.Component {
 
     this.doOnEdit = this.doOnEdit.bind(this);
     this.inputValueChange = this.inputValueChange.bind(this);
+    this.gameInputValueChange = this.gameInputValueChange.bind(this);
     this.doOnSubmit = this.doOnSubmit.bind(this);
     this.doOnCancel = this.doOnCancel.bind(this);
+    this.beforeAddGame = this.beforeAddGame.bind(this);
+    this.doOnGameAdd = this.doOnGameAdd.bind(this);
 
     this.state = {
       editMode: false,
-      inputValue: this.props.sectionName
+      addGameMode: false,
+      inputValue: this.props.sectionName,
+      gameInputValue: ""
     };
+  }
+
+  beforeAddGame() {
+    if (!this.state.addGameMode) {
+      this.setState({
+        addGameMode: true,
+        gameInputValue: ""
+      });
+    }
   }
 
   doOnEdit() {
@@ -35,6 +49,12 @@ class Section extends React.Component {
     });
   }
 
+  gameInputValueChange(event) {
+    this.setState({
+      gameInputValue: event.target.value
+    });
+  }
+
   doOnSubmit() {
     this.props.doOnSectionRename(this.state.inputValue);
     this.setState({
@@ -42,9 +62,22 @@ class Section extends React.Component {
     });
   }
 
+  doOnGameAdd() {
+    if(this.state.gameInputValue) {
+      this.props.addNewGame(this.state.gameInputValue);
+      console.log("game adding initiated with name " + this.state.gameInputValue);
+    }
+
+    this.setState({
+      addGameMode: false
+    });
+  }
+
   doOnCancel() {
     this.setState({
       editMode: false,
+      addGameMode: false,
+      gameInputValue: "",
       inputValue: this.props.sectionName
     });
   }
@@ -71,7 +104,18 @@ class Section extends React.Component {
           <button className="submitButtons" onClick={this.doOnCancel}>Cancel</button>
           <Colors currentColor={this.props.color} passColorToSection={this.props.passColorUp}/>
         </div>
+    );
 
+    const addGameBlock = (
+      <div>
+        <input type="text" placeholder="Enter game name" value={this.state.gameInputValue} onChange={this.gameInputValueChange}></input>
+        <button className="submitButtons" onClick={this.doOnGameAdd}>Add game</button>
+        <button className="submitButtons" onClick={this.doOnCancel}>Cancel</button>
+      </div>
+    );
+
+    const addGameButton = (
+      <button onClick={this.beforeAddGame}><p>+</p></button>
     );
 
     return (
@@ -79,6 +123,7 @@ class Section extends React.Component {
         {(this.state.editMode) ? editForm : nameBlock}
         <div className="inner-section">
           {gamesToRender}
+            {(this.state.addGameMode) ? addGameBlock : addGameButton}
         </div>
       </div>
     );

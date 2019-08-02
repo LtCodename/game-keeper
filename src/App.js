@@ -16,6 +16,9 @@ class App extends React.Component {
     this.addList = this.addList.bind(this);
     this.deleteSection = this.deleteSection.bind(this);
     this.changeColor = this.changeColor.bind(this);
+    this.addSection = this.addSection.bind(this);
+    this.rewriteLists = this.rewriteLists.bind(this);
+    this.addGame = this.addGame.bind(this);
 
     this.state = {
       selectedListIndex: 0,
@@ -25,15 +28,13 @@ class App extends React.Component {
 
   changeColor(listIndex, sectionIndex, newColor) {
     //console.log("App here! I got list " + listIndex + " section " + sectionIndex + " and color " + newColor);
-    
+
     const copy = this.deepCopy(this.state.lists);
     //console.log("this section color is: " + copy[listIndex].content[sectionIndex].color);
     copy[listIndex].content[sectionIndex].color = newColor;
     //console.log("and now in is: " + copy[listIndex].content[sectionIndex].color);
 
-    this.setState({
-      lists: copy
-    });
+    this.rewriteLists(copy);
   }
 
   changeSelectedListIndex(newIndex) {
@@ -48,27 +49,31 @@ class App extends React.Component {
     const copy = this.deepCopy(this.state.lists);
     copy[this.state.selectedListIndex].name = newName;
 
-    this.setState({
-      lists: copy
-    });
+    this.rewriteLists(copy);
   }
 
   renameSection(newName, sectionId, listId) {
     const copy = this.deepCopy(this.state.lists);
     copy[listId].content[sectionId].name = newName;
 
-    this.setState({
-      lists: copy
+    this.rewriteLists(copy);
+  }
+
+  addGame(name, section, list) {
+    const copy = this.deepCopy(this.state.lists);
+    copy[list].content[section].games.push({
+      id: copy[list].content[section].games.length + 1,
+      name: name
     });
+
+    this.rewriteLists(copy);
   }
 
   deleteSection(listIndex, sectionIndex) {
     const copy = this.deepCopy(this.state.lists);
     copy[listIndex].content.splice(sectionIndex, 1);
 
-    this.setState({
-      lists: copy
-    });
+    this.rewriteLists(copy);
   }
 
   deleteList(index) {
@@ -86,6 +91,25 @@ class App extends React.Component {
     });
   }
 
+  addSection(sectionName, sectionColor, listIndex) {
+    const copy = this.deepCopy(this.state.lists);
+
+    copy[listIndex].content.push({
+      id: copy[listIndex].content.length + 1,
+      name: sectionName,
+      color: sectionColor,
+      games: []
+    });
+
+    this.rewriteLists(copy);
+  }
+
+  rewriteLists(newData) {
+    this.setState({
+      lists: newData
+    });
+  }
+
   addList(listName) {
     const copy = this.deepCopy(this.state.lists);
 
@@ -95,9 +119,7 @@ class App extends React.Component {
       content: []
     });
 
-    this.setState({
-      lists: copy
-    });
+    this.rewriteLists(copy);
   }
 
   deepCopy(objectToCopy) {
@@ -116,7 +138,9 @@ class App extends React.Component {
           listName={this.state.lists[this.state.selectedListIndex].name}
           content={this.state.lists[this.state.selectedListIndex].content}
           doOnListRename={this.renameList}
+          doOnAddSection={(sectionName, sectionColor) => this.addSection(sectionName, sectionColor, this.state.selectedListIndex)}
           doOnSectionRename={(newSectionName, sectionIndex) => this.renameSection(newSectionName, sectionIndex, this.state.selectedListIndex)}
+          doOnAddGame={(gameName, sectionIndex) => this.addGame(gameName, sectionIndex, this.state.selectedListIndex)}
           doOnSectionDelete={(sectionIndex) => this.deleteSection(this.state.selectedListIndex, sectionIndex)}
           doOnColorChange={(sectionIndex, newColor) => this.changeColor(this.state.selectedListIndex, sectionIndex, newColor)}
           doOnDelete={() => this.deleteList(this.state.selectedListIndex)}/>
