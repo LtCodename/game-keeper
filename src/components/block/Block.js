@@ -14,11 +14,16 @@ class Block extends React.Component {
     this.onDeleteBlock = this.onDeleteBlock.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.resetState = this.resetState.bind(this);
+    this.changeDescription = this.changeDescription.bind(this);
+    this.descriptionInputValueChange = this.descriptionInputValueChange.bind(this);
+    this.doOnDescriptionChange = this.doOnDescriptionChange.bind(this);
 
     this.state = {
       localGameData: this.props.gameData,
       nameEditMode: false,
-      nameInputValue: this.props.gameData.name
+      descriptionEditMode: false,
+      nameInputValue: this.props.gameData.name,
+      descriptionInputValue: ""
     };
   }
 
@@ -28,9 +33,21 @@ class Block extends React.Component {
     });
   }
 
+  descriptionInputValueChange(event) {
+    this.setState({
+      descriptionInputValue: event.target.value
+    });
+  }
+
   changeGameName() {
     this.setState({
       nameEditMode: true
+    });
+  }
+
+  changeDescription() {
+    this.setState({
+      descriptionEditMode: true
     });
   }
 
@@ -41,9 +58,18 @@ class Block extends React.Component {
     });
   }
 
+  doOnDescriptionChange() {
+    this.setState({
+      descriptionEditMode: false,
+      localGameData: {...this.state.localGameData, description:this.state.descriptionInputValue}
+    });
+  }
+
   doOnCancel() {
     this.setState({
-      nameEditMode: false
+      nameEditMode: false,
+      descriptionEditMode: false,
+      descriptionInputValue: ""
     });
   }
 
@@ -68,7 +94,8 @@ class Block extends React.Component {
   resetState() {
     this.setState({
       localGameData: this.props.gameData,
-      nameInputValue: this.props.gameData.name
+      nameInputValue: this.props.gameData.name,
+      descriptionInputValue: ""
     })
   }
 
@@ -95,6 +122,18 @@ class Block extends React.Component {
       </div>
     );
 
+    const descriptionCustom = (
+      <p onClick={this.changeDescription}>{(this.state.localGameData.description) ? this.state.localGameData.description : "Click here to enter description."}</p>
+    );
+
+    const descriptionEdit = (
+      <div>
+        <input type="text" placeholder="Add your text" value={this.state.descriptionInputValue} onChange={this.descriptionInputValueChange}></input>
+        <button className="submitButtons" onClick={this.doOnDescriptionChange}>OK</button>
+        <button className="submitButtons" onClick={this.doOnCancel}>Cancel</button>
+      </div>
+    );
+
     return (
       <div>
         <button className={className} data-toggle="modal" data-target={"#bModal" + this.state.localGameData.id + this.props.sectionId}>
@@ -107,13 +146,13 @@ class Block extends React.Component {
               <div className="modal-header">
                 {/*Title*/}
                 {(this.state.nameEditMode) ? gameNameEdit :  gameName}
-
                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div className="modal-body">
-                <p>Click here to enter description.</p>
+                {/*description*/}
+                {(this.state.descriptionEditMode) ? descriptionEdit :  descriptionCustom}
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
