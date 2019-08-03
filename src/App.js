@@ -19,6 +19,7 @@ class App extends React.Component {
     this.addSection = this.addSection.bind(this);
     this.rewriteLists = this.rewriteLists.bind(this);
     this.addGame = this.addGame.bind(this);
+    this.onBlockDelete = this.onBlockDelete.bind(this);
 
     this.state = {
       selectedListIndex: 0,
@@ -29,7 +30,7 @@ class App extends React.Component {
   changeColor(listIndex, sectionIndex, newColor) {
     const copy = this.deepCopy(this.state.lists);
     copy[listIndex].content[sectionIndex].color = newColor;
-    
+
     this.rewriteLists(copy);
   }
 
@@ -118,6 +119,14 @@ class App extends React.Component {
     this.rewriteLists(copy);
   }
 
+  onBlockDelete(blockIndex, sectionIndex, listIndex) {
+    const copy = this.deepCopy(this.state.lists);
+
+    copy[listIndex].content[sectionIndex].games.splice(blockIndex, 1);
+
+    this.rewriteLists(copy);
+  }
+
   deepCopy(objectToCopy) {
     return JSON.parse(JSON.stringify(objectToCopy));
   }
@@ -139,6 +148,7 @@ class App extends React.Component {
           doOnAddGame={(gameName, sectionIndex) => this.addGame(gameName, sectionIndex, this.state.selectedListIndex)}
           doOnSectionDelete={(sectionIndex) => this.deleteSection(this.state.selectedListIndex, sectionIndex)}
           doOnColorChange={(sectionIndex, newColor) => this.changeColor(this.state.selectedListIndex, sectionIndex, newColor)}
+          onBlockDelete={(blockId, sectionId) => this.onBlockDelete(blockId, sectionId, this.state.selectedListIndex)}
           doOnDelete={() => this.deleteList(this.state.selectedListIndex)}/>
       </div>
     );

@@ -73,7 +73,8 @@ class List extends React.Component {
   doOnSubmitListName() {
     this.props.doOnListRename(this.state.listNameInputValue);
     this.setState({
-      renameListMode: false
+      renameListMode: false,
+      listNameInputValue: ""
     });
   }
 
@@ -95,11 +96,13 @@ class List extends React.Component {
         <Section
           key={elem.id}
           sectionName={elem.name}
+          sectionId={index}
           color={elem.color}
           passColorUp={(newColor) => this.props.doOnColorChange(index, newColor)}
           doOnSectionRename={(newSectionName) => this.props.doOnSectionRename(newSectionName, index)}
           addNewGame={(gameName) => this.props.doOnAddGame(gameName, index)}
           doOnSectionDelete={() => this.props.doOnSectionDelete(index)}
+          onBlockDelete={(blockIndex) => this.props.onBlockDelete(blockIndex, index)}
           games={elem.games} />);
     })
 

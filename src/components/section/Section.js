@@ -82,8 +82,13 @@ class Section extends React.Component {
   }
 
   render() {
-    let gamesToRender = this.props.games.map(elem => {
-      return <Block key={elem.id} color={this.props.color} gameName={elem.name}/>;
+    let gamesToRender = this.props.games.map((elem, index) => {
+      return <Block
+        key={elem.id}
+        color={this.props.color}
+        onBlockDelete={() => this.props.onBlockDelete(index)}
+        gameData={elem}
+        sectionId = {this.props.sectionId}/>;
     })
 
     const nameBlock = (

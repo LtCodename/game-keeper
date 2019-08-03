@@ -40,7 +40,8 @@ class Nav extends React.Component {
     this.props.doOnAdd(this.state.inputValue);
 
     this.setState({
-      addMode: false
+      addMode: false,
+      inputValue: ""
     })
   }
 
