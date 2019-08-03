@@ -5,18 +5,6 @@ const lists = [
     content: [
       {
         id: 1,
-        name: "Roster",
-        color: "orange",
-        games: [
-          {id: 1, name:"World Of Warcraft: Battle For Azeroth 8.2"},
-          {id: 2, name:"F1 2019"},
-          {id: 3, name:"Hearthstone"},
-          {id: 4, name:"Rocket League"},
-          {id: 5, name:"Heroes Of The Storm"}
-        ]
-      },
-      {
-        id: 2,
         name: "Completed",
         color: "green",
         games: [
@@ -29,8 +17,15 @@ const lists = [
           {id: 7, name:"Assassin’s Creed Origins"},
           {id: 8, name:"What Remains Of Edith Finch"},
           {id: 9, name:"Quantum Break"},
-          {id: 10, name:"Bulletstorm"},
-          {id: 11, name:"Heavy Rain"}
+          {id: 10, name:"Heavy Rain"}
+        ]
+      },
+      {
+        id: 2,
+        name: "Revisited",
+        color: "green",
+        games: [
+          {id: 1, name:"Bulletstorm"},
         ]
       },
       {
@@ -69,15 +64,39 @@ const lists = [
     ]
   },{
     id: 2,
-    name: "2020",
+    name: "Roster",
     content: [
       {
         id: 1,
-        name: "Completed",
+        name: "Roster",
         color: "orange",
         games: [
-          {id: 1, name:"World Of Warcraft: Battle For Azeroth 8.2"},
-          {id: 2, name:"F1 2019"}
+          {id: 1, name:"Stardew Valley"},
+          {id: 2, name:"Rocket League"},
+          {id: 3, name:"Divinity: Original Sin 2"},
+          {id: 4, name:"F1 2019"},
+          {id: 5, name:"Hearthstone"}
+        ]
+      },
+      {
+        id: 2,
+        name: "Queue",
+        color: "orange",
+        games: [
+          {id: 1, name:"World Of Warcraft: Battle For Azeroth 8.2"}
+        ]
+      },
+      {
+        id: 3,
+        name: "When I'm 64",
+        color: "orange",
+        games: [
+          {id: 1, name:"The Legend of Zelda: Breath of the Wild"},
+          {id: 2, name:"Grand Theft Auto: San Andreas"},
+          {id: 3, name:"Dragon Age: Inquisition"},
+          {id: 4, name:"Pillars Of Eternity"},
+          {id: 5, name:"Assassin's Creed Syndicate"},
+          {id: 6, name:"Assassin's Creed Unity"}
         ]
       }
     ]

@@ -3,7 +3,7 @@
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Libre Baskerville', serif;
   padding: 0;
   margin: 0;
 }
@@ -43,10 +43,17 @@ ul {
 
 h1 {
   font-size: 55px;
+  font-family: 'Luckiest Guy', cursive;
+}
+
+header {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 30px;
 }
 
 h2 {
   font-size: 40px;
+  font-family: 'Luckiest Guy', cursive;
 }
 
 .all-content {
