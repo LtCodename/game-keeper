@@ -15,6 +15,17 @@ input {
   font-size: 2rem;
 }
 
+.platformsBlock {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.platforms {
+  padding: 2px;
+  background-color: grey;
+  color: white;
+}
+
 .submitButtons {
   padding: 5px;
 }

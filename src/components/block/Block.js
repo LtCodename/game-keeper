@@ -115,7 +115,6 @@ class Block extends React.Component {
   }
 
   modalSave(event) {
-    //console.log("save changes");
     //console.log("new name is " + this.state.localGameData.name);
     //console.log("description is " + this.state.localGameData.description);
     //console.log("release date is " + this.state.localGameData.releaseDate);
@@ -123,9 +122,6 @@ class Block extends React.Component {
 
     let mappedPlatforms = this.state.platforms.filter((elem) => elem.checked)
                                               .map((elem) =>  elem.name);
-
-    //console.log(mapped);
-
     let dataToSend = {
       name: this.state.localGameData.name,
       description: this.state.localGameData.description,
@@ -202,7 +198,7 @@ class Block extends React.Component {
       </label>
     );
 
-    let platformPicker = this.state.platforms.map((elem, index) => {
+    const platformPicker = this.state.platforms.map((elem, index) => {
       return (
         <div className="form-check" key={elem.id}>
           <input
@@ -220,10 +216,22 @@ class Block extends React.Component {
         );
     })
 
+    const platformsToShow = (this.state.localGameData.hasOwnProperty('platforms')) ?  this.state.localGameData.platforms.map((elem, index) => <p className="platforms" key={index} >{elem}</p>) : [];
+
+    const platfotmsOnBlock = (
+      <div className="platformsBlock">
+        {platformsToShow}
+      </div>
+    );
+
+    const dateToShow = (this.state.localGameData.hasOwnProperty('releaseDate') ?  <p className="releaseDate">{this.state.localGameData.releaseDate}</p> : <p></p>);
+
     return (
       <div>
         <button className={className} data-toggle="modal" data-target={"#bModal" + this.state.localGameData.id + this.props.sectionId}>
           <p>{this.props.gameData.name}</p>
+          {dateToShow}
+          {platfotmsOnBlock}
         </button>
 
         <div className="modal fade" id={"bModal" + this.state.localGameData.id + this.props.sectionId} tabIndex="-1" role="dialog"> {/* Modal Window Start*/}
