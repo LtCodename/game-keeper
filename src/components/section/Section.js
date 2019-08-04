@@ -88,6 +88,7 @@ class Section extends React.Component {
         color={this.props.color}
         onBlockDelete={() => this.props.onBlockDelete(index)}
         gameData={elem}
+        saveBlock={(blockData) => this.props.saveBlock(blockData, index)}
         sectionId = {this.props.sectionId}/>;
     })
 

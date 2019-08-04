@@ -103,6 +103,7 @@ class List extends React.Component {
           addNewGame={(gameName) => this.props.doOnAddGame(gameName, index)}
           doOnSectionDelete={() => this.props.doOnSectionDelete(index)}
           onBlockDelete={(blockIndex) => this.props.onBlockDelete(blockIndex, index)}
+          saveBlock={(blockData, blockId) => this.props.saveBlock(blockData, blockId, index)}
           games={elem.games} />);
     })
 
