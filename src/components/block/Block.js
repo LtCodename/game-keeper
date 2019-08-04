@@ -216,7 +216,7 @@ class Block extends React.Component {
         );
     })
 
-    const platformsToShow = (this.state.localGameData.hasOwnProperty('platforms')) ?  this.state.localGameData.platforms.map((elem, index) => <p className="platforms" key={index} >{elem}</p>) : [];
+    const platformsToShow = (this.state.localGameData.hasOwnProperty('platforms')) ? this.state.localGameData.platforms.map((elem, index) => <p className="platforms" key={index} >{elem}</p>) : [];
 
     const platfotmsOnBlock = (
       <div className="platformsBlock">
@@ -224,7 +224,7 @@ class Block extends React.Component {
       </div>
     );
 
-    const dateToShow = (this.state.localGameData.hasOwnProperty('releaseDate') ?  <p className="releaseDate">{this.state.localGameData.releaseDate}</p> : <p></p>);
+    const dateToShow = (this.state.localGameData.hasOwnProperty('releaseDate') ? <p className="releaseDate">{this.state.localGameData.releaseDate}</p> : <p></p>);
 
     return (
       <div>
