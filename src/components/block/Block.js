@@ -1,5 +1,7 @@
 import React from 'react';
+import BlockModalWindow from '../block-modal-window/BlockModalWindow.js';
 import platforms from './platforms.js';
+import './Block.css';
 declare var  $;
 
 class Block extends React.Component {
@@ -22,6 +24,7 @@ class Block extends React.Component {
     this.handleCheckboxInputChange = this.handleCheckboxInputChange.bind(this);
     this.deepCopy = this.deepCopy.bind(this);
     this.rewriteLists = this.rewriteLists.bind(this);
+    this.openModalWindow = this.openModalWindow.bind(this);
 
     this.state = {
       localGameData: {...this.props.gameData, releaseDate: this.props.gameData.releaseDate || ""},
@@ -29,7 +32,8 @@ class Block extends React.Component {
       descriptionEditMode: false,
       nameInputValue: this.props.gameData.name,
       descriptionInputValue: "",
-      platforms: this.preparePlatformsForState()
+      platforms: this.preparePlatformsForState(),
+      showModalWindow: false
     };
   }
 
@@ -40,7 +44,8 @@ class Block extends React.Component {
       return {
         id: index,
         name: elem.name,
-        checked: selectedPlatforms.indexOf(elem.name) > -1
+        url: elem.url,
+        checked: Boolean(selectedPlatforms.find(platform => elem.name === platform.name))
       };
     });
   }
@@ -115,21 +120,15 @@ class Block extends React.Component {
   }
 
   modalSave(event) {
-    //console.log("new name is " + this.state.localGameData.name);
-    //console.log("description is " + this.state.localGameData.description);
-    //console.log("release date is " + this.state.localGameData.releaseDate);
-    //console.log("platforms are " + this.state.platforms);
+    const mappedPlatforms = this.state.platforms.filter((elem) => elem.checked)
+                                              .map((elem) => {
+                                                return {
+                                                  name: elem.name,
+                                                  url: elem.url
+                                                }
+                                              });
 
-    let mappedPlatforms = this.state.platforms.filter((elem) => elem.checked)
-                                              .map((elem) =>  elem.name);
-    let dataToSend = {
-      name: this.state.localGameData.name,
-      description: this.state.localGameData.description,
-      releaseDate: this.state.localGameData.releaseDate,
-      platforms: mappedPlatforms
-    };
-
-    this.props.saveBlock(dataToSend);
+    this.props.saveBlock({...this.props.gameData, ...this.state.localGameData, platforms: mappedPlatforms});
 
     this.closeModal();
   }
@@ -143,17 +142,23 @@ class Block extends React.Component {
     $("#bModal" + this.state.localGameData.id + this.props.sectionId).unbind('hidden.bs.modal');
   }
 
-  componentDidMount() {
-    $("#bModal" + this.state.localGameData.id + this.props.sectionId).on('hidden.bs.modal', this.resetState);
-  }
-
   resetState() {
     this.setState({
       localGameData: {...this.props.gameData, releaseDate: this.props.gameData.releaseDate || ""},
       nameInputValue: this.props.gameData.name,
       descriptionInputValue: "",
-      platforms: this.preparePlatformsForState()
+      platforms: this.preparePlatformsForState(),
+      showModalWindow: false
     })
+  }
+
+  openModalWindow() {
+    this.setState({
+      showModalWindow: true
+    }, () => {
+      $("#bModal" + this.state.localGameData.id + this.props.sectionId).modal('show');
+      $("#bModal" + this.state.localGameData.id + this.props.sectionId).on('hidden.bs.modal', this.resetState);
+    });
   }
 
   closeModal() {
@@ -216,7 +221,11 @@ class Block extends React.Component {
         );
     })
 
-    const platformsToShow = (this.state.localGameData.hasOwnProperty('platforms')) ? this.state.localGameData.platforms.map((elem, index) => <p className="platforms" key={index} >{elem}</p>) : [];
+    const platformsToShow = (this.props.gameData.hasOwnProperty('platforms')) ? (
+      this.props.gameData.platforms.map((elem, index) => {
+        console.log(elem.url);
+        return (<img className="platforms" key={index}  src={elem.url} alt={elem.name} />);
+      })) : [];
 
     const platfotmsOnBlock = (
       <div className="platformsBlock">
@@ -224,42 +233,50 @@ class Block extends React.Component {
       </div>
     );
 
-    const dateToShow = (this.state.localGameData.hasOwnProperty('releaseDate') ? <p className="releaseDate">{this.state.localGameData.releaseDate}</p> : <p></p>);
+    const dateToShow = (this.props.gameData.hasOwnProperty('releaseDate') ? <span className="releaseDate">{this.props.gameData.releaseDate}</span> : "");
 
-    return (
-      <div>
-        <button className={className} data-toggle="modal" data-target={"#bModal" + this.state.localGameData.id + this.props.sectionId}>
-          <p>{this.props.gameData.name}</p>
-          {dateToShow}
-          {platfotmsOnBlock}
-        </button>
-
-        <div className="modal fade" id={"bModal" + this.state.localGameData.id + this.props.sectionId} tabIndex="-1" role="dialog"> {/* Modal Window Start*/}
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                {/*title*/}
-                {(this.state.nameEditMode) ? gameNameEdit :  gameName}
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                {/*description*/}
-                {(this.state.descriptionEditMode) ? descriptionEdit :  descriptionCustom}
-                {/*date*/}
-                {datePicker}
-                {/*platform*/}
-                {platformPicker}
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" className="btn btn-secondary" onClick={this.onDeleteBlock}>Delete</button>
-                <button type="button" className="btn btn-primary" onClick={this.modalSave}>Save</button>
-              </div>
+    const modalWindow = (
+      <div className="modal fade" id={"bModal" + this.state.localGameData.id + this.props.sectionId} tabIndex="-1" role="dialog">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              {/*title*/}
+              {(this.state.nameEditMode) ? gameNameEdit :  gameName}
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              {/*description*/}
+              {(this.state.descriptionEditMode) ? descriptionEdit :  descriptionCustom}
+              {/*date*/}
+              {datePicker}
+              {/*platform*/}
+              {platformPicker}
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="button" className="btn btn-secondary" onClick={this.onDeleteBlock}>Delete</button>
+              <button type="button" className="btn btn-primary" onClick={this.modalSave}>Save</button>
             </div>
           </div>
-        </div>{/* Modal Window End*/}
+        </div>
+      </div>
+    );
+
+    return (
+      <div className="cardWrapper">
+        <button className={className} data-toggle="modal" onClick={this.openModalWindow}>
+          <div className="gameBlockContent">
+            <span>{this.props.gameData.name}</span>
+            <div className="gameBlockFooter">
+              {dateToShow}
+              {platfotmsOnBlock}
+            </div>
+          </div>
+        </button>
+
+        {this.state.showModalWindow ? modalWindow : ""}
       </div>
     )
   }

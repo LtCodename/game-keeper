@@ -1,0 +1,80 @@
+.game-block {
+  --footer-content-height: 20px;
+  border: 0px solid black;
+  /*border-radius: 20px;*/
+  text-align: center;
+  padding: 10px;
+  margin: 1px 2px 1px 0;
+  min-width: 150px;
+  max-width: 250px;
+  min-height: 85px;
+}
+
+.platforms {
+  margin-left: 2px;
+  height: var(--footer-content-height);
+  width: 20px;
+}
+
+.releaseDate {
+  background-color: grey;
+  line-height: var(--footer-content-height);
+  padding: 0 2px;
+  margin-right: 3px;
+  font-size: 13px;
+}
+
+.platformsBlock {
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+.gameBlockFooter {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cardWrapper {
+  display: flex;
+}
+
+.game-block_orange {
+  background-color: rgba(255, 159, 26, 1);
+}
+
+.game-block_orange:hover {
+  background-color: rgba(255, 159, 26, 0.5);
+}
+
+.game-block_green {
+  background-color: rgba(97, 189, 79, 1);
+}
+
+.game-block_green:hover {
+  background-color: rgba(97, 189, 79, 0.5);
+}
+
+.game-block_yellow {
+  background-color: rgba(242, 214, 0, 1);
+}
+
+.game-block_yellow:hover {
+  background-color: rgba(242, 214, 0, 0.5);
+}
+
+.game-block_blue {
+  background-color: rgba(0, 194, 224, 1);
+}
+
+.game-block_blue:hover {
+  background-color: rgba(0, 194, 224, 0.5);
+}
+
+.game-block_red {
+  background-color: rgba(235, 90, 70, 1);
+}
+
+.game-block_red:hover {
+  background-color: rgba(235, 90, 70, 0.5);
+}

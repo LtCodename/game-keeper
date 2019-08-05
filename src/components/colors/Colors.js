@@ -24,7 +24,7 @@ class Colors extends React.Component {
 
   render() {
     let colorsToRender = availableColors.map((elem, index) => {
-      let classNameReal = "color_";
+      let classNameReal = "colorsSpan color_";
       classNameReal += elem.name;
 
       return (

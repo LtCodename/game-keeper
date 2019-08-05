@@ -82,7 +82,7 @@ class Section extends React.Component {
   }
 
   render() {
-    let gamesToRender = this.props.games.map((elem, index) => {
+    const gamesToRender = this.props.games.map((elem, index) => {
       return <Block
         key={elem.id}
         color={this.props.color}
@@ -90,7 +90,10 @@ class Section extends React.Component {
         gameData={elem}
         saveBlock={(blockData) => this.props.saveBlock(blockData, index)}
         sectionId = {this.props.sectionId}/>;
-    })
+    });
+
+
+    console.log(gamesToRender);
 
     const nameBlock = (
       <div>
