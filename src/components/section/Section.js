@@ -92,9 +92,6 @@ class Section extends React.Component {
         sectionId = {this.props.sectionId}/>;
     });
 
-
-    console.log(gamesToRender);
-
     const nameBlock = (
       <div>
         <h2>{this.props.sectionName}</h2>
