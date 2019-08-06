@@ -1,6 +1,8 @@
 import React from 'react';
 import Section from '../section/Section.js';
 import Colors from '../colors/Colors.js';
+import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
+declare var  $;
 
 class List extends React.Component {
   constructor(props) {
@@ -13,19 +15,37 @@ class List extends React.Component {
     this.listNameInputValueChange = this.listNameInputValueChange.bind(this);
     this.sectionNameInputValueChange = this.sectionNameInputValueChange.bind(this);
     this.holdColorForNewSection = this.holdColorForNewSection.bind(this);
+    this.openModalWarningWindow = this.openModalWarningWindow.bind(this);
+    this.resetState = this.resetState.bind(this);
 
     this.state = {
       renameListMode: false,
       addSectionMode: false,
       listNameInputValue: this.props.listName,
       sectionNameInputValue: "",
-      colorFofNewSection: ""
+      colorFofNewSection: "",
+      showModalWindow: false
     };
   }
 
   static defaultProps = {
     content: [],
     newListName: ""
+  }
+
+  openModalWarningWindow() {
+    this.setState({
+      showModalWindow: true
+    }, () => {
+      $("#modalWarning").modal('show');
+      $("#modalWarning").on('hidden.bs.modal', this.resetState);
+    });
+  }
+
+  resetState() {
+    this.setState({
+      showModalWindow: false
+    })
   }
 
   holdColorForNewSection(color) {
@@ -107,12 +127,19 @@ class List extends React.Component {
           games={elem.games} />);
     })
 
+    const modalWarningWindow = (
+      <WarningModalWindow
+        modalId={"modalWarning"}
+        onDeleteList={this.props.doOnDelete}
+        message={`Are you sure you want to delete list ${this.props.listName}?`} />
+    );
+
     const nameAndButtonsBlock = (
       <div>
         <h1>{this.props.listName}</h1>
         <div className="actionButtons">
           <button className="btn" onClick={this.doOnEdit}>Edit name</button>
-          <button className="btn" onClick={this.props.doOnDelete}>Delete list</button>
+          <button className="btn" onClick={this.openModalWarningWindow}>Delete list</button>
           <button className="btn" onClick={this.doOnAddSection}>Add section</button>
         </div>
       </div>
@@ -139,6 +166,8 @@ class List extends React.Component {
       <div className="all-content">
         {this.state.renameListMode ? editListNameForm : this.state.addSectionMode ? addNewSectionForm : nameAndButtonsBlock}
         {sectionsToRender}
+
+        {this.state.showModalWindow ? modalWarningWindow : ""}
       </div>
     );
   }
