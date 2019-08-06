@@ -111,10 +111,11 @@ class List extends React.Component {
   }
 
   render() {
-    let sectionsToRender = this.props.content.map((elem, index) => {
+    const sectionsToRender = this.props.content.map((elem, index) => {
       return (
         <Section
           key={elem.id}
+          content={this.props.content}
           sectionName={elem.name}
           sectionId={index}
           color={elem.color}
@@ -124,6 +125,7 @@ class List extends React.Component {
           doOnSectionDelete={() => this.props.doOnSectionDelete(index)}
           onBlockDelete={(blockIndex) => this.props.onBlockDelete(blockIndex, index)}
           saveBlock={(blockData, blockId) => this.props.saveBlock(blockData, blockId, index)}
+          changeGameSection={(newSectionIndex, blockIndex) => this.props.changeGameSection(newSectionIndex, blockIndex, index)}
           games={elem.games} />);
     })
 

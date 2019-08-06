@@ -77,7 +77,11 @@ class Block extends React.Component {
         modalId={"bModal" + this.props.gameData.id + this.props.sectionId}
         gameData={this.props.gameData}
         onDeleteBlock={this.onDeleteBlock}
-        modalSave={this.modalSave} />
+        modalSave={this.modalSave}
+        sectionId={this.props.sectionId}
+        content={this.props.content}
+        changeGameSection={this.props.changeGameSection}
+        closeModal = {this.closeModal} />
     );
 
     return (

@@ -23,6 +23,7 @@ class BlockModalWindow extends React.Component {
     this.modalSave = this.modalSave.bind(this);
     this.openModalWarningWindow = this.openModalWarningWindow.bind(this);
     this.resetState = this.resetState.bind(this);
+    this.selectChangeHandler = this.selectChangeHandler.bind(this);
 
     this.state = {
       nameEditMode: false,
@@ -33,6 +34,12 @@ class BlockModalWindow extends React.Component {
       platforms: this.preparePlatformsForState(),
       showModalWindow: false
     };
+  }
+
+  selectChangeHandler(event) {
+    //console.log(event.target.value);
+    this.props.changeGameSection(event.target.value);
+    this.props.closeModal();
   }
 
   openModalWarningWindow() {
@@ -206,6 +213,18 @@ class BlockModalWindow extends React.Component {
         message={`Are you sure you want to delete block ${this.state.localGameData.name}?`} />
     );
 
+    const sectionOptions = this.props.content.map((elem, index) => {
+      return (
+        <option key={index} value={index}>{elem.name}</option>
+      );
+    })
+
+    const sectionSelector = (
+      <select value={this.props.sectionId} className="custom-select" onChange={this.selectChangeHandler}>
+        {sectionOptions}
+      </select>
+    );
+
     return (
       <div>
         <div className="modal fade" id={this.props.modalId} tabIndex="-1" role="dialog">
@@ -219,6 +238,8 @@ class BlockModalWindow extends React.Component {
                 </button>
               </div>
               <div className="modal-body">
+                {/*section selector*/}
+                {sectionSelector}
                 {/*description*/}
                 {(this.state.descriptionEditMode) ? descriptionEdit : descriptionCustom}
                 {/*date*/}
