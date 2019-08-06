@@ -38,7 +38,8 @@ class App extends React.Component {
   onBlockSave(blockData, blockId, sectionId, listId) {
     const copy = this.deepCopy(this.state.lists);
     copy[listId].content[sectionId].games[blockId] = blockData;
-
+    console.log(`index is ${blockId}`);
+    console.log(blockData);
     this.rewriteLists(copy);
   }
 

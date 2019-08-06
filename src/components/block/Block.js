@@ -70,7 +70,7 @@ class Block extends React.Component {
       </div>
     );
 
-    const dateToShow = (this.props.gameData.hasOwnProperty('releaseDate') ? <span className="releaseDate">{this.props.gameData.releaseDate}</span> : "");
+    const dateToShow = (this.props.gameData.releaseDate ? <span className="releaseDate">{this.props.gameData.releaseDate}</span> : "");
 
     const modalWindow = (
       <BlockModalWindow
@@ -84,7 +84,7 @@ class Block extends React.Component {
       <div className="cardWrapper">
         <button className={className} data-toggle="modal" onClick={this.openModalWindow}>
           <div className="gameBlockContent">
-            <span>{this.props.gameData.name}</span>
+            <span className="gameName">{this.props.gameData.name}</span>
             <div className="gameBlockFooter">
               {dateToShow}
               {platfotmsOnBlock}

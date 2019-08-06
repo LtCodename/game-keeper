@@ -1,7 +1,7 @@
 .game-block {
   --footer-content-height: 20px;
   border: 0px solid black;
-  /*border-radius: 20px;*/
+  border-radius: .25rem;
   text-align: center;
   padding: 10px;
   margin: 1px 2px 1px 0;
@@ -16,6 +16,11 @@
   width: 20px;
 }
 
+.gameName {
+  min-height: 48px;
+  display: block;
+}
+
 .releaseDate {
   background-color: grey;
   line-height: var(--footer-content-height);
@@ -27,6 +32,7 @@
 .platformsBlock {
   display: flex;
   justify-content: flex-end;
+  flex: 1;
 }
 
 

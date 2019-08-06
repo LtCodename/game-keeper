@@ -1,6 +1,8 @@
 import React from 'react';
 import './BlockModalWindow.css';
 import platforms from '../block/platforms.js';
+import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
+declare var  $;
 
 class BlockModalWindow extends React.Component {
 
@@ -19,6 +21,8 @@ class BlockModalWindow extends React.Component {
     this.deepCopy = this.deepCopy.bind(this);
     this.rewriteLists = this.rewriteLists.bind(this);
     this.modalSave = this.modalSave.bind(this);
+    this.openModalWarningWindow = this.openModalWarningWindow.bind(this);
+    this.resetState = this.resetState.bind(this);
 
     this.state = {
       nameEditMode: false,
@@ -26,8 +30,28 @@ class BlockModalWindow extends React.Component {
       localGameData: {...this.props.gameData, releaseDate: this.props.gameData.releaseDate || ""},
       nameInputValue: this.props.gameData.name,
       descriptionInputValue: "",
-      platforms: this.preparePlatformsForState()
+      platforms: this.preparePlatformsForState(),
+      showModalWindow: false
     };
+  }
+
+  openModalWarningWindow() {
+    this.setState({
+      showModalWindow: true
+    }, () => {
+      $("#modalWarning").modal('show');
+      $("#modalWarning").on('hidden.bs.modal', this.resetState);
+    });
+  }
+
+  componentWillUnmount() {
+    $("#modalWarning").unbind('hidden.bs.modal');
+  }
+
+  resetState() {
+    this.setState({
+      showModalWindow: false
+    })
   }
 
   handleCheckboxInputChange(event) {
@@ -173,34 +197,44 @@ class BlockModalWindow extends React.Component {
           </label>
         </div>
         );
-    })
+    });
+
+    const modalWarningWindow = (
+      <WarningModalWindow
+        modalId={"modalWarning"}
+        onProceed={this.props.onDeleteBlock}
+        message={`Are you sure you want to delete block ${this.state.localGameData.name}?`} />
+    );
 
     return (
-      <div className="modal fade" id={this.props.modalId} tabIndex="-1" role="dialog">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              {/*title*/}
-              {(this.state.nameEditMode) ? gameNameEdit : gameName}
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              {/*description*/}
-              {(this.state.descriptionEditMode) ? descriptionEdit : descriptionCustom}
-              {/*date*/}
-              {datePicker}
-              {/*platform*/}
-              {platformPicker}
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn" data-dismiss="modal">Cancel</button>
-              <button type="button" className="btn" onClick={this.props.onDeleteBlock}>Delete</button>
-              <button type="button" className="btn btn-dark" onClick={this.modalSave}>Save</button>
+      <div>
+        <div className="modal fade" id={this.props.modalId} tabIndex="-1" role="dialog">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                {/*title*/}
+                {(this.state.nameEditMode) ? gameNameEdit : gameName}
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                {/*description*/}
+                {(this.state.descriptionEditMode) ? descriptionEdit : descriptionCustom}
+                {/*date*/}
+                {datePicker}
+                {/*platform*/}
+                {platformPicker}
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn" data-dismiss="modal">Cancel</button>
+                <button type="button" className="btn" onClick={this.openModalWarningWindow}>Delete</button>
+                <button type="button" className="btn btn-dark" onClick={this.modalSave}>Save</button>
+              </div>
             </div>
           </div>
         </div>
+        {this.state.showModalWindow ? modalWarningWindow : ""}
       </div>
     )
   }

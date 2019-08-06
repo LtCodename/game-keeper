@@ -114,6 +114,17 @@ class Section extends React.Component {
         gameData={elem}
         saveBlock={(blockData) => this.props.saveBlock(blockData, index)}
         sectionId = {this.props.sectionId}/>;
+    }).sort((a, b) => {
+      const releaseDateA = a.props.gameData.releaseDate || "";
+      const releaseDateB = b.props.gameData.releaseDate || "";
+
+      if (releaseDateA < releaseDateB) {
+        return -1;
+      }
+      if (releaseDateA > releaseDateB) {
+        return 1;
+      }
+      return 0;
     });
 
     const nameBlock = (
