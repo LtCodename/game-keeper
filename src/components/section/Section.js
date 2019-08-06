@@ -1,6 +1,8 @@
 import React from 'react';
 import Block from '../block/Block.js';
 import Colors from '../colors/Colors.js';
+import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
+declare var  $;
 
 class Section extends React.Component {
   static defaultProps = {
@@ -17,13 +19,35 @@ class Section extends React.Component {
     this.doOnCancel = this.doOnCancel.bind(this);
     this.beforeAddGame = this.beforeAddGame.bind(this);
     this.doOnGameAdd = this.doOnGameAdd.bind(this);
+    this.openModalWarningWindow = this.openModalWarningWindow.bind(this);
+    this.resetState = this.resetState.bind(this);
 
     this.state = {
       editMode: false,
       addGameMode: false,
       inputValue: this.props.sectionName,
-      gameInputValue: ""
+      gameInputValue: "",
+      showModalWindow: false
     };
+  }
+
+  openModalWarningWindow() {
+    this.setState({
+      showModalWindow: true
+    }, () => {
+      $("#modalWarning").modal('show');
+      $("#modalWarning").on('hidden.bs.modal', this.resetState);
+    });
+  }
+
+  componentWillUnmount() {
+    $("#modalWarning").unbind('hidden.bs.modal');
+  }
+
+  resetState() {
+    this.setState({
+      showModalWindow: false
+    })
   }
 
   beforeAddGame() {
@@ -97,7 +121,7 @@ class Section extends React.Component {
         <h2>{this.props.sectionName}</h2>
         <div className="actionButtons">
           <button className="btn" onClick={this.doOnEdit}>Edit section</button>
-          <button className="btn" onClick={this.props.doOnSectionDelete}>Delete section</button>
+          <button className="btn" onClick={this.openModalWarningWindow}>Delete section</button>
         </div>
       </div>
     );
@@ -123,6 +147,13 @@ class Section extends React.Component {
       <button className="btn" onClick={this.beforeAddGame}><p>+</p></button>
     );
 
+    const modalWarningWindow = (
+      <WarningModalWindow
+        modalId={"modalWarning"}
+        onProceed={this.props.doOnSectionDelete}
+        message={`Are you sure you want to delete section ${this.props.sectionName}?`} />
+    );
+
     return (
       <div className="section">
         {(this.state.editMode) ? editForm : nameBlock}
@@ -130,6 +161,8 @@ class Section extends React.Component {
           {gamesToRender}
           {(this.state.addGameMode) ? addGameBlock : addGameButton}
         </div>
+
+        {this.state.showModalWindow ? modalWarningWindow : ""}
       </div>
     );
   }

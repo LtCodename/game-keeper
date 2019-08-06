@@ -130,7 +130,7 @@ class List extends React.Component {
     const modalWarningWindow = (
       <WarningModalWindow
         modalId={"modalWarning"}
-        onDeleteList={this.props.doOnDelete}
+        onProceed={this.props.doOnDelete}
         message={`Are you sure you want to delete list ${this.props.listName}?`} />
     );
 

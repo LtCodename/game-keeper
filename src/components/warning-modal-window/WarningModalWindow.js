@@ -11,7 +11,7 @@ class WarningModalWindow extends React.Component {
   }
 
   onProceed() {
-    this.props.onDeleteList();
+    this.props.onProceed();
     $("#" + this.props.modalId).modal('hide');
   }
 
