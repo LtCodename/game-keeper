@@ -8,15 +8,13 @@ body {
   margin: 0;
 }
 
-input {
-  margin-top: 50px;
-  margin-right: 20px;
-  padding: 5px;
-  font-size: 2rem;
+.btn {
+  margin-right: 3px;
+    padding: 5px;
 }
 
-.submitButtons {
-  padding: 5px;
+input {
+  margin-bottom: 3px;
 }
 
 .appDiv {

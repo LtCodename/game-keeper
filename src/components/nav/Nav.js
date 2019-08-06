@@ -55,7 +55,7 @@ class Nav extends React.Component {
 
     let buttonsToRender = this.props.content.map((elem, index) => {
 
-      let className = "navButton";
+      let className = "navButton btn btn-light";
 
       if (this.props.indexToHighligth === index) {
         className += " navButtonActive";
@@ -66,15 +66,15 @@ class Nav extends React.Component {
 
     const inputBit = (
       <div>
-        <input type="text" placeholder="Enter new name" value={this.state.inputValue} onChange={this.inputValueChange}></input>
-        <button className="submitButtons" onClick={this.submitNewList}>Submit list</button>
-        <button className="submitButtons" onClick={this.doOnCancel}>Cancel</button>
+        <input type="text" className="form-control" placeholder="Enter new name" value={this.state.inputValue} onChange={this.inputValueChange}></input>
+        <button className="btn btn-dark" onClick={this.submitNewList}>Submit list</button>
+        <button className="btn " onClick={this.doOnCancel}>Cancel</button>
       </div>
     );
 
     const buttonBit = (
       <div>
-        <button onClick={this.doOnAdd}>Add list</button>
+        <button className="btn" onClick={this.doOnAdd}>Add list</button>
       </div>
     );
 

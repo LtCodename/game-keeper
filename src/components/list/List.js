@@ -111,27 +111,27 @@ class List extends React.Component {
       <div>
         <h1>{this.props.listName}</h1>
         <div className="actionButtons">
-          <button onClick={this.doOnEdit}>Edit name</button>
-          <button onClick={this.props.doOnDelete}>Delete list</button>
-          <button onClick={this.doOnAddSection}>Add section</button>
+          <button className="btn" onClick={this.doOnEdit}>Edit name</button>
+          <button className="btn" onClick={this.props.doOnDelete}>Delete list</button>
+          <button className="btn" onClick={this.doOnAddSection}>Add section</button>
         </div>
       </div>
     );
 
     const editListNameForm = (
       <div>
-        <input type="text" placeholder="Enter new name" value={this.state.listNameInputValue} onChange={this.listNameInputValueChange}></input>
-        <button className="submitButtons" onClick={this.doOnSubmitListName}>Submit name</button>
-        <button className="submitButtons" onClick={this.doOnCancel}>Cancel</button>
+        <input className="form-control" type="text" placeholder="Enter new name" value={this.state.listNameInputValue} onChange={this.listNameInputValueChange}></input>
+        <button className="btn btn-dark" onClick={this.doOnSubmitListName}>Submit name</button>
+        <button className="btn" onClick={this.doOnCancel}>Cancel</button>
       </div>
     );
 
     const addNewSectionForm = (
       <div>
-        <input type="text" placeholder="Enter section name" value={this.state.sectionNameInputValue} onChange={this.sectionNameInputValueChange}></input>
-        <button className="submitButtons" onClick={() => this.props.doOnAddSection(this.state.sectionNameInputValue, this.state.colorForNewSection)}>Submit section</button>
-        <button className="submitButtons" onClick={this.doOnCancel}>Cancel</button>
-        <Colors passColorToSection={this.holdColorForNewSection}/><br />
+        <input className="form-control" type="text" placeholder="Enter section name" value={this.state.sectionNameInputValue} onChange={this.sectionNameInputValueChange}></input>
+        <button className="btn btn-dark" onClick={() => this.props.doOnAddSection(this.state.sectionNameInputValue, this.state.colorForNewSection)}>Submit section</button>
+        <button className="btn" onClick={this.doOnCancel}>Cancel</button>
+        <Colors passColorToSection={this.holdColorForNewSection}/>
       </div>
     );
 

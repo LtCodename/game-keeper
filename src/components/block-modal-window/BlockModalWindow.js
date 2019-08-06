@@ -128,9 +128,9 @@ class BlockModalWindow extends React.Component {
   render() {
     const descriptionEdit = (
       <div>
-        <textarea row="3" type="text" placeholder="Add your text" value={this.state.descriptionInputValue} onChange={this.descriptionInputValueChange}></textarea>
-        <button className="submitButtons" onClick={this.doOnDescriptionChange}>OK</button>
-        <button className="submitButtons" onClick={this.doOnCancel}>Cancel</button>
+        <textarea className="form-control" row="3" type="text" placeholder="Add your text" value={this.state.descriptionInputValue} onChange={this.descriptionInputValueChange}></textarea>
+        <button className="btn btn-dark" onClick={this.doOnDescriptionChange}>Submit</button>
+        <button className="btn" onClick={this.doOnCancel}>Cancel</button>
       </div>
     );
 
@@ -144,16 +144,16 @@ class BlockModalWindow extends React.Component {
 
     const gameNameEdit = (
       <div>
-        <input type="text" placeholder="Enter new name" value={this.state.nameInputValue} onChange={this.nameInputValueChange}></input>
-        <button className="submitButtons" onClick={this.doOnNameChange}>OK</button>
-        <button className="submitButtons" onClick={this.doOnCancel}>Cancel</button>
+        <input className="form-control" type="text" placeholder="Enter new name" value={this.state.nameInputValue} onChange={this.nameInputValueChange}></input>
+        <button className="btn btn-dark" onClick={this.doOnNameChange}>Submit</button>
+        <button className="btn" onClick={this.doOnCancel}>Cancel</button>
       </div>
     );
 
     const datePicker = (
       <label>
         Release date
-        <input type="date" value={this.state.localGameData.releaseDate} onChange={this.dateInputValueChange}></input>
+        <input className="form-control" type="date" value={this.state.localGameData.releaseDate} onChange={this.dateInputValueChange}></input>
       </label>
     );
 
@@ -195,9 +195,9 @@ class BlockModalWindow extends React.Component {
               {platformPicker}
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="button" className="btn btn-secondary" onClick={this.props.onDeleteBlock}>Delete</button>
-              <button type="button" className="btn btn-primary" onClick={this.modalSave}>Save</button>
+              <button type="button" className="btn" data-dismiss="modal">Cancel</button>
+              <button type="button" className="btn" onClick={this.props.onDeleteBlock}>Delete</button>
+              <button type="button" className="btn btn-dark" onClick={this.modalSave}>Save</button>
             </div>
           </div>
         </div>

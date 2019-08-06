@@ -40,7 +40,7 @@ class Colors extends React.Component {
     return (
       <div >
         <p>Pick a color</p>
-        <div>
+        <div className="colorsContainer">
           {colorsToRender}
         </div>
       </div>
