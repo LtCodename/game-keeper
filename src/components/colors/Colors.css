@@ -1,5 +1,5 @@
 .color_orange {
-  background-color: rgba(255, 159, 26, 1);
+  background-color: var(--color-orange);
 }
 
 .color_green {

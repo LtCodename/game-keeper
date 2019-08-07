@@ -2,7 +2,8 @@
   width: 200px;
   height: 100vh;
   position: relative;
-  padding-bottom: 44px;
+  padding-bottom: 72px;
+  padding-left: 4px;
 }
 
 .navButton {
@@ -20,4 +21,13 @@
 .downloadData {
   position: absolute;
   bottom: 4px;
+}
+
+.downloadImg {
+  transition: all .3s;
+  width: 80%;
+}
+
+.downloadImg:hover {
+  width: 100%;
 }

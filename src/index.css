@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  --color-orange: rgba(255, 159, 26, 1);
+  --color-orange-half-alpha: rgba(255, 159, 26, 0.5);
 }
 
 body {

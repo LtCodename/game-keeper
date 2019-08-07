@@ -1,5 +1,6 @@
 import React from 'react';
 import './Nav.css';
+import downloadImg from '../../assets/download.png';
 
 class Nav extends React.Component {
 
@@ -83,7 +84,7 @@ class Nav extends React.Component {
         <header>Game Keeper</header>
         {buttonsToRender}
         {(this.state.addMode) ? inputBit : buttonBit}
-        <a className="btn btn-link downloadData" download="lists.js" href={this.props.fileLink}>DOWNLOAD</a>
+        <a className="downloadData" download="lists.js" href={this.props.fileLink}><img className="downloadImg" src={downloadImg} alt=""></img></a>
       </nav>
     )
   }

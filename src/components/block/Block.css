@@ -46,11 +46,11 @@
 }
 
 .game-block_orange {
-  background-color: rgba(255, 159, 26, 1);
+  background-color: var(--color-orange);
 }
 
 .game-block_orange:hover {
-  background-color: rgba(255, 159, 26, 0.5);
+  background-color: var(--color-orange-half-alpha);
 }
 
 .game-block_green {
