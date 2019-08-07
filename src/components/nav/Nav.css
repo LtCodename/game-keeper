@@ -1,3 +1,10 @@
+#navbar {
+  width: 200px;
+  height: 100vh;
+  position: relative;
+  padding-bottom: 44px;
+}
+
 .navButton {
   display: block;
   width: 100%;
@@ -8,4 +15,9 @@
 .navButtonActive {
   background-color: #333;
   color: #fff;
+}
+
+.downloadData {
+  position: absolute;
+  bottom: 4px;
 }

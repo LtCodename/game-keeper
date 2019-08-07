@@ -21,11 +21,6 @@ input {
   display: flex;
 }
 
-nav {
-  width: 200px;
-  height: 100vh;
-}
-
 img {
   width: 200px;
 }

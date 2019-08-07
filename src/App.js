@@ -25,8 +25,21 @@ class App extends React.Component {
 
     this.state = {
       selectedListIndex: 0,
-      lists: lists
+      lists: lists,
+      downloadLink: this.createBlob(lists)
     };
+  }
+
+  createBlob(lists, oldLink) {
+    const stringified = JSON.stringify(lists);
+    const fileStructure = `const lists = ${stringified}; export default lists;`
+    const data = new Blob([fileStructure], {type: 'text/plain'});
+    // If we are replacing a previously generated file we need to
+    // manually revoke the object URL to avoid memory leaks.
+    if (oldLink) {
+      window.URL.revokeObjectURL(oldLink);
+    }
+    return window.URL.createObjectURL(data);
   }
 
   onChangeGameSection(newSectionIndex, blockIndex, oldSectionIndex, listIndex) {
@@ -122,7 +135,8 @@ class App extends React.Component {
 
   rewriteLists(newData) {
     this.setState({
-      lists: newData
+      lists: newData,
+      downloadLink: this.createBlob(newData, this.state.downloadLink)
     });
   }
 
@@ -157,7 +171,8 @@ class App extends React.Component {
           content={this.state.lists}
           indexToHighligth={this.state.selectedListIndex}
           doOnClick={this.changeSelectedListIndex}
-          doOnAdd={this.addList}/>
+          doOnAdd={this.addList}
+          fileLink={this.state.downloadLink}/>
         <List
           listName={this.state.lists[this.state.selectedListIndex].name}
           content={this.state.lists[this.state.selectedListIndex].content}
