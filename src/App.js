@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import List from './components/list/List.js';
 import Nav from './components/nav/Nav.js';
+import Dashboard from './components/dashboard/Dashboard.js';
 import lists from './mocks/lists.js';
 
 class App extends React.Component {
@@ -164,18 +165,16 @@ class App extends React.Component {
   }
 
   render() {
-    const homePage = (
-      <div className="dashboard">
-      <h1>DASHBOARD</h1>
-      </div>
+    const dashboard = (
+      <Dashboard data={this.state.lists}/>
     );
 
-    let firstListOrHomePage;
+    let firstListOrDashboard;
 
     if (this.state.selectedListIndex === null) {
-      firstListOrHomePage = homePage;
+      firstListOrDashboard = dashboard;
     }else {
-      firstListOrHomePage = <List
+      firstListOrDashboard = <List
         listName={this.state.lists[this.state.selectedListIndex].name}
         content={this.state.lists[this.state.selectedListIndex].content}
         doOnListRename={this.renameList}
@@ -199,7 +198,7 @@ class App extends React.Component {
           doOnAdd={this.addList}
           fileLink={this.state.downloadLink}/>
 
-          {firstListOrHomePage}
+          {firstListOrDashboard}
       </div>
     );
   }

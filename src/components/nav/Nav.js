@@ -82,6 +82,7 @@ class Nav extends React.Component {
     return (
       <nav id="navbar">
         <header>Game Keeper</header>
+        <button type="button" className="navButton btn btn-light" onClick={() => this.props.doOnClick(null)}>Dashboard</button>
         {buttonsToRender}
         {(this.state.addMode) ? inputBit : buttonBit}
         <a className="downloadData" download="lists.js" href={this.props.fileLink}><img className="downloadImg" src={downloadImg} alt=""></img></a>
