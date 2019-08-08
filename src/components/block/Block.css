@@ -1,7 +1,7 @@
 .game-block {
   --footer-content-height: 20px;
   border: 0px solid black;
-  border-radius: .25rem;
+  /*border-radius: .25rem;*/
   text-align: center;
   padding: 10px;
   margin: 1px 2px 1px 0;
@@ -45,42 +45,98 @@
   display: flex;
 }
 
-.game-block_orange {
-  background-color: var(--color-orange);
+.game-block_air-force-blue {
+  background-color: var(--color-air-force-blue);
 }
 
-.game-block_orange:hover {
-  background-color: var(--color-orange-half-alpha);
+.game-block_air-force-blue:hover {
+  background-color: var(--color-air-force-blue-half-alpha);
 }
 
-.game-block_green {
-  background-color: rgba(97, 189, 79, 1);
+.game-block_alice-blue {
+  background-color: var(--color-alice-blue);
 }
 
-.game-block_green:hover {
-  background-color: rgba(97, 189, 79, 0.5);
+.game-block_alice-blue:hover {
+  background-color: var(--color-alice-blue-half-alpha);
+}
+
+.game-block_wistful {
+  background-color: var(--color-wistful);
+}
+
+.game-block_wistful:hover {
+  background-color: var(--color-wistful-half-alpha);
+}
+
+.game-block_ce-soir {
+  background-color: var(--color-ce-soir);
+}
+
+.game-block_ce-soir:hover {
+  background-color: var(--color-ce-soir-half-alpha);
+}
+
+.game-block_vivid-tangerine {
+  background-color: var(--color-vivid-tangerine);
+}
+
+.game-block_vivid-tangerine:hover {
+  background-color: var(--color-vivid-tangerine-half-alpha);
+}
+
+.game-block_sunset-orange {
+  background-color: var(--color-sunset-orange);
+}
+
+.game-block_sunset-orange:hover {
+  background-color: var(--color-sunset-orange-half-alpha);
+}
+
+.game-block_madang {
+  background-color: var(--color-madang);
+}
+
+.game-block_madang:hover {
+  background-color: var(--color-madang-half-alpha);
+}
+
+.game-block_emerald {
+  background-color: var(--color-emerald);
+}
+
+.game-block_emerald:hover {
+  background-color: var(--color-emerald-half-alpha);
+}
+
+.game-block_witch-haze {
+  background-color: var(--color-witch-haze);
+}
+
+.game-block_witch-haze:hover {
+  background-color: var(--color-witch-haze-half-alpha);
 }
 
 .game-block_yellow {
-  background-color: rgba(242, 214, 0, 1);
+  background-color: var(--color-yellow);
 }
 
 .game-block_yellow:hover {
-  background-color: rgba(242, 214, 0, 0.5);
+  background-color: var(--color-yellow-half-alpha);
 }
 
-.game-block_blue {
-  background-color: rgba(0, 194, 224, 1);
+.game-block_california {
+  background-color: var(--color-california);
 }
 
-.game-block_blue:hover {
-  background-color: rgba(0, 194, 224, 0.5);
+.game-block_california:hover {
+  background-color: var(--color-california-half-alpha);
 }
 
-.game-block_red {
-  background-color: rgba(235, 90, 70, 1);
+.game-block_burnt-orange {
+  background-color: var(--color-burnt-orange);
 }
 
-.game-block_red:hover {
-  background-color: rgba(235, 90, 70, 0.5);
+.game-block_burnt-orange:hover {
+  background-color: var(--color-burnt-orange-half-alpha);
 }

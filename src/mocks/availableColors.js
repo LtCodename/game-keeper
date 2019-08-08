@@ -1,23 +1,51 @@
 const availableColors = [
   {
     id: 1,
-    name: "orange",
+    name: "air-force-blue",
   },
   {
     id: 2,
-    name: "green",
+    name: "alice-blue",
   },
   {
     id: 3,
-    name: "yellow",
+    name: "wistful",
   },
   {
     id: 4,
-    name: "blue",
+    name: "ce-soir",
   },
   {
     id: 5,
-    name: "red",
+    name: "vivid-tangerine",
+  },
+  {
+    id: 6,
+    name: "sunset-orange",
+  },
+  {
+    id: 7,
+    name: "madang",
+  },
+  {
+    id: 8,
+    name: "emerald",
+  },
+  {
+    id: 9,
+    name: "witch-haze",
+  },
+  {
+    id: 10,
+    name: "yellow",
+  },
+  {
+    id: 11,
+    name: "california",
+  },
+  {
+    id: 12,
+    name: "burnt-orange",
   }
 ];
 

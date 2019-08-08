@@ -1,7 +1,29 @@
 * {
   box-sizing: border-box;
-  --color-orange: rgba(255, 159, 26, 1);
-  --color-orange-half-alpha: rgba(255, 159, 26, 0.5);
+  --color-air-force-blue: rgba(75, 119, 190, 1);
+  --color-air-force-blue-half-alpha: rgba(75, 119, 190, 0.5);
+  --color-madang: rgba(200, 247, 197, 1);
+  --color-madang-half-alpha: rgba(200, 247, 197, 0.5);
+  --color-alice-blue: rgba(228, 241, 254, 1);
+  --color-alice-blue-half-alpha: rgba(228, 241, 254, 0.5);
+  --color-wistful: rgba(174, 168, 211, 1);
+  --color-wistful-half-alpha: rgba(74, 168, 211, 0.5);
+  --color-ce-soir: rgba(169, 109, 173, 1);
+  --color-ce-soir-half-alpha: rgba(169, 109, 173, 0.5);
+  --color-vivid-tangerine: rgba(255, 148, 120, 1);
+  --color-vivid-tangerine-half-alpha: rgba(255, 148, 120, 0.5);
+  --color-sunset-orange: rgba(246, 71, 71, 1);
+  --color-sunset-orange-half-alpha: rgba(246, 71, 71, 0.5);
+  --color-emerald: rgba(63, 195, 128, 1);
+  --color-emerald-half-alpha: rgba(63, 195, 128, 0.5);
+  --color-witch-haze: rgba(255, 246, 143, 1);
+  --color-witch-haze-half-alpha: rgba(255, 246, 143, 0.5);
+  --color-yellow: rgba(240, 255, 0, 1);
+  --color-yellow-half-alpha: rgba(240, 255, 0, 0.5);
+  --color-california: rgba(248, 148, 6, 1);
+  --color-california-half-alpha: rgba(248, 148, 6, 0.5);
+  --color-burnt-orange: rgba(211, 84, 0, 1);
+  --color-burnt-orange-half-alpha: rgba(211, 84, 0, 0.5);
 }
 
 body {
