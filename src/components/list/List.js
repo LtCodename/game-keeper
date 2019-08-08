@@ -165,7 +165,7 @@ class List extends React.Component {
     );
 
     return (
-      <div className="all-content">
+      <div className="allContent">
         {this.state.renameListMode ? editListNameForm : this.state.addSectionMode ? addNewSectionForm : nameAndButtonsBlock}
         {sectionsToRender}
 

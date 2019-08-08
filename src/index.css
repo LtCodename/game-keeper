@@ -49,7 +49,7 @@ img {
   width: 200px;
 }
 
-.all-content {
+.allContent, .dashboard {
   padding-left: 20px;
   flex: 1;
 }

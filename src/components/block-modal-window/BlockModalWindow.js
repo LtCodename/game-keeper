@@ -37,7 +37,6 @@ class BlockModalWindow extends React.Component {
   }
 
   selectChangeHandler(event) {
-    //console.log(event.target.value);
     this.props.changeGameSection(event.target.value);
     this.props.closeModal();
   }

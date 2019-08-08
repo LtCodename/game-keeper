@@ -24,8 +24,8 @@ class App extends React.Component {
     this.onChangeGameSection = this.onChangeGameSection.bind(this);
 
     this.state = {
-      selectedListIndex: 0,
       lists: lists,
+      selectedListIndex: null,
       downloadLink: this.createBlob(lists)
     };
   }
@@ -61,8 +61,6 @@ class App extends React.Component {
   onBlockSave(blockData, blockId, sectionId, listId) {
     const copy = this.deepCopy(this.state.lists);
     copy[listId].content[sectionId].games[blockId] = blockData;
-    console.log(`index is ${blockId}`);
-    console.log(blockData);
     this.rewriteLists(copy);
   }
 
@@ -106,9 +104,10 @@ class App extends React.Component {
   }
 
   deleteList(index) {
+    let newIndex = 0;
+
     if (this.state.lists.length === 1) {
-      console.log("Warning: You can't delete last list. Yet.");
-      return;
+      newIndex = null;
     }
 
     const copy = this.deepCopy(this.state.lists);
@@ -116,7 +115,7 @@ class App extends React.Component {
 
     this.setState({
       lists: copy,
-      selectedListIndex: 0
+      selectedListIndex: newIndex
     });
   }
 
@@ -165,6 +164,32 @@ class App extends React.Component {
   }
 
   render() {
+    const homePage = (
+      <div className="dashboard">
+      <h1>DASHBOARD</h1>
+      </div>
+    );
+
+    let firstListOrHomePage;
+
+    if (this.state.selectedListIndex === null) {
+      firstListOrHomePage = homePage;
+    }else {
+      firstListOrHomePage = <List
+        listName={this.state.lists[this.state.selectedListIndex].name}
+        content={this.state.lists[this.state.selectedListIndex].content}
+        doOnListRename={this.renameList}
+        doOnAddSection={(sectionName, sectionColor) => this.addSection(sectionName, sectionColor, this.state.selectedListIndex)}
+        doOnSectionRename={(newSectionName, sectionIndex) => this.renameSection(newSectionName, sectionIndex, this.state.selectedListIndex)}
+        doOnAddGame={(gameName, sectionIndex) => this.addGame(gameName, sectionIndex, this.state.selectedListIndex)}
+        doOnSectionDelete={(sectionIndex) => this.deleteSection(this.state.selectedListIndex, sectionIndex)}
+        doOnColorChange={(sectionIndex, newColor) => this.changeColor(this.state.selectedListIndex, sectionIndex, newColor)}
+        onBlockDelete={(blockId, sectionId) => this.onBlockDelete(blockId, sectionId, this.state.selectedListIndex)}
+        doOnDelete={() => this.deleteList(this.state.selectedListIndex)}
+        saveBlock={(blockData, blockId, sectionId) => this.onBlockSave(blockData, blockId, sectionId, this.state.selectedListIndex)}
+        changeGameSection={(newSectionIndex, blockIndex, oldSectionIndex) => this.onChangeGameSection(newSectionIndex, blockIndex, oldSectionIndex, this.state.selectedListIndex)}/>
+    }
+
     return (
       <div className="appDiv">
         <Nav
@@ -173,19 +198,8 @@ class App extends React.Component {
           doOnClick={this.changeSelectedListIndex}
           doOnAdd={this.addList}
           fileLink={this.state.downloadLink}/>
-        <List
-          listName={this.state.lists[this.state.selectedListIndex].name}
-          content={this.state.lists[this.state.selectedListIndex].content}
-          doOnListRename={this.renameList}
-          doOnAddSection={(sectionName, sectionColor) => this.addSection(sectionName, sectionColor, this.state.selectedListIndex)}
-          doOnSectionRename={(newSectionName, sectionIndex) => this.renameSection(newSectionName, sectionIndex, this.state.selectedListIndex)}
-          doOnAddGame={(gameName, sectionIndex) => this.addGame(gameName, sectionIndex, this.state.selectedListIndex)}
-          doOnSectionDelete={(sectionIndex) => this.deleteSection(this.state.selectedListIndex, sectionIndex)}
-          doOnColorChange={(sectionIndex, newColor) => this.changeColor(this.state.selectedListIndex, sectionIndex, newColor)}
-          onBlockDelete={(blockId, sectionId) => this.onBlockDelete(blockId, sectionId, this.state.selectedListIndex)}
-          doOnDelete={() => this.deleteList(this.state.selectedListIndex)}
-          saveBlock={(blockData, blockId, sectionId) => this.onBlockSave(blockData, blockId, sectionId, this.state.selectedListIndex)}
-          changeGameSection={(newSectionIndex, blockIndex, oldSectionIndex) => this.onChangeGameSection(newSectionIndex, blockIndex, oldSectionIndex, this.state.selectedListIndex)}/>
+
+          {firstListOrHomePage}
       </div>
     );
   }
