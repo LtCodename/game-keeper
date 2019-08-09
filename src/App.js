@@ -26,7 +26,7 @@ class App extends React.Component {
 
     this.state = {
       lists: lists,
-      selectedListIndex: 0,//TODO should be null on prod
+      selectedListIndex: null,
       downloadLink: this.createBlob(lists)
     };
   }

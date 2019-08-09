@@ -26,20 +26,19 @@ class Colors extends React.Component {
     let colorsToRender = availableColors.map((elem, index) => {
       let classNameReal = "colorsSpan color_";
       classNameReal += elem.name;
-      
+
       return (
         <span
           key={elem.id}
           className={classNameReal}
           onClick={() => this.colorMagic(elem.name)}>
-          {(this.state.currentColor === elem.name) ? "V" : ""}
+          {(this.state.currentColor === elem.name) ? "X" : ""}
         </span>
       );
     })
 
     return (
       <div >
-        <p>Pick a color</p>
         <div className="colorsContainer">
           {colorsToRender}
         </div>

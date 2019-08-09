@@ -1,5 +1,6 @@
 import React from 'react';
 import Statistics from '../../components/statistics/Statistics.js';
+import './Dashboard.css'
 
 class Dashboard extends React.Component {
 
@@ -21,8 +22,8 @@ class Dashboard extends React.Component {
 
     return (
       <div className="dashboard">
-        <h1>DASHBOARD</h1>
-        <p>Very interesting introduction text that tells you all about this site and describes all its wonderfull features in a jolly manner.</p>
+        <h1 className="dashboardText">DASHBOARD</h1>
+        <p className="dashboardText">Very interesting introduction text that tells you all about this site and describes all its wonderfull features in a jolly manner.</p>
         {sorryOrStatistics}
       </div>
     )

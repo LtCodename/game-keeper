@@ -149,16 +149,16 @@ class List extends React.Component {
     );
 
     const editListNameForm = (
-      <div>
-        <input className="form-control" type="text" placeholder="Enter new name" value={this.state.listNameInputValue} onChange={this.listNameInputValueChange}></input>
+      <div className="editListDiv">
+        <input className="editListInput form-control" type="text" placeholder="Enter new name" value={this.state.listNameInputValue} onChange={this.listNameInputValueChange}></input>
         <button className="btn btn-dark" onClick={this.doOnSubmitListName}>Submit name</button>
         <button className="btn" onClick={this.doOnCancel}>Cancel</button>
       </div>
     );
 
     const addNewSectionForm = (
-      <div>
-        <input className="form-control" type="text" placeholder="Enter section name" value={this.state.sectionNameInputValue} onChange={this.sectionNameInputValueChange}></input>
+      <div className="addListDiv">
+        <input className="addListInput form-control" type="text" placeholder="Enter section name" value={this.state.sectionNameInputValue} onChange={this.sectionNameInputValueChange}></input>
         <button className="btn btn-dark" onClick={() => this.props.doOnAddSection(this.state.sectionNameInputValue, this.state.colorForNewSection)}>Submit section</button>
         <button className="btn" onClick={this.doOnCancel}>Cancel</button>
         <Colors passColorToSection={this.holdColorForNewSection}/>

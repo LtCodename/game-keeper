@@ -1,0 +1,10 @@
+.dashboard {
+  background-color: white;
+  color: black;
+  margin: 10px;
+  border-radius: 15px;
+}
+
+.dashboardText {
+  color: black;
+}

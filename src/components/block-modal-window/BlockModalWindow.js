@@ -157,7 +157,7 @@ class BlockModalWindow extends React.Component {
 
   render() {
     const descriptionEdit = (
-      <div>
+      <div className="modalPiece">
         <textarea className="form-control" row="3" type="text" placeholder="Add your text" value={this.state.descriptionInputValue} onChange={this.descriptionInputValueChange}></textarea>
         <button className="btn btn-dark" onClick={this.doOnDescriptionChange}>Submit</button>
         <button className="btn" onClick={this.doOnCancel}>Cancel</button>
@@ -165,7 +165,9 @@ class BlockModalWindow extends React.Component {
     );
 
     const descriptionCustom = (
-      <p onClick={this.changeDescription}>{(this.state.localGameData.description) ? this.state.localGameData.description : "Click here to enter description."}</p>
+      <div className="modalPiece">
+        <p className="modalParagraph" onClick={this.changeDescription}>{(this.state.localGameData.description) ? this.state.localGameData.description : "Click this text to enter description"}</p>
+      </div>
     );
 
     const gameName = (
@@ -181,10 +183,12 @@ class BlockModalWindow extends React.Component {
     );
 
     const datePicker = (
-      <label>
-        Release date
-        <input className="form-control" type="date" value={this.state.localGameData.releaseDate} onChange={this.dateInputValueChange}></input>
-      </label>
+      <div className="modalPiece">
+        <label>
+          Release Date
+          <input className="form-control" type="date" value={this.state.localGameData.releaseDate} onChange={this.dateInputValueChange}></input>
+        </label>
+      </div>
     );
 
     const platformPicker = this.state.platforms.map((elem, index) => {
@@ -219,9 +223,12 @@ class BlockModalWindow extends React.Component {
     })
 
     const sectionSelector = (
-      <select value={this.props.sectionId} className="custom-select" onChange={this.selectChangeHandler}>
-        {sectionOptions}
-      </select>
+      <div className="modalPiece">
+        Move to another section
+        <select value={this.props.sectionId} className="custom-select" onChange={this.selectChangeHandler}>
+          {sectionOptions}
+        </select>
+      </div>
     );
 
     return (
@@ -244,7 +251,10 @@ class BlockModalWindow extends React.Component {
                 {/*date*/}
                 {datePicker}
                 {/*platform*/}
-                {platformPicker}
+                <div className="modalPiece">
+                  Select platform
+                  {platformPicker}
+                </div>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn" data-dismiss="modal">Cancel</button>

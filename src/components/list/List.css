@@ -1,3 +1,14 @@
 .actionButtons {
-  padding-bottom: 10px;
+}
+
+.editListDiv {
+  padding-top: 10px;
+}
+
+.editListInput, .addListInput {
+  width: 50%;
+}
+
+.addListInput {
+  margin-top: 10px;
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import './Statistics.css';
 
 class Statistics extends React.Component {
 
@@ -25,9 +26,9 @@ class Statistics extends React.Component {
 
     return (
       <div className="statistics">
-        <p>{`You have ${this.props.data.length} lists.`}</p>
-        <p>{`You have ${sectionsNumber} sections in your lists.`}</p>
-        <p>{`You have ${gamesNumber} games in your sections.`}</p>
+        <p className="dashboardText">{`You have ${this.props.data.length} lists.`}</p>
+        <p className="dashboardText">{`You have ${sectionsNumber} sections in your lists.`}</p>
+        <p className="dashboardText">{`You have ${gamesNumber} games in your sections.`}</p>
       </div>
     )
   }

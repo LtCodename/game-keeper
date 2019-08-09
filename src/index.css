@@ -55,6 +55,10 @@ h1, h2, header, p {
   color: white;
 }
 
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0;
+  }
+
 h1 {
   font-size: 55px;
   font-family: 'Luckiest Guy', cursive;
@@ -73,10 +77,4 @@ h2 {
 .all-content {
   height: 100vh;
   overflow: auto;
-}
-
-.inner-section {
-  display: flex;
-  flex-wrap: wrap;
-  clear: both;
 }

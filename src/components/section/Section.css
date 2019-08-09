@@ -5,3 +5,27 @@
 .btnAddGame {
   border-radius: 0;
 }
+
+.editSectionInput {
+  width: 50%;
+}
+
+.editSectionDiv {
+  margin-top: 10px;
+}
+
+.inner-section {
+  display: flex;
+  flex-wrap: wrap;
+  clear: both;
+  margin-top: 10px;
+}
+
+.addGameBlockDiv {
+  margin-top: 8px;
+  margin-left: 8px;
+}
+
+.cancelAddBlockBtn {
+    width: 118px;
+}

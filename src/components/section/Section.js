@@ -142,8 +142,8 @@ class Section extends React.Component {
     );
 
     const editForm = (
-        <div>
-          <input className="form-control" type="text" placeholder="Enter new name" value={this.state.sectionInputValue} onChange={this.sectionInputValueChange}></input>
+        <div className="editSectionDiv">
+          <input className="form-control editSectionInput" type="text" placeholder="Enter new name" value={this.state.sectionInputValue} onChange={this.sectionInputValueChange}></input>
           <button className="btn btn-dark" onClick={this.doOnSubmit}>Submit name</button>
           <button className="btn" onClick={this.doOnCancel}>Cancel</button>
           <Colors currentColor={this.props.color} passColorToSection={this.props.passColorUp}/>
@@ -151,10 +151,10 @@ class Section extends React.Component {
     );
 
     const addGameBlock = (
-      <div>
+      <div className="addGameBlockDiv">
         <input className="form-control" type="text" placeholder="Enter game name" value={this.state.gameInputValue} onChange={this.gameInputValueChange}></input>
         <button className="btn btn-dark" onClick={this.doOnGameAdd}>Submit game</button>
-        <button className="btn" onClick={this.doOnCancel}>Cancel</button>
+        <button className="btn cancelAddBlockBtn" onClick={this.doOnCancel}>Cancel</button>
       </div>
     );
 

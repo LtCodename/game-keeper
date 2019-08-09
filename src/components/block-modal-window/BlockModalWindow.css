@@ -1,0 +1,9 @@
+.modalParagraph {
+  color: black;
+}
+
+.modalPiece {
+  border: 1px solid black;
+  padding: 5px;
+  margin-bottom: 5px;
+}
