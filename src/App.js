@@ -89,8 +89,11 @@ class App extends React.Component {
 
   addGame(name, section, list) {
     const copy = this.deepCopy(this.state.lists);
+    const uniqueIndex = `id${new Date().getTime()}`;
+
     copy[list].content[section].games.push({
-      id: `${list}-${section}-${copy[list].content[section].length + 1}`,
+      //id: `${list}-${section}-${unique}`,
+      id: `${uniqueIndex}`,
       name: name
     });
 
