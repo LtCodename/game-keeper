@@ -76,7 +76,7 @@ class Nav extends React.Component {
 
     const buttonBit = (
       <div>
-        <button className="btn addListBtn" onClick={this.doOnAdd}>Add list</button>
+        <button className="btn addListBtn btn-warning" onClick={this.doOnAdd}>Add List</button>
       </div>
     );
 
