@@ -22,11 +22,12 @@
 }
 
 .releaseDate {
-  background-color: grey;
   line-height: var(--footer-content-height);
   padding: 0 2px;
   margin-right: 3px;
-  font-size: 13px;
+  font-size: 15px;
+  font-family: 'Roboto Mono', monospace;
+  border: 1px solid black;
 }
 
 .platformsBlock {
