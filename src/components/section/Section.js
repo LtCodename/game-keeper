@@ -13,7 +13,7 @@ class Section extends React.Component {
     super(props);
 
     this.doOnEdit = this.doOnEdit.bind(this);
-    this.inputValueChange = this.inputValueChange.bind(this);
+    this.sectionInputValueChange = this.sectionInputValueChange.bind(this);
     this.gameInputValueChange = this.gameInputValueChange.bind(this);
     this.doOnSubmit = this.doOnSubmit.bind(this);
     this.doOnCancel = this.doOnCancel.bind(this);
@@ -25,7 +25,7 @@ class Section extends React.Component {
     this.state = {
       editMode: false,
       addGameMode: false,
-      inputValue: this.props.sectionName,
+      sectionInputValue: this.props.sectionName,
       gameInputValue: "",
       showModalWindow: false
     };
@@ -62,14 +62,15 @@ class Section extends React.Component {
   doOnEdit() {
     if (!this.state.editMode) {
       this.setState({
-        editMode: true
+        editMode: true,
+        sectionInputValue: this.props.sectionName
       });
     }
   }
 
-  inputValueChange(event) {
+  sectionInputValueChange(event) {
     this.setState({
-      inputValue: event.target.value
+      sectionInputValue: event.target.value
     });
   }
 
@@ -80,7 +81,7 @@ class Section extends React.Component {
   }
 
   doOnSubmit() {
-    this.props.doOnSectionRename(this.state.inputValue);
+    this.props.doOnSectionRename(this.state.sectionInputValue);
     this.setState({
       editMode: false
     });
@@ -101,7 +102,7 @@ class Section extends React.Component {
       editMode: false,
       addGameMode: false,
       gameInputValue: "",
-      inputValue: this.props.sectionName
+      sectionInputValue: this.props.sectionName
     });
   }
 
@@ -141,7 +142,7 @@ class Section extends React.Component {
 
     const editForm = (
         <div>
-          <input className="form-control" type="text" placeholder="Enter new name" value={this.state.inputValue} onChange={this.inputValueChange}></input>
+          <input className="form-control" type="text" placeholder="Enter new name" value={this.state.sectionInputValue} onChange={this.sectionInputValueChange}></input>
           <button className="btn btn-dark" onClick={this.doOnSubmit}>Submit name</button>
           <button className="btn" onClick={this.doOnCancel}>Cancel</button>
           <Colors currentColor={this.props.color} passColorToSection={this.props.passColorUp}/>
