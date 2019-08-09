@@ -1,6 +1,7 @@
 import React from 'react';
 import Block from '../block/Block.js';
 import Colors from '../colors/Colors.js';
+import './Section.css';
 import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
 declare var  $;
 
@@ -157,8 +158,10 @@ class Section extends React.Component {
       </div>
     );
 
+    const addBtnClassName = `game-block_${this.props.color} btn btnAddGame`;
+
     const addGameButton = (
-      <button className="btn" onClick={this.beforeAddGame}><p>+</p></button>
+      <button className={addBtnClassName} onClick={this.beforeAddGame}><p className="pAddGame">+</p></button>
     );
 
     const modalWarningWindow = (

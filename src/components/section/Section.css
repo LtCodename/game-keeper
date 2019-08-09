@@ -1,0 +1,7 @@
+.pAddGame {
+  color: var(--nav-background-color);
+}
+
+.btnAddGame {
+  border-radius: 0;
+}

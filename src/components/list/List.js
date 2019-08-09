@@ -1,6 +1,7 @@
 import React from 'react';
 import Section from '../section/Section.js';
 import Colors from '../colors/Colors.js';
+import './List.css';
 import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
 declare var  $;
 

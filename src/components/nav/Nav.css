@@ -1,9 +1,11 @@
 #navbar {
-  width: 200px;
-  height: 100vh;
+  width: 220px;
+  height: auto;
   position: relative;
   padding-bottom: 72px;
-  padding-left: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: var(--nav-background-color);
 }
 
 .navButton {
@@ -13,8 +15,12 @@
   cursor: pointer;
 }
 
+.cancelAddListBtn {
+  width: 93px;
+}
+
 .navButtonActive {
-  background-color: #333;
+  background-color: var(--nav-background-color);
   color: #fff;
 }
 
@@ -29,5 +35,9 @@
 }
 
 .downloadImg:hover {
+  width: 100%;
+}
+
+.addListBtn {
   width: 100%;
 }

@@ -69,13 +69,13 @@ class Nav extends React.Component {
       <div>
         <input type="text" className="form-control" placeholder="Enter new name" value={this.state.inputValue} onChange={this.inputValueChange}></input>
         <button className="btn btn-dark" onClick={this.submitNewList}>Submit list</button>
-        <button className="btn " onClick={this.doOnCancel}>Cancel</button>
+        <button className="btn cancelAddListBtn " onClick={this.doOnCancel}>Cancel</button>
       </div>
     );
 
     const buttonBit = (
       <div>
-        <button className="btn" onClick={this.doOnAdd}>Add list</button>
+        <button className="btn addListBtn" onClick={this.doOnAdd}>Add list</button>
       </div>
     );
 
