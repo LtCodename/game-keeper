@@ -26,7 +26,8 @@ class Nav extends React.Component {
 
   doOnCancel() {
     this.setState({
-      addMode: false
+      addMode: false,
+      inputValue: ""
     })
   }
 

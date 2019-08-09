@@ -41,10 +41,12 @@ img {
   width: 200px;
 }
 
-.allContent, .dashboard {
+.allContent {
   padding-left: 20px;
   padding-bottom: 20px;
   flex: 1;
+  height: 100vh;
+  overflow: auto;
 }
 
 ul {

@@ -1,4 +1,5 @@
 .actionButtons {
+  display: flex;
 }
 
 .editListDiv {
@@ -11,4 +12,8 @@
 
 .addListInput {
   margin-top: 10px;
+}
+
+.listPositionPicker {
+  width: 100px;
 }

@@ -161,7 +161,7 @@ class Section extends React.Component {
     const addBtnClassName = `game-block_${this.props.color} btn btnAddGame`;
 
     const addGameButton = (
-      <button className={addBtnClassName} onClick={this.beforeAddGame}><p className="pAddGame">+</p></button>
+      <button className={addBtnClassName} onClick={this.beforeAddGame}><span className="pAddGame">+</span></button>
     );
 
     const modalWarningWindow = (

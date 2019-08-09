@@ -23,12 +23,36 @@ class App extends React.Component {
     this.onBlockDelete = this.onBlockDelete.bind(this);
     this.onBlockSave = this.onBlockSave.bind(this);
     this.onChangeGameSection = this.onChangeGameSection.bind(this);
+    this.onChangeListPosition = this.onChangeListPosition.bind(this);
 
     this.state = {
       lists: lists,
       selectedListIndex: null,
       downloadLink: this.createBlob(lists)
     };
+  }
+
+  onChangeListPosition(newListPosition, oldListPosition) {
+    const copy = this.deepCopy(this.state.lists);
+    console.log(`old list position is ${oldListPosition} and new list position is ${newListPosition}`)
+
+    console.log(copy)
+    let spliced = copy.splice(oldListPosition, 1);
+    console.log(spliced)
+
+    if (newListPosition < oldListPosition) {
+      copy.splice(newListPosition, 0, spliced[0]);
+    }
+
+    if (newListPosition > oldListPosition) {
+      copy.splice(newListPosition - 1, 0, spliced[0]);
+    }
+
+    //console.log(copy)
+    this.setState({
+      selectedListIndex: newListPosition
+    });
+    this.rewriteLists(copy);
   }
 
   createBlob(lists, oldLink) {
@@ -180,6 +204,7 @@ class App extends React.Component {
       firstListOrDashboard = <List
         listName={this.state.lists[this.state.selectedListIndex].name}
         content={this.state.lists[this.state.selectedListIndex].content}
+        allLists={this.state.lists}
         doOnListRename={this.renameList}
         doOnAddSection={(sectionName, sectionColor) => this.addSection(sectionName, sectionColor, this.state.selectedListIndex)}
         doOnSectionRename={(newSectionName, sectionIndex) => this.renameSection(newSectionName, sectionIndex, this.state.selectedListIndex)}
@@ -188,7 +213,9 @@ class App extends React.Component {
         doOnColorChange={(sectionIndex, newColor) => this.changeColor(this.state.selectedListIndex, sectionIndex, newColor)}
         onBlockDelete={(blockId, sectionId) => this.onBlockDelete(blockId, sectionId, this.state.selectedListIndex)}
         doOnDelete={() => this.deleteList(this.state.selectedListIndex)}
+        listIndex={this.state.selectedListIndex}
         saveBlock={(blockData, blockId, sectionId) => this.onBlockSave(blockData, blockId, sectionId, this.state.selectedListIndex)}
+        changeListPosition={(newListPosition, oldListPosition) => this.onChangeListPosition(newListPosition, oldListPosition)}
         changeGameSection={(newSectionIndex, blockIndex, oldSectionIndex) => this.onChangeGameSection(newSectionIndex, blockIndex, oldSectionIndex, this.state.selectedListIndex)}/>
     }
 

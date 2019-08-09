@@ -21,10 +21,12 @@ class Dashboard extends React.Component {
     }
 
     return (
-      <div className="dashboard">
-        <h1 className="dashboardText">DASHBOARD</h1>
-        <p className="dashboardText">Very interesting introduction text that tells you all about this site and describes all its wonderfull features in a jolly manner.</p>
-        {sorryOrStatistics}
+      <div>
+        <div className="dashboard">
+          <h1 className="dashboardText">DASHBOARD</h1>
+          <p className="dashboardText">Very interesting introduction text that tells you all about this site and describes all its wonderfull features in a jolly manner.</p>
+          {sorryOrStatistics}
+        </div>
       </div>
     )
   }

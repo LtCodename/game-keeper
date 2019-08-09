@@ -18,6 +18,7 @@ class List extends React.Component {
     this.holdColorForNewSection = this.holdColorForNewSection.bind(this);
     this.openModalWarningWindow = this.openModalWarningWindow.bind(this);
     this.resetState = this.resetState.bind(this);
+    this.listPositionChangeHandler = this.listPositionChangeHandler.bind(this);
 
     this.state = {
       renameListMode: false,
@@ -32,6 +33,10 @@ class List extends React.Component {
   static defaultProps = {
     content: [],
     newListName: ""
+  }
+
+  listPositionChangeHandler(event) {
+    this.props.changeListPosition(event.target.value, this.props.listIndex);
   }
 
   openModalWarningWindow() {
@@ -137,6 +142,20 @@ class List extends React.Component {
         message={`Are you sure you want to delete list ${this.props.listName}?`} />
     );
 
+    const positionOptions = this.props.allLists.map((elem, index) => {
+      return (
+        <option key={index} value={index}>{index}</option>
+      );
+    })
+
+    const listPositionPicker = (
+      <div>
+        <select value={this.props.listIndex} className="custom-select listPositionPicker" onChange={this.listPositionChangeHandler}>
+          {positionOptions}
+        </select>
+      </div>
+    );
+
     const nameAndButtonsBlock = (
       <div>
         <h1>{this.props.listName}</h1>
@@ -144,7 +163,9 @@ class List extends React.Component {
           <button className="btn" onClick={this.doOnEdit}>Edit name</button>
           <button className="btn" onClick={this.openModalWarningWindow}>Delete list</button>
           <button className="btn" onClick={this.doOnAddSection}>Add section</button>
+          {listPositionPicker}
         </div>
+
       </div>
     );
 
