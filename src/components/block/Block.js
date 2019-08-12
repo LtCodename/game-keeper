@@ -81,7 +81,7 @@ class Block extends React.Component {
         sectionId={this.props.sectionId}
         content={this.props.content}
         changeGameSection={this.props.changeGameSection}
-        closeModal = {this.closeModal} />
+        closeModal={this.closeModal} />
     );
 
     return (

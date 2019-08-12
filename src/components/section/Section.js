@@ -3,6 +3,7 @@ import Block from '../block/Block.js';
 import Colors from '../colors/Colors.js';
 import './Section.css';
 import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
+import BlockModalWindow from '../block-modal-window/BlockModalWindow.js';
 declare var  $;
 
 class Section extends React.Component {
@@ -15,21 +16,30 @@ class Section extends React.Component {
 
     this.doOnEdit = this.doOnEdit.bind(this);
     this.sectionInputValueChange = this.sectionInputValueChange.bind(this);
-    this.gameInputValueChange = this.gameInputValueChange.bind(this);
     this.doOnSubmit = this.doOnSubmit.bind(this);
     this.doOnCancel = this.doOnCancel.bind(this);
-    this.beforeAddGame = this.beforeAddGame.bind(this);
     this.doOnGameAdd = this.doOnGameAdd.bind(this);
     this.openModalWarningWindow = this.openModalWarningWindow.bind(this);
     this.resetState = this.resetState.bind(this);
+    this.openAddGameWindow = this.openAddGameWindow.bind(this);
+    this.modalSave = this.modalSave.bind(this);
 
     this.state = {
       editMode: false,
       addGameMode: false,
       sectionInputValue: this.props.sectionName,
-      gameInputValue: "",
-      showModalWindow: false
+      showModalWindow: false,
+      showAddGameWindow: false
     };
+  }
+
+  modalSave(data) {
+    this.props.addNewGame(data);
+    this.closeAddGameModal();
+  }
+
+  closeAddGameModal() {
+    $("#addGame").modal('hide');
   }
 
   openModalWarningWindow() {
@@ -41,23 +51,25 @@ class Section extends React.Component {
     });
   }
 
+  openAddGameWindow() {
+    this.setState({
+      showAddGameWindow: true
+    }, () => {
+      $("#addGame").modal('show');
+      $("#addGame").on('hidden.bs.modal', this.resetState);
+    });
+  }
+
   componentWillUnmount() {
     $("#modalWarning").unbind('hidden.bs.modal');
+    $("#addGame").unbind('hidden.bs.modal');
   }
 
   resetState() {
     this.setState({
-      showModalWindow: false
+      showModalWindow: false,
+      showAddGameWindow: false
     })
-  }
-
-  beforeAddGame() {
-    if (!this.state.addGameMode) {
-      this.setState({
-        addGameMode: true,
-        gameInputValue: ""
-      });
-    }
   }
 
   doOnEdit() {
@@ -72,12 +84,6 @@ class Section extends React.Component {
   sectionInputValueChange(event) {
     this.setState({
       sectionInputValue: event.target.value
-    });
-  }
-
-  gameInputValueChange(event) {
-    this.setState({
-      gameInputValue: event.target.value
     });
   }
 
@@ -150,18 +156,10 @@ class Section extends React.Component {
         </div>
     );
 
-    const addGameBlock = (
-      <div className="addGameBlockDiv">
-        <input className="form-control" type="text" placeholder="Enter game name" value={this.state.gameInputValue} onChange={this.gameInputValueChange}></input>
-        <button className="btn btn-dark" onClick={this.doOnGameAdd}>Submit game</button>
-        <button className="btn cancelAddBlockBtn" onClick={this.doOnCancel}>Cancel</button>
-      </div>
-    );
-
     const addBtnClassName = `game-block_${this.props.color} btn btnAddGame`;
 
     const addGameButton = (
-      <button className={addBtnClassName} onClick={this.beforeAddGame}><span className="pAddGame">+</span></button>
+      <button className={addBtnClassName} onClick={this.openAddGameWindow}><span className="pAddGame">+</span></button>
     );
 
     const modalWarningWindow = (
@@ -171,15 +169,24 @@ class Section extends React.Component {
         message={`Are you sure you want to delete section ${this.props.sectionName}?`} />
     );
 
+    const addGameWindow = (
+      <BlockModalWindow
+        modalId={"addGame"}
+        gameData={{name:"New game"}}
+        modalSave={this.modalSave}
+        closeModal={this.closeAddGameModal}  />
+    );
+
     return (
       <div className="section">
         {(this.state.editMode) ? editForm : nameBlock}
         <div className="inner-section">
           {gamesToRender}
-          {(this.state.addGameMode) ? addGameBlock : addGameButton}
+          {addGameButton}
         </div>
 
         {this.state.showModalWindow ? modalWarningWindow : ""}
+        {this.state.showAddGameWindow ? addGameWindow : ""}
       </div>
     );
   }

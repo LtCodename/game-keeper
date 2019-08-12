@@ -27,7 +27,7 @@ class App extends React.Component {
 
     this.state = {
       lists: lists,
-      selectedListIndex: null,
+      selectedListIndex: 0,//TODO null for prod
       downloadLink: this.createBlob(lists)
     };
   }
@@ -111,14 +111,13 @@ class App extends React.Component {
     this.rewriteLists(copy);
   }
 
-  addGame(name, section, list) {
+  addGame(data, section, list) {
     const copy = this.deepCopy(this.state.lists);
     const uniqueIndex = `id${new Date().getTime()}`;
 
     copy[list].content[section].games.push({
-      //id: `${list}-${section}-${unique}`,
       id: `${uniqueIndex}`,
-      name: name
+      ...data
     });
 
     this.rewriteLists(copy);

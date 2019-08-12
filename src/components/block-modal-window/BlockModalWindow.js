@@ -216,20 +216,26 @@ class BlockModalWindow extends React.Component {
         message={`Are you sure you want to delete block ${this.state.localGameData.name}?`} />
     );
 
-    const sectionOptions = this.props.content.map((elem, index) => {
-      return (
-        <option key={index} value={index}>{elem.name}</option>
-      );
-    })
+    let sectionSelector = "";
 
-    const sectionSelector = (
-      <div className="modalPiece">
-        Move to another section
-        <select value={this.props.sectionId} className="custom-select" onChange={this.selectChangeHandler}>
-          {sectionOptions}
-        </select>
-      </div>
-    );
+    if (this.props.content) {
+      const sectionOptions = this.props.content.map((elem, index) => {
+        return (
+          <option key={index} value={index}>{elem.name}</option>
+        );
+      })
+
+      sectionSelector = (
+        <div className="modalPiece">
+          Move to another section
+          <select value={this.props.sectionId} className="custom-select" onChange={this.selectChangeHandler}>
+            {sectionOptions}
+          </select>
+        </div>
+      );
+    }
+
+    const deleteButton = (this.props.onDeleteBlock) ? <button type="button" className="btn" onClick={this.openModalWarningWindow}>Delete</button> : "";
 
     return (
       <div>
@@ -258,7 +264,7 @@ class BlockModalWindow extends React.Component {
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn" data-dismiss="modal">Cancel</button>
-                <button type="button" className="btn" onClick={this.openModalWarningWindow}>Delete</button>
+                {deleteButton}
                 <button type="button" className="btn btn-dark" onClick={this.modalSave}>Save</button>
               </div>
             </div>
