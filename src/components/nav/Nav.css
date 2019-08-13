@@ -49,6 +49,10 @@
     height: auto;
     width: auto;
     padding-bottom: 5px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
   }
 
   .downloadImg {
@@ -61,10 +65,13 @@
   }
 
   .navBar {
-    display: none;
+    height: 0px;
+    overflow: hidden;
+    transition: height .5s;
   }
 
   .navBarVisible {
-    display: block;
+    overflow: auto;
+    height: calc(100vh - 51px);
   }
 }

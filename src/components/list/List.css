@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.actionButtons .btn {
+  margin-bottom: 2px;
+}
+
 .editListDiv {
   padding-top: 10px;
 }
@@ -16,4 +20,10 @@
 
 .listPositionPicker {
   width: 100px;
+}
+
+@media (max-width: 1050px) {
+  .actionButtons {
+    flex-wrap: wrap;
+  }
 }

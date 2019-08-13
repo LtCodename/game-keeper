@@ -22,7 +22,6 @@ class Dashboard extends React.Component {
 
     return (
       <div>
-
         <div className="dashboard">
           <h1 className="dashboardText">DASHBOARD</h1>
           <p className="dashboardText">Keep track of games you play in style!</p>

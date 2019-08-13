@@ -12,12 +12,28 @@ class Nav extends React.Component {
     this.submitNewList = this.submitNewList.bind(this);
     this.inputValueChange = this.inputValueChange.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.switchBetweenTabs = this.switchBetweenTabs.bind(this);
+    this.goToDashboard = this.goToDashboard.bind(this);
 
     this.state = {
       addMode: false,
       inputValue: "",
       navbarVisible: false
     };
+  }
+
+  switchBetweenTabs(index) {
+    this.props.doOnClick(index);
+    this.setState({
+      navbarVisible: false
+    });
+  }
+
+  goToDashboard() {
+    this.props.doOnClick(null)
+    this.setState({
+      navbarVisible: false
+    });
   }
 
   toggleNavbar() {
@@ -76,7 +92,7 @@ class Nav extends React.Component {
         className += " navButtonActive";
       }
 
-      return <button className={className} type="button" key={elem.id} onClick={() => this.props.doOnClick(index)}>{elem.name}</button>;
+      return <button className={className} type="button" key={elem.id} onClick={() => this.switchBetweenTabs(index)}>{elem.name}</button>;
     })
 
     const inputBit = (
@@ -98,7 +114,7 @@ class Nav extends React.Component {
     );
 
     let navClassName = "navBar";
-    
+
     if (this.state.navbarVisible) {
         navClassName += " navBarVisible";
     }
@@ -110,7 +126,7 @@ class Nav extends React.Component {
           {hideButton}
         </div>
         <div className={navClassName}>
-          <button type="button" className="navButton btn btn-light" onClick={() => this.props.doOnClick(null)}>Dashboard</button>
+          <button type="button" className="navButton btn btn-light" onClick={this.goToDashboard}>Dashboard</button>
           {buttonsToRender}
           {(this.state.addMode) ? inputBit : buttonBit}
           <a className="downloadData" download="lists.js" href={this.props.fileLink}><img className="downloadImg" src={downloadImg} alt=""></img></a>
