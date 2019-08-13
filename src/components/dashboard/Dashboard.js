@@ -22,9 +22,13 @@ class Dashboard extends React.Component {
 
     return (
       <div>
+
         <div className="dashboard">
           <h1 className="dashboardText">DASHBOARD</h1>
-          <p className="dashboardText">Very interesting introduction text that tells you all about this site and describes all its wonderfull features in a jolly manner.</p>
+          <p className="dashboardText">Keep track of games you play in style!</p>
+          <div className="dashboardImage">
+            <img src="https://media.giphy.com/media/3oKIPEqDGUULpEU0aQ/giphy.gif" alt="Dashboard" height="360" width="480"></img>
+          </div>
           {sorryOrStatistics}
         </div>
       </div>

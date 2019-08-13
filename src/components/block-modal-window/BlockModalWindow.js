@@ -159,7 +159,7 @@ class BlockModalWindow extends React.Component {
     const descriptionEdit = (
       <div className="modalPiece">
         <textarea className="form-control" row="3" type="text" placeholder="Add your text" value={this.state.descriptionInputValue} onChange={this.descriptionInputValueChange}></textarea>
-        <button className="btn btn-dark" onClick={this.doOnDescriptionChange}>Submit</button>
+        <button className="btn btn-dark" onClick={this.doOnDescriptionChange}>OK</button>
         <button className="btn" onClick={this.doOnCancel}>Cancel</button>
       </div>
     );
@@ -177,7 +177,7 @@ class BlockModalWindow extends React.Component {
     const gameNameEdit = (
       <div>
         <input className="form-control" type="text" placeholder="Enter new name" value={this.state.nameInputValue} onChange={this.nameInputValueChange}></input>
-        <button className="btn btn-dark" onClick={this.doOnNameChange}>Submit</button>
+        <button className="btn btn-dark" onClick={this.doOnNameChange}>OK</button>
         <button className="btn" onClick={this.doOnCancel}>Cancel</button>
       </div>
     );

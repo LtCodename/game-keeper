@@ -19,6 +19,7 @@ class List extends React.Component {
     this.openModalWarningWindow = this.openModalWarningWindow.bind(this);
     this.resetState = this.resetState.bind(this);
     this.listPositionChangeHandler = this.listPositionChangeHandler.bind(this);
+    this.beforeAddingNewSection = this.beforeAddingNewSection.bind(this);
 
     this.state = {
       renameListMode: false,
@@ -33,6 +34,15 @@ class List extends React.Component {
   static defaultProps = {
     content: [],
     newListName: ""
+  }
+
+  beforeAddingNewSection() {
+    if (!this.state.sectionNameInputValue) {
+      this.doOnCancel();
+      return;
+    }
+    
+    this.props.doOnAddSection(this.state.sectionNameInputValue, this.state.colorForNewSection);
   }
 
   listPositionChangeHandler(event) {
@@ -172,7 +182,7 @@ class List extends React.Component {
     const editListNameForm = (
       <div className="editListDiv">
         <input className="editListInput form-control" type="text" placeholder="Enter new name" value={this.state.listNameInputValue} onChange={this.listNameInputValueChange}></input>
-        <button className="btn btn-dark" onClick={this.doOnSubmitListName}>Submit name</button>
+        <button className="btn btn-dark" onClick={this.doOnSubmitListName}>OK</button>
         <button className="btn" onClick={this.doOnCancel}>Cancel</button>
       </div>
     );
@@ -180,7 +190,7 @@ class List extends React.Component {
     const addNewSectionForm = (
       <div className="addListDiv">
         <input className="addListInput form-control" type="text" placeholder="Enter section name" value={this.state.sectionNameInputValue} onChange={this.sectionNameInputValueChange}></input>
-        <button className="btn btn-dark" onClick={() => this.props.doOnAddSection(this.state.sectionNameInputValue, this.state.colorForNewSection)}>Submit section</button>
+        <button className="btn btn-dark" onClick={this.beforeAddingNewSection}>OK</button>
         <button className="btn" onClick={this.doOnCancel}>Cancel</button>
         <Colors passColorToSection={this.holdColorForNewSection}/>
       </div>
@@ -190,7 +200,6 @@ class List extends React.Component {
       <div className="allContent">
         {this.state.renameListMode ? editListNameForm : this.state.addSectionMode ? addNewSectionForm : nameAndButtonsBlock}
         {sectionsToRender}
-
         {this.state.showModalWindow ? modalWarningWindow : ""}
       </div>
     );

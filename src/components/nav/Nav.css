@@ -15,10 +15,6 @@
   cursor: pointer;
 }
 
-.cancelAddListBtn {
-  width: 93px;
-}
-
 .navButtonActive {
   background-color: var(--nav-background-color);
   color: #fff;

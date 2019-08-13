@@ -37,10 +37,6 @@ input {
   display: flex;
 }
 
-img {
-  width: 200px;
-}
-
 .allContent {
   padding-left: 20px;
   padding-bottom: 20px;

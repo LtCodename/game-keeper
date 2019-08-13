@@ -150,7 +150,7 @@ class Section extends React.Component {
     const editForm = (
         <div className="editSectionDiv">
           <input className="form-control editSectionInput" type="text" placeholder="Enter new name" value={this.state.sectionInputValue} onChange={this.sectionInputValueChange}></input>
-          <button className="btn btn-dark" onClick={this.doOnSubmit}>Submit name</button>
+          <button className="btn btn-dark" onClick={this.doOnSubmit}>OK</button>
           <button className="btn" onClick={this.doOnCancel}>Cancel</button>
           <Colors currentColor={this.props.color} passColorToSection={this.props.passColorUp}/>
         </div>
