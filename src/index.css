@@ -17,6 +17,11 @@
   --content-background-color: rgba(18, 18, 18, 1);
 }
 
+.responsiveImage {
+  width: 100%;
+  height: auto;
+}
+
 body {
   font-family: 'Libre Baskerville', serif;
   padding: 0;
@@ -75,4 +80,10 @@ h2 {
 .all-content {
   height: 100vh;
   overflow: auto;
+}
+
+@media (max-width: 1050px) {
+  .appDiv {
+    display: block;
+  }
 }

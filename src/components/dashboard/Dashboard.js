@@ -27,7 +27,7 @@ class Dashboard extends React.Component {
           <h1 className="dashboardText">DASHBOARD</h1>
           <p className="dashboardText">Keep track of games you play in style!</p>
           <div className="dashboardImage">
-            <img src="https://media.giphy.com/media/3oKIPEqDGUULpEU0aQ/giphy.gif" alt="Dashboard" height="360" width="480"></img>
+            <img src="https://media.giphy.com/media/3oKIPEqDGUULpEU0aQ/giphy.gif" alt="Dashboard" height="360" width="480" className="responsiveImage"></img>
           </div>
           {sorryOrStatistics}
         </div>

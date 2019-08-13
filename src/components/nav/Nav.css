@@ -34,6 +34,37 @@
   width: 100%;
 }
 
-.addListBtn {
-  /*width: 100%;*/
+.nameAndButton {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.hideNavButton {
+  display: none;
+}
+
+@media (max-width: 1050px) {
+  #navbar {
+    height: auto;
+    width: auto;
+    padding-bottom: 5px;
+  }
+
+  .downloadImg {
+    display: none;
+  }
+
+  .hideNavButton {
+    display: block;
+    margin: 5px;
+  }
+
+  .navBar {
+    display: none;
+  }
+
+  .navBarVisible {
+    display: block;
+  }
 }

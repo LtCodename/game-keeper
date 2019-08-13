@@ -11,11 +11,25 @@ class Nav extends React.Component {
     this.doOnCancel = this.doOnCancel.bind(this);
     this.submitNewList = this.submitNewList.bind(this);
     this.inputValueChange = this.inputValueChange.bind(this);
+    this.toggleNavbar = this.toggleNavbar.bind(this);
 
     this.state = {
       addMode: false,
-      inputValue: ""
+      inputValue: "",
+      navbarVisible: false
     };
+  }
+
+  toggleNavbar() {
+    if (!this.state.navbarVisible) {
+      this.setState({
+        navbarVisible: true
+      });
+    }else {
+      this.setState({
+        navbarVisible: false
+      });
+    }
   }
 
   doOnAdd() {
@@ -54,7 +68,6 @@ class Nav extends React.Component {
   }
 
   render() {
-
     let buttonsToRender = this.props.content.map((elem, index) => {
 
       let className = "navButton btn btn-light";
@@ -76,17 +89,32 @@ class Nav extends React.Component {
 
     const buttonBit = (
       <div>
-        <button className="btn addListBtn btn-warning" onClick={this.doOnAdd}>Add List</button>
+        <button className="btn btn-warning" onClick={this.doOnAdd}>Add List</button>
       </div>
     );
 
+    const hideButton = (
+      <button className="btn hideNavButton" onClick={this.toggleNavbar}>Menu</button>
+    );
+
+    let navClassName = "navBar";
+    
+    if (this.state.navbarVisible) {
+        navClassName += " navBarVisible";
+    }
+
     return (
       <nav id="navbar">
-        <header>Game Keeper</header>
-        <button type="button" className="navButton btn btn-light" onClick={() => this.props.doOnClick(null)}>Dashboard</button>
-        {buttonsToRender}
-        {(this.state.addMode) ? inputBit : buttonBit}
-        <a className="downloadData" download="lists.js" href={this.props.fileLink}><img className="downloadImg" src={downloadImg} alt=""></img></a>
+        <div className="nameAndButton">
+          <header>Game Keeper</header>
+          {hideButton}
+        </div>
+        <div className={navClassName}>
+          <button type="button" className="navButton btn btn-light" onClick={() => this.props.doOnClick(null)}>Dashboard</button>
+          {buttonsToRender}
+          {(this.state.addMode) ? inputBit : buttonBit}
+          <a className="downloadData" download="lists.js" href={this.props.fileLink}><img className="downloadImg" src={downloadImg} alt=""></img></a>
+        </div>
       </nav>
     )
   }

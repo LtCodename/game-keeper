@@ -41,7 +41,7 @@ class List extends React.Component {
       this.doOnCancel();
       return;
     }
-    
+
     this.props.doOnAddSection(this.state.sectionNameInputValue, this.state.colorForNewSection);
   }
 
