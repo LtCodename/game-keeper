@@ -98,7 +98,7 @@ class Statistics extends React.Component {
     );
 
     const gamesInYears = (
-      <p className="dashboardText">{`Your Game Keeper represents games released in ${years.length} different years! From ${years[1]} to ${years[years.length - 1]}`}</p>
+      <p className="dashboardText">{`Your Game Keeper represents games released in ${years.length} different years! From ${years[1]} to ${years[years.length - 1]}.`}</p>
     );
 
     return (

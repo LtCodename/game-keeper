@@ -46,6 +46,54 @@
   background-color: var(--color-burnt-orange);
 }
 
+.color_shakespeare {
+  background-color: var(--color-shakespeare);
+}
+
+.color_malibu {
+  background-color: var(--color-malibu);
+}
+
+.color_blue-chalk {
+  background-color: var(--color-blue-chalk);
+}
+
+.color_light-wisteria {
+  background-color: var(--color-light-wisteria);
+}
+
+.color_wax-flower {
+  background-color: var(--color-wax-flower);
+}
+
+.color_soft-red {
+  background-color: var(--color-soft-red);
+}
+
+.color_turquoise {
+  background-color: var(--color-turquoise);
+}
+
+.color_jade {
+  background-color: var(--color-jade);
+}
+
+.color_marigold-yellow {
+  background-color: var(--color-marigold-yellow);
+}
+
+.color_orchid-white {
+  background-color: var(--color-orchid-white);
+}
+
+.color_supernova {
+  background-color: var(--color-supernova);
+}
+
+.color_cape-honey {
+  background-color: var(--color-cape-honey);
+}
+
 .colorsSpan {
   width: 50px;
   height: 50px;
@@ -55,6 +103,7 @@
   line-height: 50px;
   text-align: center;
   border-radius: 25px;
+  margin-bottom: 5px;
 }
 
 .colorsSpan:hover {

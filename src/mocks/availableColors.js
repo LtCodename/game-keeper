@@ -46,6 +46,54 @@ const availableColors = [
   {
     id: 12,
     name: "burnt-orange",
+  },
+  {
+    id: 13,
+    name: "shakespeare",
+  },
+  {
+    id: 14,
+    name: "malibu",
+  },
+  {
+    id: 15,
+    name: "blue-chalk",
+  },
+  {
+    id: 16,
+    name: "light-wisteria",
+  },
+  {
+    id: 17,
+    name: "wax-flower",
+  },
+  {
+    id: 18,
+    name: "soft-red",
+  },
+  {
+    id: 19,
+    name: "turquoise",
+  },
+  {
+    id: 20,
+    name: "jade",
+  },
+  {
+    id: 21,
+    name: "marigold-yellow",
+  },
+  {
+    id: 22,
+    name: "orchid-white",
+  },
+  {
+    id: 23,
+    name: "supernova",
+  },
+  {
+    id: 24,
+    name: "cape-honey",
   }
 ];
 

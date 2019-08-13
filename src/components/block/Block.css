@@ -96,3 +96,51 @@
 .game-block_burnt-orange {
   background-color: var(--color-burnt-orange);
 }
+
+.game-block_shakespeare {
+  background-color: var(--color-shakespeare);
+}
+
+.game-block_malibu {
+  background-color: var(--color-malibu);
+}
+
+.game-block_blue-chalk {
+  background-color: var(--color-blue-chalk);
+}
+
+.game-block_light-wisteria {
+  background-color: var(--color-light-wisteria);
+}
+
+.game-block_wax-flower {
+  background-color: var(--color-wax-flower);
+}
+
+.game-block_soft-red {
+  background-color: var(--color-soft-red);
+}
+
+.game-block_turquoise {
+  background-color: var(--color-turquoise);
+}
+
+.game-block_jade {
+  background-color: var(--color-jade);
+}
+
+.game-block_marigold-yellow {
+  background-color: var(--color-marigold-yellow);
+}
+
+.game-block_orchid-white {
+  background-color: var(--color-orchid-white);
+}
+
+.game-block_supernova {
+  background-color: var(--color-supernova);
+}
+
+.game-block_cape-honey {
+  background-color: var(--color-cape-honey);
+}
