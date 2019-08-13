@@ -176,7 +176,7 @@ class BlockModalWindow extends React.Component {
 
     const gameNameEdit = (
       <div>
-        <input className="form-control" type="text" placeholder="Enter new name" value={this.state.nameInputValue} onChange={this.nameInputValueChange}></input>
+        <input className="form-control enterNewName" type="text" placeholder="Enter new name" value={this.state.nameInputValue} onChange={this.nameInputValueChange}></input>
         <button className="btn btn-dark" onClick={this.doOnNameChange}>OK</button>
         <button className="btn" onClick={this.doOnCancel}>Cancel</button>
       </div>

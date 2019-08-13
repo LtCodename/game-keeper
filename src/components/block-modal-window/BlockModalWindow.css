@@ -7,3 +7,13 @@
   padding: 5px;
   margin-bottom: 5px;
 }
+
+.enterNewName {
+  width: 435px;
+}
+
+@media (max-width: 1050px) {
+  .enterNewName {
+    width: 340px;
+  }
+}

@@ -10,6 +10,12 @@
   color: black;
 }
 
-.dashboardImage {
+.dashboardImageContainer {
   margin-bottom: 10px;
+}
+
+.dashboardImage {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
 }
