@@ -191,7 +191,7 @@ class App extends React.Component {
 
   render() {
     const dashboard = (
-      <Dashboard data={this.state.lists}/>
+      <Dashboard data={this.state.lists} listBlockClick={(index) => this.changeSelectedListIndex(index)}/>
     );
 
     let firstListOrDashboard;

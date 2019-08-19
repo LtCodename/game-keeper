@@ -1,5 +1,5 @@
 import React from 'react';
-import Statistics from '../../components/statistics/Statistics.js';
+import ListBlock from '../list-block/ListBlock.js';
 import './Dashboard.css'
 
 class Dashboard extends React.Component {
@@ -12,13 +12,16 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    let sorryOrStatistics;
+    const listsToRender = this.props.data.map((elem, index) => {
+      return <ListBlock
+        key={elem.id}
+        listBlockClick={() => this.props.listBlockClick(index)}
+        name={elem.name}/>;
+    });
 
-    if (!this.props.data.length) {
-      sorryOrStatistics = <p>You don't have any lists.</p>;
-    }else {
-      sorryOrStatistics = <Statistics data={this.props.data} />
-    }
+    const addListButton = (
+      <button className="btn btnAddListFromDashboard" onClick={this.openAddGameWindow}><i className="fas fa-plus-circle"></i></button>
+    );
 
     return (
       <div>
@@ -28,7 +31,10 @@ class Dashboard extends React.Component {
           <div className="dashboardImageContainer">
             <img src="https://media.giphy.com/media/l46Cy1rHbQ92uuLXa/giphy.gif" alt="Dashboard" height="360" width="480" className="dashboardImage"></img>
           </div>
-          {/*sorryOrStatistics*/}
+          <div className="listsMatrix">
+          {listsToRender}
+          {addListButton}
+          </div>
         </div>
       </div>
     )

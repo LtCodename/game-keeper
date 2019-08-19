@@ -1,7 +1,6 @@
 .game-block {
   --footer-content-height: 20px;
-  border: 0px solid black;
-  /*border-radius: .25rem;*/
+  border: none;
   text-align: center;
   padding: 10px;
   margin: 1px 2px 1px 0;
