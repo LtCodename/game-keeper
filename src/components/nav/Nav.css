@@ -20,11 +20,31 @@
   cursor: pointer;
 }
 
+.inputBit button {
+  width: 50%;
+  margin: 0;
+  border-radius: 0;
+}
+
+.inputBit input {
+  border-radius: 0;
+}
+
 .navButton {
   display: block;
   width: 100%;
-  margin-bottom: 5px;
+  margin-bottom: 1px;
   cursor: pointer;
+  border-radius: 0;
+  text-transform: uppercase;
+  padding: 10px 0;
+}
+
+.btnAddList {
+  width: 100%;
+  border-radius: 0;
+  text-transform: uppercase;
+  padding: 10px 0;
 }
 
 .navButtonActive {

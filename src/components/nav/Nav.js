@@ -96,7 +96,7 @@ class Nav extends React.Component {
     })
 
     const inputBit = (
-      <div>
+      <div className="inputBit">
         <input type="text" className="form-control" placeholder="Enter new name" value={this.state.inputValue} onChange={this.inputValueChange}></input>
         <button className="btn btn-dark" onClick={this.submitNewList}>OK</button>
         <button className="btn" onClick={this.doOnCancel}>Cancel</button>
@@ -105,7 +105,7 @@ class Nav extends React.Component {
 
     const buttonBit = (
       <div>
-        <button className="btn btn-warning" onClick={this.doOnAdd}>Add List</button>
+        <button className="btn btn-warning btnAddList" onClick={this.doOnAdd}>Add List</button>
       </div>
     );
 
