@@ -1,10 +1,10 @@
-.pAddGame {
-  color: var(--nav-background-color);
-}
-
 .btnAddGame {
   border-radius: 0;
   margin: 1px 2px 1px 0;
+}
+
+.btnAddGame:hover {
+  opacity: 0.8;
 }
 
 .editSectionInput {

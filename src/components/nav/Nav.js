@@ -122,11 +122,11 @@ class Nav extends React.Component {
     return (
       <nav id="navbar">
         <div className="nameAndButton">
-          <header>Game Keeper</header>
+           <button className="logoButton btn" onClick={this.goToDashboard}>Game Keeper</button>
           {hideButton}
         </div>
         <div className={navClassName}>
-          <button type="button" className="navButton btn btn-light" onClick={this.goToDashboard}>Dashboard</button>
+          {/*}<button type="button" className="navButton btn btn-danger" onClick={this.goToDashboard}>Dashboard</button>*/}
           {buttonsToRender}
           {(this.state.addMode) ? inputBit : buttonBit}
           <a className="downloadData" download="lists.js" href={this.props.fileLink}><img className="downloadImg" src={downloadImg} alt=""></img></a>

@@ -47,7 +47,7 @@ class App extends React.Component {
     if (newListPosition > oldListPosition) {
       copy.splice(newListPosition - 1, 0, spliced[0]);
     }
-    
+
     this.setState({
       selectedListIndex: newListPosition
     });

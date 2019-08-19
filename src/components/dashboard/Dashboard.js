@@ -28,7 +28,7 @@ class Dashboard extends React.Component {
           <div className="dashboardImageContainer">
             <img src="https://media.giphy.com/media/l46Cy1rHbQ92uuLXa/giphy.gif" alt="Dashboard" height="360" width="480" className="dashboardImage"></img>
           </div>
-          {sorryOrStatistics}
+          {/*sorryOrStatistics*/}
         </div>
       </div>
     )

@@ -8,6 +8,18 @@
   background-color: var(--nav-background-color);
 }
 
+.logoButton {
+  font-family: 'Luckiest Guy', cursive;
+  background-color: inherit;
+  width: 100%;
+  color: white;
+  font-size: 30px;
+  padding: 0;
+  margin: 5px 0;
+  border: none;
+  cursor: pointer;
+}
+
 .navButton {
   display: block;
   width: 100%;
