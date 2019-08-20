@@ -14,15 +14,15 @@
 }
 
 .listsMatrix {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 10px;
 }
 
 .btnAddListFromDashboard {
   font-family: var(--titles-font);
   border-radius: 0;
   padding: 15px;
-  margin: 1px 8px 6px 0;
   background-color: var(--add-list-color);
   min-width: 300px;
   max-width: 400px;

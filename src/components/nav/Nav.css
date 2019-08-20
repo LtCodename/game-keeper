@@ -6,7 +6,6 @@
   padding-left: 10px;
   padding-right: 10px;
   background-color: var(--nav-color);
-  z-index: 101;
 }
 
 .logoButton {
@@ -44,6 +43,7 @@
   padding: 10px 0;
   background-color: var(--list-color);
   font-size: 28px;
+  white-space: inherit;
 }
 
 .navButton:hover {
