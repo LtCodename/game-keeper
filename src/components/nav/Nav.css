@@ -1,18 +1,19 @@
-#navbar {
+.classNavbar {
   width: 220px;
   height: 100vh;
   position: relative;
   padding-bottom: 80px;
   padding-left: 10px;
   padding-right: 10px;
-  background-color: var(--nav-background-color);
+  background-color: var(--nav-color);
+  z-index: 101;
 }
 
 .logoButton {
-  font-family: 'Luckiest Guy', cursive;
+  font-family: var(--titles-font);
   background-color: inherit;
   width: 100%;
-  color: white;
+  color: var(--titles-color);
   font-size: 30px;
   padding: 0;
   margin: 5px 0;
@@ -31,25 +32,45 @@
 }
 
 .navButton {
+  font-family: var(--titles-font);
+  color: rgba(0, 121, 197, 1);
   display: block;
   width: 100%;
-  margin-bottom: 1px;
+  margin-bottom: 4px;
+  border: none;
   cursor: pointer;
   border-radius: 0;
   text-transform: uppercase;
   padding: 10px 0;
+  background-color: var(--list-color);
+  font-size: 28px;
+}
+
+.navButton:hover {
+  color: rgba(0, 121, 197, 1);
+  background-color: var(--list-color);
+  opacity: 0.8;
 }
 
 .btnAddList {
+  font-family: var(--titles-font);
   width: 100%;
   border-radius: 0;
   text-transform: uppercase;
   padding: 10px 0;
+  color: rgba(0, 121, 197, 1);
+  font-size: 28px;
+  background-color: var(--add-list-color);
+  border: none;
+}
+
+.btnAddList:hover {
+  background-color: var(--add-list-color);
+  opacity: 0.8;
 }
 
 .navButtonActive {
-  background-color: var(--nav-background-color);
-  color: #fff;
+  opacity: 0.8;
 }
 
 .downloadData {
@@ -77,7 +98,7 @@
 }
 
 @media (max-width: 1050px) {
-  #navbar {
+  .classNavbar {
     height: auto;
     width: auto;
     padding-bottom: 5px;

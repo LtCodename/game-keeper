@@ -156,7 +156,7 @@ class Section extends React.Component {
         </div>
     );
 
-    const addBtnClassName = `game-block_${this.props.color} btn btnAddGame`;
+    const addBtnClassName = `gameBlock_${this.props.color} btn btnAddGame`;
 
     const addGameButton = (
       <button className={addBtnClassName} onClick={this.openAddGameWindow}><i className="fas fa-plus-circle"></i></button>

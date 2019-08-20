@@ -31,15 +31,21 @@
   --color-supernova: rgba(255, 203, 5, 1);
   --color-cape-honey: rgba(253, 227, 167, 1);
 
-  --nav-background-color: rgba(42, 42, 42, 1);
-  --content-background-color: rgba(18, 18, 18, 1);
+  --nav-color: rgba(0, 121, 197, 1);
+  --content-color: rgba(0, 121, 197, 1);
+  --list-color: rgba(255, 246, 143, 1);
+  --add-list-color: rgba(240, 240, 214, 1);
+  --titles-color: rgba(255, 249, 222, 1);
+
+  --main-font: 'Kite One', sans-serif;
+  --titles-font: 'Luckiest Guy', cursive;
+  --date-font: 'Roboto Mono', monospace;
 }
 
 body {
-  font-family: 'Libre Baskerville', serif;
+  font-family: var(--main-font);
   padding: 0;
   margin: 0;
-  background-color: var(--content-background-color);
 }
 
 .btn {
@@ -56,11 +62,12 @@ input {
 }
 
 .allContent {
-  padding-left: 20px;
+  padding-left: 10px;
   padding-bottom: 20px;
   flex: 1;
   height: 100vh;
   overflow: auto;
+  background-color: var(--content-color);
 }
 
 ul {
@@ -68,7 +75,7 @@ ul {
 }
 
 h1, h2, header, p {
-  color: white;
+  color: var(--titles-color);
 }
 
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
@@ -77,17 +84,17 @@ h1, h2, header, p {
 
 h1 {
   font-size: 55px;
-  font-family: 'Luckiest Guy', cursive;
+  font-family: var(--titles-font);
 }
 
 header {
-  font-family: 'Luckiest Guy', cursive;
+  font-family: var(--titles-font);
   font-size: 30px;
 }
 
 h2 {
   font-size: 40px;
-  font-family: 'Luckiest Guy', cursive;
+  font-family: var(--titles-font);
 }
 
 @media (max-width: 1050px) {

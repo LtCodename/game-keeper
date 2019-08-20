@@ -45,7 +45,7 @@ class Dashboard extends React.Component {
     });
 
     const addListButton = (
-      <button className="btn btnAddListFromDashboard" onClick={this.openAddListWindow}><i className="fas fa-plus-circle"></i></button>
+      <button className="btn btnAddListFromDashboard" onClick={this.openAddListWindow}>ADD LIST</button>
     );
 
     const modalAddListWindow = (
@@ -61,14 +61,9 @@ class Dashboard extends React.Component {
           <button className="logoButtonDashboard btn" onClick={this.goToDashboard}>Game Keeper</button>
         </div>
         <div className="dashboard">
-          <h1 className="dashboardText">DASHBOARD</h1>
-          <p className="dashboardText">Keep track of games you play in style!</p>
-          <div className="dashboardImageContainer">
-            <img src="https://media.giphy.com/media/l46Cy1rHbQ92uuLXa/giphy.gif" alt="Dashboard" height="360" width="480" className="dashboardImage"></img>
-          </div>
           <div className="listsMatrix">
-          {listsToRender}
-          {addListButton}
+            {listsToRender}
+            {addListButton}
           </div>
         </div>
 

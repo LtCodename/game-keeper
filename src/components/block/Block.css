@@ -1,4 +1,4 @@
-.game-block {
+.gameBlock {
   --footer-content-height: 20px;
   border: none;
   text-align: center;
@@ -18,6 +18,7 @@
 .gameName {
   min-height: 48px;
   display: block;
+  text-transform: uppercase;
 }
 
 .releaseDate {
@@ -25,7 +26,7 @@
   padding: 0 2px;
   margin-right: 3px;
   font-size: 15px;
-  font-family: 'Roboto Mono', monospace;
+  font-family: var(--date-font);
   border: 1px solid black;
 }
 
@@ -44,102 +45,102 @@
   display: flex;
 }
 
-.game-block_air-force-blue {
+.gameBlock_air-force-blue {
   background-color: var(--color-air-force-blue);
 }
 
-.game-block:hover {
+.gameBlock:hover {
   opacity: 0.8;
 }
 
-.game-block_alice-blue {
+.gameBlock_alice-blue {
   background-color: var(--color-alice-blue);
 }
 
-.game-block_wistful {
+.gameBlock_wistful {
   background-color: var(--color-wistful);
 }
 
-.game-block_ce-soir {
+.gameBlock_ce-soir {
   background-color: var(--color-ce-soir);
 }
 
-.game-block_vivid-tangerine {
+.gameBlock_vivid-tangerine {
   background-color: var(--color-vivid-tangerine);
 }
 
-.game-block_sunset-orange {
+.gameBlock_sunset-orange {
   background-color: var(--color-sunset-orange);
 }
 
-.game-block_madang {
+.gameBlock_madang {
   background-color: var(--color-madang);
 }
 
-.game-block_emerald {
+.gameBlock_emerald {
   background-color: var(--color-emerald);
 }
 
-.game-block_witch-haze {
+.gameBlock_witch-haze {
   background-color: var(--color-witch-haze);
 }
 
-.game-block_yellow {
+.gameBlock_yellow {
   background-color: var(--color-yellow);
 }
 
-.game-block_california {
+.gameBlock_california {
   background-color: var(--color-california);
 }
 
-.game-block_burnt-orange {
+.gameBlock_burnt-orange {
   background-color: var(--color-burnt-orange);
 }
 
-.game-block_shakespeare {
+.gameBlock_shakespeare {
   background-color: var(--color-shakespeare);
 }
 
-.game-block_malibu {
+.gameBlock_malibu {
   background-color: var(--color-malibu);
 }
 
-.game-block_blue-chalk {
+.gameBlock_blue-chalk {
   background-color: var(--color-blue-chalk);
 }
 
-.game-block_light-wisteria {
+.gameBlock_light-wisteria {
   background-color: var(--color-light-wisteria);
 }
 
-.game-block_wax-flower {
+.gameBlock_wax-flower {
   background-color: var(--color-wax-flower);
 }
 
-.game-block_soft-red {
+.gameBlock_soft-red {
   background-color: var(--color-soft-red);
 }
 
-.game-block_turquoise {
+.gameBlock_turquoise {
   background-color: var(--color-turquoise);
 }
 
-.game-block_jade {
+.gameBlock_jade {
   background-color: var(--color-jade);
 }
 
-.game-block_marigold-yellow {
+.gameBlock_marigold-yellow {
   background-color: var(--color-marigold-yellow);
 }
 
-.game-block_orchid-white {
+.gameBlock_orchid-white {
   background-color: var(--color-orchid-white);
 }
 
-.game-block_supernova {
+.gameBlock_supernova {
   background-color: var(--color-supernova);
 }
 
-.game-block_cape-honey {
+.gameBlock_cape-honey {
   background-color: var(--color-cape-honey);
 }

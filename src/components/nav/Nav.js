@@ -101,7 +101,7 @@ class Nav extends React.Component {
     );
 
     return (
-      <nav id="navbar">
+      <nav className="classNavbar">
         <div className="nameAndButton">
            <button className="logoButton btn" onClick={this.goToDashboard}>Game Keeper</button>
           {hideButton}

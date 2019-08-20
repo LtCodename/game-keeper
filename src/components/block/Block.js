@@ -53,7 +53,7 @@ class Block extends React.Component {
   }
 
   render() {
-    let className = 'game-block game-block_';
+    let className = 'gameBlock gameBlock_';
 
     if (this.props.color) {
       className += this.props.color;
