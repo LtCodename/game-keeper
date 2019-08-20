@@ -1,25 +1,42 @@
 import React from 'react';
 import './Nav.css';
 import downloadImg from '../../assets/download.png';
+import AddListModalWindow from '../add-list-modal-window/AddListModalWindow.js';
+declare var  $;
 
 class Nav extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.doOnAdd = this.doOnAdd.bind(this);
-    this.doOnCancel = this.doOnCancel.bind(this);
-    this.submitNewList = this.submitNewList.bind(this);
-    this.inputValueChange = this.inputValueChange.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.switchBetweenTabs = this.switchBetweenTabs.bind(this);
     this.goToDashboard = this.goToDashboard.bind(this);
+    this.openAddListWindow = this.openAddListWindow.bind(this);
+    this.resetState = this.resetState.bind(this);
 
     this.state = {
-      addMode: false,
-      inputValue: "",
-      navbarVisible: false
+      navbarVisible: false,
+      showAddListWindow: false
     };
+  }
+
+  openAddListWindow() {
+    this.setState({
+      showAddListWindow: true
+    }, () => {
+      $("#addList").modal('show');
+      $("#addList").on('hidden.bs.modal', this.resetState);
+    });
+  }
+
+  resetState() {
+    this.setState({
+      showAddListWindow: false
+    })
+  }
+
+  componentWillUnmount() {
+    $("#addList").unbind('hidden.bs.modal');
   }
 
   switchBetweenTabs(index) {
@@ -48,41 +65,6 @@ class Nav extends React.Component {
     }
   }
 
-  doOnAdd() {
-    this.setState({
-      addMode: true
-    })
-  }
-
-  doOnCancel() {
-    this.setState({
-      addMode: false,
-      inputValue: ""
-    })
-  }
-
-  submitNewList() {
-    if (!this.state.inputValue.length) {
-      this.setState({
-        addMode: false
-      })
-      return;
-    }
-
-    this.props.doOnAdd(this.state.inputValue);
-
-    this.setState({
-      addMode: false,
-      inputValue: ""
-    })
-  }
-
-  inputValueChange(event) {
-    this.setState({
-      inputValue: event.target.value
-    });
-  }
-
   render() {
     let buttonsToRender = this.props.content.map((elem, index) => {
 
@@ -95,17 +77,9 @@ class Nav extends React.Component {
       return <button className={className} type="button" key={elem.id} onClick={() => this.switchBetweenTabs(index)}>{elem.name}</button>;
     })
 
-    const inputBit = (
-      <div className="inputBit">
-        <input type="text" className="form-control" placeholder="Enter new name" value={this.state.inputValue} onChange={this.inputValueChange}></input>
-        <button className="btn btn-dark" onClick={this.submitNewList}>OK</button>
-        <button className="btn" onClick={this.doOnCancel}>Cancel</button>
-      </div>
-    );
-
-    const buttonBit = (
+    const addListButton = (
       <div>
-        <button className="btn btn-warning btnAddList" onClick={this.doOnAdd}>Add List</button>
+        <button className="btn btn-warning btnAddList" onClick={this.openAddListWindow}>Add List</button>
       </div>
     );
 
@@ -119,6 +93,13 @@ class Nav extends React.Component {
         navClassName += " navBarVisible";
     }
 
+    const modalAddListWindow = (
+      <AddListModalWindow
+        modalId={"addList"}
+        onProceed={(listName) => this.props.doOnAdd(listName)}
+        message={`Click here to pass a new list name`} />
+    );
+
     return (
       <nav id="navbar">
         <div className="nameAndButton">
@@ -126,11 +107,12 @@ class Nav extends React.Component {
           {hideButton}
         </div>
         <div className={navClassName}>
-          {/*}<button type="button" className="navButton btn btn-danger" onClick={this.goToDashboard}>Dashboard</button>*/}
           {buttonsToRender}
-          {(this.state.addMode) ? inputBit : buttonBit}
+          {addListButton}
           <a className="downloadData" download="lists.js" href={this.props.fileLink}><img className="downloadImg" src={downloadImg} alt=""></img></a>
         </div>
+
+        {this.state.showAddListWindow ? modalAddListWindow : ""}
       </nav>
     )
   }

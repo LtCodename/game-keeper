@@ -166,6 +166,10 @@ class App extends React.Component {
   }
 
   addList(listName) {
+    if (!listName) {
+      return;
+    }
+
     const copy = this.deepCopy(this.state.lists);
 
     copy.push({
@@ -191,15 +195,18 @@ class App extends React.Component {
 
   render() {
     const dashboard = (
-      <Dashboard data={this.state.lists} listBlockClick={(index) => this.changeSelectedListIndex(index)}/>
+      <Dashboard
+        data={this.state.lists}
+        doOnAdd={(listName => this.addList(listName))}
+        listBlockClick={(index) => this.changeSelectedListIndex(index)}/>
     );
 
-    let firstListOrDashboard;
+    let listOrDashboard;
 
     if (this.state.selectedListIndex === null) {
-      firstListOrDashboard = dashboard;
+      listOrDashboard = dashboard;
     }else {
-      firstListOrDashboard = <List
+      listOrDashboard = <List
         listName={this.state.lists[this.state.selectedListIndex].name}
         content={this.state.lists[this.state.selectedListIndex].content}
         allLists={this.state.lists}
@@ -217,16 +224,19 @@ class App extends React.Component {
         changeGameSection={(newSectionIndex, blockIndex, oldSectionIndex) => this.onChangeGameSection(newSectionIndex, blockIndex, oldSectionIndex, this.state.selectedListIndex)}/>
     }
 
+    const nav = (
+      <Nav
+        content={this.state.lists}
+        indexToHighligth={this.state.selectedListIndex}
+        doOnClick={this.changeSelectedListIndex}
+        doOnAdd={this.addList}
+        fileLink={this.state.downloadLink}/>
+    );
+
     return (
       <div className="appDiv">
-        <Nav
-          content={this.state.lists}
-          indexToHighligth={this.state.selectedListIndex}
-          doOnClick={this.changeSelectedListIndex}
-          doOnAdd={this.addList}
-          fileLink={this.state.downloadLink}/>
-
-          {firstListOrDashboard}
+          {(this.state.selectedListIndex === null) ? "" : nav}
+          {listOrDashboard}
       </div>
     );
   }
