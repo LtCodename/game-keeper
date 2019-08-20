@@ -1,6 +1,6 @@
 import React from 'react';
 import './WarningModalWindow.css';
-declare var  $;
+declare var $;
 
 class WarningModalWindow extends React.Component {
 

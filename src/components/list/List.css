@@ -19,7 +19,35 @@
 }
 
 .listPositionPicker {
-  width: 100px;
+  width: 60px;
+  height: 35px;
+  margin-left: 4px;
+  background-color: var(--add-list-color);
+}
+
+.listWrapper {
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.actionButtons .btn {
+  padding: 0;
+  width: 30px;
+  background-color: var(--content-color);
+}
+
+.actionButtons {
+  margin-right: 20px;
+}
+
+.actionButtons i:hover {
+  opacity: 0.8;
+}
+
+.actionButtons i {
+  font-size: 30px;
+  color: var(--list-color);
 }
 
 @media (max-width: 1050px) {

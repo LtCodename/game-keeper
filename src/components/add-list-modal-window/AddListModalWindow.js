@@ -1,6 +1,6 @@
 import React from 'react';
 import './AddListModalWindow.css';
-declare var  $;
+declare var $;
 
 class AddListModalWindow extends React.Component {
 

@@ -2,7 +2,7 @@ import React from 'react';
 import ListBlock from '../list-block/ListBlock.js';
 import './Dashboard.css'
 import AddListModalWindow from '../add-list-modal-window/AddListModalWindow.js';
-declare var  $;
+declare var $;
 
 class Dashboard extends React.Component {
 

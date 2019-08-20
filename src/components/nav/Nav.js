@@ -2,7 +2,7 @@ import React from 'react';
 import './Nav.css';
 import downloadImg from '../../assets/download.png';
 import AddListModalWindow from '../add-list-modal-window/AddListModalWindow.js';
-declare var  $;
+declare var $;
 
 class Nav extends React.Component {
 
@@ -24,8 +24,8 @@ class Nav extends React.Component {
     this.setState({
       showAddListWindow: true
     }, () => {
-      $("#addList").modal('show');
-      $("#addList").on('hidden.bs.modal', this.resetState);
+      $("#addListNav").modal('show');
+      $("#addListNav").on('hidden.bs.modal', this.resetState);
     });
   }
 
@@ -36,7 +36,7 @@ class Nav extends React.Component {
   }
 
   componentWillUnmount() {
-    $("#addList").unbind('hidden.bs.modal');
+    $("#addListNav").unbind('hidden.bs.modal');
   }
 
   switchBetweenTabs(index) {
@@ -95,7 +95,7 @@ class Nav extends React.Component {
 
     const modalAddListWindow = (
       <AddListModalWindow
-        modalId={"addList"}
+        modalId={"addListNav"}
         onProceed={(listName) => this.props.doOnAdd(listName)}
         message={`Click here to pass a new list name`} />
     );

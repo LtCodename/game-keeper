@@ -2,7 +2,7 @@ import React from 'react';
 import './BlockModalWindow.css';
 import platforms from '../block/platforms.js';
 import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
-declare var  $;
+declare var $;
 
 class BlockModalWindow extends React.Component {
 

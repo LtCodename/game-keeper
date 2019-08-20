@@ -3,7 +3,7 @@ import Section from '../section/Section.js';
 import Colors from '../colors/Colors.js';
 import './List.css';
 import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
-declare var  $;
+declare var $;
 
 class List extends React.Component {
   constructor(props) {
@@ -167,12 +167,12 @@ class List extends React.Component {
     );
 
     const nameAndButtonsBlock = (
-      <div>
+      <div className="listWrapper">
         <h1>{this.props.listName}</h1>
         <div className="actionButtons">
-          <button className="btn" onClick={this.doOnEdit}>Edit name</button>
-          <button className="btn" onClick={this.openModalWarningWindow}>Delete list</button>
-          <button className="btn" onClick={this.doOnAddSection}>Add section</button>
+          <button className="btn" onClick={this.doOnEdit}><i className="fas fa-pen-square"></i></button>
+          <button className="btn" onClick={this.openModalWarningWindow}><i className="fas fa-trash"></i></button>
+          <button className="btn" onClick={this.doOnAddSection}><i className="fas fa-plus-square"></i></button>
           {listPositionPicker}
         </div>
 

@@ -1,10 +1,6 @@
-.btnAddGame {
-  border-radius: 0;
-  margin: 0px 1px 1px 0;
-}
-
-.btnAddGame:hover {
-  opacity: 0.8;
+.nameAndButtonsWrapper {
+  display: flex;
+  align-items: center;
 }
 
 .editSectionInput {
@@ -19,7 +15,7 @@
   display: flex;
   flex-wrap: wrap;
   clear: both;
-  margin-top: 10px;
+  margin: 10px 0;
 }
 
 .addGameBlockDiv {
@@ -29,4 +25,23 @@
 
 .cancelAddBlockBtn {
     width: 118px;
+}
+
+.sectionActionButtons {
+  margin-left: 20px;
+}
+
+.sectionActionButtons .btn {
+  padding: 0;
+  width: 30px;
+  background-color: var(--content-color);
+}
+
+.sectionActionButtons i:hover {
+  opacity: 0.8;
+}
+
+.sectionActionButtons i {
+  font-size: 30px;
+  color: var(--titles-color);
 }

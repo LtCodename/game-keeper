@@ -1,7 +1,7 @@
 import React from 'react';
 import BlockModalWindow from '../block-modal-window/BlockModalWindow.js';
 import './Block.css';
-declare var  $;
+declare var $;
 
 class Block extends React.Component {
 

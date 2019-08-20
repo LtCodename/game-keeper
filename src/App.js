@@ -27,7 +27,7 @@ class App extends React.Component {
 
     this.state = {
       lists: lists,
-      selectedListIndex: null,
+      selectedListIndex: 0,
       downloadLink: this.createBlob(lists)
     };
   }

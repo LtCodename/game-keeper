@@ -4,7 +4,7 @@ import Colors from '../colors/Colors.js';
 import './Section.css';
 import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
 import BlockModalWindow from '../block-modal-window/BlockModalWindow.js';
-declare var  $;
+declare var $;
 
 class Section extends React.Component {
   static defaultProps = {
@@ -137,12 +137,13 @@ class Section extends React.Component {
       return 0;
     });
 
-    const nameBlock = (
-      <div>
+    const nameAndButtonsBlock = (
+      <div className="nameAndButtonsWrapper">
         <h2>{this.props.sectionName}</h2>
-        <div className="actionButtons">
-          <button className="btn" onClick={this.doOnEdit}>Edit section</button>
-          <button className="btn" onClick={this.openModalWarningWindow}>Delete section</button>
+        <div className="sectionActionButtons">
+          <button className="btn" onClick={this.doOnEdit}><i className="fas fa-pen-square"></i></button>
+          <button className="btn" onClick={this.openModalWarningWindow}><i className="fas fa-trash"></i></button>
+          <button className="btn" onClick={this.openAddGameWindow}><i className="fas fa-plus-square"></i></button>
         </div>
       </div>
     );
@@ -154,12 +155,6 @@ class Section extends React.Component {
           <button className="btn" onClick={this.doOnCancel}>Cancel</button>
           <Colors currentColor={this.props.color} passColorToSection={this.props.passColorUp}/>
         </div>
-    );
-
-    const addBtnClassName = `gameBlock_${this.props.color} btn btnAddGame`;
-
-    const addGameButton = (
-      <button className={addBtnClassName} onClick={this.openAddGameWindow}><i className="fas fa-plus-circle"></i></button>
     );
 
     const modalWarningWindow = (
@@ -179,10 +174,9 @@ class Section extends React.Component {
 
     return (
       <div className="section">
-        {(this.state.editMode) ? editForm : nameBlock}
+        {(this.state.editMode) ? editForm : nameAndButtonsBlock}
         <div className="inner-section">
           {gamesToRender}
-          {addGameButton}
         </div>
 
         {this.state.showModalWindow ? modalWarningWindow : ""}

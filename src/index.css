@@ -74,8 +74,12 @@ ul {
   list-style: none;
 }
 
-h1, h2, header, p {
+h2, header, p {
   color: var(--titles-color);
+}
+
+h1 {
+  color: var(--list-color);
 }
 
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
