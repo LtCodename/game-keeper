@@ -6,6 +6,7 @@ import Footer from './components/footer/Footer.js';
 import Header from './components/header/Header.js';
 import Dashboard from './components/dashboard/Dashboard.js';
 import lists from './mocks/lists.js';
+import availableDevelopers from './mocks/developers.js';
 
 class App extends React.Component {
 
@@ -21,6 +22,7 @@ class App extends React.Component {
     this.changeColor = this.changeColor.bind(this);
     this.addSection = this.addSection.bind(this);
     this.rewriteLists = this.rewriteLists.bind(this);
+    this.rewriteDevelopers = this.rewriteDevelopers.bind(this);
     this.addGame = this.addGame.bind(this);
     this.onBlockDelete = this.onBlockDelete.bind(this);
     this.onBlockSave = this.onBlockSave.bind(this);
@@ -29,8 +31,10 @@ class App extends React.Component {
 
     this.state = {
       lists: lists,
+      developers: availableDevelopers,
       selectedListIndex: null,
-      downloadLink: this.createBlob(lists)
+      listsDownloadLink: this.createListsBlob(lists),
+      developersDownloadLink: this.createDevelopersBlob(availableDevelopers)
     };
   }
 
@@ -56,9 +60,21 @@ class App extends React.Component {
     this.rewriteLists(copy);
   }
 
-  createBlob(lists, oldLink) {
+  createListsBlob(lists, oldLink) {
     const stringified = JSON.stringify(lists);
     const fileStructure = `const lists = ${stringified}; export default lists;`
+    const data = new Blob([fileStructure], {type: 'text/plain'});
+    // If we are replacing a previously generated file we need to
+    // manually revoke the object URL to avoid memory leaks.
+    if (oldLink) {
+      window.URL.revokeObjectURL(oldLink);
+    }
+    return window.URL.createObjectURL(data);
+  }
+
+  createDevelopersBlob(lists, oldLink) {
+    const stringified = JSON.stringify(lists);
+    const fileStructure = `const developers = ${stringified}; export default developers;`
     const data = new Blob([fileStructure], {type: 'text/plain'});
     // If we are replacing a previously generated file we need to
     // manually revoke the object URL to avoid memory leaks.
@@ -163,7 +179,14 @@ class App extends React.Component {
   rewriteLists(newData) {
     this.setState({
       lists: newData,
-      downloadLink: this.createBlob(newData, this.state.downloadLink)
+      listsDownloadLink: this.createListsBlob(newData, this.state.listsDownloadLink)
+    });
+  }
+
+  rewriteDevelopers(newData) {
+    this.setState({
+      developers: newData,
+      developersDownloadLink: this.createDevelopersBlob(newData, this.state.developersDownloadLink)
     });
   }
 
@@ -221,6 +244,8 @@ class App extends React.Component {
         onBlockDelete={(blockId, sectionId) => this.onBlockDelete(blockId, sectionId, this.state.selectedListIndex)}
         doOnDelete={() => this.deleteList(this.state.selectedListIndex)}
         listIndex={this.state.selectedListIndex}
+        developers={this.state.developers}
+        updateDevelopers={(developersData) => this.rewriteDevelopers(developersData)}
         saveBlock={(blockData, blockId, sectionId) => this.onBlockSave(blockData, blockId, sectionId, this.state.selectedListIndex)}
         changeListPosition={(newListPosition, oldListPosition) => this.onChangeListPosition(newListPosition, oldListPosition)}
         changeGameSection={(newSectionIndex, blockIndex, oldSectionIndex) => this.onChangeGameSection(newSectionIndex, blockIndex, oldSectionIndex, this.state.selectedListIndex)}/>
@@ -236,7 +261,8 @@ class App extends React.Component {
 
     const footer = (
       <Footer
-        fileLink={this.state.downloadLink}/>
+        listsLink={this.state.listsDownloadLink}
+        developersLink={this.state.developersDownloadLink}/>
     );
 
     const header = (

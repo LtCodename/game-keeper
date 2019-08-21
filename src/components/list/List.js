@@ -135,6 +135,8 @@ class List extends React.Component {
           sectionName={elem.name}
           sectionId={index}
           color={elem.color}
+          developers={this.props.developers}
+          updateDevelopers={this.props.updateDevelopers}
           passColorUp={(newColor) => this.props.doOnColorChange(index, newColor)}
           doOnSectionRename={(newSectionName) => this.props.doOnSectionRename(newSectionName, index)}
           addNewGame={(gameName) => this.props.doOnAddGame(gameName, index)}

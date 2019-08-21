@@ -11,34 +11,52 @@ class BlockModalWindow extends React.Component {
 
     this.changeGameName = this.changeGameName.bind(this);
     this.doOnNameChange = this.doOnNameChange.bind(this);
+    this.doOnAddDeveloper = this.doOnAddDeveloper.bind(this);
     this.doOnCancel = this.doOnCancel.bind(this);
     this.changeDescription = this.changeDescription.bind(this);
     this.descriptionInputValueChange = this.descriptionInputValueChange.bind(this);
     this.doOnDescriptionChange = this.doOnDescriptionChange.bind(this);
     this.nameInputValueChange = this.nameInputValueChange.bind(this);
+    this.developerInputValueChange = this.developerInputValueChange.bind(this);
     this.dateInputValueChange = this.dateInputValueChange.bind(this);
     this.handleCheckboxInputChange = this.handleCheckboxInputChange.bind(this);
     this.deepCopy = this.deepCopy.bind(this);
     this.rewriteLists = this.rewriteLists.bind(this);
+    this.rewriteDevelopers = this.rewriteDevelopers.bind(this);
     this.modalSave = this.modalSave.bind(this);
     this.openModalWarningWindow = this.openModalWarningWindow.bind(this);
     this.resetState = this.resetState.bind(this);
     this.selectChangeHandler = this.selectChangeHandler.bind(this);
+    this.developerChangeHandler = this.developerChangeHandler.bind(this);
 
     this.state = {
       nameEditMode: false,
       descriptionEditMode: false,
       localGameData: {...this.props.gameData, releaseDate: this.props.gameData.releaseDate || ""},
       nameInputValue: this.props.gameData.name,
+      developerInputValue: "",
       descriptionInputValue: "",
       platforms: this.preparePlatformsForState(),
-      showModalWindow: false
+      showModalWindow: false,
+      developers: this.props.developers
     };
   }
 
   selectChangeHandler(event) {
     this.props.changeGameSection(event.target.value);
     this.props.closeModal();
+  }
+
+  developerChangeHandler(event) {
+    this.setState({
+      localGameData: {...this.state.localGameData, developer:event.target.value}
+    });
+  }
+
+  developerInputValueChange(event) {
+    this.setState({
+      developerInputValue: event.target.value
+    });
   }
 
   openModalWarningWindow() {
@@ -77,6 +95,14 @@ class BlockModalWindow extends React.Component {
     });
   }
 
+  rewriteDevelopers(newData) {
+    this.setState({
+      developers: newData
+    });
+
+    this.props.updateDevelopers(newData);
+  }
+
   preparePlatformsForState(){
     const selectedPlatforms = this.props.gameData.platforms || [];
 
@@ -100,6 +126,26 @@ class BlockModalWindow extends React.Component {
     this.setState({
       nameEditMode: false,
       localGameData: {...this.state.localGameData, name:this.state.nameInputValue}
+    });
+  }
+
+  doOnAddDeveloper() {
+    if (!this.state.developerInputValue) {
+      return;
+    }
+
+    const copy = this.deepCopy(this.state.developers);
+    const uniqueIndex = `id${new Date().getTime()}`;
+
+    copy.push({
+      id: uniqueIndex,
+      name: this.state.developerInputValue
+    })
+
+    this.rewriteDevelopers(copy);
+
+    this.setState({
+      developerInputValue: ""
     });
   }
 
@@ -219,23 +265,45 @@ class BlockModalWindow extends React.Component {
     let sectionSelector = "";
 
     if (this.props.content) {
-      const sectionOptions = this.props.content.map((elem, index) => {
+      const sectionSectionOptions = this.props.content.map((elem, index) => {
         return (
           <option key={index} value={index}>{elem.name}</option>
         );
-      })
+      });
 
       sectionSelector = (
         <div className="modalPiece">
           Move to another section
           <select value={this.props.sectionId} className="custom-select" onChange={this.selectChangeHandler}>
-            {sectionOptions}
+            {sectionSectionOptions}
           </select>
         </div>
       );
     }
 
     const deleteButton = (this.props.onDeleteBlock) ? <button type="button" className="btn" onClick={this.openModalWarningWindow}>Delete</button> : "";
+
+    const developerSectionOptions = this.state.developers.map((elem, index) => {
+      return (
+        <option key={index} value={index}>{elem.name}</option>
+      );
+    });
+
+    const devSelectValue = ((this.state.localGameData.developer) ? this.state.localGameData.developer : 0);
+
+    const developerSelector = (
+      <div className="modalPiece">
+        Assing developer
+        <select value={devSelectValue} className="custom-select" onChange={this.developerChangeHandler}>
+          {developerSectionOptions}
+        </select>
+        Add developer
+        <div>
+          <input className="form-control" type="text" placeholder="Developer Name" value={this.state.developerInputValue} onChange={this.developerInputValueChange}></input>
+          <button className="btn btn-dark" onClick={this.doOnAddDeveloper}>Add</button>
+        </div>
+      </div>
+    );
 
     return (
       <div>
@@ -254,7 +322,9 @@ class BlockModalWindow extends React.Component {
                 {sectionSelector}
                 {/*description*/}
                 {(this.state.descriptionEditMode) ? descriptionEdit : descriptionCustom}
-                {/*date*/}
+                {/*developer*/}
+                {developerSelector}
+                {/*release date*/}
                 {datePicker}
                 {/*platform*/}
                 <div className="modalPiece">

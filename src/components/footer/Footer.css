@@ -20,10 +20,16 @@
   opacity: 0.8;
 }
 
-.shareIconsWrapper a, .saveIconWrapper a {
+.shareIconsWrapper a {
   color: var(--content-color);
   font-size: 33px;
   margin-right: 10px;
+}
+
+.saveIconsWrapper a {
+  color: var(--content-color);
+  font-size: 33px;
+  margin-left: 10px;
 }
 
 .footerWrapper span {

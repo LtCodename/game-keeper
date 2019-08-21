@@ -80,6 +80,8 @@ class Block extends React.Component {
         modalSave={this.modalSave}
         sectionId={this.props.sectionId}
         content={this.props.content}
+        developers={this.props.developers}
+        updateDevelopers={this.props.updateDevelopers}
         changeGameSection={this.props.changeGameSection}
         closeModal={this.closeModal} />
     );

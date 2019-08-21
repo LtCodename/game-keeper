@@ -19,9 +19,10 @@ class Footer extends React.Component {
       </div>
     );
 
-    const saveIcon = (
-      <div className="saveIconWrapper">
-          <a download="lists.js" href={this.props.fileLink} target="blank"><i className="fas fa-cloud-download-alt"></i></a>
+    const saveListsIcon = (
+      <div className="saveIconsWrapper">
+          <a download="lists.js" href={this.props.listsLink} target="blank"><i className="fas fa-cloud-download-alt"></i></a>
+          <a download="developers.js" href={this.props.developersLink} target="blank"><i class="fas fa-save"></i></a>
       </div>
     );
 
@@ -31,7 +32,7 @@ class Footer extends React.Component {
 
     return (
       <div className="footerWrapper">
-        {saveIcon}
+        {saveListsIcon}
         {copyrighth}
         {shareIcons}
       </div>
