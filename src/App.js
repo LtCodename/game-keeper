@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import List from './components/list/List.js';
 import Nav from './components/nav/Nav.js';
+import Footer from './components/footer/Footer.js';
 import Dashboard from './components/dashboard/Dashboard.js';
 import lists from './mocks/lists.js';
 
@@ -229,14 +230,23 @@ class App extends React.Component {
         content={this.state.lists}
         indexToHighligth={this.state.selectedListIndex}
         doOnClick={this.changeSelectedListIndex}
-        doOnAdd={this.addList}
+        doOnAdd={this.addList}/>
+    );
+
+    const footer = (
+      <Footer
         fileLink={this.state.downloadLink}/>
     );
 
     return (
-      <div className="appDiv">
-          {(this.state.selectedListIndex === null) ? "" : nav}
-          {listOrDashboard}
+      <div className="appWrapper">
+        <div className="contentWrapper">
+            {(this.state.selectedListIndex === null) ? "" : nav}
+            {listOrDashboard}
+        </div>
+        <footer>
+          {footer}
+        </footer>
       </div>
     );
   }

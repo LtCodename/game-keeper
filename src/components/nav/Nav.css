@@ -2,7 +2,6 @@
   width: 220px;
   height: 100vh;
   position: relative;
-  padding-bottom: 80px;
   padding-left: 10px;
   padding-right: 10px;
   background-color: var(--nav-color);
@@ -73,20 +72,6 @@
   opacity: 0.8;
 }
 
-.downloadData {
-  position: absolute;
-  bottom: 10px;
-}
-
-.downloadImg {
-  transition: all .3s;
-  width: 80%;
-}
-
-.downloadImg:hover {
-  width: 100%;
-}
-
 .nameAndButton {
   display: flex;
   justify-content: space-between;
@@ -106,10 +91,6 @@
     left: 0;
     right: 0;
     top: 0;
-  }
-
-  .downloadImg {
-    display: none;
   }
 
   .hideNavButton {

@@ -1,0 +1,44 @@
+.footerWrapper {
+  background-color: var(--footer-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.saveDataButton {
+  bottom: 10px;
+}
+
+.saveDataButton img {
+  transition: all .3s;
+  width: 35px;
+  height: auto;
+  margin: 5px 0 0 10px;
+}
+
+.saveDataButton img:hover {
+  opacity: 0.8;
+}
+
+.shareIconsWrapper a {
+  color: #475f8e;
+  font-size: 33px;
+  margin-right: 10px;
+}
+
+.saveIconWrapper a {
+  color: #475f8e;
+  font-size: 33px;
+  margin-left: 10px;
+}
+
+.footerWrapper span {
+  text-transform: uppercase;
+}
+
+@media (max-width: 1050px) {
+
+  .saveDataButton img {
+    display: none;
+  }
+}

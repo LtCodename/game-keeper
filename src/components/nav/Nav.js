@@ -1,6 +1,5 @@
 import React from 'react';
 import './Nav.css';
-import downloadImg from '../../assets/download.png';
 import AddListModalWindow from '../add-list-modal-window/AddListModalWindow.js';
 declare var $;
 
@@ -109,7 +108,6 @@ class Nav extends React.Component {
         <div className={navClassName}>
           {buttonsToRender}
           {addListButton}
-          <a className="downloadData" download="lists.js" href={this.props.fileLink}><img className="downloadImg" src={downloadImg} alt=""></img></a>
         </div>
 
         {this.state.showAddListWindow ? modalAddListWindow : ""}
