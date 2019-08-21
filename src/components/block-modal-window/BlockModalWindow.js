@@ -285,11 +285,13 @@ class BlockModalWindow extends React.Component {
 
     const developerSectionOptions = this.state.developers.map((elem, index) => {
       return (
-        <option key={index} value={index}>{elem.name}</option>
+        <option key={elem.id} value={elem.id}>{elem.name}</option>
       );
     });
 
-    const devSelectValue = ((this.state.localGameData.developer) ? this.state.localGameData.developer : 0);
+    developerSectionOptions.unshift(<option value="" key={"default"}>Select</option>);
+
+    const devSelectValue = this.state.localGameData.developer || '';
 
     const developerSelector = (
       <div className="modalPiece">

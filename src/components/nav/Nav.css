@@ -1,9 +1,9 @@
 .navbarWrapper {
   width: 220px;
-  height: 100vh;
-  /*position: relative;*/
-  padding: 10px 0 0 10px;;
+  padding: 10px 0 0 10px;
   background-color: var(--nav-color);
+  position: sticky;
+  top: 0;
 }
 
 .inputBit button {

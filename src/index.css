@@ -61,13 +61,15 @@ input {
 
 .contentWrapper {
   display: flex;
+  position: relative;
+  align-items: flex-start;
+  background-color: var(--content-color);
 }
 
 .allContent {
   padding: 0 0 20px 10px;
   flex: 1;
-  height: 100vh;
-  overflow: auto;
+  min-height: calc(100vh - 110px);
   background-color: var(--content-color);
 }
 
