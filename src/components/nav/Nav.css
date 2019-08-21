@@ -1,22 +1,9 @@
-.classNavbar {
+.navbarWrapper {
   width: 220px;
   height: 100vh;
-  position: relative;
-  padding-left: 10px;
-  padding-right: 10px;
+  /*position: relative;*/
+  padding: 10px 0 0 10px;;
   background-color: var(--nav-color);
-}
-
-.logoButton {
-  font-family: var(--titles-font);
-  background-color: inherit;
-  width: 100%;
-  color: var(--titles-color);
-  font-size: 30px;
-  padding: 0;
-  margin: 5px 0;
-  border: none;
-  cursor: pointer;
 }
 
 .inputBit button {
@@ -72,10 +59,9 @@
   opacity: 0.8;
 }
 
-.nameAndButton {
+.hideButtonWrapper {
   display: flex;
   justify-content: space-between;
-
 }
 
 .hideNavButton {
@@ -83,7 +69,7 @@
 }
 
 @media (max-width: 1050px) {
-  .classNavbar {
+  .navbarWrapper {
     height: auto;
     width: auto;
     padding-bottom: 5px;

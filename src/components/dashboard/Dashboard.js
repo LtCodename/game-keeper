@@ -57,9 +57,6 @@ class Dashboard extends React.Component {
 
     return (
       <div className="dashboardWrapper">
-        <div className="logoButtonDiv">
-          <button className="logoButtonDashboard btn" onClick={this.goToDashboard}>Game Keeper</button>
-        </div>
         <div className="dashboard">
           <div className="listsMatrix">
             {listsToRender}

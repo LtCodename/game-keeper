@@ -9,7 +9,6 @@ class Nav extends React.Component {
     super(props);
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.switchBetweenTabs = this.switchBetweenTabs.bind(this);
-    this.goToDashboard = this.goToDashboard.bind(this);
     this.openAddListWindow = this.openAddListWindow.bind(this);
     this.resetState = this.resetState.bind(this);
 
@@ -39,14 +38,7 @@ class Nav extends React.Component {
   }
 
   switchBetweenTabs(index) {
-    this.props.doOnClick(index);
-    this.setState({
-      navbarVisible: false
-    });
-  }
-
-  goToDashboard() {
-    this.props.doOnClick(null)
+    this.props.switchBetweenTabs(index);
     this.setState({
       navbarVisible: false
     });
@@ -100,9 +92,8 @@ class Nav extends React.Component {
     );
 
     return (
-      <nav className="classNavbar">
-        <div className="nameAndButton">
-           <button className="logoButton btn" onClick={this.goToDashboard}>Game Keeper</button>
+      <nav className="navbarWrapper">
+        <div className="hideButtonWrapper">
           {hideButton}
         </div>
         <div className={navClassName}>

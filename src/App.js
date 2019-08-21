@@ -3,6 +3,7 @@ import './App.css';
 import List from './components/list/List.js';
 import Nav from './components/nav/Nav.js';
 import Footer from './components/footer/Footer.js';
+import Header from './components/header/Header.js';
 import Dashboard from './components/dashboard/Dashboard.js';
 import lists from './mocks/lists.js';
 
@@ -28,7 +29,7 @@ class App extends React.Component {
 
     this.state = {
       lists: lists,
-      selectedListIndex: 0,
+      selectedListIndex: null,
       downloadLink: this.createBlob(lists)
     };
   }
@@ -229,8 +230,8 @@ class App extends React.Component {
       <Nav
         content={this.state.lists}
         indexToHighligth={this.state.selectedListIndex}
-        doOnClick={this.changeSelectedListIndex}
-        doOnAdd={this.addList}/>
+        doOnAdd={this.addList}
+        switchBetweenTabs={this.changeSelectedListIndex}/>
     );
 
     const footer = (
@@ -238,8 +239,16 @@ class App extends React.Component {
         fileLink={this.state.downloadLink}/>
     );
 
+    const header = (
+      <Header
+        goToDashboard={this.changeSelectedListIndex}/>
+    );
+
     return (
       <div className="appWrapper">
+        <header>
+          {header}
+        </header>
         <div className="contentWrapper">
             {(this.state.selectedListIndex === null) ? "" : nav}
             {listOrDashboard}

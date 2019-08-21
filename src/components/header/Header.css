@@ -1,0 +1,22 @@
+.logoWrapper {
+  display: flex;
+  justify-content: center;
+  background-color: var(--header-color);
+}
+
+.logoWrapper .btn {
+  width: auto;
+  font-family: var(--titles-font);
+  background-color: var(--header-color);
+  color: var(--content-color);
+  font-size: 41px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.headerWrappper {
+  position: fixed;
+  width: 100%;
+}

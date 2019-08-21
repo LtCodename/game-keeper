@@ -4,13 +4,10 @@
   width: 100%;
 }
 
-.dashboardText {
-  color: black;
-}
-
 .dashboard {
   display: flex;
   justify-content: center;
+  margin-top: 20px;
 }
 
 .listsMatrix {
@@ -33,21 +30,4 @@
 
 .btnAddListFromDashboard:hover {
   opacity: 0.8;
-}
-
-.logoButtonDiv {
-  display: flex;
-  justify-content: center;
-}
-
-.logoButtonDashboard {
-  width: auto;
-  font-family: var(--titles-font);
-  background-color: inherit;
-  color: var(--titles-color);
-  font-size: 41px;
-  padding: 0;
-  margin: 0;
-  border: none;
-  cursor: pointer;
 }
