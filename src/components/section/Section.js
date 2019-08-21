@@ -171,6 +171,8 @@ class Section extends React.Component {
         modalId={"addGame"}
         gameData={{name:"New game"}}
         modalSave={this.modalSave}
+        developers={this.props.developers}
+        updateDevelopers={this.props.updateDevelopers}
         closeModal={this.closeAddGameModal}  />
     );
 
