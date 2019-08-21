@@ -173,8 +173,8 @@ class List extends React.Component {
         <h1>{this.props.listName}</h1>
         <div className="actionButtons">
           <button className="btn" onClick={this.doOnEdit}><i className="fas fa-pen-square"></i></button>
-          <button className="btn" onClick={this.openModalWarningWindow}><i className="fas fa-trash"></i></button>
           <button className="btn" onClick={this.doOnAddSection}><i className="fas fa-plus-square"></i></button>
+          <button className="btn" onClick={this.openModalWarningWindow}><i className="fas fa-trash"></i></button>
           {listPositionPicker}
         </div>
 

@@ -35,6 +35,7 @@
   padding: 0;
   width: 30px;
   background-color: var(--content-color);
+    margin-right: 10px;
 }
 
 .sectionActionButtons i:hover {
@@ -42,6 +43,6 @@
 }
 
 .sectionActionButtons i {
-  font-size: 30px;
+  font-size: 35px;
   color: var(--titles-color);
 }

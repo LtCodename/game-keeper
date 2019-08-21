@@ -34,6 +34,7 @@
 .actionButtons .btn {
   padding: 0;
   width: 30px;
+  margin-right: 10px;
   background-color: var(--content-color);
 }
 
@@ -46,7 +47,7 @@
 }
 
 .actionButtons i {
-  font-size: 30px;
+  font-size: 35px;
   color: var(--list-color);
 }
 

@@ -144,8 +144,8 @@ class Section extends React.Component {
         <h2>{this.props.sectionName}</h2>
         <div className="sectionActionButtons">
           <button className="btn" onClick={this.doOnEdit}><i className="fas fa-pen-square"></i></button>
-          <button className="btn" onClick={this.openModalWarningWindow}><i className="fas fa-trash"></i></button>
           <button className="btn" onClick={this.openAddGameWindow}><i className="fas fa-plus-square"></i></button>
+          <button className="btn" onClick={this.openModalWarningWindow}><i className="fas fa-trash"></i></button>
         </div>
       </div>
     );

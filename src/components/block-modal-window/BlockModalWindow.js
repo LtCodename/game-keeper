@@ -283,7 +283,15 @@ class BlockModalWindow extends React.Component {
 
     const deleteButton = (this.props.onDeleteBlock) ? <button type="button" className="btn" onClick={this.openModalWarningWindow}>Delete</button> : "";
 
-    const developerSectionOptions = this.state.developers.map((elem, index) => {
+    const developerSectionOptions = this.state.developers.sort((a, b) => {
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      }
+      return 0;
+    }).map((elem, index) => {
       return (
         <option key={elem.id} value={elem.id}>{elem.name}</option>
       );
