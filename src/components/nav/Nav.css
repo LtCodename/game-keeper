@@ -2,8 +2,6 @@
   width: 220px;
   padding: 10px 0 0 10px;
   background-color: var(--nav-color);
-  position: sticky;
-  top: 0;
 }
 
 .inputBit button {
@@ -83,7 +81,6 @@
     height: auto;
     width: auto;
     padding: 0;
-    position: fixed;
     left: 0;
     right: 0;
     top: 45px;

@@ -103,7 +103,6 @@ h2 {
   .contentWrapper {
     display: block;
     height: auto;
-    padding-top: 30px;
   }
 
   .allContent{
@@ -113,5 +112,15 @@ h2 {
 
   h2 {
     font-size: 30px;
+  }
+
+  .allContent {
+    min-height: calc(100vh - 124px);
+  }
+}
+
+@media (max-width: 450px) {
+  .allContent {
+    min-height: calc(100vh - 104px);
   }
 }

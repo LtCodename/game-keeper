@@ -7,7 +7,7 @@
 .dashboard {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  padding-top: 20px;
 }
 
 .listsMatrix {
@@ -36,6 +36,12 @@
   }
 }
 
+@media (max-width: 1050px) {
+  .dashboardWrapper {
+    min-height: calc(100vh - 94px);
+  }
+}
+
 @media (max-width: 990px) {
   .listsMatrix {
     grid-template-columns: 1fr 1fr;
@@ -45,5 +51,11 @@
 @media (max-width: 630px) {
   .listsMatrix {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 450px) {
+  .dashboardWrapper {
+    min-height: calc(100vh - 74px);
   }
 }
