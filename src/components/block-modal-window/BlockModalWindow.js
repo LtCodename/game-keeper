@@ -124,6 +124,7 @@ class BlockModalWindow extends React.Component {
       return;
     }
 
+    console.log(this.state.developerInputValue);
     this.props.updateDevelopers(this.state.developerInputValue);
 
     this.setState({
@@ -281,12 +282,13 @@ class BlockModalWindow extends React.Component {
 
     developerSectionOptions.unshift(<option value="" key={"default"}>Select</option>);
 
+    console.log(this.state.localGameData.developer)
     const devSelectValue = this.state.localGameData.developer || '';
 
     const developerSelector = (
       <div className="modalPiece">
         Assing developer
-        <select value={devSelectValue} className="custom-select" onChange={this.developerChangeHandler}>
+        <select style={{fontWeight:"bold"}} value={devSelectValue} className="custom-select" onChange={this.developerChangeHandler}>
           {developerSectionOptions}
         </select>
         Add developer

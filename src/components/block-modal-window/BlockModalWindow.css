@@ -12,6 +12,10 @@
   width: 435px;
 }
 
+.developerSelector .custom-select {
+  font-weight: bold;
+}
+
 @media (max-width: 1050px) {
   .enterNewName {
     width: 340px;

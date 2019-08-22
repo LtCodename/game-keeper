@@ -102,6 +102,7 @@ class App extends React.Component {
   }
 
   onBlockSave(blockData, blockId, sectionId, listId) {
+    console.log(blockData)
     const copy = this.deepCopy(this.state.lists);
     copy[listId].content[sectionId].games[blockId] = blockData;
     this.rewriteLists(copy);
@@ -185,7 +186,7 @@ class App extends React.Component {
   }
 
   onUpdateDevelopers(newDeveloper) {
-    const copy = this.deepCopy(availableDevelopers);
+    const copy = this.deepCopy(this.state.developers);
     const uniqueIndex = `id${new Date().getTime()}`;
 
     copy.push({
@@ -194,6 +195,7 @@ class App extends React.Component {
     })
 
     this.rewriteDevelopers(copy)
+    console.log(copy)
   }
 
   rewriteDevelopers(newData) {
