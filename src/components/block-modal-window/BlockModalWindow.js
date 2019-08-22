@@ -22,7 +22,6 @@ class BlockModalWindow extends React.Component {
     this.handleCheckboxInputChange = this.handleCheckboxInputChange.bind(this);
     this.deepCopy = this.deepCopy.bind(this);
     this.rewriteLists = this.rewriteLists.bind(this);
-    this.rewriteDevelopers = this.rewriteDevelopers.bind(this);
     this.modalSave = this.modalSave.bind(this);
     this.openModalWarningWindow = this.openModalWarningWindow.bind(this);
     this.resetState = this.resetState.bind(this);
@@ -37,8 +36,7 @@ class BlockModalWindow extends React.Component {
       developerInputValue: "",
       descriptionInputValue: "",
       platforms: this.preparePlatformsForState(),
-      showModalWindow: false,
-      developers: this.props.developers
+      showModalWindow: false
     };
   }
 
@@ -95,14 +93,6 @@ class BlockModalWindow extends React.Component {
     });
   }
 
-  rewriteDevelopers(newData) {
-    this.setState({
-      developers: newData
-    });
-
-    this.props.updateDevelopers(newData);
-  }
-
   preparePlatformsForState(){
     const selectedPlatforms = this.props.gameData.platforms || [];
 
@@ -134,15 +124,7 @@ class BlockModalWindow extends React.Component {
       return;
     }
 
-    const copy = this.deepCopy(this.state.developers);
-    const uniqueIndex = `id${new Date().getTime()}`;
-
-    copy.push({
-      id: uniqueIndex,
-      name: this.state.developerInputValue
-    })
-
-    this.rewriteDevelopers(copy);
+    this.props.updateDevelopers(this.state.developerInputValue);
 
     this.setState({
       developerInputValue: ""
@@ -283,7 +265,7 @@ class BlockModalWindow extends React.Component {
 
     const deleteButton = (this.props.onDeleteBlock) ? <button type="button" className="btn" onClick={this.openModalWarningWindow}>Delete</button> : "";
 
-    const developerSectionOptions = this.state.developers.sort((a, b) => {
+    const developerSectionOptions = this.props.developers.sort((a, b) => {
       if (a.name < b.name) {
         return -1;
       }

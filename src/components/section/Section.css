@@ -46,3 +46,27 @@
   font-size: 35px;
   color: var(--titles-color);
 }
+
+@media (max-width: 1050px) {
+  .sectionActionButtons {
+    display: none;
+  }
+
+  .nameAndButtonsWrapper {
+    text-align: center;
+    justify-content: center;
+  }
+
+  .inner-section {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 450px) {
+  .inner-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    margin-right: 10px;
+  }
+}

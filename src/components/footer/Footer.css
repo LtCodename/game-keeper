@@ -5,21 +5,6 @@
   align-items: center;
 }
 
-.saveDataButton {
-  bottom: 10px;
-}
-
-.saveDataButton img {
-  transition: all .3s;
-  width: 35px;
-  height: auto;
-  margin: 5px 0 0 10px;
-}
-
-.saveDataButton img:hover {
-  opacity: 0.8;
-}
-
 .shareIconsWrapper a {
   color: var(--content-color);
   font-size: 33px;
@@ -36,9 +21,17 @@
   text-transform: uppercase;
 }
 
-@media (max-width: 1050px) {
-
-  .saveDataButton img {
+@media (max-width: 450px) {
+  .shareIconsWrapper {
     display: none;
+  }
+
+  .saveIconsWrapper {
+    display: none;
+  }
+
+  .footerWrapper {
+    justify-content: center;
+    padding-top: 5px;
   }
 }

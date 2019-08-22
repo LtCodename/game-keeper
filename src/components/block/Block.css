@@ -143,3 +143,20 @@
 .gameBlock_cape-honey {
   background-color: var(--color-cape-honey);
 }
+
+@media (max-width: 450px) {
+  .gameBlock {
+    --footer-content-height: 20px;
+    border: none;
+    text-align: center;
+    padding: 5px;
+    margin: 3px 4px 1px 0;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+  }
+
+  .gameBlockFooter {
+    display: none;
+  }
+}

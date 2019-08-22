@@ -102,8 +102,8 @@ h2 {
 @media (max-width: 1050px) {
   .contentWrapper {
     display: block;
-      height: auto;
-      padding-top: 51px;
+    height: auto;
+    padding-top: 30px;
   }
 
   .allContent{
@@ -111,11 +111,7 @@ h2 {
     overflow: auto;
   }
 
-  h1 {
-    font-size: 40px;
-  }
-
   h2 {
-    font-size: 25px;
+    font-size: 30px;
   }
 }

@@ -23,6 +23,7 @@ class App extends React.Component {
     this.addSection = this.addSection.bind(this);
     this.rewriteLists = this.rewriteLists.bind(this);
     this.rewriteDevelopers = this.rewriteDevelopers.bind(this);
+    this.onUpdateDevelopers = this.onUpdateDevelopers.bind(this);
     this.addGame = this.addGame.bind(this);
     this.onBlockDelete = this.onBlockDelete.bind(this);
     this.onBlockSave = this.onBlockSave.bind(this);
@@ -183,6 +184,18 @@ class App extends React.Component {
     });
   }
 
+  onUpdateDevelopers(newDeveloper) {
+    const copy = this.deepCopy(availableDevelopers);
+    const uniqueIndex = `id${new Date().getTime()}`;
+
+    copy.push({
+      id: uniqueIndex,
+      name: newDeveloper
+    })
+
+    this.rewriteDevelopers(copy)
+  }
+
   rewriteDevelopers(newData) {
     this.setState({
       developers: newData,
@@ -245,7 +258,7 @@ class App extends React.Component {
         doOnDelete={() => this.deleteList(this.state.selectedListIndex)}
         listIndex={this.state.selectedListIndex}
         developers={this.state.developers}
-        updateDevelopers={(developersData) => this.rewriteDevelopers(developersData)}
+        updateDevelopers={(newDeveloper) => this.onUpdateDevelopers(newDeveloper)}
         saveBlock={(blockData, blockId, sectionId) => this.onBlockSave(blockData, blockId, sectionId, this.state.selectedListIndex)}
         changeListPosition={(newListPosition, oldListPosition) => this.onChangeListPosition(newListPosition, oldListPosition)}
         changeGameSection={(newSectionIndex, blockIndex, oldSectionIndex) => this.onChangeGameSection(newSectionIndex, blockIndex, oldSectionIndex, this.state.selectedListIndex)}/>

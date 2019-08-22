@@ -1,6 +1,6 @@
 .dashboardWrapper {
   background-color: var(--nav-color);
-  height: 100vh;
+  min-height: calc(100vh - 110px);
   width: 100%;
 }
 
@@ -19,15 +19,31 @@
 .btnAddListFromDashboard {
   font-family: var(--titles-font);
   border-radius: 0;
-  padding: 15px;
   background-color: var(--add-list-color);
-  min-width: 300px;
-  max-width: 400px;
-  min-height: 235px;
   font-size: 41px;
   color: rgba(0, 121, 197, 1);
+  padding: 0;
+  margin: 0;
 }
 
 .btnAddListFromDashboard:hover {
   opacity: 0.8;
+}
+
+@media (max-width: 1300px) {
+  .listsMatrix {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 990px) {
+  .listsMatrix {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 630px) {
+  .listsMatrix {
+    grid-template-columns: 1fr;
+  }
 }

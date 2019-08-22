@@ -31,6 +31,7 @@
   align-items: center;
   justify-content: space-between;
 }
+
 .actionButtons .btn {
   padding: 0;
   width: 30px;
@@ -49,6 +50,12 @@
 .actionButtons i {
   font-size: 35px;
   color: var(--list-color);
+}
+
+@media (max-width: 1050px) {
+  .listWrapper {
+    display: none;
+  }
 }
 
 @media (max-width: 1050px) {
