@@ -24,6 +24,7 @@
   color: rgba(0, 121, 197, 1);
   padding: 0;
   margin: 0;
+  height: 200px;
 }
 
 .btnAddListFromDashboard:hover {

@@ -1,29 +1,23 @@
-import pcImg from '../../assets/pc.png';
-import switchImg from '../../assets/switch.png';
-import ps4Img from '../../assets/ps.png';
-import iosImg from '../../assets/ios.png';
-import xboxImg from '../../assets/xbox.png';
-
 const platforms = [
   {
     name: "PC",
-    url: pcImg
+    iconName: "fab fa-windows"
   },
   {
     name: "Nintendo Switch",
-    url: switchImg
+    iconName: "fas fa-gamepad"
   },
   {
     name: "PlayStation 4",
-    url: ps4Img
+    iconName: "fab fa-playstation"
   },
   {
     name: "iOS",
-    url: iosImg
+    iconName: "fab fa-app-store-ios"
   },
   {
     name: "Xbox",
-    url: xboxImg
+    iconName: "fab fa-xbox"
   }
 ];
 

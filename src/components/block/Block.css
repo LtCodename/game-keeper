@@ -2,16 +2,10 @@
   --footer-content-height: 20px;
   border: none;
   text-align: center;
-  padding: 10px;
   margin: 3px 4px 1px 0;
   min-width: 150px;
   max-width: 250px;
-}
-
-.platforms {
-  margin-left: 2px;
-  height: var(--footer-content-height);
-  width: 20px;
+  padding: 5px 8px;
 }
 
 .gameName {
@@ -22,10 +16,14 @@
 .releaseDate {
   line-height: var(--footer-content-height);
   padding: 0 2px;
-  margin-right: 3px;
-  font-size: 15px;
-  font-family: var(--date-font);
-  border: 1px solid black;
+  margin-right: 5px;
+  font-size: 18px;
+  font-family: var(--main-font);
+}
+
+.gameBlockContent {
+  display: grid;
+  grid-template-rows: 2fr 1fr;
 }
 
 .platformsBlock {
@@ -34,9 +32,16 @@
   flex: 1;
 }
 
+.platformsBlock i {
+  font-size: 25px;
+  color: var(--content-color);
+  margin-left: 5px;
+}
+
 .gameBlockFooter {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .cardWrapper {

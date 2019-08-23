@@ -100,7 +100,7 @@ class BlockModalWindow extends React.Component {
       return {
         id: index,
         name: elem.name,
-        url: elem.url,
+        iconName: elem.iconName,
         checked: Boolean(selectedPlatforms.find(platform => elem.name === platform.name))
       };
     });
@@ -124,7 +124,6 @@ class BlockModalWindow extends React.Component {
       return;
     }
 
-    console.log(this.state.developerInputValue);
     this.props.updateDevelopers(this.state.developerInputValue);
 
     this.setState({
@@ -177,7 +176,7 @@ class BlockModalWindow extends React.Component {
                                                 .map((elem) => {
                                                   return {
                                                     name: elem.name,
-                                                    url: elem.url
+                                                    iconName: elem.iconName
                                                   }
                                                 });
 
@@ -282,7 +281,6 @@ class BlockModalWindow extends React.Component {
 
     developerSectionOptions.unshift(<option value="" key={"default"}>Select</option>);
 
-    console.log(this.state.localGameData.developer)
     const devSelectValue = this.state.localGameData.developer || '';
 
     const developerSelector = (

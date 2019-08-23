@@ -61,7 +61,8 @@ class Block extends React.Component {
 
     const platformsToShow = (this.props.gameData.hasOwnProperty('platforms')) ? (
       this.props.gameData.platforms.map((elem, index) => {
-        return (<img className="platforms" key={index}  src={elem.url} alt={elem.name} />);
+        const iconClassName = `${elem.iconName}`;
+        return (<i key={index} className={iconClassName}></i>);
       })) : [];
 
     const platfotmsOnBlock = (
@@ -70,7 +71,7 @@ class Block extends React.Component {
       </div>
     );
 
-    const dateToShow = (this.props.gameData.releaseDate ? <span className="releaseDate">{this.props.gameData.releaseDate}</span> : "");
+    const dateToShow = (this.props.gameData.releaseDate ? <span className="releaseDate">{this.props.gameData.releaseDate.substring(0,4)}</span> : "");
 
     const modalWindow = (
       <BlockModalWindow
