@@ -71,7 +71,7 @@ class Block extends React.Component {
       </div>
     );
 
-    const dateToShow = (this.props.gameData.releaseDate ? <span className="releaseDate">{this.props.gameData.releaseDate.substring(0,4)}</span> : "");
+    const dateToShow = (this.props.gameData.releaseDate ? <span className="releaseDate">{this.props.gameData.releaseDate}</span> : "");
 
     const modalWindow = (
       <BlockModalWindow
