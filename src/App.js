@@ -5,8 +5,6 @@ import Nav from './components/nav/Nav.js';
 import Footer from './components/footer/Footer.js';
 import Header from './components/header/Header.js';
 import Dashboard from './components/dashboard/Dashboard.js';
-import lists from './mocks/lists.js';
-import availableDevelopers from './mocks/developers.js';
 
 class App extends React.Component {
 
@@ -14,7 +12,6 @@ class App extends React.Component {
     super(props);
 
     this.changeSelectedListIndex = this.changeSelectedListIndex.bind(this);
-    this.renameList = this.renameList.bind(this);
     this.renameSection= this.renameSection.bind(this);
     this.deleteList = this.deleteList.bind(this);
     this.addList = this.addList.bind(this);
@@ -31,12 +28,14 @@ class App extends React.Component {
     this.onChangeListPosition = this.onChangeListPosition.bind(this);
 
     this.state = {
-      lists: lists,
-      developers: availableDevelopers,
+      lists: this.props.lists,
+      developers: this.props.developers,
       selectedListIndex: null,
-      listsDownloadLink: this.createListsBlob(lists),
-      developersDownloadLink: this.createDevelopersBlob(availableDevelopers)
+      listsDownloadLink: this.createListsBlob(this.props.lists),
+      developersDownloadLink: this.createDevelopersBlob(this.props.developers)
     };
+
+    // console.log(this.props);
   }
 
   onChangeListPosition(newListPosition, oldListPosition) {
@@ -113,13 +112,6 @@ class App extends React.Component {
         selectedListIndex: newIndex
       });
     }
-  }
-
-  renameList(newName) {
-    const copy = this.deepCopy(this.state.lists);
-    copy[this.state.selectedListIndex].name = newName;
-
-    this.rewriteLists(copy);
   }
 
   renameSection(newName, sectionId, listId) {
@@ -235,7 +227,7 @@ class App extends React.Component {
   render() {
     const dashboard = (
       <Dashboard
-        data={this.state.lists}
+        data={this.props.lists}
         doOnAdd={(listName => this.addList(listName))}
         listBlockClick={(index) => this.changeSelectedListIndex(index)}/>
     );
@@ -246,10 +238,9 @@ class App extends React.Component {
       listOrDashboard = dashboard;
     }else {
       listOrDashboard = <List
-        listName={this.state.lists[this.state.selectedListIndex].name}
-        content={this.state.lists[this.state.selectedListIndex].content}
-        allLists={this.state.lists}
-        doOnListRename={this.renameList}
+        listName={this.props.lists[this.state.selectedListIndex].name}
+        content={this.props.lists[this.state.selectedListIndex].content}
+        allLists={this.props.lists}
         doOnAddSection={(sectionName, sectionColor) => this.addSection(sectionName, sectionColor, this.state.selectedListIndex)}
         doOnSectionRename={(newSectionName, sectionIndex) => this.renameSection(newSectionName, sectionIndex, this.state.selectedListIndex)}
         doOnAddGame={(gameName, sectionIndex) => this.addGame(gameName, sectionIndex, this.state.selectedListIndex)}
@@ -258,7 +249,7 @@ class App extends React.Component {
         onBlockDelete={(blockId, sectionId) => this.onBlockDelete(blockId, sectionId, this.state.selectedListIndex)}
         doOnDelete={() => this.deleteList(this.state.selectedListIndex)}
         listIndex={this.state.selectedListIndex}
-        developers={this.state.developers}
+        developers={this.props.developers}
         updateDevelopers={(newDeveloper) => this.onUpdateDevelopers(newDeveloper)}
         saveBlock={(blockData, blockId, sectionId) => this.onBlockSave(blockData, blockId, sectionId, this.state.selectedListIndex)}
         changeListPosition={(newListPosition, oldListPosition) => this.onChangeListPosition(newListPosition, oldListPosition)}
@@ -267,7 +258,7 @@ class App extends React.Component {
 
     const nav = (
       <Nav
-        content={this.state.lists}
+        content={this.props.lists}
         indexToHighligth={this.state.selectedListIndex}
         doOnAdd={this.addList}
         switchBetweenTabs={this.changeSelectedListIndex}/>

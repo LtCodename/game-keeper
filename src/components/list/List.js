@@ -3,6 +3,8 @@ import Section from '../section/Section.js';
 import Colors from '../colors/Colors.js';
 import './List.css';
 import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
+import reducers from '../../redux/reducers';
+import { connect } from 'react-redux'
 declare var $;
 
 class List extends React.Component {
@@ -29,6 +31,8 @@ class List extends React.Component {
       colorFofNewSection: "",
       showModalWindow: false
     };
+
+    console.log(this.props);
   }
 
   static defaultProps = {
@@ -107,7 +111,8 @@ class List extends React.Component {
   }
 
   doOnSubmitListName() {
-    this.props.doOnListRename(this.state.listNameInputValue);
+    this.props.rename(this.props.listIndex, this.state.listNameInputValue);
+
     this.setState({
       renameListMode: false,
       listNameInputValue: ""
@@ -208,4 +213,14 @@ class List extends React.Component {
   }
 }
 
-export default List;
+const listDispatchToProps = (dispatch) => {
+  return {
+    rename: (listIndex, name) => {
+      dispatch({ type: reducers.actions.listsActions.RENAME, listIndex: listIndex, name: name });
+    }
+  }
+};
+
+const ListConnected = connect(null, listDispatchToProps)(List);
+
+export default ListConnected;
