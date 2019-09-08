@@ -2,6 +2,8 @@ import React from 'react';
 import ListBlock from '../list-block/ListBlock.js';
 import './Dashboard.css'
 import AddListModalWindow from '../add-list-modal-window/AddListModalWindow.js';
+import reducers from '../../redux/reducers';
+import { connect } from 'react-redux'
 declare var $;
 
 class Dashboard extends React.Component {
@@ -70,4 +72,14 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+const listDispatchToProps = (dispatch) => {
+  return {
+    doOnAdd: (listName) => {
+      dispatch({ type: reducers.actions.listsActions.ADD_LIST, listName: listName});
+    }
+  }
+};
+
+const DashboardConnected = connect(null, listDispatchToProps)(Dashboard);
+
+export default DashboardConnected;

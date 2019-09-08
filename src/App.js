@@ -13,11 +13,8 @@ class App extends React.Component {
 
     this.changeSelectedListIndex = this.changeSelectedListIndex.bind(this);
     this.renameSection= this.renameSection.bind(this);
-    this.deleteList = this.deleteList.bind(this);
-    this.addList = this.addList.bind(this);
     this.deleteSection = this.deleteSection.bind(this);
     this.changeColor = this.changeColor.bind(this);
-    this.addSection = this.addSection.bind(this);
     this.rewriteLists = this.rewriteLists.bind(this);
     this.rewriteDevelopers = this.rewriteDevelopers.bind(this);
     this.onUpdateDevelopers = this.onUpdateDevelopers.bind(this);
@@ -25,39 +22,14 @@ class App extends React.Component {
     this.onBlockDelete = this.onBlockDelete.bind(this);
     this.onBlockSave = this.onBlockSave.bind(this);
     this.onChangeGameSection = this.onChangeGameSection.bind(this);
-    this.onChangeListPosition = this.onChangeListPosition.bind(this);
 
     this.state = {
       lists: this.props.lists,
       developers: this.props.developers,
-      selectedListIndex: null,
+      selectedListIndex: this.props.selectedListIndex,
       listsDownloadLink: this.createListsBlob(this.props.lists),
       developersDownloadLink: this.createDevelopersBlob(this.props.developers)
     };
-
-    // console.log(this.props);
-  }
-
-  onChangeListPosition(newListPosition, oldListPosition) {
-    const copy = this.deepCopy(this.state.lists);
-    console.log(`old list position is ${oldListPosition} and new list position is ${newListPosition}`)
-
-    console.log(copy)
-    let spliced = copy.splice(oldListPosition, 1);
-    console.log(spliced)
-
-    if (newListPosition < oldListPosition) {
-      copy.splice(newListPosition, 0, spliced[0]);
-    }
-
-    if (newListPosition > oldListPosition) {
-      copy.splice(newListPosition - 1, 0, spliced[0]);
-    }
-
-    this.setState({
-      selectedListIndex: newListPosition
-    });
-    this.rewriteLists(copy);
   }
 
   createListsBlob(lists, oldLink) {
@@ -107,7 +79,7 @@ class App extends React.Component {
   }
 
   changeSelectedListIndex(newIndex) {
-    if (this.state.selectedListIndex !== newIndex && newIndex >= 0 && newIndex < this.state.lists.length) {
+    if (this.state.selectedListIndex !== newIndex && newIndex >= 0 && newIndex < this.props.lists.length) {
       this.setState({
         selectedListIndex: newIndex
       });
@@ -140,35 +112,6 @@ class App extends React.Component {
     this.rewriteLists(copy);
   }
 
-  deleteList(index) {
-    let newIndex = 0;
-
-    if (this.state.lists.length === 1) {
-      newIndex = null;
-    }
-
-    const copy = this.deepCopy(this.state.lists);
-    copy.splice(index, 1);
-
-    this.setState({
-      lists: copy,
-      selectedListIndex: newIndex
-    });
-  }
-
-  addSection(sectionName, sectionColor, listIndex) {
-    const copy = this.deepCopy(this.state.lists);
-
-    copy[listIndex].content.push({
-      id: copy[listIndex].content.length + 1,
-      name: sectionName,
-      color: sectionColor,
-      games: []
-    });
-
-    this.rewriteLists(copy);
-  }
-
   rewriteLists(newData) {
     this.setState({
       lists: newData,
@@ -196,22 +139,6 @@ class App extends React.Component {
     });
   }
 
-  addList(listName) {
-    if (!listName) {
-      return;
-    }
-
-    const copy = this.deepCopy(this.state.lists);
-
-    copy.push({
-      id: copy.length + 1,
-      name: listName,
-      content: []
-    });
-
-    this.rewriteLists(copy);
-  }
-
   onBlockDelete(blockIndex, sectionIndex, listIndex) {
     const copy = this.deepCopy(this.state.lists);
 
@@ -228,7 +155,6 @@ class App extends React.Component {
     const dashboard = (
       <Dashboard
         data={this.props.lists}
-        doOnAdd={(listName => this.addList(listName))}
         listBlockClick={(index) => this.changeSelectedListIndex(index)}/>
     );
 
@@ -240,19 +166,15 @@ class App extends React.Component {
       listOrDashboard = <List
         listName={this.props.lists[this.state.selectedListIndex].name}
         content={this.props.lists[this.state.selectedListIndex].content}
-        allLists={this.props.lists}
-        doOnAddSection={(sectionName, sectionColor) => this.addSection(sectionName, sectionColor, this.state.selectedListIndex)}
         doOnSectionRename={(newSectionName, sectionIndex) => this.renameSection(newSectionName, sectionIndex, this.state.selectedListIndex)}
         doOnAddGame={(gameName, sectionIndex) => this.addGame(gameName, sectionIndex, this.state.selectedListIndex)}
         doOnSectionDelete={(sectionIndex) => this.deleteSection(this.state.selectedListIndex, sectionIndex)}
         doOnColorChange={(sectionIndex, newColor) => this.changeColor(this.state.selectedListIndex, sectionIndex, newColor)}
         onBlockDelete={(blockId, sectionId) => this.onBlockDelete(blockId, sectionId, this.state.selectedListIndex)}
-        doOnDelete={() => this.deleteList(this.state.selectedListIndex)}
         listIndex={this.state.selectedListIndex}
         developers={this.props.developers}
         updateDevelopers={(newDeveloper) => this.onUpdateDevelopers(newDeveloper)}
         saveBlock={(blockData, blockId, sectionId) => this.onBlockSave(blockData, blockId, sectionId, this.state.selectedListIndex)}
-        changeListPosition={(newListPosition, oldListPosition) => this.onChangeListPosition(newListPosition, oldListPosition)}
         changeGameSection={(newSectionIndex, blockIndex, oldSectionIndex) => this.onChangeGameSection(newSectionIndex, blockIndex, oldSectionIndex, this.state.selectedListIndex)}/>
     }
 
@@ -260,7 +182,6 @@ class App extends React.Component {
       <Nav
         content={this.props.lists}
         indexToHighligth={this.state.selectedListIndex}
-        doOnAdd={this.addList}
         switchBetweenTabs={this.changeSelectedListIndex}/>
     );
 

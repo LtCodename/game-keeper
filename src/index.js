@@ -17,7 +17,8 @@ const store = createStore(
 const stateToProps = (state = {}) => {
   return {
     lists: state.lists,
-    developers: state.developers
+    developers: state.developers,
+    selectedListIndex: state.selectedListIndex
   }
 };
 

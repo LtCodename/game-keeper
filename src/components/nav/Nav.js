@@ -1,6 +1,8 @@
 import React from 'react';
 import './Nav.css';
 import AddListModalWindow from '../add-list-modal-window/AddListModalWindow.js';
+import reducers from '../../redux/reducers';
+import { connect } from 'react-redux'
 declare var $;
 
 class Nav extends React.Component {
@@ -107,4 +109,14 @@ class Nav extends React.Component {
   }
 }
 
-export default Nav;
+const listDispatchToProps = (dispatch) => {
+  return {
+    doOnAdd: (listName) => {
+      dispatch({ type: reducers.actions.listsActions.ADD_LIST, listName: listName});
+    }
+  }
+};
+
+const NavConnected = connect(null, listDispatchToProps)(Nav);
+
+export default NavConnected;

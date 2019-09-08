@@ -46,7 +46,7 @@ class List extends React.Component {
       return;
     }
 
-    this.props.doOnAddSection(this.state.sectionNameInputValue, this.state.colorForNewSection);
+    this.props.addSection(this.state.sectionNameInputValue, this.state.colorForNewSection, this.props.listIndex);
   }
 
   listPositionChangeHandler(event) {
@@ -155,7 +155,7 @@ class List extends React.Component {
     const modalWarningWindow = (
       <WarningModalWindow
         modalId={"modalWarning"}
-        onProceed={this.props.doOnDelete}
+        onProceed={() => this.props.delete(this.props.listIndex)}
         message={`Are you sure you want to delete list ${this.props.listName}?`} />
     );
 
@@ -216,11 +216,28 @@ class List extends React.Component {
 const listDispatchToProps = (dispatch) => {
   return {
     rename: (listIndex, name) => {
-      dispatch({ type: reducers.actions.listsActions.RENAME, listIndex: listIndex, name: name });
+      dispatch({ type: reducers.actions.listsActions.LIST_RENAME, listIndex: listIndex, name: name });
+    },
+    changeListPosition: (newListPosition, oldListPosition) => {
+      dispatch({ type: reducers.actions.listsActions.CHANGE_POSITION, newListPosition: newListPosition, oldListPosition: oldListPosition });
+      dispatch({ type: reducers.actions.selectedListIndexActions.CHANGE_LIST_INDEX, index: newListPosition });
+    },
+    delete: (index) => {
+      dispatch({ type: reducers.actions.listsActions.DELETE, index: index });
+      dispatch({ type: reducers.actions.selectedListIndexActions.CHANGE_INDEX_ON_DELETE });
+    },
+    addSection: (sectionName, sectionColor, listIndex) => {
+      dispatch({ type: reducers.actions.listsActions.ADD_SECTION, sectionName: sectionName, sectionColor: sectionColor, listIndex: listIndex });
     }
   }
 };
 
-const ListConnected = connect(null, listDispatchToProps)(List);
+const stateToProps = (state = {}) => {
+  return {
+    allLists: state.lists
+  }
+};
+
+const ListConnected = connect(stateToProps, listDispatchToProps)(List);
 
 export default ListConnected;
