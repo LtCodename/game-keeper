@@ -17,11 +17,8 @@ class App extends React.Component {
     this.changeColor = this.changeColor.bind(this);
     this.rewriteLists = this.rewriteLists.bind(this);
     this.rewriteDevelopers = this.rewriteDevelopers.bind(this);
-    this.onUpdateDevelopers = this.onUpdateDevelopers.bind(this);
     this.addGame = this.addGame.bind(this);
-    this.onBlockDelete = this.onBlockDelete.bind(this);
     this.onBlockSave = this.onBlockSave.bind(this);
-    this.onChangeGameSection = this.onChangeGameSection.bind(this);
 
     this.state = {
       lists: this.props.lists,
@@ -54,15 +51,6 @@ class App extends React.Component {
       window.URL.revokeObjectURL(oldLink);
     }
     return window.URL.createObjectURL(data);
-  }
-
-  onChangeGameSection(newSectionIndex, blockIndex, oldSectionIndex, listIndex) {
-    const copy = this.deepCopy(this.state.lists);
-
-    copy[listIndex].content[newSectionIndex].games.push(copy[listIndex].content[oldSectionIndex].games[blockIndex]);
-    copy[listIndex].content[oldSectionIndex].games.splice(blockIndex, 1);
-
-    this.rewriteLists(copy);
   }
 
   changeColor(listIndex, sectionIndex, newColor) {
@@ -119,32 +107,11 @@ class App extends React.Component {
     });
   }
 
-  onUpdateDevelopers(newDeveloper) {
-    const copy = this.deepCopy(this.state.developers);
-    const uniqueIndex = `id${new Date().getTime()}`;
-
-    copy.push({
-      id: uniqueIndex,
-      name: newDeveloper
-    })
-
-    this.rewriteDevelopers(copy)
-    console.log(copy)
-  }
-
   rewriteDevelopers(newData) {
     this.setState({
       developers: newData,
       developersDownloadLink: this.createDevelopersBlob(newData, this.state.developersDownloadLink)
     });
-  }
-
-  onBlockDelete(blockIndex, sectionIndex, listIndex) {
-    const copy = this.deepCopy(this.state.lists);
-
-    copy[listIndex].content[sectionIndex].games.splice(blockIndex, 1);
-
-    this.rewriteLists(copy);
   }
 
   deepCopy(objectToCopy) {
@@ -170,12 +137,9 @@ class App extends React.Component {
         doOnAddGame={(gameName, sectionIndex) => this.addGame(gameName, sectionIndex, this.state.selectedListIndex)}
         doOnSectionDelete={(sectionIndex) => this.deleteSection(this.state.selectedListIndex, sectionIndex)}
         doOnColorChange={(sectionIndex, newColor) => this.changeColor(this.state.selectedListIndex, sectionIndex, newColor)}
-        onBlockDelete={(blockId, sectionId) => this.onBlockDelete(blockId, sectionId, this.state.selectedListIndex)}
         listIndex={this.state.selectedListIndex}
-        developers={this.props.developers}
-        updateDevelopers={(newDeveloper) => this.onUpdateDevelopers(newDeveloper)}
-        saveBlock={(blockData, blockId, sectionId) => this.onBlockSave(blockData, blockId, sectionId, this.state.selectedListIndex)}
-        changeGameSection={(newSectionIndex, blockIndex, oldSectionIndex) => this.onChangeGameSection(newSectionIndex, blockIndex, oldSectionIndex, this.state.selectedListIndex)}/>
+        developers={this.state.developers}
+        saveBlock={(blockData, blockId, sectionId) => this.onBlockSave(blockData, blockId, sectionId, this.state.selectedListIndex)}/>
     }
 
     const nav = (

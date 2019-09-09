@@ -2,6 +2,8 @@ import React from 'react';
 import './BlockModalWindow.css';
 import platforms from '../block/platforms.js';
 import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
+import reducers from '../../redux/reducers';
+import { connect } from 'react-redux'
 declare var $;
 
 class BlockModalWindow extends React.Component {
@@ -41,7 +43,7 @@ class BlockModalWindow extends React.Component {
   }
 
   selectChangeHandler(event) {
-    this.props.changeGameSection(event.target.value);
+    this.props.changeGameSection(event.target.value, this.props.listIndex, this.props.sectionIndex, this.props.blockIndex);
     this.props.closeModal();
   }
 
@@ -338,4 +340,17 @@ class BlockModalWindow extends React.Component {
   }
 }
 
-export default BlockModalWindow;
+const blockModalWindowDispatchToProps = (dispatch) => {
+  return {
+    updateDevelopers: (newDeveloper) => {
+      dispatch({ type: reducers.actions.listsActions.BLOCK_ADD_DEVELOPER, newDeveloper: newDeveloper });
+    },
+    changeGameSection: (newSectionIndex, listIndex, sectionIndex, blockIndex) => {
+      dispatch({ type: reducers.actions.listsActions.BLOCK_CHANGE_GAME_SECTION, newSectionIndex: newSectionIndex, listIndex: listIndex, sectionIndex: sectionIndex, blockIndex: blockIndex });
+    }
+  }
+};
+
+const BlockModalWindowConnected = connect(null, blockModalWindowDispatchToProps)(BlockModalWindow);
+
+export default BlockModalWindowConnected;

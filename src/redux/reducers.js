@@ -14,10 +14,13 @@ const defaultStore = {
 }
 
 const LIST_RENAME = 'LIST_RENAME';
-const ADD_LIST = 'ADD_LIST';
-const ADD_SECTION = 'ADD_SECTION';
-const DELETE = 'DELETE';
-const CHANGE_POSITION = 'CHANGE_POSITION';
+const LIST_ADD = 'LIST_ADD';
+const LIST_ADD_SECTION = 'LIST_ADD_SECTION';
+const LIST_DELETE = 'LIST_DELETE';
+const LIST_CHANGE_POSITION = 'LIST_CHANGE_POSITION';
+const BLOCK_DELETE = 'LOCK_DELETE';
+const BLOCK_ADD_DEVELOPER = 'BLOCK_ADD_DEVELOPER';
+const BLOCK_CHANGE_GAME_SECTION = 'BLOCK_CHANGE_GAME_SECTION';
 
 const listsReducer = (state = defaultStore.lists, action) => {
   const copy = deepCopy(state);
@@ -30,7 +33,7 @@ const listsReducer = (state = defaultStore.lists, action) => {
         return state;
       }
       break;
-    case ADD_LIST:
+    case LIST_ADD:
       if (!action.listName) {
         return state;
       }else {
@@ -42,11 +45,11 @@ const listsReducer = (state = defaultStore.lists, action) => {
         return copy;
       }
       break;
-    case DELETE:
+    case LIST_DELETE:
       copy.splice(action.index, 1);
       return copy;
       break;
-    case ADD_SECTION:
+    case LIST_ADD_SECTION:
       copy[action.listIndex].content.push({
         id: copy[action.listIndex].content.length + 1,
         name: action.sectionName,
@@ -55,15 +58,30 @@ const listsReducer = (state = defaultStore.lists, action) => {
       });
       return copy;
       break;
-    case CHANGE_POSITION:
+    case LIST_CHANGE_POSITION:
       if (action.oldListPosition === action.newListPosition) {
         return copy;
       }
-
       let spliced = copy.splice(action.oldListPosition, 1);
-
       copy.splice(action.newListPosition, 0, spliced[0]);
-
+      return copy;
+      break;
+    case BLOCK_DELETE:
+      copy[action.listIndex].content[action.sectionIndex].games.splice(action.blockIndex, 1);
+      return copy;
+      break;
+      break;
+    case BLOCK_ADD_DEVELOPER:
+      const uniqueIndex = `id${new Date().getTime()}`;
+      copy.push({
+        id: uniqueIndex,
+        name: action.newDeveloper
+      })
+      return copy;
+      break;
+    case BLOCK_CHANGE_GAME_SECTION:
+      copy[action.listIndex].content[action.newSectionIndex].games.push(copy[action.listIndex].content[action.sectionIndex].games[action.blockIndex]);
+      copy[action.listIndex].content[action.sectionIndex].games.splice(action.blockIndex, 1);
       return copy;
       break;
     default:
@@ -78,15 +96,15 @@ const developersReducer = (state = defaultStore.developers, action) => {
   }
 };
 
-const CHANGE_LIST_INDEX = 'CHANGE_LIST_INDEX';
-const CHANGE_INDEX_ON_DELETE = 'CHANGE_INDEX_ON_DELETE';
+const SLI_CHANGE = 'SLI_CHANGE';
+const SLI_CHANGE_ON_DELETE = 'SLI_CHANGE_ON_DELETE';
 
 const selectedListIndexReducer = (state = defaultStore.selectedListIndex, action) => {
   switch(action.type) {
-    case CHANGE_LIST_INDEX:
+    case SLI_CHANGE:
       return action.index;
       break;
-    case CHANGE_INDEX_ON_DELETE:
+    case SLI_CHANGE_ON_DELETE:
       // let newIndex = 0;
       // if (copy.length === 1) {
       //   newIndex = null;
@@ -108,7 +126,7 @@ const rootReducer = combineReducers({
 export default {
   reducer: rootReducer,
   actions: {
-    listsActions: {LIST_RENAME, ADD_LIST, DELETE, CHANGE_POSITION, ADD_SECTION},
-    selectedListIndexActions: {CHANGE_LIST_INDEX, CHANGE_INDEX_ON_DELETE}
+    listsActions: {LIST_RENAME, LIST_ADD, LIST_DELETE, LIST_CHANGE_POSITION, LIST_ADD_SECTION, BLOCK_DELETE, BLOCK_ADD_DEVELOPER, BLOCK_CHANGE_GAME_SECTION},
+    selectedListIndexActions: {SLI_CHANGE, SLI_CHANGE_ON_DELETE}
   }
 };

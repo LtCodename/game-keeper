@@ -75,7 +75,7 @@ class Dashboard extends React.Component {
 const listDispatchToProps = (dispatch) => {
   return {
     doOnAdd: (listName) => {
-      dispatch({ type: reducers.actions.listsActions.ADD_LIST, listName: listName});
+      dispatch({ type: reducers.actions.listsActions.LIST_ADD, listName: listName});
     }
   }
 };

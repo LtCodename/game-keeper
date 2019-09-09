@@ -141,14 +141,13 @@ class List extends React.Component {
           sectionId={index}
           color={elem.color}
           developers={this.props.developers}
-          updateDevelopers={this.props.updateDevelopers}
           passColorUp={(newColor) => this.props.doOnColorChange(index, newColor)}
           doOnSectionRename={(newSectionName) => this.props.doOnSectionRename(newSectionName, index)}
           addNewGame={(gameName) => this.props.doOnAddGame(gameName, index)}
           doOnSectionDelete={() => this.props.doOnSectionDelete(index)}
-          onBlockDelete={(blockIndex) => this.props.onBlockDelete(blockIndex, index)}
+          sectionIndex={index}
+          listIndex={this.props.listIndex}
           saveBlock={(blockData, blockId) => this.props.saveBlock(blockData, blockId, index)}
-          changeGameSection={(newSectionIndex, blockIndex) => this.props.changeGameSection(newSectionIndex, blockIndex, index)}
           games={elem.games} />);
     })
 
@@ -219,15 +218,15 @@ const listDispatchToProps = (dispatch) => {
       dispatch({ type: reducers.actions.listsActions.LIST_RENAME, listIndex: listIndex, name: name });
     },
     changeListPosition: (newListPosition, oldListPosition) => {
-      dispatch({ type: reducers.actions.listsActions.CHANGE_POSITION, newListPosition: newListPosition, oldListPosition: oldListPosition });
-      dispatch({ type: reducers.actions.selectedListIndexActions.CHANGE_LIST_INDEX, index: newListPosition });
+      dispatch({ type: reducers.actions.listsActions.LIST_CHANGE_POSITION, newListPosition: newListPosition, oldListPosition: oldListPosition });
+      dispatch({ type: reducers.actions.selectedListIndexActions.SLI_CHANGE, index: newListPosition });
     },
     delete: (index) => {
-      dispatch({ type: reducers.actions.listsActions.DELETE, index: index });
-      dispatch({ type: reducers.actions.selectedListIndexActions.CHANGE_INDEX_ON_DELETE });
+      dispatch({ type: reducers.actions.listsActions.LIST_DELETE, index: index });
+      dispatch({ type: reducers.actions.selectedListIndexActions.SLI_CHANGE_ON_DELETE });
     },
     addSection: (sectionName, sectionColor, listIndex) => {
-      dispatch({ type: reducers.actions.listsActions.ADD_SECTION, sectionName: sectionName, sectionColor: sectionColor, listIndex: listIndex });
+      dispatch({ type: reducers.actions.listsActions.LIST_ADD_SECTION, sectionName: sectionName, sectionColor: sectionColor, listIndex: listIndex });
     }
   }
 };

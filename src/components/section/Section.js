@@ -118,14 +118,14 @@ class Section extends React.Component {
       return <Block
         key={elem.id}
         color={this.props.color}
-        onBlockDelete={() => this.props.onBlockDelete(index)}
+        blockIndex={index}
+        listIndex={this.props.listIndex}
+        sectionIndex={this.props.sectionIndex}
         gameData={elem}
         developers={this.props.developers}
-        updateDevelopers={this.props.updateDevelopers}
         saveBlock={(blockData) => this.props.saveBlock(blockData, index)}
         sectionId = {this.props.sectionId}
-        content={this.props.content}
-        changeGameSection={(newSectionIndex) => this.props.changeGameSection(newSectionIndex, index)}/>;
+        content={this.props.content}/>;
     }).sort((a, b) => {
       const releaseDateA = a.props.gameData.releaseDate || "";
       const releaseDateB = b.props.gameData.releaseDate || "";

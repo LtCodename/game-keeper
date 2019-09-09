@@ -1,6 +1,8 @@
 import React from 'react';
 import BlockModalWindow from '../block-modal-window/BlockModalWindow.js';
 import './Block.css';
+import reducers from '../../redux/reducers';
+import { connect } from 'react-redux'
 declare var $;
 
 class Block extends React.Component {
@@ -25,7 +27,7 @@ class Block extends React.Component {
   }
 
   onDeleteBlock() {
-    this.props.onBlockDelete();
+    this.props.onBlockDelete(this.props.listIndex, this.props.sectionIndex, this.props.blockIndex);
     this.closeModal();
   }
 
@@ -77,13 +79,14 @@ class Block extends React.Component {
       <BlockModalWindow
         modalId={"bModal" + this.props.gameData.id + this.props.sectionId}
         gameData={this.props.gameData}
+        listIndex={this.props.listIndex}
+        sectionIndex={this.props.sectionIndex}
+        blockIndex={this.props.blockIndex}
         onDeleteBlock={this.onDeleteBlock}
         modalSave={this.modalSave}
         sectionId={this.props.sectionId}
         content={this.props.content}
         developers={this.props.developers}
-        updateDevelopers={this.props.updateDevelopers}
-        changeGameSection={this.props.changeGameSection}
         closeModal={this.closeModal} />
     );
 
@@ -105,4 +108,14 @@ class Block extends React.Component {
   }
 }
 
-export default Block;
+const blockDispatchToProps = (dispatch) => {
+  return {
+    onBlockDelete: (listIndex, sectionIndex, blockIndex) => {
+      dispatch({ type: reducers.actions.listsActions.BLOCK_DELETE, listIndex: listIndex, sectionIndex: sectionIndex, blockIndex: blockIndex });
+    }
+  }
+};
+
+const BlockConnected = connect(null, blockDispatchToProps)(Block);
+
+export default BlockConnected;
