@@ -123,7 +123,6 @@ class Section extends React.Component {
         sectionIndex={this.props.sectionIndex}
         gameData={elem}
         developers={this.props.developers}
-        saveBlock={(blockData) => this.props.saveBlock(blockData, index)}
         sectionId = {this.props.sectionId}
         content={this.props.content}/>;
     }).sort((a, b) => {
@@ -171,8 +170,6 @@ class Section extends React.Component {
         modalId={"addGame"}
         gameData={{name:"New game"}}
         modalSave={this.modalSave}
-        developers={this.props.developers}
-        updateDevelopers={this.props.updateDevelopers}
         closeModal={this.closeAddGameModal}  />
     );
 

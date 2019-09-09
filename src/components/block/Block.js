@@ -10,7 +10,6 @@ class Block extends React.Component {
   constructor(props) {
     super(props);
 
-    this.modalSave = this.modalSave.bind(this);
     this.onDeleteBlock = this.onDeleteBlock.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.resetState = this.resetState.bind(this);
@@ -19,11 +18,6 @@ class Block extends React.Component {
     this.state = {
       showModalWindow: false
     };
-  }
-
-  modalSave(data) {
-    this.props.saveBlock(data);
-    this.closeModal();
   }
 
   onDeleteBlock() {
@@ -83,10 +77,9 @@ class Block extends React.Component {
         sectionIndex={this.props.sectionIndex}
         blockIndex={this.props.blockIndex}
         onDeleteBlock={this.onDeleteBlock}
-        modalSave={this.modalSave}
+        onModalSave={this.closeModal}
         sectionId={this.props.sectionId}
         content={this.props.content}
-        developers={this.props.developers}
         closeModal={this.closeModal} />
     );
 

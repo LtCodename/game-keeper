@@ -18,7 +18,6 @@ class App extends React.Component {
     this.rewriteLists = this.rewriteLists.bind(this);
     this.rewriteDevelopers = this.rewriteDevelopers.bind(this);
     this.addGame = this.addGame.bind(this);
-    this.onBlockSave = this.onBlockSave.bind(this);
 
     this.state = {
       lists: this.props.lists,
@@ -57,12 +56,6 @@ class App extends React.Component {
     const copy = this.deepCopy(this.state.lists);
     copy[listIndex].content[sectionIndex].color = newColor;
 
-    this.rewriteLists(copy);
-  }
-
-  onBlockSave(blockData, blockId, sectionId, listId) {
-    const copy = this.deepCopy(this.state.lists);
-    copy[listId].content[sectionId].games[blockId] = blockData;
     this.rewriteLists(copy);
   }
 
@@ -137,9 +130,7 @@ class App extends React.Component {
         doOnAddGame={(gameName, sectionIndex) => this.addGame(gameName, sectionIndex, this.state.selectedListIndex)}
         doOnSectionDelete={(sectionIndex) => this.deleteSection(this.state.selectedListIndex, sectionIndex)}
         doOnColorChange={(sectionIndex, newColor) => this.changeColor(this.state.selectedListIndex, sectionIndex, newColor)}
-        listIndex={this.state.selectedListIndex}
-        developers={this.state.developers}
-        saveBlock={(blockData, blockId, sectionId) => this.onBlockSave(blockData, blockId, sectionId, this.state.selectedListIndex)}/>
+        listIndex={this.state.selectedListIndex}/>
     }
 
     const nav = (

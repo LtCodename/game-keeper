@@ -182,7 +182,8 @@ class BlockModalWindow extends React.Component {
                                                   }
                                                 });
 
-      this.props.modalSave({...this.props.gameData, ...this.state.localGameData, platforms: mappedPlatforms});
+      this.props.saveBlock({...this.props.gameData, ...this.state.localGameData, platforms: mappedPlatforms}, this.props.listIndex, this.props.sectionIndex, this.props.blockIndex);
+      this.props.onModalSave();
     }
 
   render() {
@@ -343,14 +344,23 @@ class BlockModalWindow extends React.Component {
 const blockModalWindowDispatchToProps = (dispatch) => {
   return {
     updateDevelopers: (newDeveloper) => {
-      dispatch({ type: reducers.actions.listsActions.BLOCK_ADD_DEVELOPER, newDeveloper: newDeveloper });
+      dispatch({ type: reducers.actions.developersActions.DEVELOPER_ADD, newDeveloper: newDeveloper });
     },
     changeGameSection: (newSectionIndex, listIndex, sectionIndex, blockIndex) => {
       dispatch({ type: reducers.actions.listsActions.BLOCK_CHANGE_GAME_SECTION, newSectionIndex: newSectionIndex, listIndex: listIndex, sectionIndex: sectionIndex, blockIndex: blockIndex });
+    },
+    saveBlock: (saveData, listIndex, sectionIndex, blockIndex) => {
+      dispatch({ type: reducers.actions.listsActions.BLOCK_SAVE, saveData: saveData, listIndex: listIndex, sectionIndex: sectionIndex, blockIndex: blockIndex });
     }
   }
 };
 
-const BlockModalWindowConnected = connect(null, blockModalWindowDispatchToProps)(BlockModalWindow);
+const stateToProps = (state = {}) => {
+  return {
+    developers: state.developers
+  }
+};
+
+const BlockModalWindowConnected = connect(stateToProps, blockModalWindowDispatchToProps)(BlockModalWindow);
 
 export default BlockModalWindowConnected;

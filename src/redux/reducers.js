@@ -19,8 +19,8 @@ const LIST_ADD_SECTION = 'LIST_ADD_SECTION';
 const LIST_DELETE = 'LIST_DELETE';
 const LIST_CHANGE_POSITION = 'LIST_CHANGE_POSITION';
 const BLOCK_DELETE = 'LOCK_DELETE';
-const BLOCK_ADD_DEVELOPER = 'BLOCK_ADD_DEVELOPER';
 const BLOCK_CHANGE_GAME_SECTION = 'BLOCK_CHANGE_GAME_SECTION';
+const BLOCK_SAVE = 'BLOCK_SAVE';
 
 const listsReducer = (state = defaultStore.lists, action) => {
   const copy = deepCopy(state);
@@ -70,18 +70,14 @@ const listsReducer = (state = defaultStore.lists, action) => {
       copy[action.listIndex].content[action.sectionIndex].games.splice(action.blockIndex, 1);
       return copy;
       break;
-      break;
-    case BLOCK_ADD_DEVELOPER:
-      const uniqueIndex = `id${new Date().getTime()}`;
-      copy.push({
-        id: uniqueIndex,
-        name: action.newDeveloper
-      })
-      return copy;
-      break;
     case BLOCK_CHANGE_GAME_SECTION:
       copy[action.listIndex].content[action.newSectionIndex].games.push(copy[action.listIndex].content[action.sectionIndex].games[action.blockIndex]);
       copy[action.listIndex].content[action.sectionIndex].games.splice(action.blockIndex, 1);
+      return copy;
+      break;
+    case BLOCK_SAVE:
+    console.log(action)
+      copy[action.listIndex].content[action.sectionIndex].games[action.blockIndex] = action.saveData;
       return copy;
       break;
     default:
@@ -89,8 +85,19 @@ const listsReducer = (state = defaultStore.lists, action) => {
   }
 };
 
+const DEVELOPER_ADD = 'DEVELOPER_ADD';
+
 const developersReducer = (state = defaultStore.developers, action) => {
+  const copy = deepCopy(state);
   switch(action.type) {
+    case DEVELOPER_ADD:
+      const uniqueIndex = `id${new Date().getTime()}`;
+      copy.push({
+        id: uniqueIndex,
+        name: action.newDeveloper
+      })
+      return copy;
+      break;
     default:
       return state;
   }
@@ -126,7 +133,8 @@ const rootReducer = combineReducers({
 export default {
   reducer: rootReducer,
   actions: {
-    listsActions: {LIST_RENAME, LIST_ADD, LIST_DELETE, LIST_CHANGE_POSITION, LIST_ADD_SECTION, BLOCK_DELETE, BLOCK_ADD_DEVELOPER, BLOCK_CHANGE_GAME_SECTION},
+    listsActions: {LIST_RENAME, LIST_ADD, LIST_DELETE, LIST_CHANGE_POSITION, LIST_ADD_SECTION, BLOCK_DELETE, BLOCK_CHANGE_GAME_SECTION, BLOCK_SAVE},
+    developersActions: {DEVELOPER_ADD},
     selectedListIndexActions: {SLI_CHANGE, SLI_CHANGE_ON_DELETE}
   }
 };
