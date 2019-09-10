@@ -146,7 +146,7 @@ class List extends React.Component {
     const modalWarningWindow = (
       <WarningModalWindow
         modalId={"modalWarning"}
-        onProceed={() => this.props.delete(this.props.listIndex)}
+        onProceed={() => this.props.deleteList(this.props.listIndex)}
         message={`Are you sure you want to delete list ${this.props.listName}?`} />
     );
 
@@ -213,7 +213,7 @@ const listDispatchToProps = (dispatch) => {
       dispatch({ type: reducers.actions.listsActions.LIST_CHANGE_POSITION, newListPosition: newListPosition, oldListPosition: oldListPosition });
       dispatch({ type: reducers.actions.selectedListIndexActions.SLI_CHANGE, index: newListPosition });
     },
-    delete: (index) => {
+    deleteList: (index) => {
       dispatch({ type: reducers.actions.listsActions.LIST_DELETE, index: index });
       dispatch({ type: reducers.actions.selectedListIndexActions.SLI_CHANGE_ON_DELETE });
     },

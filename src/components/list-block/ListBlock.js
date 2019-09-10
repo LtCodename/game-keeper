@@ -1,5 +1,7 @@
 import React from 'react';
 import './ListBlock.css';
+import reducers from '../../redux/reducers';
+import { connect } from 'react-redux'
 
 class ListBlock extends React.Component {
 
@@ -14,10 +16,21 @@ class ListBlock extends React.Component {
 
     return (
       <div className="listBlockWrapper">
-        <button className="listBlock" onClick={this.props.listBlockClick}>{this.props.name}</button>
+        <button className="listBlock" onClick={() => this.props.changeListIndex(this.props.listBlockIndex)}>{this.props.name}</button>
       </div>
     )
   }
 }
 
-export default ListBlock;
+
+const listBlockDispatchToProps = (dispatch) => {
+  return {
+    changeListIndex: (index) => {
+      dispatch({ type: reducers.actions.selectedListIndexActions.SLI_CHANGE, index: index });
+    }
+  }
+};
+
+const ListBlockConnected = connect(null, listBlockDispatchToProps)(ListBlock);
+
+export default ListBlockConnected;

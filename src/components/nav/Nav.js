@@ -40,7 +40,7 @@ class Nav extends React.Component {
   }
 
   switchBetweenTabs(index) {
-    this.props.switchBetweenTabs(index);
+    this.props.changeListIndex(index);
     this.setState({
       navbarVisible: false
     });
@@ -89,7 +89,6 @@ class Nav extends React.Component {
     const modalAddListWindow = (
       <AddListModalWindow
         modalId={"addListNav"}
-        onProceed={(listName) => this.props.doOnAdd(listName)}
         message={`Click here to pass a new list name`} />
     );
 
@@ -111,8 +110,8 @@ class Nav extends React.Component {
 
 const listDispatchToProps = (dispatch) => {
   return {
-    doOnAdd: (listName) => {
-      dispatch({ type: reducers.actions.listsActions.LIST_ADD, listName: listName});
+    changeListIndex: (index) => {
+      dispatch({ type: reducers.actions.selectedListIndexActions.SLI_CHANGE, index: index });
     }
   }
 };

@@ -1,5 +1,7 @@
 import React from 'react';
 import './AddListModalWindow.css';
+import reducers from '../../redux/reducers';
+import { connect } from 'react-redux'
 declare var $;
 
 class AddListModalWindow extends React.Component {
@@ -49,7 +51,7 @@ class AddListModalWindow extends React.Component {
       return;
     }
 
-    this.props.onProceed(this.state.nameInputValue);
+    this.props.addList(this.state.nameInputValue);
     $("#" + this.props.modalId).modal('hide');
   }
 
@@ -89,4 +91,14 @@ class AddListModalWindow extends React.Component {
   }
 }
 
-export default AddListModalWindow;
+const addListModalWindowDispatchToProps = (dispatch) => {
+  return {
+    addList: (listName) => {
+      dispatch({ type: reducers.actions.listsActions.LIST_ADD, listName: listName});
+    }
+  }
+};
+
+const AddListModalWindowConnected = connect(null, addListModalWindowDispatchToProps)(AddListModalWindow);
+
+export default AddListModalWindowConnected;

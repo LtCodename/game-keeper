@@ -42,8 +42,8 @@ class Dashboard extends React.Component {
     const listsToRender = this.props.data.map((elem, index) => {
       return <ListBlock
         key={elem.id}
-        listBlockClick={() => this.props.listBlockClick(index)}
-        name={elem.name}/>;
+        name={elem.name}
+        listBlockIndex={index}/>;
     });
 
     const addListButton = (
@@ -53,7 +53,6 @@ class Dashboard extends React.Component {
     const modalAddListWindow = (
       <AddListModalWindow
         modalId={"addList"}
-        onProceed={(listName) => this.props.doOnAdd(listName)}
         message={`Click here to pass a new list name`} />
     );
 

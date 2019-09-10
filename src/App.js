@@ -10,8 +10,7 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.changeSelectedListIndex = this.changeSelectedListIndex.bind(this);
+    
     this.rewriteLists = this.rewriteLists.bind(this);
     this.rewriteDevelopers = this.rewriteDevelopers.bind(this);
 
@@ -44,14 +43,6 @@ class App extends React.Component {
     return window.URL.createObjectURL(data);
   }
 
-  changeSelectedListIndex(newIndex) {
-    if (this.state.selectedListIndex !== newIndex && newIndex >= 0 && newIndex < this.props.lists.length) {
-      this.setState({
-        selectedListIndex: newIndex
-      });
-    }
-  }
-
   rewriteLists(newData) {
     this.setState({
       lists: newData,
@@ -69,26 +60,24 @@ class App extends React.Component {
   render() {
     const dashboard = (
       <Dashboard
-        data={this.props.lists}
-        listBlockClick={(index) => this.changeSelectedListIndex(index)}/>
+        data={this.props.lists}/>
     );
 
     let listOrDashboard;
 
-    if (this.state.selectedListIndex === null) {
+    if (this.props.selectedListIndex === null) {
       listOrDashboard = dashboard;
     }else {
       listOrDashboard = <List
-        listName={this.props.lists[this.state.selectedListIndex].name}
-        content={this.props.lists[this.state.selectedListIndex].content}
-        listIndex={this.state.selectedListIndex}/>
+        listName={this.props.lists[this.props.selectedListIndex].name}
+        content={this.props.lists[this.props.selectedListIndex].content}
+        listIndex={this.props.selectedListIndex}/>
     }
 
     const nav = (
       <Nav
         content={this.props.lists}
-        indexToHighligth={this.state.selectedListIndex}
-        switchBetweenTabs={this.changeSelectedListIndex}/>
+        indexToHighligth={this.props.selectedListIndex}/>
     );
 
     const footer = (
@@ -98,8 +87,7 @@ class App extends React.Component {
     );
 
     const header = (
-      <Header
-        goToDashboard={this.changeSelectedListIndex}/>
+      <Header/>
     );
 
     return (
@@ -108,7 +96,7 @@ class App extends React.Component {
           {header}
         </header>
         <div className="contentWrapper">
-            {(this.state.selectedListIndex === null) ? "" : nav}
+            {(this.props.selectedListIndex === null) ? "" : nav}
             {listOrDashboard}
         </div>
         <footer>
