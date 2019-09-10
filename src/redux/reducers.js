@@ -25,9 +25,11 @@ const BLOCK_ADD = 'BLOCK_ADD';
 const SECTION_CHANGE_COLOR = 'SECTION_CHANGE_COLOR';
 const SECTION_RENAME = 'SECTION_RENAME';
 const SECTION_DELETE = 'SECTION_DELETE';
+const SECTION_CHANGE_POSITION = 'SECTION_CHANGE_POSITION';
 
 const listsReducer = (state = defaultStore.lists, action) => {
   const copy = deepCopy(state);
+  let spliced;
   switch(action.type) {
     case LIST_RENAME:
       if (copy[action.listIndex]) {
@@ -66,7 +68,7 @@ const listsReducer = (state = defaultStore.lists, action) => {
       if (action.oldListPosition === action.newListPosition) {
         return copy;
       }
-      let spliced = copy.splice(action.oldListPosition, 1);
+      spliced = copy.splice(action.oldListPosition, 1);
       copy.splice(action.newListPosition, 0, spliced[0]);
       return copy;
       break;
@@ -101,6 +103,15 @@ const listsReducer = (state = defaultStore.lists, action) => {
       break;
     case SECTION_DELETE:
       copy[action.listIndex].content.splice(action.sectionIndex, 1);
+      return copy;
+      break;
+    case SECTION_CHANGE_POSITION:
+      if (action.oldSectionPosition === action.newSectionPosition) {
+        return copy;
+      }
+      console.log(action)
+      spliced = copy[action.listIndex].content.splice(action.oldSectionPosition, 1);
+      copy[action.listIndex].content.splice(action.newSectionPosition, 0, spliced[0]);
       return copy;
       break;
     default:
@@ -172,6 +183,7 @@ export default {
       BLOCK_ADD,
       SECTION_CHANGE_COLOR,
       SECTION_RENAME,
+      SECTION_CHANGE_POSITION,
       SECTION_DELETE
     },
     developersActions: {DEVELOPER_ADD},

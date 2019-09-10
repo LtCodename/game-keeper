@@ -35,6 +35,10 @@
   .listsMatrix {
     grid-template-columns: 1fr 1fr 1fr;
   }
+
+  .btnAddListFromDashboard {
+    height: 150px;
+  }
 }
 
 @media (max-width: 1050px) {
@@ -46,6 +50,10 @@
 @media (max-width: 990px) {
   .listsMatrix {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .btnAddListFromDashboard {
+    height: 81px;
   }
 }
 

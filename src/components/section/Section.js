@@ -23,6 +23,7 @@ class Section extends React.Component {
     this.openModalWarningWindow = this.openModalWarningWindow.bind(this);
     this.resetState = this.resetState.bind(this);
     this.openAddGameWindow = this.openAddGameWindow.bind(this);
+    this.sectionPositionChangeHandler = this.sectionPositionChangeHandler.bind(this);
 
     this.state = {
       editMode: false,
@@ -30,6 +31,10 @@ class Section extends React.Component {
       showModalWindow: false,
       showAddGameWindow: false
     };
+  }
+
+  sectionPositionChangeHandler(event) {
+    this.props.changeSectionPosition(event.target.value, this.props.sectionIndex, this.props.listIndex);
   }
 
   closeAddGameModal() {
@@ -121,6 +126,12 @@ class Section extends React.Component {
       return 0;
     });
 
+    const positionOptions = this.props.allLists[this.props.listIndex].content.map((elem, index) => {
+      return (
+        <option key={index} value={index}>{index}</option>
+      );
+    })
+
     const nameAndButtonsBlock = (
       <div className="nameAndButtonsWrapper">
         <h2>{this.props.sectionName}</h2>
@@ -128,6 +139,11 @@ class Section extends React.Component {
           <button className="btn" onClick={this.doOnEdit}><i className="fas fa-pen-square"></i></button>
           <button className="btn" onClick={this.openAddGameWindow}><i className="fas fa-plus-square"></i></button>
           <button className="btn" onClick={this.openModalWarningWindow}><i className="fas fa-trash"></i></button>
+        </div>
+        <div className="positionPickerWrapper">
+        <select value={this.props.sectionIndex} className="custom-select listPositionPicker" onChange={this.sectionPositionChangeHandler}>
+          {positionOptions}
+        </select>
         </div>
       </div>
     );
@@ -181,10 +197,19 @@ const sectionDispatchToProps = (dispatch) => {
     },
     sectionDelete: (listIndex, sectionIndex) => {
       dispatch({ type: reducers.actions.listsActions.SECTION_DELETE, listIndex: listIndex, sectionIndex: sectionIndex});
-    }
+    },
+    changeSectionPosition: (newSectionPosition, oldSectionPosition, listIndex) => {
+      dispatch({ type: reducers.actions.listsActions.SECTION_CHANGE_POSITION, newSectionPosition: newSectionPosition, oldSectionPosition: oldSectionPosition, listIndex: listIndex });
+    },
   }
 };
 
-const ConnectedSection = connect(null, sectionDispatchToProps)(Section);
+const stateToProps = (state = {}) => {
+  return {
+    allLists: state.lists
+  }
+};
+
+const ConnectedSection = connect(stateToProps, sectionDispatchToProps)(Section);
 
 export default ConnectedSection;
