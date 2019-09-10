@@ -16,7 +16,7 @@ class ListBlock extends React.Component {
 
     return (
       <div className="listBlockWrapper">
-        <button className="listBlock" onClick={() => this.props.changeListIndex(this.props.listBlockIndex)}>{this.props.name}</button>
+        <button className="listBlock" onClick={() => this.props.changeListIndex(this.props.listBlockIndex, this.props.allLists.length)}>{this.props.name}</button>
       </div>
     )
   }
@@ -25,12 +25,18 @@ class ListBlock extends React.Component {
 
 const listBlockDispatchToProps = (dispatch) => {
   return {
-    changeListIndex: (index) => {
-      dispatch({ type: reducers.actions.selectedListIndexActions.SLI_CHANGE, index: index });
+    changeListIndex: (index, listsLength) => {
+      dispatch({ type: reducers.actions.selectedListIndexActions.SLI_CHANGE, index: index, listsLength: listsLength  });
     }
   }
 };
 
-const ListBlockConnected = connect(null, listBlockDispatchToProps)(ListBlock);
+const stateToProps = (state = {}) => {
+  return {
+    allLists: state.lists
+  }
+};
+
+const ListBlockConnected = connect(stateToProps, listBlockDispatchToProps)(ListBlock);
 
 export default ListBlockConnected;

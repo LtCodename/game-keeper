@@ -15,7 +15,7 @@ class Header extends React.Component {
   render() {
     const logo = (
       <div className="logoWrapper">
-        <button className="btn" onClick={() => this.props.changeListIndex(null)}>Game Keeper</button>
+        <button className="btn" onClick={() => this.props.changeListIndex(null, this.props.allLists.length)}>Game Keeper</button>
       </div>
     );
 
@@ -29,12 +29,18 @@ class Header extends React.Component {
 
 const headerDispatchToProps = (dispatch) => {
   return {
-    changeListIndex: (index) => {
-      dispatch({ type: reducers.actions.selectedListIndexActions.SLI_CHANGE, index: index });
+    changeListIndex: (index, listsLength) => {
+      dispatch({ type: reducers.actions.selectedListIndexActions.SLI_CHANGE, index: index, listsLength: listsLength });
     }
   }
 };
 
-const HeaderConnected = connect(null, headerDispatchToProps)(Header);
+const stateToProps = (state = {}) => {
+  return {
+    allLists: state.lists
+  }
+};
+
+const HeaderConnected = connect(stateToProps, headerDispatchToProps)(Header);
 
 export default HeaderConnected;

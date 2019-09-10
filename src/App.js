@@ -10,51 +10,9 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    
-    this.rewriteLists = this.rewriteLists.bind(this);
-    this.rewriteDevelopers = this.rewriteDevelopers.bind(this);
 
     this.state = {
-      lists: this.props.lists,
-      developers: this.props.developers,
-      selectedListIndex: this.props.selectedListIndex,
-      listsDownloadLink: this.createListsBlob(this.props.lists),
-      developersDownloadLink: this.createDevelopersBlob(this.props.developers)
     };
-  }
-
-  createListsBlob(lists, oldLink) {
-    const stringified = JSON.stringify(lists);
-    const fileStructure = `const lists = ${stringified}; export default lists;`
-    const data = new Blob([fileStructure], {type: 'text/plain'});
-    if (oldLink) {
-      window.URL.revokeObjectURL(oldLink);
-    }
-    return window.URL.createObjectURL(data);
-  }
-
-  createDevelopersBlob(lists, oldLink) {
-    const stringified = JSON.stringify(lists);
-    const fileStructure = `const developers = ${stringified}; export default developers;`
-    const data = new Blob([fileStructure], {type: 'text/plain'});
-    if (oldLink) {
-      window.URL.revokeObjectURL(oldLink);
-    }
-    return window.URL.createObjectURL(data);
-  }
-
-  rewriteLists(newData) {
-    this.setState({
-      lists: newData,
-      listsDownloadLink: this.createListsBlob(newData, this.state.listsDownloadLink)
-    });
-  }
-
-  rewriteDevelopers(newData) {
-    this.setState({
-      developers: newData,
-      developersDownloadLink: this.createDevelopersBlob(newData, this.state.developersDownloadLink)
-    });
   }
 
   render() {
@@ -81,9 +39,7 @@ class App extends React.Component {
     );
 
     const footer = (
-      <Footer
-        listsLink={this.state.listsDownloadLink}
-        developersLink={this.state.developersDownloadLink}/>
+      <Footer/>
     );
 
     const header = (

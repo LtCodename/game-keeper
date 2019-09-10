@@ -143,18 +143,15 @@ const SLI_CHANGE_ON_DELETE = 'SLI_CHANGE_ON_DELETE';
 const selectedListIndexReducer = (state = defaultStore.selectedListIndex, action) => {
   switch(action.type) {
     case SLI_CHANGE:
-      // if (this.props.selectedListIndex !== newIndex && newIndex >= 0 && newIndex < this.props.lists.length) {
-      //   this.setState({
-      //     selectedListIndex: newIndex
-      //   });
-      // }
-      return action.index;
+      if (state !== action.index && action.index >= 0 && action.index < action.listsLength) {
+        return action.index;
+      }
+      return state;
       break;
     case SLI_CHANGE_ON_DELETE:
-      // let newIndex = 0;
-      // if (copy.length === 1) {
-      //   newIndex = null;
-      // }
+      if (action.listsLength > 1) {
+        return 0;
+      }
       return null;
       break;
     default:

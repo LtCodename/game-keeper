@@ -48,7 +48,7 @@ class List extends React.Component {
   }
 
   listPositionChangeHandler(event) {
-    this.props.changeListPosition(event.target.value, this.props.listIndex);
+    this.props.changeListPosition(event.target.value, this.props.listIndex, this.props.allLists.length);
   }
 
   openModalWarningWindow() {
@@ -146,7 +146,7 @@ class List extends React.Component {
     const modalWarningWindow = (
       <WarningModalWindow
         modalId={"modalWarning"}
-        onProceed={() => this.props.deleteList(this.props.listIndex)}
+        onProceed={() => this.props.deleteList(this.props.listIndex, this.props.allLists.length)}
         message={`Are you sure you want to delete list ${this.props.listName}?`} />
     );
 
@@ -209,13 +209,13 @@ const listDispatchToProps = (dispatch) => {
     rename: (listIndex, name) => {
       dispatch({ type: reducers.actions.listsActions.LIST_RENAME, listIndex: listIndex, name: name });
     },
-    changeListPosition: (newListPosition, oldListPosition) => {
+    changeListPosition: (newListPosition, oldListPosition, listsLength) => {
       dispatch({ type: reducers.actions.listsActions.LIST_CHANGE_POSITION, newListPosition: newListPosition, oldListPosition: oldListPosition });
-      dispatch({ type: reducers.actions.selectedListIndexActions.SLI_CHANGE, index: newListPosition });
+      dispatch({ type: reducers.actions.selectedListIndexActions.SLI_CHANGE, index: newListPosition, listsLength: listsLength });
     },
-    deleteList: (index) => {
+    deleteList: (index, listsLength) => {
       dispatch({ type: reducers.actions.listsActions.LIST_DELETE, index: index });
-      dispatch({ type: reducers.actions.selectedListIndexActions.SLI_CHANGE_ON_DELETE });
+      dispatch({ type: reducers.actions.selectedListIndexActions.SLI_CHANGE_ON_DELETE, listsLength: listsLength });
     },
     addSection: (sectionName, sectionColor, listIndex) => {
       dispatch({ type: reducers.actions.listsActions.LIST_ADD_SECTION, sectionName: sectionName, sectionColor: sectionColor, listIndex: listIndex });

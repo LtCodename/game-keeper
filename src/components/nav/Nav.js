@@ -40,7 +40,7 @@ class Nav extends React.Component {
   }
 
   switchBetweenTabs(index) {
-    this.props.changeListIndex(index);
+    this.props.changeListIndex(index, this.props.allLists.length);
     this.setState({
       navbarVisible: false
     });
@@ -110,12 +110,18 @@ class Nav extends React.Component {
 
 const listDispatchToProps = (dispatch) => {
   return {
-    changeListIndex: (index) => {
-      dispatch({ type: reducers.actions.selectedListIndexActions.SLI_CHANGE, index: index });
+    changeListIndex: (index, listsLength) => {
+      dispatch({ type: reducers.actions.selectedListIndexActions.SLI_CHANGE, index: index, listsLength: listsLength });
     }
   }
 };
 
-const NavConnected = connect(null, listDispatchToProps)(Nav);
+const stateToProps = (state = {}) => {
+  return {
+    allLists: state.lists
+  }
+};
+
+const NavConnected = connect(stateToProps, listDispatchToProps)(Nav);
 
 export default NavConnected;
