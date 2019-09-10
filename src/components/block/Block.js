@@ -1,8 +1,6 @@
 import React from 'react';
 import BlockModalWindow from '../block-modal-window/BlockModalWindow.js';
 import './Block.css';
-import reducers from '../../redux/reducers';
-import { connect } from 'react-redux'
 declare var $;
 
 class Block extends React.Component {
@@ -10,7 +8,6 @@ class Block extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onDeleteBlock = this.onDeleteBlock.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.resetState = this.resetState.bind(this);
     this.openModalWindow = this.openModalWindow.bind(this);
@@ -18,11 +15,6 @@ class Block extends React.Component {
     this.state = {
       showModalWindow: false
     };
-  }
-
-  onDeleteBlock() {
-    this.props.onBlockDelete(this.props.listIndex, this.props.sectionIndex, this.props.blockIndex);
-    this.closeModal();
   }
 
   componentWillUnmount() {
@@ -76,11 +68,10 @@ class Block extends React.Component {
         listIndex={this.props.listIndex}
         sectionIndex={this.props.sectionIndex}
         blockIndex={this.props.blockIndex}
-        onDeleteBlock={this.onDeleteBlock}
-        onModalSave={this.closeModal}
+        needDelete={true}
         sectionId={this.props.sectionId}
         content={this.props.content}
-        closeModal={this.closeModal} />
+        closeModal={this.closeModal}/>
     );
 
     return (
@@ -101,14 +92,4 @@ class Block extends React.Component {
   }
 }
 
-const blockDispatchToProps = (dispatch) => {
-  return {
-    onBlockDelete: (listIndex, sectionIndex, blockIndex) => {
-      dispatch({ type: reducers.actions.listsActions.BLOCK_DELETE, listIndex: listIndex, sectionIndex: sectionIndex, blockIndex: blockIndex });
-    }
-  }
-};
-
-const BlockConnected = connect(null, blockDispatchToProps)(Block);
-
-export default BlockConnected;
+export default Block;

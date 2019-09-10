@@ -1,6 +1,8 @@
 import React from 'react';
 import availableColors from '../../mocks/availableColors.js';
 import './Colors.css';
+import reducers from '../../redux/reducers';
+import { connect } from 'react-redux'
 
 class Colors extends React.Component {
 
@@ -15,7 +17,7 @@ class Colors extends React.Component {
   }
 
   colorMagic(color) {
-    this.props.passColorToSection(color);
+    this.props.changeSectionColor(this.props.listIndex, this.props.sectionIndex, color);
 
     this.setState({
       currentColor: color
@@ -47,4 +49,14 @@ class Colors extends React.Component {
   }
 }
 
-export default Colors;
+const colorsDispatchToProps = (dispatch) => {
+  return {
+    changeSectionColor: (listIndex, sectionIndex, color) => {
+      dispatch({ type: reducers.actions.listsActions.SECTION_CHANGE_COLOR, listIndex: listIndex, sectionIndex: sectionIndex, color: color });
+    }
+  }
+};
+
+const ConnectedColors = connect(null, colorsDispatchToProps)(Colors);
+
+export default ConnectedColors;

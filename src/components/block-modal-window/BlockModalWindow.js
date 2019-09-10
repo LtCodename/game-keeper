@@ -29,6 +29,8 @@ class BlockModalWindow extends React.Component {
     this.resetState = this.resetState.bind(this);
     this.selectChangeHandler = this.selectChangeHandler.bind(this);
     this.developerChangeHandler = this.developerChangeHandler.bind(this);
+    this.deleteBlock = this.deleteBlock.bind(this);
+
 
     this.state = {
       nameEditMode: false,
@@ -44,6 +46,11 @@ class BlockModalWindow extends React.Component {
 
   selectChangeHandler(event) {
     this.props.changeGameSection(event.target.value, this.props.listIndex, this.props.sectionIndex, this.props.blockIndex);
+    this.props.closeModal();
+  }
+
+  deleteBlock() {
+    this.props.deleteBlock(this.props.listIndex, this.props.sectionIndex, this.props.blockIndex)
     this.props.closeModal();
   }
 
@@ -182,8 +189,13 @@ class BlockModalWindow extends React.Component {
                                                   }
                                                 });
 
-      this.props.saveBlock({...this.props.gameData, ...this.state.localGameData, platforms: mappedPlatforms}, this.props.listIndex, this.props.sectionIndex, this.props.blockIndex);
-      this.props.onModalSave();
+      if (this.props.newGameMode) {
+        this.props.addGame({...this.props.gameData, ...this.state.localGameData, platforms: mappedPlatforms}, this.props.listIndex, this.props.sectionIndex);
+      }else {
+        this.props.saveBlock({...this.props.gameData, ...this.state.localGameData, platforms: mappedPlatforms}, this.props.listIndex, this.props.sectionIndex, this.props.blockIndex);
+      }
+
+      this.props.closeModal();
     }
 
   render() {
@@ -243,7 +255,7 @@ class BlockModalWindow extends React.Component {
     const modalWarningWindow = (
       <WarningModalWindow
         modalId={"modalWarning"}
-        onProceed={this.props.onDeleteBlock}
+        onProceed={this.deleteBlock}
         message={`Are you sure you want to delete block ${this.state.localGameData.name}?`} />
     );
 
@@ -266,7 +278,7 @@ class BlockModalWindow extends React.Component {
       );
     }
 
-    const deleteButton = (this.props.onDeleteBlock) ? <button type="button" className="btn" onClick={this.openModalWarningWindow}>Delete</button> : "";
+    const deleteButton = (this.props.needDelete) ? <button type="button" className="btn" onClick={this.openModalWarningWindow}>Delete</button> : "";
 
     const developerSectionOptions = this.props.developers.sort((a, b) => {
       if (a.name < b.name) {
@@ -351,6 +363,12 @@ const blockModalWindowDispatchToProps = (dispatch) => {
     },
     saveBlock: (saveData, listIndex, sectionIndex, blockIndex) => {
       dispatch({ type: reducers.actions.listsActions.BLOCK_SAVE, saveData: saveData, listIndex: listIndex, sectionIndex: sectionIndex, blockIndex: blockIndex });
+    },
+    deleteBlock: (listIndex, sectionIndex, blockIndex) => {
+      dispatch({ type: reducers.actions.listsActions.BLOCK_DELETE, listIndex: listIndex, sectionIndex: sectionIndex, blockIndex: blockIndex });
+    },
+    addGame: (saveData, listIndex, sectionIndex) => {
+      dispatch({ type: reducers.actions.listsActions.BLOCK_ADD, saveData: saveData, listIndex: listIndex, sectionIndex: sectionIndex });
     }
   }
 };

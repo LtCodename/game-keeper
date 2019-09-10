@@ -31,8 +31,6 @@ class List extends React.Component {
       colorFofNewSection: "",
       showModalWindow: false
     };
-
-    console.log(this.props);
   }
 
   static defaultProps = {
@@ -140,10 +138,6 @@ class List extends React.Component {
           sectionName={elem.name}
           sectionId={index}
           color={elem.color}
-          passColorUp={(newColor) => this.props.doOnColorChange(index, newColor)}
-          doOnSectionRename={(newSectionName) => this.props.doOnSectionRename(newSectionName, index)}
-          addNewGame={(gameName) => this.props.doOnAddGame(gameName, index)}
-          doOnSectionDelete={() => this.props.doOnSectionDelete(index)}
           sectionIndex={index}
           listIndex={this.props.listIndex}
           games={elem.games} />);

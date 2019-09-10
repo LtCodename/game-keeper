@@ -4,6 +4,8 @@ import Colors from '../colors/Colors.js';
 import './Section.css';
 import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
 import BlockModalWindow from '../block-modal-window/BlockModalWindow.js';
+import reducers from '../../redux/reducers';
+import { connect } from 'react-redux'
 declare var $;
 
 class Section extends React.Component {
@@ -18,24 +20,16 @@ class Section extends React.Component {
     this.sectionInputValueChange = this.sectionInputValueChange.bind(this);
     this.doOnSubmit = this.doOnSubmit.bind(this);
     this.doOnCancel = this.doOnCancel.bind(this);
-    this.doOnGameAdd = this.doOnGameAdd.bind(this);
     this.openModalWarningWindow = this.openModalWarningWindow.bind(this);
     this.resetState = this.resetState.bind(this);
     this.openAddGameWindow = this.openAddGameWindow.bind(this);
-    this.modalSave = this.modalSave.bind(this);
 
     this.state = {
       editMode: false,
-      addGameMode: false,
       sectionInputValue: this.props.sectionName,
       showModalWindow: false,
       showAddGameWindow: false
     };
-  }
-
-  modalSave(data) {
-    this.props.addNewGame(data);
-    this.closeAddGameModal();
   }
 
   closeAddGameModal() {
@@ -88,26 +82,15 @@ class Section extends React.Component {
   }
 
   doOnSubmit() {
-    this.props.doOnSectionRename(this.state.sectionInputValue);
+    this.props.renameSection(this.props.listIndex, this.props.sectionIndex, this.state.sectionInputValue);
     this.setState({
       editMode: false
-    });
-  }
-
-  doOnGameAdd() {
-    if(this.state.gameInputValue) {
-      this.props.addNewGame(this.state.gameInputValue);
-    }
-
-    this.setState({
-      addGameMode: false
     });
   }
 
   doOnCancel() {
     this.setState({
       editMode: false,
-      addGameMode: false,
       gameInputValue: "",
       sectionInputValue: this.props.sectionName
     });
@@ -154,14 +137,16 @@ class Section extends React.Component {
           <input className="form-control editSectionInput" type="text" placeholder="Enter new name" value={this.state.sectionInputValue} onChange={this.sectionInputValueChange}></input>
           <button className="btn btn-dark" onClick={this.doOnSubmit}>OK</button>
           <button className="btn" onClick={this.doOnCancel}>Cancel</button>
-          <Colors currentColor={this.props.color} passColorToSection={this.props.passColorUp}/>
+          <Colors currentColor={this.props.color}
+                  listIndex={this.props.listIndex}
+                  sectionIndex={this.props.sectionIndex}/>
         </div>
     );
 
     const modalWarningWindow = (
       <WarningModalWindow
         modalId={"modalWarning"}
-        onProceed={this.props.doOnSectionDelete}
+        onProceed={() => this.props.sectionDelete(this.props.listIndex, this.props.sectionIndex)}
         message={`Are you sure you want to delete section ${this.props.sectionName}?`} />
     );
 
@@ -169,7 +154,9 @@ class Section extends React.Component {
       <BlockModalWindow
         modalId={"addGame"}
         gameData={{name:"New game"}}
-        modalSave={this.modalSave}
+        newGameMode={true}
+        listIndex={this.props.listIndex}
+        sectionIndex={this.props.sectionIndex}
         closeModal={this.closeAddGameModal}  />
     );
 
@@ -187,4 +174,17 @@ class Section extends React.Component {
   }
 }
 
-export default Section;
+const sectionDispatchToProps = (dispatch) => {
+  return {
+    renameSection: (listIndex, sectionIndex, sectionName) => {
+      dispatch({ type: reducers.actions.listsActions.SECTION_RENAME, listIndex: listIndex, sectionIndex: sectionIndex, sectionName: sectionName });
+    },
+    sectionDelete: (listIndex, sectionIndex) => {
+      dispatch({ type: reducers.actions.listsActions.SECTION_DELETE, listIndex: listIndex, sectionIndex: sectionIndex});
+    }
+  }
+};
+
+const ConnectedSection = connect(null, sectionDispatchToProps)(Section);
+
+export default ConnectedSection;

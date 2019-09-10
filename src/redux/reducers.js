@@ -18,9 +18,13 @@ const LIST_ADD = 'LIST_ADD';
 const LIST_ADD_SECTION = 'LIST_ADD_SECTION';
 const LIST_DELETE = 'LIST_DELETE';
 const LIST_CHANGE_POSITION = 'LIST_CHANGE_POSITION';
-const BLOCK_DELETE = 'LOCK_DELETE';
+const BLOCK_DELETE = 'BLOCK_DELETE';
 const BLOCK_CHANGE_GAME_SECTION = 'BLOCK_CHANGE_GAME_SECTION';
 const BLOCK_SAVE = 'BLOCK_SAVE';
+const BLOCK_ADD = 'BLOCK_ADD';
+const SECTION_CHANGE_COLOR = 'SECTION_CHANGE_COLOR';
+const SECTION_RENAME = 'SECTION_RENAME';
+const SECTION_DELETE = 'SECTION_DELETE';
 
 const listsReducer = (state = defaultStore.lists, action) => {
   const copy = deepCopy(state);
@@ -76,8 +80,27 @@ const listsReducer = (state = defaultStore.lists, action) => {
       return copy;
       break;
     case BLOCK_SAVE:
-    console.log(action)
       copy[action.listIndex].content[action.sectionIndex].games[action.blockIndex] = action.saveData;
+      return copy;
+      break;
+    case BLOCK_ADD:
+      const uniqueIndex = `id${new Date().getTime()}`;
+      copy[action.listIndex].content[action.sectionIndex].games.push({
+        id: `${uniqueIndex}`,
+        ...action.saveData
+      });
+      return copy;
+      break;
+    case SECTION_CHANGE_COLOR:
+      copy[action.listIndex].content[action.sectionIndex].color = action.color;
+      return copy;
+      break;
+    case SECTION_RENAME:
+      copy[action.listIndex].content[action.sectionIndex].name = action.sectionName;
+      return copy;
+      break;
+    case SECTION_DELETE:
+      copy[action.listIndex].content.splice(action.sectionIndex, 1);
       return copy;
       break;
     default:
@@ -116,7 +139,6 @@ const selectedListIndexReducer = (state = defaultStore.selectedListIndex, action
       // if (copy.length === 1) {
       //   newIndex = null;
       // }
-      console.log('here');
       return null;
       break;
     default:
@@ -133,7 +155,20 @@ const rootReducer = combineReducers({
 export default {
   reducer: rootReducer,
   actions: {
-    listsActions: {LIST_RENAME, LIST_ADD, LIST_DELETE, LIST_CHANGE_POSITION, LIST_ADD_SECTION, BLOCK_DELETE, BLOCK_CHANGE_GAME_SECTION, BLOCK_SAVE},
+    listsActions: {
+      LIST_RENAME,
+      LIST_ADD,
+      LIST_DELETE,
+      LIST_CHANGE_POSITION,
+      LIST_ADD_SECTION,
+      BLOCK_DELETE,
+      BLOCK_CHANGE_GAME_SECTION,
+      BLOCK_SAVE,
+      BLOCK_ADD,
+      SECTION_CHANGE_COLOR,
+      SECTION_RENAME,
+      SECTION_DELETE
+    },
     developersActions: {DEVELOPER_ADD},
     selectedListIndexActions: {SLI_CHANGE, SLI_CHANGE_ON_DELETE}
   }
