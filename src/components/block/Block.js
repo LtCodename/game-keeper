@@ -67,11 +67,10 @@ class Block extends React.Component {
     const modalWindow = (
       <BlockModalWindow
         modalId={"bModal" + this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex].id + this.props.sectionIndex}
-        
         gameData={this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex]}
+        fullMode={true}
         sectionIndex={this.props.sectionIndex}
         blockIndex={this.props.blockIndex}
-        fullMode={true}
         closeModal={this.closeModal}/>
     );
 

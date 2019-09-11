@@ -62,7 +62,7 @@ const listsReducer = (state = defaultStore.lists, action) => {
       copy[action.listIndex].content.push({
         id: uniqueIndex,
         name: action.sectionName,
-        color: action.sectionColor,
+        color: action.sectionColor || "ce-soir",
         games: []
       });
       return copy;
@@ -105,6 +105,7 @@ const listsReducer = (state = defaultStore.lists, action) => {
       return copy;
       break;
     case SECTION_CHANGE_COLOR:
+      console.log(action)
       copy[action.listIndex].content[action.sectionIndex].color = action.color;
       return copy;
       break;

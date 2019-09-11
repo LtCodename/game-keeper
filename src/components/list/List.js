@@ -131,20 +131,16 @@ class List extends React.Component {
 
   render() {
     const sectionsToRender = this.props.allLists[this.props.listIndex].content.map((elem, index) => {
+
       return (
         <Section
           key={elem.id}
-          content={this.props.allLists[this.props.listIndex].content}
-          sectionName={elem.name}
-          sectionId={index}
-          color={elem.color}
-          sectionIndex={index}
-          games={elem.games} />);
+          id={elem.id}
+          sectionIndex={index}/>);
     })
 
     const modalWarningWindow = (
       <WarningModalWindow
-        modalId={"modalWarning"}
         onProceed={() => this.props.deleteList(this.props.listIndex, this.props.allLists.length)}
         message={`Are you sure you want to delete list ${this.props.allLists[this.props.listIndex].name}?`} />
     );

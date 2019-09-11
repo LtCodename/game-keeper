@@ -12,12 +12,20 @@ class Colors extends React.Component {
     this.colorMagic = this.colorMagic.bind(this);
 
     this.state = {
-      currentColor: this.props.currentColor
+      currentColor: this.props.allLists
+        && this.props.allLists[this.props.listIndex]
+        && this.props.allLists[this.props.listIndex].content
+        && this.props.allLists[this.props.listIndex].content[this.props.sectionIndex]
+        && this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].color
     };
   }
 
   colorMagic(color) {
-    this.props.changeSectionColor(this.props.listIndex, this.props.sectionIndex, color);
+    if (typeof this.props.passColorToSection === "function") {
+      this.props.passColorToSection(color);
+    }else {
+      this.props.changeSectionColor(this.props.listIndex, this.props.sectionIndex, color);
+    }
 
     this.setState({
       currentColor: color
@@ -57,6 +65,13 @@ const colorsDispatchToProps = (dispatch) => {
   }
 };
 
-const ConnectedColors = connect(null, colorsDispatchToProps)(Colors);
+const stateToProps = (state = {}) => {
+  return {
+    allLists: state.lists,
+    listIndex: state.selectedListIndex
+  }
+};
+
+const ConnectedColors = connect(stateToProps, colorsDispatchToProps)(Colors);
 
 export default ConnectedColors;

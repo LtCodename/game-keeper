@@ -3,7 +3,6 @@ import './WarningModalWindow.css';
 declare var $;
 
 class WarningModalWindow extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -12,12 +11,12 @@ class WarningModalWindow extends React.Component {
 
   onProceed() {
     this.props.onProceed();
-    $("#" + this.props.modalId).modal('hide');
+    $("#modalWarning").modal('hide');
   }
 
   render() {
     return (
-      <div className="modal fade" id={this.props.modalId} tabIndex="-1" role="dialog">
+      <div className="modal fade" id="modalWarning" tabIndex="-1" role="dialog">
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">

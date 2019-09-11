@@ -42,7 +42,6 @@ class Dashboard extends React.Component {
     const listsToRender = this.props.allLists.map((elem, index) => {
       return <ListBlock
         key={elem.id}
-        name={elem.name}
         listBlockIndex={index}/>;
     });
 

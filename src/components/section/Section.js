@@ -27,7 +27,7 @@ class Section extends React.Component {
 
     this.state = {
       editMode: false,
-      sectionInputValue: this.props.sectionName,
+      sectionInputValue: this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].name,
       showModalWindow: false,
       showAddGameWindow: false
     };
@@ -75,7 +75,7 @@ class Section extends React.Component {
     if (!this.state.editMode) {
       this.setState({
         editMode: true,
-        sectionInputValue: this.props.sectionName
+        sectionInputValue: this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].name
       });
     }
   }
@@ -97,19 +97,19 @@ class Section extends React.Component {
     this.setState({
       editMode: false,
       gameInputValue: "",
-      sectionInputValue: this.props.sectionName
+      sectionInputValue: this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].name
     });
   }
 
   render() {
-    const gamesToRender = this.props.games.map((elem, index) => {
+    const gamesToRender = this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games.map((elem, index) => {
       return <Block
         key={elem.id}
         blockIndex={index}
         sectionIndex={this.props.sectionIndex}/>;
     }).sort((a, b) => {
-      const releaseDateA = this.props.games[a.props.blockIndex].releaseDate || "";
-      const releaseDateB = this.props.games[b.props.blockIndex].releaseDate || "";
+      const releaseDateA = this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[a.props.blockIndex].releaseDate || "";
+      const releaseDateB = this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[b.props.blockIndex].releaseDate || "";
 
       if (releaseDateA < releaseDateB) {
         return -1;
@@ -128,7 +128,7 @@ class Section extends React.Component {
 
     const nameAndButtonsBlock = (
       <div className="nameAndButtonsWrapper">
-        <h2>{this.props.sectionName}</h2>
+        <h2>{this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].name}</h2>
         <div className="sectionActionButtons">
           <button className="btn" onClick={this.doOnEdit}><i className="fas fa-pen-square"></i></button>
           <button className="btn" onClick={this.openAddGameWindow}><i className="fas fa-plus-square"></i></button>
@@ -147,28 +147,23 @@ class Section extends React.Component {
           <input className="form-control editSectionInput" type="text" placeholder="Enter new name" value={this.state.sectionInputValue} onChange={this.sectionInputValueChange}></input>
           <button className="btn btn-dark" onClick={this.doOnSubmit}>OK</button>
           <button className="btn" onClick={this.doOnCancel}>Cancel</button>
-          <Colors currentColor={this.props.color}
-                  listIndex={this.props.listIndex}
-                  sectionIndex={this.props.sectionIndex}/>
+          <Colors sectionIndex={this.props.sectionIndex}/>
         </div>
     );
 
     const modalWarningWindow = (
       <WarningModalWindow
-        modalId={"modalWarning"}
         onProceed={() => this.props.sectionDelete(this.props.listIndex, this.props.sectionIndex)}
-        message={`Are you sure you want to delete section ${this.props.sectionName}?`} />
+        message={`Are you sure you want to delete section ${this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].name}?`} />
     );
 
     const addGameWindow = (
       <BlockModalWindow
         modalId={"addGame"}
-        
         gameData={{name:"New game"}}
         fullMode={false}
-        listIndex={this.props.listIndex}
         sectionIndex={this.props.sectionIndex}
-        closeModal={this.closeAddGameModal}  />
+        closeModal={this.closeAddGameModal}/>
     );
 
     return (
