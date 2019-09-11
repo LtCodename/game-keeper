@@ -270,7 +270,14 @@ class BlockModalWindow extends React.Component {
 
       sectionSelector = (
         <div className="modalPiece">
-          Move to another section
+          Move to another List or Section
+          <br></br>
+          <br></br>
+          Pick a List
+          <select value={this.props.sectionId} className="custom-select" onChange={this.selectChangeHandler}>
+            {sectionSectionOptions}
+          </select>
+          Pick a Section
           <select value={this.props.sectionId} className="custom-select" onChange={this.selectChangeHandler}>
             {sectionSectionOptions}
           </select>

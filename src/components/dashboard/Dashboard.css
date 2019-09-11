@@ -12,8 +12,23 @@
 
 .listsMatrix {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 10px;
+}
+
+.fourCells {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.threeCells {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.twoCells {
+  grid-template-columns: 1fr 1fr;
+}
+
+.oneCell {
+  grid-template-columns: 1fr;
 }
 
 .btnAddListFromDashboard {
@@ -27,14 +42,18 @@
   height: 200px;
 }
 
+.btnAddListFromDashboardSpecial {
+  width: 270px;
+}
+
 .btnAddListFromDashboard:hover {
   opacity: 0.8;
 }
 
 @media (max-width: 1300px) {
   .listsMatrix {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
+      grid-template-columns: 1fr 1fr 1fr;
+    }
 
   .btnAddListFromDashboard {
     height: 150px;
@@ -48,7 +67,7 @@
 }
 
 @media (max-width: 990px) {
-  .listsMatrix {
+  .fourCells {
     grid-template-columns: 1fr 1fr;
   }
 

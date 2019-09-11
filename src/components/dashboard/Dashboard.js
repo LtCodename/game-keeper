@@ -46,8 +46,14 @@ class Dashboard extends React.Component {
         listBlockIndex={index}/>;
     });
 
+    let btnAddListClassName = "btn btnAddListFromDashboard";
+
+    if (this.props.allLists.length === 0) {
+      btnAddListClassName += " btnAddListFromDashboardSpecial";
+    }
+
     const addListButton = (
-      <button className="btn btnAddListFromDashboard" onClick={this.openAddListWindow}>ADD LIST</button>
+      <button className={btnAddListClassName} onClick={this.openAddListWindow}>ADD LIST</button>
     );
 
     const modalAddListWindow = (
@@ -56,10 +62,28 @@ class Dashboard extends React.Component {
         message={`Click here to pass a new list name`} />
     );
 
+    let matrixClassName = "listsMatrix";
+
+    switch(this.props.allLists.length) {
+      case 2:
+        matrixClassName += " threeCells";
+        break;
+      case 1:
+        matrixClassName += " twoCells";
+        break;
+      case 0:
+        matrixClassName += " oneCell";
+        break;
+      default:
+        matrixClassName += " fourCells"
+    }
+
+    console.log(matrixClassName);
+
     return (
       <div className="dashboardWrapper">
         <div className="dashboard">
-          <div className="listsMatrix">
+          <div className={matrixClassName}>
             {listsToRender}
             {addListButton}
           </div>
@@ -79,6 +103,12 @@ const listDispatchToProps = (dispatch) => {
   }
 };
 
-const DashboardConnected = connect(null, listDispatchToProps)(Dashboard);
+const stateToProps = (state = {}) => {
+  return {
+    allLists: state.lists
+  }
+};
+
+const DashboardConnected = connect(stateToProps, listDispatchToProps)(Dashboard);
 
 export default DashboardConnected;
