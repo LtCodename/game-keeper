@@ -1,6 +1,7 @@
 import React from 'react';
 import BlockModalWindow from '../block-modal-window/BlockModalWindow.js';
 import './Block.css';
+import * as moment from 'moment';
 declare var $;
 
 class Block extends React.Component {
@@ -59,7 +60,7 @@ class Block extends React.Component {
       </div>
     );
 
-    const dateToShow = (this.props.gameData.releaseDate ? <span className="releaseDate">{this.props.gameData.releaseDate}</span> : "");
+    const dateToShow = (this.props.gameData.releaseDate ? <span className="releaseDate">{moment(this.props.gameData.releaseDate).format('DD-MM-YYYY')}</span> : "");
 
     const modalWindow = (
       <BlockModalWindow
