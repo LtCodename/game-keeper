@@ -105,17 +105,11 @@ class Section extends React.Component {
     const gamesToRender = this.props.games.map((elem, index) => {
       return <Block
         key={elem.id}
-        color={this.props.color}
         blockIndex={index}
-        listIndex={this.props.listIndex}
-        sectionIndex={this.props.sectionIndex}
-        gameData={elem}
-        developers={this.props.developers}
-        sectionId = {this.props.sectionId}
-        content={this.props.content}/>;
+        sectionIndex={this.props.sectionIndex}/>;
     }).sort((a, b) => {
-      const releaseDateA = a.props.gameData.releaseDate || "";
-      const releaseDateB = b.props.gameData.releaseDate || "";
+      const releaseDateA = this.props.games[a.props.blockIndex].releaseDate || "";
+      const releaseDateB = this.props.games[b.props.blockIndex].releaseDate || "";
 
       if (releaseDateA < releaseDateB) {
         return -1;
@@ -169,8 +163,9 @@ class Section extends React.Component {
     const addGameWindow = (
       <BlockModalWindow
         modalId={"addGame"}
+        
         gameData={{name:"New game"}}
-        newGameMode={true}
+        fullMode={false}
         listIndex={this.props.listIndex}
         sectionIndex={this.props.sectionIndex}
         closeModal={this.closeAddGameModal}  />
@@ -206,7 +201,8 @@ const sectionDispatchToProps = (dispatch) => {
 
 const stateToProps = (state = {}) => {
   return {
-    allLists: state.lists
+    allLists: state.lists,
+    listIndex: state.selectedListIndex
   }
 };
 

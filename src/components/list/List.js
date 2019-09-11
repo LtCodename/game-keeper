@@ -26,7 +26,7 @@ class List extends React.Component {
     this.state = {
       renameListMode: false,
       addSectionMode: false,
-      listNameInputValue: this.props.listName,
+      listNameInputValue: this.props.allLists[this.props.listIndex].name,
       sectionNameInputValue: "",
       colorFofNewSection: "",
       showModalWindow: false
@@ -94,7 +94,7 @@ class List extends React.Component {
     if (!this.state.renameListMode) {
       this.setState({
         renameListMode: true,
-        listNameInputValue: this.props.listName
+        listNameInputValue: this.props.allLists[this.props.listIndex].name
       });
     }
   }
@@ -103,7 +103,7 @@ class List extends React.Component {
     this.setState({
       renameListMode: false,
       addSectionMode: false,
-      listNameInputValue: this.props.listName,
+      listNameInputValue: this.props.allLists[this.props.listIndex].name,
       sectionNameInputValue: ""
     });
   }
@@ -130,16 +130,15 @@ class List extends React.Component {
   }
 
   render() {
-    const sectionsToRender = this.props.content.map((elem, index) => {
+    const sectionsToRender = this.props.allLists[this.props.listIndex].content.map((elem, index) => {
       return (
         <Section
           key={elem.id}
-          content={this.props.content}
+          content={this.props.allLists[this.props.listIndex].content}
           sectionName={elem.name}
           sectionId={index}
           color={elem.color}
           sectionIndex={index}
-          listIndex={this.props.listIndex}
           games={elem.games} />);
     })
 
@@ -147,7 +146,7 @@ class List extends React.Component {
       <WarningModalWindow
         modalId={"modalWarning"}
         onProceed={() => this.props.deleteList(this.props.listIndex, this.props.allLists.length)}
-        message={`Are you sure you want to delete list ${this.props.listName}?`} />
+        message={`Are you sure you want to delete list ${this.props.allLists[this.props.listIndex].name}?`} />
     );
 
     const positionOptions = this.props.allLists.map((elem, index) => {
@@ -166,7 +165,7 @@ class List extends React.Component {
 
     const nameAndButtonsBlock = (
       <div className="listWrapper">
-        <h1>{this.props.listName}</h1>
+        <h1>{this.props.allLists[this.props.listIndex].name}</h1>
         <div className="actionButtons">
           <button className="btn" onClick={this.doOnEdit}><i className="fas fa-pen-square"></i></button>
           <button className="btn" onClick={this.doOnAddSection}><i className="fas fa-plus-square"></i></button>
@@ -225,7 +224,8 @@ const listDispatchToProps = (dispatch) => {
 
 const stateToProps = (state = {}) => {
   return {
-    allLists: state.lists
+    allLists: state.lists,
+    listIndex: state.selectedListIndex
   }
 };
 

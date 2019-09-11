@@ -2,6 +2,7 @@ import React from 'react';
 import BlockModalWindow from '../block-modal-window/BlockModalWindow.js';
 import './Block.css';
 import * as moment from 'moment';
+import { connect } from 'react-redux'
 declare var $;
 
 class Block extends React.Component {
@@ -19,7 +20,7 @@ class Block extends React.Component {
   }
 
   componentWillUnmount() {
-    $("#bModal" + this.props.gameData.id + this.props.sectionId).unbind('hidden.bs.modal');
+    $("#bModal" + this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex].id + this.props.sectionIndex).unbind('hidden.bs.modal');
   }
 
   resetState() {
@@ -32,24 +33,25 @@ class Block extends React.Component {
     this.setState({
       showModalWindow: true
     }, () => {
-      $("#bModal" + this.props.gameData.id + this.props.sectionId).modal('show');
-      $("#bModal" + this.props.gameData.id + this.props.sectionId).on('hidden.bs.modal', this.resetState);
+      $("#bModal" + this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex].id + this.props.sectionIndex).modal('show');
+      $("#bModal" + this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex].id + this.props.sectionIndex).on('hidden.bs.modal', this.resetState);
     });
   }
 
   closeModal() {
-    $("#bModal" + this.props.gameData.id + this.props.sectionId).modal('hide');
+    $("#bModal" + this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex].id + this.props.sectionIndex).modal('hide');
   }
 
   render() {
     let className = 'gameBlock gameBlock_';
+    let color = this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].color;
 
-    if (this.props.color) {
-      className += this.props.color;
+    if (color) {
+      className += color;
     }
 
-    const platformsToShow = (this.props.gameData.hasOwnProperty('platforms')) ? (
-      this.props.gameData.platforms.map((elem, index) => {
+    const platformsToShow = (this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex].hasOwnProperty('platforms')) ? (
+      this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex].platforms.map((elem, index) => {
         const iconClassName = `${elem.iconName}`;
         return (<i key={index} className={iconClassName}></i>);
       })) : [];
@@ -60,17 +62,16 @@ class Block extends React.Component {
       </div>
     );
 
-    const dateToShow = (this.props.gameData.releaseDate ? <span className="releaseDate">{moment(this.props.gameData.releaseDate).format('DD-MM-YYYY')}</span> : "");
+    const dateToShow = (this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex].releaseDate ? <span className="releaseDate">{moment(this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex].releaseDate).format('DD-MM-YYYY')}</span> : "");
 
     const modalWindow = (
       <BlockModalWindow
-        modalId={"bModal" + this.props.gameData.id + this.props.sectionId}
-        gameData={this.props.gameData}
-        listIndex={this.props.listIndex}
+        modalId={"bModal" + this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex].id + this.props.sectionIndex}
+        
+        gameData={this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex]}
         sectionIndex={this.props.sectionIndex}
         blockIndex={this.props.blockIndex}
         fullMode={true}
-        sectionId={this.props.sectionId}
         closeModal={this.closeModal}/>
     );
 
@@ -78,7 +79,7 @@ class Block extends React.Component {
       <div className="cardWrapper">
         <button className={className} data-toggle="modal" onClick={this.openModalWindow}>
           <div className="gameBlockContent">
-            <span className="gameName">{this.props.gameData.name}</span>
+            <span className="gameName">{this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex].name}</span>
             <div className="gameBlockFooter">
               {dateToShow}
               {platfotmsOnBlock}
@@ -92,4 +93,13 @@ class Block extends React.Component {
   }
 }
 
-export default Block;
+const stateToProps = (state = {}) => {
+  return {
+    allLists: state.lists,
+    listIndex: state.selectedListIndex
+  }
+};
+
+const BlockConnected = connect(stateToProps, null)(Block);
+
+export default BlockConnected;

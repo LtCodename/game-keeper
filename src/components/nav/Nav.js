@@ -24,8 +24,8 @@ class Nav extends React.Component {
     this.setState({
       showAddListWindow: true
     }, () => {
-      $("#addListNav").modal('show');
-      $("#addListNav").on('hidden.bs.modal', this.resetState);
+      $("#addListWindow").modal('show');
+      $("#addListWindow").on('hidden.bs.modal', this.resetState);
     });
   }
 
@@ -36,7 +36,7 @@ class Nav extends React.Component {
   }
 
   componentWillUnmount() {
-    $("#addListNav").unbind('hidden.bs.modal');
+    $("#addListWindow").unbind('hidden.bs.modal');
   }
 
   switchBetweenTabs(index) {
@@ -59,11 +59,11 @@ class Nav extends React.Component {
   }
 
   render() {
-    let buttonsToRender = this.props.content.map((elem, index) => {
+    let buttonsToRender = this.props.allLists.map((elem, index) => {
 
       let className = "navButton btn btn-light";
 
-      if (this.props.indexToHighligth === index) {
+      if (this.props.listIndex === index) {
         className += " navButtonActive";
       }
 
@@ -87,9 +87,7 @@ class Nav extends React.Component {
     }
 
     const modalAddListWindow = (
-      <AddListModalWindow
-        modalId={"addListNav"}
-        message={`Click here to pass a new list name`} />
+      <AddListModalWindow/>
     );
 
     return (
@@ -101,7 +99,6 @@ class Nav extends React.Component {
           {buttonsToRender}
           {addListButton}
         </div>
-
         {this.state.showAddListWindow ? modalAddListWindow : ""}
       </nav>
     )
@@ -118,7 +115,8 @@ const listDispatchToProps = (dispatch) => {
 
 const stateToProps = (state = {}) => {
   return {
-    allLists: state.lists
+    allLists: state.lists,
+    listIndex: state.selectedListIndex
   }
 };
 

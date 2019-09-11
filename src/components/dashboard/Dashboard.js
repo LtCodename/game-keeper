@@ -23,8 +23,8 @@ class Dashboard extends React.Component {
     this.setState({
       showAddListWindow: true
     }, () => {
-      $("#addList").modal('show');
-      $("#addList").on('hidden.bs.modal', this.resetState);
+      $("#addListWindow").modal('show');
+      $("#addListWindow").on('hidden.bs.modal', this.resetState);
     });
   }
 
@@ -35,11 +35,11 @@ class Dashboard extends React.Component {
   }
 
   componentWillUnmount() {
-    $("#addList").unbind('hidden.bs.modal');
+    $("#addListWindow").unbind('hidden.bs.modal');
   }
 
   render() {
-    const listsToRender = this.props.data.map((elem, index) => {
+    const listsToRender = this.props.allLists.map((elem, index) => {
       return <ListBlock
         key={elem.id}
         name={elem.name}
@@ -57,9 +57,7 @@ class Dashboard extends React.Component {
     );
 
     const modalAddListWindow = (
-      <AddListModalWindow
-        modalId={"addList"}
-        message={`Click here to pass a new list name`} />
+      <AddListModalWindow/>
     );
 
     let matrixClassName = "listsMatrix";

@@ -199,7 +199,7 @@ class BlockModalWindow extends React.Component {
                                                   }
                                                 });
 
-      if (this.props.newGameMode) {
+      if (!this.props.fullMode) {
         this.props.addGame({...this.props.gameData, ...this.state.localGameData, platforms: mappedPlatforms}, this.props.listIndex, this.props.sectionIndex);
       }else {
         this.props.saveBlock({...this.props.gameData, ...this.state.localGameData, platforms: mappedPlatforms}, this.props.listIndex, this.props.sectionIndex, this.props.blockIndex, this.state.newListForBlock, this.state.newSectionForBlock);
@@ -396,7 +396,8 @@ const blockModalWindowDispatchToProps = (dispatch) => {
 const stateToProps = (state = {}) => {
   return {
     developers: state.developers,
-    allLists: state.lists
+    allLists: state.lists,
+    listIndex: state.selectedListIndex
   }
 };
 

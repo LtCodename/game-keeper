@@ -17,14 +17,14 @@ class AddListModalWindow extends React.Component {
 
     this.state = {
       nameEditMode: false,
-      nameInputValue: this.props.message
+      nameInputValue: `Click here to pass a new list name`
     };
   }
 
   doOnCancel() {
     this.setState({
       nameEditMode: false,
-      nameInputValue: this.props.message
+      nameInputValue: `Click here to pass a new list name`
     });
   }
 
@@ -47,18 +47,18 @@ class AddListModalWindow extends React.Component {
   }
 
   onProceed() {
-    if (this.state.nameInputValue === this.props.message) {
+    if (this.state.nameInputValue === `Click here to pass a new list name`) {
       return;
     }
 
     this.props.addList(this.state.nameInputValue);
-    $("#" + this.props.modalId).modal('hide');
+    $("#addListWindow").modal('hide');
   }
 
   render() {
 
     const listName = (
-      <h5 className="modal-title" onClick={this.changeListName}>{(this.state.nameInputValue) ? this.state.nameInputValue : this.props.message}</h5>
+      <h5 className="modal-title" onClick={this.changeListName}>{(this.state.nameInputValue) ? this.state.nameInputValue : `Click here to pass a new list name`}</h5>
     );
 
     const listNameEdit = (
@@ -70,7 +70,7 @@ class AddListModalWindow extends React.Component {
     );
 
     return (
-      <div className="modal fade" id={this.props.modalId} tabIndex="-1" role="dialog">
+      <div className="modal fade" id="addListWindow" tabIndex="-1" role="dialog">
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">

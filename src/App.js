@@ -17,8 +17,7 @@ class App extends React.Component {
 
   render() {
     const dashboard = (
-      <Dashboard
-        data={this.props.lists}/>
+      <Dashboard/>
     );
 
     let listOrDashboard;
@@ -26,16 +25,11 @@ class App extends React.Component {
     if (this.props.selectedListIndex === null) {
       listOrDashboard = dashboard;
     }else {
-      listOrDashboard = <List
-        listName={this.props.lists[this.props.selectedListIndex].name}
-        content={this.props.lists[this.props.selectedListIndex].content}
-        listIndex={this.props.selectedListIndex}/>
+      listOrDashboard = <List/>
     }
 
     const nav = (
-      <Nav
-        content={this.props.lists}
-        indexToHighligth={this.props.selectedListIndex}/>
+      <Nav/>
     );
 
     const footer = (
