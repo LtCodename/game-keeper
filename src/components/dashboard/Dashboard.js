@@ -78,8 +78,6 @@ class Dashboard extends React.Component {
         matrixClassName += " fourCells"
     }
 
-    console.log(matrixClassName);
-
     return (
       <div className="dashboardWrapper">
         <div className="dashboard">

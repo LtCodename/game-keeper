@@ -27,10 +27,10 @@ class BlockModalWindow extends React.Component {
     this.modalSave = this.modalSave.bind(this);
     this.openModalWarningWindow = this.openModalWarningWindow.bind(this);
     this.resetState = this.resetState.bind(this);
-    this.selectChangeHandler = this.selectChangeHandler.bind(this);
+    this.newListSelectChangeHandler = this.newListSelectChangeHandler.bind(this);
+    this.newSectionSelectChangeHandler = this.newSectionSelectChangeHandler.bind(this);
     this.developerChangeHandler = this.developerChangeHandler.bind(this);
     this.deleteBlock = this.deleteBlock.bind(this);
-
 
     this.state = {
       nameEditMode: false,
@@ -40,13 +40,23 @@ class BlockModalWindow extends React.Component {
       developerInputValue: "",
       descriptionInputValue: "",
       platforms: this.preparePlatformsForState(),
-      showModalWindow: false
+      showModalWindow: false,
+      newListForBlock: this.props.listIndex,
+      newSectionForBlock:this.props.sectionIndex
     };
   }
 
-  selectChangeHandler(event) {
-    this.props.changeGameSection(event.target.value, this.props.listIndex, this.props.sectionIndex, this.props.blockIndex);
-    this.props.closeModal();
+  newListSelectChangeHandler(event) {
+    this.setState({
+      newListForBlock: event.target.value,
+      newSectionForBlock: 0
+    });
+  }
+
+  newSectionSelectChangeHandler(event) {
+    this.setState({
+      newSectionForBlock: event.target.value
+    });
   }
 
   deleteBlock() {
@@ -192,7 +202,7 @@ class BlockModalWindow extends React.Component {
       if (this.props.newGameMode) {
         this.props.addGame({...this.props.gameData, ...this.state.localGameData, platforms: mappedPlatforms}, this.props.listIndex, this.props.sectionIndex);
       }else {
-        this.props.saveBlock({...this.props.gameData, ...this.state.localGameData, platforms: mappedPlatforms}, this.props.listIndex, this.props.sectionIndex, this.props.blockIndex);
+        this.props.saveBlock({...this.props.gameData, ...this.state.localGameData, platforms: mappedPlatforms}, this.props.listIndex, this.props.sectionIndex, this.props.blockIndex, this.state.newListForBlock, this.state.newSectionForBlock);
       }
 
       this.props.closeModal();
@@ -259,33 +269,39 @@ class BlockModalWindow extends React.Component {
         message={`Are you sure you want to delete block ${this.state.localGameData.name}?`} />
     );
 
-    let sectionSelector = "";
+    let newHomeSelector = "";
 
-    if (this.props.content) {
-      const sectionSectionOptions = this.props.content.map((elem, index) => {
+    if (this.props.fullMode) {
+      const listSectionOptions = this.props.allLists.map((elem, index) => {
         return (
           <option key={index} value={index}>{elem.name}</option>
         );
       });
 
-      sectionSelector = (
+      const sectionSectionOptions = this.props.allLists[this.state.newListForBlock].content.map((elem, index) => {
+        return (
+          <option key={index} value={index}>{elem.name}</option>
+        );
+      });
+
+      newHomeSelector = (
         <div className="modalPiece">
           Move to another List or Section
           <br></br>
           <br></br>
           Pick a List
-          <select value={this.props.sectionId} className="custom-select" onChange={this.selectChangeHandler}>
-            {sectionSectionOptions}
+          <select value={this.state.newListForBlock} className="custom-select" onChange={this.newListSelectChangeHandler}>
+            {listSectionOptions}
           </select>
           Pick a Section
-          <select value={this.props.sectionId} className="custom-select" onChange={this.selectChangeHandler}>
+          <select value={this.state.newSectionForBlock} className="custom-select" onChange={this.newSectionSelectChangeHandler}>
             {sectionSectionOptions}
           </select>
         </div>
       );
     }
 
-    const deleteButton = (this.props.needDelete) ? <button type="button" className="btn" onClick={this.openModalWarningWindow}>Delete</button> : "";
+    const deleteButton = (this.props.fullMode) ? <button type="button" className="btn" onClick={this.openModalWarningWindow}>Delete</button> : "";
 
     const developerSectionOptions = this.props.developers.sort((a, b) => {
       if (a.name < b.name) {
@@ -332,8 +348,8 @@ class BlockModalWindow extends React.Component {
                 </button>
               </div>
               <div className="modal-body">
-                {/*section selector*/}
-                {sectionSelector}
+                {/*New list and section selector*/}
+                {newHomeSelector}
                 {/*description*/}
                 {(this.state.descriptionEditMode) ? descriptionEdit : descriptionCustom}
                 {/*developer*/}
@@ -365,11 +381,8 @@ const blockModalWindowDispatchToProps = (dispatch) => {
     updateDevelopers: (newDeveloper) => {
       dispatch({ type: reducers.actions.developersActions.DEVELOPER_ADD, newDeveloper: newDeveloper });
     },
-    changeGameSection: (newSectionIndex, listIndex, sectionIndex, blockIndex) => {
-      dispatch({ type: reducers.actions.listsActions.BLOCK_CHANGE_GAME_SECTION, newSectionIndex: newSectionIndex, listIndex: listIndex, sectionIndex: sectionIndex, blockIndex: blockIndex });
-    },
-    saveBlock: (saveData, listIndex, sectionIndex, blockIndex) => {
-      dispatch({ type: reducers.actions.listsActions.BLOCK_SAVE, saveData: saveData, listIndex: listIndex, sectionIndex: sectionIndex, blockIndex: blockIndex });
+    saveBlock: (saveData, listIndex, sectionIndex, blockIndex, newListIndex, newSectionIndex) => {
+      dispatch({ type: reducers.actions.listsActions.BLOCK_SAVE, saveData: saveData, listIndex: listIndex, sectionIndex: sectionIndex, blockIndex: blockIndex, newListIndex: newListIndex, newSectionIndex: newSectionIndex });
     },
     deleteBlock: (listIndex, sectionIndex, blockIndex) => {
       dispatch({ type: reducers.actions.listsActions.BLOCK_DELETE, listIndex: listIndex, sectionIndex: sectionIndex, blockIndex: blockIndex });
@@ -382,7 +395,8 @@ const blockModalWindowDispatchToProps = (dispatch) => {
 
 const stateToProps = (state = {}) => {
   return {
-    developers: state.developers
+    developers: state.developers,
+    allLists: state.lists
   }
 };
 

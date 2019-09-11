@@ -18,7 +18,6 @@ class Footer extends React.Component {
 
   onSaveLists() {
     const stringified = JSON.stringify(this.props.lists);
-    console.log(stringified)
     const fileStructure = `const lists = ${stringified}; export default lists;`
     const data = new Blob([fileStructure], {type: 'text/plain'});
     if (this.state.listsUrl) {

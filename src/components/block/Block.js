@@ -68,9 +68,8 @@ class Block extends React.Component {
         listIndex={this.props.listIndex}
         sectionIndex={this.props.sectionIndex}
         blockIndex={this.props.blockIndex}
-        needDelete={true}
+        fullMode={true}
         sectionId={this.props.sectionId}
-        content={this.props.content}
         closeModal={this.closeModal}/>
     );
 
