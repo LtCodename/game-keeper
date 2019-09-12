@@ -161,7 +161,7 @@ class List extends React.Component {
 
     const nameAndButtonsBlock = (
       <div className="listWrapper">
-        <h1>{this.props.allLists[this.props.listIndex].name}</h1>
+        <h1 className="listName">{this.props.allLists[this.props.listIndex].name}</h1>
         <div className="actionButtons">
           <button className="btn" onClick={this.doOnEdit}><i className="fas fa-pen-square"></i></button>
           <button className="btn" onClick={this.doOnAddSection}><i className="fas fa-plus-square"></i></button>

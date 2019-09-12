@@ -28,6 +28,8 @@
   background-color: var(--list-color);
   font-size: 28px;
   white-space: inherit;
+  overflow-wrap: break-word;
+  padding: 5px;
 }
 
 .navButton:hover {

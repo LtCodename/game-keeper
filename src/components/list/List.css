@@ -14,6 +14,12 @@
   width: 50%;
 }
 
+.listName {
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
 .addListInput {
   margin-top: 10px;
 }
