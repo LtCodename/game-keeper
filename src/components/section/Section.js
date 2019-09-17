@@ -130,9 +130,9 @@ class Section extends React.Component {
       <div className="nameAndButtonsWrapper">
         <h2>{this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].name}</h2>
         <div className="sectionActionButtons">
-          <button className="btn" onClick={this.doOnEdit}><i className="fas fa-pen-square"></i></button>
-          <button className="btn" onClick={this.openAddGameWindow}><i className="fas fa-plus-square"></i></button>
-          <button className="btn" onClick={this.openModalWarningWindow}><i className="fas fa-trash"></i></button>
+          <button className="btn" onClick={this.doOnEdit}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-section.svg'}></img></button>
+          <button className="btn" onClick={this.openAddGameWindow}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-add-section.svg'}></img></button>
+          <button className="btn" onClick={this.openModalWarningWindow}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-section.svg'}></img></button>
         </div>
         <div className="positionPickerWrapper">
         <select value={this.props.sectionIndex} className="custom-select listPositionPicker" onChange={this.sectionPositionChangeHandler}>

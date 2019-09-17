@@ -163,9 +163,9 @@ class List extends React.Component {
       <div className="listWrapper">
         <h1 className="listName">{this.props.allLists[this.props.listIndex].name}</h1>
         <div className="actionButtons">
-          <button className="btn" onClick={this.doOnEdit}><i className="fas fa-pen-square"></i></button>
-          <button className="btn" onClick={this.doOnAddSection}><i className="fas fa-plus-square"></i></button>
-          <button className="btn" onClick={this.openModalWarningWindow}><i className="fas fa-trash"></i></button>
+          <button className="btn" onClick={this.doOnEdit}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-list.svg'}></img></button>
+          <button className="btn" onClick={this.doOnAddSection}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-add-list.svg'}></img></button>
+          <button className="btn" onClick={this.openModalWarningWindow}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-list.svg'}></img></button>
           {listPositionPicker}
         </div>
 

@@ -49,13 +49,12 @@
   margin-right: 20px;
 }
 
-.actionButtons i:hover {
-  opacity: 0.8;
+.editIcon {
+  height: 35px;
 }
 
-.actionButtons i {
-  font-size: 35px;
-  color: var(--list-color);
+.editIcon:hover {
+  opacity: 0.8;
 }
 
 @media (max-width: 1050px) {

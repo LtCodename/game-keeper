@@ -52,8 +52,11 @@ class Block extends React.Component {
 
     const platformsToShow = (this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex].hasOwnProperty('platforms')) ? (
       this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex].platforms.map((elem, index) => {
-        const iconClassName = `${elem.iconName}`;
-        return (<i key={index} className={iconClassName}></i>);
+        const path = `${elem.iconName}`;
+        // return (<i key={index} className={iconClassName}></i>);
+        let fullPath = '/icons/' + path + '.svg'
+        console.log(fullPath)
+        return (<img key={index} className="platformIcon" alt="" src={process.env.PUBLIC_URL + fullPath}></img>);
       })) : [];
 
     const platfotmsOnBlock = (

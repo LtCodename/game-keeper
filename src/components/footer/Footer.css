@@ -5,30 +5,38 @@
   align-items: center;
 }
 
-.shareIconsWrapper a {
-  color: var(--content-color);
-  font-size: 33px;
-  margin-right: 10px;
-}
-
 .footerWrapper span {
   text-transform: uppercase;
 }
 
 .saveButton {
   background-color: inherit;
-  margin: 0px;
   padding: 0px;
+  margin-right: 10px;
 }
 
 .saveIcon {
-  font-size: 33px;
-  color: var(--content-color);
-  margin-right: 10px;
+  height: 35px;
+}
+
+.shareIcon {
+  height: 35px;
+}
+
+.shareIcons-a {
+  margin-left: 10px;
 }
 
 .saveIconsWrapper {
   margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.shareIconsWrapper {
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 @media (max-width: 450px) {

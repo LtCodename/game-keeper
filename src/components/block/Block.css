@@ -32,9 +32,8 @@
   flex: 1;
 }
 
-.platformsBlock i {
-  font-size: 25px;
-  color: var(--content-color);
+.platformIcon {
+  height: 25px;
   margin-left: 5px;
 }
 

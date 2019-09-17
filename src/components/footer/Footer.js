@@ -57,15 +57,15 @@ class Footer extends React.Component {
   render() {
     const shareIcons = (
       <div className="shareIconsWrapper">
-          <a href="https://github.com/LtCodename/Game-Keeper" target="blank"><i className="fab fa-github"></i></a>
-          <a href="https://twitter.com/LtCodename" target="blank"><i className="fab fa-twitter"></i></a>
+          <a className="shareIcons-a" href="https://github.com/LtCodename/Game-Keeper" target="blank"><img className="shareIcon" alt="" src={process.env.PUBLIC_URL + '/icons/share-github.svg'}></img></a>
+          <a className="shareIcons-a" href="https://twitter.com/LtCodename" target="blank"><img className="shareIcon" alt="" src={process.env.PUBLIC_URL + '/icons/share-twitter.svg'}></img></a>
       </div>
     );
 
     const saveListsIcon = (
       <div className="saveIconsWrapper">
-          <button type="button" className="btn saveButton" onClick={this.onSaveLists}><i className="fas fa-cloud-download-alt saveIcon"></i></button>
-          <button type="button" className="btn saveButton" onClick={this.onSaveDevelopers}><i className="fas fa-save saveIcon"></i></button>
+          <button type="button" className="btn saveButton" onClick={this.onSaveLists}><img className="saveIcon" alt="" src={process.env.PUBLIC_URL + '/icons/save-lists.svg'}></img></button>
+          <button type="button" className="btn saveButton" onClick={this.onSaveDevelopers}><img className="saveIcon" alt="" src={process.env.PUBLIC_URL + '/icons/save-developers.svg'}></img></button>
       </div>
     );
 

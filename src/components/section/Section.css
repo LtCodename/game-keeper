@@ -38,13 +38,12 @@
     margin-right: 10px;
 }
 
-.sectionActionButtons i:hover {
+.editIcon:hover {
   opacity: 0.8;
 }
 
-.sectionActionButtons i {
-  font-size: 35px;
-  color: var(--titles-color);
+.editIcon {
+  height: 35px;
 }
 
 @media (max-width: 1050px) {
