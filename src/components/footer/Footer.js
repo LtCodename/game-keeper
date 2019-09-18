@@ -81,7 +81,7 @@ class Footer extends React.Component {
   render() {
     const shareIcons = (
       <div className="shareIconsWrapper">
-          <a className="shareIcons-a" href="https://github.com/LtCodename/Game-Keeper" target="blank"><img className="shareIcon" alt="" src={process.env.PUBLIC_URL + '/icons/share-github.svg'}></img></a>
+          <a className="shareIcons-a" href="https://www.linkedin.com/in/yevhen-chernenko/" target="blank"><img className="shareIcon" alt="" src={process.env.PUBLIC_URL + '/icons/share-linkedin.svg'}></img></a>
           <a className="shareIcons-a" href="https://twitter.com/LtCodename" target="blank"><img className="shareIcon" alt="" src={process.env.PUBLIC_URL + '/icons/share-twitter.svg'}></img></a>
       </div>
     );
@@ -101,7 +101,7 @@ class Footer extends React.Component {
     const alertWindow = (
       <AlertModalWindow
         title={`Game Keeper Alpha`}
-        message={`Version: 0.001a.`}/>
+        message={`Version: 0.002a. Release date: 18.09.19`}/>
     );
 
     return (
