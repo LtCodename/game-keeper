@@ -1,7 +1,6 @@
 .logoWrapper {
   display: flex;
-  justify-content: center;
-  background-color: var(--header-color);
+  justify-content: left;
 }
 
 .logoWrapper .btn {
@@ -18,6 +17,27 @@
 
 .headerWrappper {
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--header-color);
+  padding: 0 20px;
+}
+
+.signWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.profileButton {
+  height: 40px;
+  margin-left: 10px;
+  background-color: #1885c7;
+  color: #fff9de;
+  border-radius: 0;
+  text-transform: uppercase;
+  font-family: var(--titles-font);
+  font-size: 25px;
+  line-height: 0;
 }
 
 @media (max-width: 1050px) {
