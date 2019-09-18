@@ -41,7 +41,9 @@ class SignUpModalWindow extends React.Component {
         passwordInputValue: ""
       });
       this.props.close();
-    })
+    }).catch(error => {
+      console.log(error);
+    });
   }
 
   render() {

@@ -6,6 +6,7 @@ import SignUpModalWindow from '../sign-up-modal-window/SignUpModalWindow.js';
 import LogInModalWindow from '../log-in-modal-window/LogInModalWindow.js';
 import ProfileModalWindow from '../profile-modal-window/ProfileModalWindow.js';
 declare var $;
+declare var firebase;
 
 class Header extends React.Component {
   constructor(props) {
@@ -13,9 +14,11 @@ class Header extends React.Component {
 
     this.onSignUpClick = this.onSignUpClick.bind(this);
     this.onLogInClick = this.onLogInClick.bind(this);
+    this.onLogOutClick = this.onLogOutClick.bind(this);
     this.onProfileClick = this.onProfileClick.bind(this);
     this.resetState = this.resetState.bind(this);
     this.closeSignUpModal = this.closeSignUpModal.bind(this);
+    this.closeLogInModal = this.closeLogInModal.bind(this);
 
     this.state = {
       showSignUpWindow: false,
@@ -51,8 +54,20 @@ class Header extends React.Component {
     });
   }
 
+  onLogOutClick() {
+    firebase.auth().signOut().then(() => {
+      console.log("user logged out");
+    }).catch(error => {
+      console.log(error);
+    });
+  }
+
   closeSignUpModal() {
     $("#signUpWindow").modal('hide');
+  }
+
+  closeLogInModal() {
+    $("#logInWindow").modal('hide');
   }
 
   resetState() {
@@ -79,6 +94,7 @@ class Header extends React.Component {
     const signButtons = (
       <div className="signWrapper">
         <button className="btn profileButton" onClick={this.onLogInClick}>Log In</button>
+        <button className="btn profileButton" onClick={this.onLogOutClick}>Log Out</button>
         <button className="btn profileButton" onClick={this.onSignUpClick}>Sign Up</button>
         <button className="btn profileButton" onClick={this.onProfileClick}>Profile</button>
       </div>
@@ -89,7 +105,7 @@ class Header extends React.Component {
     );
 
     const logInWindow = (
-      <LogInModalWindow />
+      <LogInModalWindow close={this.closeLogInModal}/>
     );
 
     const profileWindow = (
