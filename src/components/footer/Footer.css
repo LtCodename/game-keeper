@@ -5,10 +5,6 @@
   align-items: center;
 }
 
-.footerWrapper span {
-  text-transform: uppercase;
-}
-
 .saveButton {
   background-color: inherit;
   padding: 0px;

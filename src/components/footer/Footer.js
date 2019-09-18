@@ -1,6 +1,8 @@
 import React from 'react';
 import './Footer.css';
 import { connect } from 'react-redux'
+import AlertModalWindow from '../alert-modal-window/AlertModalWindow.js';
+declare var $;
 
 class Footer extends React.Component {
 
@@ -9,10 +11,13 @@ class Footer extends React.Component {
 
     this.onSaveLists = this.onSaveLists.bind(this);
     this.onSaveDevelopers = this.onSaveDevelopers.bind(this);
+    this.onVersionClick = this.onVersionClick.bind(this);
+    this.resetState = this.resetState.bind(this);
 
     this.state = {
       listsUrl: null,
-      developersUrl: null
+      developersUrl: null,
+      showAlertWindow: false,
     };
   }
 
@@ -33,6 +38,25 @@ class Footer extends React.Component {
       a.click();
       document.body.removeChild(a);
     });
+  }
+
+  onVersionClick() {
+    this.setState({
+      showAlertWindow: true
+    }, () => {
+      $("#versionAlert").modal('show');
+      $("#versionAlert").on('hidden.bs.modal', this.resetState);
+    });
+  }
+
+  resetState() {
+    this.setState({
+      showAlertWindow: false
+    })
+  }
+
+  componentWillUnmount() {
+    $("#versionAlert").unbind('hidden.bs.modal');
   }
 
   onSaveDevelopers() {
@@ -66,11 +90,18 @@ class Footer extends React.Component {
       <div className="saveIconsWrapper">
           <button type="button" className="btn saveButton" onClick={this.onSaveLists}><img className="saveIcon" alt="" src={process.env.PUBLIC_URL + '/icons/save-lists.svg'}></img></button>
           <button type="button" className="btn saveButton" onClick={this.onSaveDevelopers}><img className="saveIcon" alt="" src={process.env.PUBLIC_URL + '/icons/save-developers.svg'}></img></button>
+          <button type="button" className="btn saveButton" onClick={this.onVersionClick}><img className="saveIcon" alt="" src={process.env.PUBLIC_URL + '/icons/version.svg'}></img></button>
       </div>
     );
 
     const copyrighth = (
-      <span>© 2019 LtCodename, Inc.</span>
+      <span>© 2019 Yevhen Chernenko</span>
+    );
+
+    const alertWindow = (
+      <AlertModalWindow
+        title={`Game Keeper Alpha`}
+        message={`Version: 0.001a.`}/>
     );
 
     return (
@@ -78,11 +109,11 @@ class Footer extends React.Component {
         {saveListsIcon}
         {copyrighth}
         {shareIcons}
+        {this.state.showAlertWindow ? alertWindow : ""}
       </div>
     )
   }
 }
-
 
 const stateToProps = (state = {}) => {
   return {
