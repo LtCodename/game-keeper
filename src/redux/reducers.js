@@ -2,7 +2,6 @@ import lists from '../mocks/lists.js';
 import availableDevelopers from '../mocks/developers.js';
 import { combineReducers } from 'redux'
 
-
 const deepCopy = function (objectToCopy) {
   return JSON.parse(JSON.stringify(objectToCopy));
 }
@@ -10,7 +9,8 @@ const deepCopy = function (objectToCopy) {
 const defaultStore = {
   lists: lists,
   developers: availableDevelopers,
-  selectedListIndex: null
+  selectedListIndex: null,
+  userData: null
 }
 
 const LIST_RENAME = 'LIST_RENAME';
@@ -148,6 +148,20 @@ const developersReducer = (state = defaultStore.developers, action) => {
   }
 };
 
+const USER_CHECK = 'USER_CHECK';
+const USER_LOG_IN = 'USER_LOG_IN';
+const USER_LOG_OUT = 'USER_LOG_OUT';
+
+const userReducer = (state = defaultStore.userData, action) => {
+  switch(action.type) {
+    case USER_CHECK:
+      return action.user;
+      break;
+    default:
+      return state;
+  }
+};
+
 const SLI_CHANGE = 'SLI_CHANGE';
 const SLI_CHANGE_ON_DELETE = 'SLI_CHANGE_ON_DELETE';
 
@@ -173,7 +187,8 @@ const selectedListIndexReducer = (state = defaultStore.selectedListIndex, action
 const rootReducer = combineReducers({
   lists: listsReducer,
   developers: developersReducer,
-  selectedListIndex: selectedListIndexReducer
+  selectedListIndex: selectedListIndexReducer,
+  userData: userReducer
 });
 
 export default {
@@ -193,7 +208,17 @@ export default {
       SECTION_CHANGE_POSITION,
       SECTION_DELETE
     },
-    developersActions: {DEVELOPER_ADD},
-    selectedListIndexActions: {SLI_CHANGE, SLI_CHANGE_ON_DELETE}
+    developersActions: {
+      DEVELOPER_ADD
+    },
+    selectedListIndexActions: {
+      SLI_CHANGE,
+      SLI_CHANGE_ON_DELETE
+    },
+    userActions: {
+      USER_CHECK,
+      USER_LOG_IN,
+      USER_LOG_OUT
+    }
   }
 };

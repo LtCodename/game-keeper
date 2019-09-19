@@ -50,6 +50,11 @@
   opacity: 0.8;
 }
 
+.signInMessage {
+  font-family: var(--titles-font);
+  font-size: 40px;
+}
+
 @media (max-width: 1300px) {
   .listsMatrix {
       grid-template-columns: 1fr 1fr 1fr;

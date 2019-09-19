@@ -1,5 +1,6 @@
 import React from 'react';
 import './ProfileModalWindow.css';
+import { connect } from 'react-redux'
 declare var $;
 
 class ProfileModalWindow extends React.Component {
@@ -15,7 +16,7 @@ class ProfileModalWindow extends React.Component {
               </button>
             </div>
             <div className="accountDetails">
-
+              <p className="accountDetails-p">My Email is  {this.props.userData.email}</p>
             </div>
             <div className="modal-footer">
               <button type="button" className="btn" data-dismiss="modal">OK</button>
@@ -27,4 +28,12 @@ class ProfileModalWindow extends React.Component {
   }
 }
 
-export default ProfileModalWindow;
+const stateToProps = (state = {}) => {
+  return {
+    userData: state.userData
+  }
+};
+
+const ProfileModalWindowConnected = connect(stateToProps, null)(ProfileModalWindow);
+
+export default ProfileModalWindowConnected;

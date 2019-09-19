@@ -75,13 +75,23 @@ class Dashboard extends React.Component {
         matrixClassName += " fourCells"
     }
 
+    const forRegisteredUsers = (
+      <div className={matrixClassName}>
+        {listsToRender}
+        {addListButton}
+      </div>
+    );
+
+    const forNotRegisteredUsers = (
+      <div>
+        <p className="signInMessage">Please sign up or log in</p>
+      </div>
+    );
+
     return (
       <div className="dashboardWrapper">
         <div className="dashboard">
-          <div className={matrixClassName}>
-            {listsToRender}
-            {addListButton}
-          </div>
+          {this.props.userData ? forRegisteredUsers : forNotRegisteredUsers}
         </div>
 
         {this.state.showAddListWindow ? modalAddListWindow : ""}
@@ -100,7 +110,8 @@ const listDispatchToProps = (dispatch) => {
 
 const stateToProps = (state = {}) => {
   return {
-    allLists: state.lists
+    allLists: state.lists,
+    userData: state.userData
   }
 };
 

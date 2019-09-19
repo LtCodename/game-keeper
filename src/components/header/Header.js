@@ -56,10 +56,10 @@ class Header extends React.Component {
 
   onLogOutClick() {
     firebase.auth().signOut().then(() => {
-      console.log("user logged out");
     }).catch(error => {
       console.log(error);
     });
+    this.props.changeListIndex(null, this.props.allLists.length);
   }
 
   closeSignUpModal() {
@@ -91,13 +91,20 @@ class Header extends React.Component {
       </div>
     );
 
-    const signButtons = (
-      <div className="signWrapper">
-        <button className="btn profileButton" onClick={this.onLogInClick}>Log In</button>
-        <button className="btn profileButton" onClick={this.onLogOutClick}>Log Out</button>
-        <button className="btn profileButton" onClick={this.onSignUpClick}>Sign Up</button>
-        <button className="btn profileButton" onClick={this.onProfileClick}>Profile</button>
-      </div>
+    const logInButton = (
+      <button className="btn profileButton" onClick={this.onLogInClick}>Log In</button>
+    );
+
+    const logOutButton = (
+      <button className="btn profileButton" onClick={this.onLogOutClick}>Log Out</button>
+    );
+
+    const signUpButton = (
+      <button className="btn profileButton" onClick={this.onSignUpClick}>Sign Up</button>
+    );
+
+    const profileButton = (
+      <button className="btn profileButton" onClick={this.onProfileClick}>Profile</button>
     );
 
     const signUpWindow = (
@@ -115,7 +122,12 @@ class Header extends React.Component {
     return (
       <div className="headerWrappper">
         {logo}
-        {signButtons}
+        <div className="signWrapper">
+          {!this.props.userData ? logInButton : ""}
+          {!this.props.userData ? signUpButton : ""}
+          {this.props.userData ? logOutButton : ""}
+          {this.props.userData ? profileButton : ""}
+        </div>
         {this.state.showSignUpWindow ? signUpWindow : ""}
         {this.state.showLogInWindow ? logInWindow : ""}
         {this.state.showProfileWindow ? profileWindow : ""}
@@ -134,7 +146,8 @@ const headerDispatchToProps = (dispatch) => {
 
 const stateToProps = (state = {}) => {
   return {
-    allLists: state.lists
+    allLists: state.lists,
+    userData: state.userData
   }
 };
 
