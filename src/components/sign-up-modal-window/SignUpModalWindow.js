@@ -34,16 +34,25 @@ class SignUpModalWindow extends React.Component {
     if (!this.state.emailInputValue || !this.state.passwordInputValue) {
       return;
     }
+
     firebase.auth().createUserWithEmailAndPassword(this.state.emailInputValue, this.state.passwordInputValue).then(credential => {
-      this.setState({
-        emailInputValue: "",
-        passwordInputValue: ""
+      return firebase.firestore().collection('users').doc(credential.user.uid).set({
+        lists: [{
+          id: `id${new Date().getTime()}`,
+          name: "New List",
+          content: []
+        }]
       });
-      this.props.close();
+    }).then(() => {
+        this.setState({
+          emailInputValue: "",
+          passwordInputValue: ""
+        });
+        this.props.close();
     }).catch(error => {
       console.log(error.message);
     });
-  }
+  };
 
   render() {
     return (

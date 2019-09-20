@@ -7,6 +7,7 @@ import Header from './components/header/Header.js';
 import Dashboard from './components/dashboard/Dashboard.js';
 import reducers from './redux/reducers';
 import { connect } from 'react-redux'
+import { BrowserRouter, Route } from 'react-router-dom'
 declare var firebase;
 
 class App extends React.Component {
@@ -28,6 +29,8 @@ class App extends React.Component {
   fecthDevelopers() {
     firebase.firestore().collection('developers').onSnapshot(snapshot => {
       this.props.fecthDevelopers(snapshot);
+    }, error => {
+      console.log(error.message);
     });
   }
 
@@ -65,18 +68,20 @@ class App extends React.Component {
     );
 
     return (
-      <div className="appWrapper">
-        <header>
-          {header}
-        </header>
-        <div className="contentWrapper">
-            {(this.props.selectedListIndex === null) ? "" : nav}
-            {listOrDashboard}
+      <BrowserRouter>
+        <div className="appWrapper">
+          <header>
+            {header}
+          </header>
+          <div className="contentWrapper">
+              {(this.props.selectedListIndex === null) ? "" : nav}
+              {listOrDashboard}
+          </div>
+          <footer>
+            {footer}
+          </footer>
         </div>
-        <footer>
-          {footer}
-        </footer>
-      </div>
+      </BrowserRouter>
     );
   }
 }
