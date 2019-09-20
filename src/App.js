@@ -13,20 +13,26 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
+
     this.fecthUser();
+    this.fecthDevelopers();
   }
 
   fecthUser() {
     firebase.auth().onAuthStateChanged(user => {
-      // if (user) {
-      //   console.log('App: ' + JSON.stringify(user))
-      //   console.log("App: user logged in");
-      // }else {
-      //   console.log('App: ' + user)
-      //   console.log("App: user logged out");
-      // }
       this.props.checkUserPresence(user);
     })
+  }
+
+  fecthDevelopers() {
+    firebase.firestore().collection('developers').get().then(snapshot => {
+      // snapshot.forEach(doc => {
+      //   console.log(doc.data())
+      //   console.log(doc.id)
+      // })
+    }).catch(error => {
+      console.log(error.message);
+    });
   }
 
   render() {
@@ -73,8 +79,6 @@ class App extends React.Component {
 
 const stateToProps = (state = {}) => {
   return {
-    lists: state.lists,
-    developers: state.developers,
     selectedListIndex: state.selectedListIndex,
     userData: state.userData
   }

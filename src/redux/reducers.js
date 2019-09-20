@@ -105,7 +105,6 @@ const listsReducer = (state = defaultStore.lists, action) => {
       return copy;
       break;
     case SECTION_CHANGE_COLOR:
-      console.log(action)
       copy[action.listIndex].content[action.sectionIndex].color = action.color;
       return copy;
       break;
@@ -149,8 +148,6 @@ const developersReducer = (state = defaultStore.developers, action) => {
 };
 
 const USER_CHECK = 'USER_CHECK';
-const USER_LOG_IN = 'USER_LOG_IN';
-const USER_LOG_OUT = 'USER_LOG_OUT';
 
 const userReducer = (state = defaultStore.userData, action) => {
   switch(action.type) {
@@ -216,9 +213,7 @@ export default {
       SLI_CHANGE_ON_DELETE
     },
     userActions: {
-      USER_CHECK,
-      USER_LOG_IN,
-      USER_LOG_OUT
+      USER_CHECK
     }
   }
 };

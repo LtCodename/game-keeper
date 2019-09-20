@@ -35,7 +35,6 @@ class SignUpModalWindow extends React.Component {
       return;
     }
     firebase.auth().createUserWithEmailAndPassword(this.state.emailInputValue, this.state.passwordInputValue).then(credential => {
-      console.log(credential.user);
       this.setState({
         emailInputValue: "",
         passwordInputValue: ""
