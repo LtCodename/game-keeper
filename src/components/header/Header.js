@@ -92,19 +92,31 @@ class Header extends React.Component {
     );
 
     const logInButton = (
-      <button className="btn profileButton" onClick={this.onLogInClick}>Log In</button>
+      <div className="authButtonWrapper">
+        <button className="btn profileButton" onClick={this.onLogInClick}>Log In<img className="authIcon" alt="" src={process.env.PUBLIC_URL + '/icons/auth-login.svg'}></img></button>
+        <button className="btn profileButtonAlt" onClick={this.onLogInClick}><img className="authIconAlt" alt="" src={process.env.PUBLIC_URL + '/icons/auth-login.svg'}></img></button>
+      </div>
     );
 
     const logOutButton = (
-      <button className="btn profileButton" onClick={this.onLogOutClick}>Log Out</button>
+      <div className="authButtonWrapper">
+        <button className="btn profileButton" onClick={this.onLogOutClick}>Log Out<img className="authIcon" alt="" src={process.env.PUBLIC_URL + '/icons/auth-logout.svg'}></img></button>
+        <button className="btn profileButtonAlt" onClick={this.onLogOutClick}><img className="authIconAlt" alt="" src={process.env.PUBLIC_URL + '/icons/auth-logout.svg'}></img></button>
+      </div>
     );
 
     const signUpButton = (
-      <button className="btn profileButton" onClick={this.onSignUpClick}>Sign Up</button>
+      <div className="authButtonWrapper">
+        <button className="btn profileButton" onClick={this.onSignUpClick}>Sign Up<img className="authIcon" alt="" src={process.env.PUBLIC_URL + '/icons/auth-signup.svg'}></img></button>
+        <button className="btn profileButtonAlt" onClick={this.onSignUpClick}><img className="authIconAlt" alt="" src={process.env.PUBLIC_URL + '/icons/auth-signup.svg'}></img></button>
+      </div>
     );
 
     const profileButton = (
-      <button className="btn profileButton" onClick={this.onProfileClick}>Profile</button>
+      <div className="authButtonWrapper">
+        <button className="btn profileButton" onClick={this.onProfileClick}>Profile<img className="authIcon" alt="" src={process.env.PUBLIC_URL + '/icons/auth-profile.svg'}></img></button>
+        <button className="btn profileButtonAlt" onClick={this.onProfileClick}><img className="authIconAlt" alt="" src={process.env.PUBLIC_URL + '/icons/auth-profile.svg'}></img></button>
+      </div>
     );
 
     const signUpWindow = (

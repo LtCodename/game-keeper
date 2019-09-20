@@ -14,6 +14,10 @@
   border-radius: 0;
 }
 
+.hideArrow {
+  height: 30px;
+}
+
 .navButton {
   font-family: var(--titles-font);
   color: rgba(0, 121, 197, 1);
@@ -71,11 +75,6 @@
   padding: 0;
   margin: 0 0 4px 0;
   background-color: var(--titles-color);
-}
-
-.hideNavButton i {
-  color: var(--content-color);
-  font-size: 20px;
 }
 
 @media (max-width: 1050px) {

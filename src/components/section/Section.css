@@ -51,6 +51,10 @@
     display: none;
   }
 
+  .positionPickerWrapper {
+    display: none;
+  }
+
   .nameAndButtonsWrapper {
     text-align: center;
     justify-content: center;

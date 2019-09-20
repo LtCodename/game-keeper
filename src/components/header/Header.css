@@ -36,12 +36,44 @@
   border-radius: 0;
   text-transform: uppercase;
   font-family: var(--titles-font);
-  font-size: 25px;
+  font-size: 21px;
   line-height: 0;
+}
+
+.profileButtonAlt {
+  background-color: #1885c7;
+  color: #fff9de;
+  border-radius: 0;
+  font-family: var(--titles-font);
+  margin: 0;
+  padding: 3px;
+  display: none;
+  margin-left: 5px;
+}
+
+.authIcon {
+  height: 25px;
+  margin-left: 5px;
+}
+
+.authIconAlt {
+  height: 25px;
 }
 
 @media (max-width: 1050px) {
   .logoWrapper .btn {
     font-size: 30px;
+  }
+
+  .authIcon {
+    margin-left: 0;
+  }
+
+  .profileButton {
+    display: none;
+  }
+
+  .profileButtonAlt {
+    display: block;
   }
 }
