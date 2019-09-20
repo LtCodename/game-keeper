@@ -16,6 +16,7 @@ class App extends React.Component {
 
     this.fecthUser();
     this.fecthDevelopers();
+    this.fecthPlatforms();
   }
 
   fecthUser() {
@@ -27,6 +28,14 @@ class App extends React.Component {
   fecthDevelopers() {
     firebase.firestore().collection('developers').get().then(snapshot => {
       this.props.fecthDevelopers(snapshot);
+    }).catch(error => {
+      console.log(error.message);
+    });
+  }
+
+  fecthPlatforms() {
+    firebase.firestore().collection('platforms').get().then(snapshot => {
+      this.props.fecthPlatforms(snapshot);
     }).catch(error => {
       console.log(error.message);
     });
@@ -87,6 +96,9 @@ const appDispatchToProps = (dispatch) => {
     },
     fecthDevelopers: (snapshot) => {
       dispatch({ type: reducers.actions.developersActions.DEVELOPERS_FETCH, snapshot: snapshot });
+    },
+    fecthPlatforms: (snapshot) => {
+      dispatch({ type: reducers.actions.platformsActions.PLATFORMS_FETCH, snapshot: snapshot });
     }
   }
 };

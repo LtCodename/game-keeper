@@ -1,6 +1,5 @@
 import React from 'react';
 import './BlockModalWindow.css';
-import platforms from '../block/platforms.js';
 import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
 import reducers from '../../redux/reducers';
 import { connect } from 'react-redux'
@@ -116,7 +115,7 @@ class BlockModalWindow extends React.Component {
   preparePlatformsForState(){
     const selectedPlatforms = this.props.gameData.platforms || [];
 
-    return platforms.map((elem, index) => {
+    return this.props.platforms.map((elem, index) => {
       return {
         id: index,
         name: elem.name,
@@ -405,7 +404,8 @@ const stateToProps = (state = {}) => {
   return {
     allLists: state.lists,
     listIndex: state.selectedListIndex,
-    developers: state.developers
+    developers: state.developers,
+    platforms: state.platforms
   }
 };
 
