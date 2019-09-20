@@ -26,10 +26,8 @@ class App extends React.Component {
   }
 
   fecthDevelopers() {
-    firebase.firestore().collection('developers').get().then(snapshot => {
+    firebase.firestore().collection('developers').onSnapshot(snapshot => {
       this.props.fecthDevelopers(snapshot);
-    }).catch(error => {
-      console.log(error.message);
     });
   }
 

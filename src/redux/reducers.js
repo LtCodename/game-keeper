@@ -137,6 +137,7 @@ const developersReducer = (state = defaultStore.developers, action) => {
     case DEVELOPERS_FETCH:
       action.snapshot.forEach(doc => {
         let otherData = doc.data();
+        console.log("here")
         copy.push({
           id: doc.id,
           ...otherData

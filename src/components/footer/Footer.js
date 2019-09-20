@@ -60,15 +60,15 @@ class Footer extends React.Component {
   render() {
     const shareIcons = (
       <div className="shareIconsWrapper">
-          <a className="shareIcons-a" href="https://www.linkedin.com/in/yevhen-chernenko/" target="blank"><img className="shareIcon" alt="" src={process.env.PUBLIC_URL + '/icons/share-linkedin.svg'}></img></a>
-          <a className="shareIcons-a" href="https://twitter.com/LtCodename" target="blank"><img className="shareIcon" alt="" src={process.env.PUBLIC_URL + '/icons/share-twitter.svg'}></img></a>
+          <a className="shareIcons-a shareLinkedinButton" href="https://www.linkedin.com/in/yevhen-chernenko/" target="blank"><img className="shareIcon" alt="" src={process.env.PUBLIC_URL + '/icons/share-linkedin.svg'}></img></a>
+          <a className="shareIcons-a shareTwitterButton" href="https://twitter.com/LtCodename" target="blank"><img className="shareIcon" alt="" src={process.env.PUBLIC_URL + '/icons/share-twitter.svg'}></img></a>
       </div>
     );
 
     const saveListsIcon = (
       <div className="saveIconsWrapper">
-          <button type="button" className="btn saveButton" onClick={this.onSaveLists}><img className="saveIcon" alt="" src={process.env.PUBLIC_URL + '/icons/save-lists.svg'}></img></button>
-          <button type="button" className="btn saveButton" onClick={this.onVersionClick}><img className="saveIcon" alt="" src={process.env.PUBLIC_URL + '/icons/version.svg'}></img></button>
+          <button type="button" className="btn saveButton saveListsButton" onClick={this.onSaveLists}><img className="saveIcon" alt="" src={process.env.PUBLIC_URL + '/icons/save-lists.svg'}></img></button>
+          <button type="button" className="btn saveButton checkVersionButton" onClick={this.onVersionClick}><img className="saveIcon" alt="" src={process.env.PUBLIC_URL + '/icons/version.svg'}></img></button>
       </div>
     );
 
@@ -79,7 +79,7 @@ class Footer extends React.Component {
     const alertWindow = (
       <AlertModalWindow
         title={`Game Keeper Alpha`}
-        message={`Version: 0.002a. Release date: 18.09.19`}/>
+        message={`Version: 0.006. Release date: 20.09.19.`}/>
     );
 
     return (

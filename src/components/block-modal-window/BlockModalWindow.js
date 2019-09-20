@@ -147,7 +147,6 @@ class BlockModalWindow extends React.Component {
       name: this.state.developerInputValue
     }).then(() => {
       firebase.firestore().collection('developers').get().then(snapshot => {
-        this.props.fecthDevelopers(snapshot);
 
         this.setState({
           developerInputValue: ""
@@ -393,9 +392,6 @@ const blockModalWindowDispatchToProps = (dispatch) => {
     },
     addGame: (saveData, listIndex, sectionIndex) => {
       dispatch({ type: reducers.actions.listsActions.BLOCK_ADD, saveData: saveData, listIndex: listIndex, sectionIndex: sectionIndex });
-    },
-    fecthDevelopers: (snapshot) => {
-      dispatch({ type: reducers.actions.developersActions.DEVELOPERS_FETCH, snapshot: snapshot });
     }
   }
 };

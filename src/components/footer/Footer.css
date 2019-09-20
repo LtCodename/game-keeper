@@ -36,16 +36,12 @@
 }
 
 @media (max-width: 450px) {
-  .shareIconsWrapper {
+
+  .saveListsButton {
     display: none;
   }
 
-  .saveIconsWrapper {
+  .shareLinkedinButton {
     display: none;
-  }
-
-  .footerWrapper {
-    justify-content: center;
-    padding-top: 5px;
   }
 }

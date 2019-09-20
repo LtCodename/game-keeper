@@ -158,7 +158,11 @@
     max-width: 100%;
   }
 
-  .gameBlockFooter {
+  .releaseDate {
     display: none;
+  }
+
+  .gameName {
+    font-size: 14px;
   }
 }
