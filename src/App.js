@@ -26,10 +26,7 @@ class App extends React.Component {
 
   fecthDevelopers() {
     firebase.firestore().collection('developers').get().then(snapshot => {
-      // snapshot.forEach(doc => {
-      //   console.log(doc.data())
-      //   console.log(doc.id)
-      // })
+      this.props.fecthDevelopers(snapshot);
     }).catch(error => {
       console.log(error.message);
     });
@@ -79,8 +76,7 @@ class App extends React.Component {
 
 const stateToProps = (state = {}) => {
   return {
-    selectedListIndex: state.selectedListIndex,
-    userData: state.userData
+    selectedListIndex: state.selectedListIndex
   }
 };
 
@@ -88,6 +84,9 @@ const appDispatchToProps = (dispatch) => {
   return {
     checkUserPresence: (user) => {
       dispatch({ type: reducers.actions.userActions.USER_CHECK, user: user });
+    },
+    fecthDevelopers: (snapshot) => {
+      dispatch({ type: reducers.actions.developersActions.DEVELOPERS_FETCH, snapshot: snapshot });
     }
   }
 };

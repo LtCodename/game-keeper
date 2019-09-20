@@ -10,13 +10,11 @@ class Footer extends React.Component {
     super(props);
 
     this.onSaveLists = this.onSaveLists.bind(this);
-    this.onSaveDevelopers = this.onSaveDevelopers.bind(this);
     this.onVersionClick = this.onVersionClick.bind(this);
     this.resetState = this.resetState.bind(this);
 
     this.state = {
       listsUrl: null,
-      developersUrl: null,
       showAlertWindow: false,
     };
   }
@@ -59,25 +57,6 @@ class Footer extends React.Component {
     $("#versionAlert").unbind('hidden.bs.modal');
   }
 
-  onSaveDevelopers() {
-    const stringified = JSON.stringify(this.props.developers);
-    const fileStructure = `const developers = ${stringified}; export default developers;`
-    const data = new Blob([fileStructure], {type: 'text/plain'});
-    if (this.state.developersUrl) {
-      window.URL.revokeObjectURL(this.state.developersUrl);
-    }
-    this.setState({
-      developersUrl: window.URL.createObjectURL(data)
-    }, () => {
-      let a = document.createElement('a');
-      a.href = this.state.developersUrl;
-      a.download = "developers.js";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    });
-  }
-
   render() {
     const shareIcons = (
       <div className="shareIconsWrapper">
@@ -89,7 +68,6 @@ class Footer extends React.Component {
     const saveListsIcon = (
       <div className="saveIconsWrapper">
           <button type="button" className="btn saveButton" onClick={this.onSaveLists}><img className="saveIcon" alt="" src={process.env.PUBLIC_URL + '/icons/save-lists.svg'}></img></button>
-          <button type="button" className="btn saveButton" onClick={this.onSaveDevelopers}><img className="saveIcon" alt="" src={process.env.PUBLIC_URL + '/icons/save-developers.svg'}></img></button>
           <button type="button" className="btn saveButton" onClick={this.onVersionClick}><img className="saveIcon" alt="" src={process.env.PUBLIC_URL + '/icons/version.svg'}></img></button>
       </div>
     );
@@ -117,8 +95,7 @@ class Footer extends React.Component {
 
 const stateToProps = (state = {}) => {
   return {
-    lists: state.lists,
-    developers: state.developers
+    lists: state.lists
   }
 };
 

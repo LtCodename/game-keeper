@@ -5,6 +5,7 @@ import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
 import reducers from '../../redux/reducers';
 import { connect } from 'react-redux'
 declare var $;
+declare var firebase;
 
 class BlockModalWindow extends React.Component {
 
@@ -143,10 +144,18 @@ class BlockModalWindow extends React.Component {
       return;
     }
 
-    this.props.updateDevelopers(this.state.developerInputValue);
+    firebase.firestore().collection('developers').add({
+      name: this.state.developerInputValue
+    }).then(() => {
+      firebase.firestore().collection('developers').get().then(snapshot => {
+        this.props.fecthDevelopers(snapshot);
 
-    this.setState({
-      developerInputValue: ""
+        this.setState({
+          developerInputValue: ""
+        });
+      }).catch(error => {
+        console.log(error.message);
+      });
     });
   }
 
@@ -377,9 +386,6 @@ class BlockModalWindow extends React.Component {
 
 const blockModalWindowDispatchToProps = (dispatch) => {
   return {
-    updateDevelopers: (newDeveloper) => {
-      dispatch({ type: reducers.actions.developersActions.DEVELOPER_ADD, newDeveloper: newDeveloper });
-    },
     saveBlock: (saveData, listIndex, sectionIndex, blockIndex, newListIndex, newSectionIndex) => {
       dispatch({ type: reducers.actions.listsActions.BLOCK_SAVE, saveData: saveData, listIndex: listIndex, sectionIndex: sectionIndex, blockIndex: blockIndex, newListIndex: newListIndex, newSectionIndex: newSectionIndex });
     },
@@ -388,15 +394,18 @@ const blockModalWindowDispatchToProps = (dispatch) => {
     },
     addGame: (saveData, listIndex, sectionIndex) => {
       dispatch({ type: reducers.actions.listsActions.BLOCK_ADD, saveData: saveData, listIndex: listIndex, sectionIndex: sectionIndex });
+    },
+    fecthDevelopers: (snapshot) => {
+      dispatch({ type: reducers.actions.developersActions.DEVELOPERS_FETCH, snapshot: snapshot });
     }
   }
 };
 
 const stateToProps = (state = {}) => {
   return {
-    developers: state.developers,
     allLists: state.lists,
-    listIndex: state.selectedListIndex
+    listIndex: state.selectedListIndex,
+    developers: state.developers
   }
 };
 

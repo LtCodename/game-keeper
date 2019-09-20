@@ -57,7 +57,7 @@ class Header extends React.Component {
   onLogOutClick() {
     firebase.auth().signOut().then(() => {
     }).catch(error => {
-      console.log(error);
+      console.log(error.message);
     });
     this.props.changeListIndex(null, this.props.allLists.length);
   }

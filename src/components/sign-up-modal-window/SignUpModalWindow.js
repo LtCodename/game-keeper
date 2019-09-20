@@ -41,7 +41,7 @@ class SignUpModalWindow extends React.Component {
       });
       this.props.close();
     }).catch(error => {
-      console.log(error);
+      console.log(error.message);
     });
   }
 

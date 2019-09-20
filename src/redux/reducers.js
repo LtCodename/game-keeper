@@ -1,6 +1,5 @@
 import lists from '../mocks/lists.js';
-import availableDevelopers from '../mocks/developers.js';
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 
 const deepCopy = function (objectToCopy) {
   return JSON.parse(JSON.stringify(objectToCopy));
@@ -8,7 +7,7 @@ const deepCopy = function (objectToCopy) {
 
 const defaultStore = {
   lists: lists,
-  developers: availableDevelopers,
+  developers: [],
   selectedListIndex: null,
   userData: null
 }
@@ -129,17 +128,19 @@ const listsReducer = (state = defaultStore.lists, action) => {
   }
 };
 
-const DEVELOPER_ADD = 'DEVELOPER_ADD';
+const DEVELOPERS_FETCH = 'DEVELOPERS_FETCH';
 
 const developersReducer = (state = defaultStore.developers, action) => {
-  const copy = deepCopy(state);
+  const copy = [];
   switch(action.type) {
-    case DEVELOPER_ADD:
-      const uniqueIndex = `id${new Date().getTime()}`;
-      copy.push({
-        id: uniqueIndex,
-        name: action.newDeveloper
-      })
+    case DEVELOPERS_FETCH:
+      action.snapshot.forEach(doc => {
+        let otherData = doc.data();
+        copy.push({
+          id: doc.id,
+          ...otherData
+        });
+      });
       return copy;
       break;
     default:
@@ -206,7 +207,7 @@ export default {
       SECTION_DELETE
     },
     developersActions: {
-      DEVELOPER_ADD
+      DEVELOPERS_FETCH
     },
     selectedListIndexActions: {
       SLI_CHANGE,
