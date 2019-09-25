@@ -7,3 +7,28 @@
   padding: 10px 20px;
   min-height: calc(100vh - 118px);
 }
+
+.blocksWrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.developersBlock {
+  background-color: var(--titles-color);
+  color: var(--content-color);
+  margin: 0 5px 5px 0;
+  text-transform: uppercase;
+  font-family: var(--titles-font);
+  font-size: 25px;
+  padding: 0 5px;
+}
+
+.deleteIcon {
+  height: 25px;
+}
+
+.deleteButton {
+  margin: 0 0 0 5px;;
+  padding: 0;
+  background-color: var(--titles-color);
+}

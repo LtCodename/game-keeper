@@ -1,7 +1,6 @@
 import React from 'react';
 import './Developers.css';
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom';
 
 class Developers extends React.Component {
   constructor(props) {
@@ -12,9 +11,30 @@ class Developers extends React.Component {
   }
 
   render() {
+
+    const developersToRender = this.props.developers.sort((a, b) => {
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      }
+      return 0;
+    }).map((elem, index) => {
+      return (
+        <div className="developersBlock" key={elem.id} value={elem.id}>
+          {elem.name}
+          <button className="btn deleteButton"><img className="deleteIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-developer.svg'}></img></button>
+        </div>
+      );
+    });
+
     return (
       <div className="developersWrapper">
-        <p>Developers</p>
+        <p>Press delete button to remove developer from Firestore. Items are sorted alphabetically.</p>
+        <div className="blocksWrapper">
+          {developersToRender}
+        </div>
       </div>
     )
   }
