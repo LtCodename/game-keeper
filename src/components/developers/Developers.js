@@ -18,15 +18,7 @@ class Developers extends React.Component {
   }
 
   render() {
-    const developersToRender = this.props.developers.sort((a, b) => {
-      if (a.name < b.name) {
-        return -1;
-      }
-      if (a.name > b.name) {
-        return 1;
-      }
-      return 0;
-    }).map((elem, index) => {
+    const developersToRender = this.props.developers.map((elem, index) => {
       return (
         <div className="developersBlock" key={elem.id} value={elem.id}>
           {elem.name}
