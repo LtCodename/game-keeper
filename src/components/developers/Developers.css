@@ -1,0 +1,9 @@
+.developersWrapper p {
+  color: var(--titles-color);
+}
+
+.developersWrapper {
+  background-color: var(--content-color);
+  padding: 10px 20px;
+  min-height: calc(100vh - 118px);
+}

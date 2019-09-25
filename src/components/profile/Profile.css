@@ -1,0 +1,18 @@
+.profileWrapper p {
+  color: var(--titles-color);
+}
+
+.profileWrapper {
+  background-color: var(--content-color);
+  padding: 10px 20px;
+  min-height: calc(100vh - 118px);
+}
+
+.developersButton {
+  border-radius: 0;
+  color: var(--content-color);
+  background-color: var(--titles-color);
+  text-transform: uppercase;
+  font-family: var(--titles-font);
+  font-size: 21px;
+}

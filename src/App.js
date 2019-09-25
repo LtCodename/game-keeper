@@ -5,6 +5,8 @@ import Nav from './components/nav/Nav.js';
 import Footer from './components/footer/Footer.js';
 import Header from './components/header/Header.js';
 import Dashboard from './components/dashboard/Dashboard.js';
+import Profile from './components/profile/Profile.js';
+import Developers from './components/developers/Developers.js';
 import reducers from './redux/reducers';
 import { connect } from 'react-redux'
 import { BrowserRouter, Route } from 'react-router-dom'
@@ -44,7 +46,7 @@ class App extends React.Component {
 
   render() {
     const dashboard = (
-      <Dashboard/>
+      <Route exact path="/" component={Dashboard} />
     );
 
     let listOrDashboard;
@@ -72,6 +74,8 @@ class App extends React.Component {
         <div className="appWrapper">
           <header>
             {header}
+            <Route path="/profile" component={Profile} />
+            <Route path="/developers" component={Developers} />
           </header>
           <div className="contentWrapper">
               {(this.props.selectedListIndex === null) ? "" : nav}

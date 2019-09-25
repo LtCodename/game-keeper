@@ -50,6 +50,11 @@ body {
   background-color: var(--footer-color);
 }
 
+.appWrappaer {
+  display: flex;
+  flex-direction: column;
+}
+
 .btn {
   margin-right: 3px;
   padding: 5px;
@@ -69,7 +74,7 @@ input {
 .allContent {
   padding: 0 0 20px 10px;
   flex: 1;
-  min-height: calc(100vh - 110px);
+  min-height: calc(100vh - 118px);
   max-width: calc(100% - 220px);
   background-color: var(--content-color);
 }
