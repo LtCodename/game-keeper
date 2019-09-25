@@ -1,17 +1,23 @@
 import React from 'react';
 import './Developers.css';
 import { connect } from 'react-redux'
+declare var firebase;
 
 class Developers extends React.Component {
   constructor(props) {
     super(props);
 
+    this.deleteItem = this.deleteItem.bind(this);
+
     this.state = {
     };
   }
 
-  render() {
+  deleteItem(id) {
+    firebase.firestore().collection('developers').doc(id).delete();
+  }
 
+  render() {
     const developersToRender = this.props.developers.sort((a, b) => {
       if (a.name < b.name) {
         return -1;
@@ -24,7 +30,7 @@ class Developers extends React.Component {
       return (
         <div className="developersBlock" key={elem.id} value={elem.id}>
           {elem.name}
-          <button className="btn deleteButton"><img className="deleteIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-developer.svg'}></img></button>
+          <button className="btn deleteButton" onClick={() => this.deleteItem(elem.id)}><img className="deleteIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-developer.svg'}></img></button>
         </div>
       );
     });
