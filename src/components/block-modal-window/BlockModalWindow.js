@@ -14,12 +14,14 @@ class BlockModalWindow extends React.Component {
     this.changeGameName = this.changeGameName.bind(this);
     this.doOnNameChange = this.doOnNameChange.bind(this);
     this.doOnAddDeveloper = this.doOnAddDeveloper.bind(this);
+    this.doOnSuggestDeveloper = this.doOnSuggestDeveloper.bind(this);
     this.doOnCancel = this.doOnCancel.bind(this);
     this.changeDescription = this.changeDescription.bind(this);
     this.descriptionInputValueChange = this.descriptionInputValueChange.bind(this);
     this.doOnDescriptionChange = this.doOnDescriptionChange.bind(this);
     this.nameInputValueChange = this.nameInputValueChange.bind(this);
     this.developerInputValueChange = this.developerInputValueChange.bind(this);
+    this.developerSuggestInputValueChange = this.developerSuggestInputValueChange.bind(this);
     this.dateInputValueChange = this.dateInputValueChange.bind(this);
     this.handleCheckboxInputChange = this.handleCheckboxInputChange.bind(this);
     this.deepCopy = this.deepCopy.bind(this);
@@ -38,6 +40,7 @@ class BlockModalWindow extends React.Component {
       localGameData: {...this.props.gameData, releaseDate: this.props.gameData.releaseDate || ""},
       nameInputValue: this.props.gameData.name,
       developerInputValue: "",
+      developerSuggestInputValue: "",
       descriptionInputValue: "",
       platforms: this.preparePlatformsForState(),
       showModalWindow: false,
@@ -73,6 +76,12 @@ class BlockModalWindow extends React.Component {
   developerInputValueChange(event) {
     this.setState({
       developerInputValue: event.target.value
+    });
+  }
+
+  developerSuggestInputValueChange(event) {
+    this.setState({
+      developerSuggestInputValue: event.target.value
     });
   }
 
@@ -147,9 +156,26 @@ class BlockModalWindow extends React.Component {
       name: this.state.developerInputValue
     }).then(() => {
       firebase.firestore().collection('developers').get().then(snapshot => {
-
         this.setState({
           developerInputValue: ""
+        });
+      }).catch(error => {
+        console.log(error.message);
+      });
+    });
+  }
+
+  doOnSuggestDeveloper() {
+    if (!this.state.developerSuggestInputValue) {
+      return;
+    }
+
+    firebase.firestore().collection('suggestedDevelopers').add({
+      name: this.state.developerSuggestInputValue
+    }).then(() => {
+      firebase.firestore().collection('suggestedDevelopers').get().then(snapshot => {
+        this.setState({
+          developerSuggestInputValue: ""
         });
       }).catch(error => {
         console.log(error.message);
@@ -327,12 +353,21 @@ class BlockModalWindow extends React.Component {
       </div>
     );
 
+    const suggestDeveloper = (
+      <div>
+        Suggest developer
+        <input className="form-control" type="text" placeholder="Developer Name" value={this.state.developerSuggestInputValue} onChange={this.developerSuggestInputValueChange}></input>
+        <button className="btn btn-dark" onClick={this.doOnSuggestDeveloper}>Suggest</button>
+      </div>
+    );
+
     const developerSelector = (
       <div className="modalPiece">
         Assing developer
         <select style={{fontWeight:"bold"}} value={devSelectValue} className="custom-select" onChange={this.developerChangeHandler}>
           {developerSectionOptions}
         </select>
+        {suggestDeveloper}
         {this.props.userData.admin ? addDeveloper : ""}
       </div>
     );

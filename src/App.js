@@ -7,6 +7,7 @@ import Header from './components/header/Header.js';
 import Dashboard from './components/dashboard/Dashboard.js';
 import Profile from './components/profile/Profile.js';
 import Developers from './components/developers/Developers.js';
+import Suggested from './components/suggested/Suggested.js';
 import reducers from './redux/reducers';
 import { connect } from 'react-redux'
 import { BrowserRouter, Route } from 'react-router-dom'
@@ -19,6 +20,7 @@ class App extends React.Component {
 
     this.fecthUser();
     this.fecthDevelopers();
+    this.fecthSuggested();
     this.fecthPlatforms();
   }
 
@@ -38,6 +40,14 @@ class App extends React.Component {
   fecthDevelopers() {
     firebase.firestore().collection('developers').orderBy("name").onSnapshot(snapshot => {
       this.props.fecthDevelopers(snapshot);
+    }, error => {
+      console.log(error.message);
+    });
+  }
+
+  fecthSuggested() {
+    firebase.firestore().collection('suggestedDevelopers').orderBy("name").onSnapshot(snapshot => {
+      this.props.fecthSuggestedDevelopers(snapshot);
     }, error => {
       console.log(error.message);
     });
@@ -83,6 +93,7 @@ class App extends React.Component {
             {header}
             <Route path="/profile" component={Profile} />
             <Route path="/developers" component={Developers} />
+            <Route path="/suggested" component={Suggested} />
           </header>
           <div className="contentWrapper">
               {(this.props.selectedListIndex === null) ? "" : nav}
@@ -110,6 +121,9 @@ const appDispatchToProps = (dispatch) => {
     },
     fecthDevelopers: (snapshot) => {
       dispatch({ type: reducers.actions.developersActions.DEVELOPERS_FETCH, snapshot: snapshot });
+    },
+    fecthSuggestedDevelopers: (snapshot) => {
+      dispatch({ type: reducers.actions.suggestedActions.SUGGESTED_FETCH, snapshot: snapshot });
     },
     fecthPlatforms: (snapshot) => {
       dispatch({ type: reducers.actions.platformsActions.PLATFORMS_FETCH, snapshot: snapshot });

@@ -8,6 +8,7 @@ const deepCopy = function (objectToCopy) {
 const defaultStore = {
   lists: lists,
   developers: [],
+  suggestedDevelopers: [],
   platforms: [],
   selectedListIndex: null,
   userData: null
@@ -149,6 +150,26 @@ const developersReducer = (state = defaultStore.developers, action) => {
   }
 };
 
+const SUGGESTED_FETCH = 'SUGGESTED_FETCH';
+
+const suggestedReducer = (state = defaultStore.suggestedDevelopers, action) => {
+  const copy = [];
+  switch(action.type) {
+    case SUGGESTED_FETCH:
+      action.snapshot.forEach(doc => {
+        let otherData = doc.data();
+        copy.push({
+          id: doc.id,
+          ...otherData
+        });
+      });
+      return copy;
+      break;
+    default:
+      return state;
+  }
+};
+
 const PLATFORMS_FETCH = 'PLATFORMS_FETCH';
 
 const platformsReducer = (state = defaultStore.platforms, action) => {
@@ -205,6 +226,7 @@ const selectedListIndexReducer = (state = defaultStore.selectedListIndex, action
 const rootReducer = combineReducers({
   lists: listsReducer,
   developers: developersReducer,
+  suggestedDevelopers: suggestedReducer,
   platforms: platformsReducer,
   selectedListIndex: selectedListIndexReducer,
   userData: userReducer
@@ -229,6 +251,9 @@ export default {
     },
     developersActions: {
       DEVELOPERS_FETCH
+    },
+    suggestedActions: {
+      SUGGESTED_FETCH
     },
     platformsActions: {
       PLATFORMS_FETCH

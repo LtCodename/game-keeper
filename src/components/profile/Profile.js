@@ -55,6 +55,10 @@ class Profile extends React.Component {
       <NavLink to="/developers"><button className="btn developersButton">Manage Developers</button></NavLink>
     );
 
+    const suggestedDevelopersButton = (
+      <NavLink to="/suggested"><button className="btn developersButton">Suggested Developers</button></NavLink>
+    );
+
     let adminSign = (<p></p>);
     if (this.props.userData !== null) {
       adminSign = (
@@ -67,6 +71,7 @@ class Profile extends React.Component {
         <p>Logged as {validEmail}</p>
         {adminSign}
         {this.props.userData.admin ? developersButton : ""}
+        {this.props.userData.admin ? suggestedDevelopersButton : ""}
         {this.props.userData.admin ? adminPanel : ""}
       </div>
     )
