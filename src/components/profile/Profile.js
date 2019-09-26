@@ -41,10 +41,6 @@ class Profile extends React.Component {
       validEmail = this.props.userData.email;
     }
 
-    if (this.props.userData !== null) {
-      console.log(`Admin rights: ${this.props.userData.admin}`);
-    }
-
     const adminPanel = (
       <form className="adminPanel" onSubmit={this.makeAdmin}>
         <div className="inputField">
@@ -59,9 +55,17 @@ class Profile extends React.Component {
       <NavLink to="/developers"><button className="btn developersButton">Manage Developers</button></NavLink>
     );
 
+    let adminSign = (<p></p>);
+    if (this.props.userData !== null) {
+      adminSign = (
+        <p>Permissions: {this.props.userData.admin ? "Admin" : "User"}</p>
+      );
+    }
+
     return (
       <div className="profileWrapper">
         <p>Logged as {validEmail}</p>
+        {adminSign}
         {this.props.userData.admin ? developersButton : ""}
         {this.props.userData.admin ? adminPanel : ""}
       </div>

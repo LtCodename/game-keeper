@@ -9,3 +9,8 @@
 .loginButton {
   margin-top: 5px;
 }
+
+.errorText {
+  color: #f64747;
+  margin-top: 10px;
+}

@@ -13,7 +13,8 @@ class LogInModalWindow extends React.Component {
 
     this.state = {
       emailInputValue: "",
-      passwordInputValue: ""
+      passwordInputValue: "",
+      errorText: ""
     };
   }
 
@@ -42,6 +43,9 @@ class LogInModalWindow extends React.Component {
       this.props.close();
     }).catch(error => {
       console.log(error.message);
+      this.setState({
+        errorText: error.message
+      });
     });
   }
 
@@ -68,6 +72,7 @@ class LogInModalWindow extends React.Component {
                 </div>
                 <button className="btn loginButton">Log In</button>
               </form>
+              <p className="errorText">{this.state.errorText}</p>
             </div>
             <div className="modal-footer">
               <button type="button" className="btn" data-dismiss="modal">OK</button>
