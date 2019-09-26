@@ -9,20 +9,58 @@ class Profile extends React.Component {
     super(props);
 
     this.emailValueChange = this.emailValueChange.bind(this);
+    this.nameValueChange = this.nameValueChange.bind(this);
     this.makeAdmin = this.makeAdmin.bind(this);
+    this.onChangeName = this.onChangeName.bind(this);
+    this.doOnCancel = this.doOnCancel.bind(this);
+    this.doOnSubmitName = this.doOnSubmitName.bind(this);
 
     if (props.userData === null) {
       props.history.push('/');
     }
 
     this.state = {
-      emailInputValue: ""
+      emailInputValue: "",
+      nameInputValue: "",
+      nameEditMode: false
     };
   }
 
   emailValueChange(event) {
     this.setState({
       emailInputValue: event.target.value
+    });
+  }
+
+  nameValueChange(event) {
+    this.setState({
+      nameInputValue: event.target.value
+    });
+  }
+
+  onChangeName() {
+    this.setState({
+      nameEditMode: true
+    });
+  }
+
+  doOnSubmitName() {
+    firebase.auth().currentUser.updateProfile({
+        displayName: this.state.nameInputValue
+    }).then(() => {
+      this.setState({
+        nameEditMode: false,
+        nameInputValue: ""
+      });
+    }, function (error) {
+        console.log(error.message);
+    });
+  }
+
+  doOnCancel() {
+    this.setState({
+      nameEditMode: false,
+      nameInputValue: ""
     });
   }
 
@@ -36,9 +74,14 @@ class Profile extends React.Component {
   }
 
   render() {
-    let validEmail = "";
+    let userEmail = "";
     if (this.props.userData !== null) {
-      validEmail = this.props.userData.email;
+      userEmail = this.props.userData.email;
+    }
+
+    let userName = "";
+    if (this.props.userData !== null) {
+      userName = this.props.userData.displayName;
     }
 
     const adminPanel = (
@@ -52,11 +95,23 @@ class Profile extends React.Component {
     );
 
     const developersButton = (
-      <NavLink to="/developers"><button className="btn developersButton">Manage Developers</button></NavLink>
+      <NavLink to="/developers"><button className="btn profileButtons">Manage Developers</button></NavLink>
     );
 
     const suggestedDevelopersButton = (
-      <NavLink to="/suggested"><button className="btn developersButton">Suggested Developers</button></NavLink>
+      <NavLink to="/suggested"><button className="btn profileButtons">Suggested Developers</button></NavLink>
+    );
+
+    const changeNameButton = (
+      <button className="btn profileButtons" onClick={this.onChangeName}>Change Name</button>
+    );
+
+    const changeNameForm = (
+      <div className="editNameWrapper">
+        <input className="form-control editNameInput" type="text" placeholder="Enter new name" value={this.state.nameInputValue} onChange={this.nameValueChange}></input>
+        <button className="btn btn-dark" onClick={this.doOnSubmitName}>OK</button>
+        <button className="btn" onClick={this.doOnCancel}>Cancel</button>
+      </div>
     );
 
     let adminSign = (<p></p>);
@@ -68,7 +123,9 @@ class Profile extends React.Component {
 
     return (
       <div className="profileWrapper">
-        <p>Logged as {validEmail}</p>
+        <p>Logged as {userEmail}</p>
+        <p>Display name: {userName}</p>
+        {this.state.nameEditMode ? changeNameForm : changeNameButton}
         {adminSign}
         {this.props.userData.admin ? developersButton : ""}
         {this.props.userData.admin ? suggestedDevelopersButton : ""}

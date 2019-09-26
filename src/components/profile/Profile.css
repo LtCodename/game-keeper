@@ -9,7 +9,7 @@
   min-height: calc(100vh - 118px);
 }
 
-.developersButton {
+.profileButtons {
   border-radius: 0;
   color: var(--content-color);
   background-color: var(--titles-color);
@@ -40,4 +40,12 @@
 
 .adminPanel {
   display: flex
+}
+
+.editNameWrapper {
+  margin-bottom: 15px;
+}
+
+.editNameInput {
+  width: 300px;
 }
