@@ -22,6 +22,10 @@ class App extends React.Component {
     this.fecthDevelopers();
     this.fecthSuggested();
     this.fecthPlatforms();
+
+    this.state = {
+      authDataLoaded: false
+    }
   }
 
   fecthUser() {
@@ -30,6 +34,9 @@ class App extends React.Component {
         user.getIdTokenResult().then(idTokenResult => {
           user.admin = idTokenResult.claims.admin;
           this.props.checkUserPresence(user);
+          this.setState({
+            authDataLoaded: true
+          })
         })
       }else {
         this.props.checkUserPresence(user);
@@ -86,14 +93,20 @@ class App extends React.Component {
       <Header/>
     );
 
+    const routes = (
+      <div>
+        <Route path="/profile" component={Profile} />
+        <Route path="/developers" component={Developers} />
+        <Route path="/suggested" component={Suggested} />
+      </div>
+    )
+
     return (
       <BrowserRouter>
         <div className="appWrapper">
           <header>
             {header}
-            <Route path="/profile" component={Profile} />
-            <Route path="/developers" component={Developers} />
-            <Route path="/suggested" component={Suggested} />
+            {this.state.authDataLoaded ? routes : ""}
           </header>
           <div className="contentWrapper">
               {(this.props.selectedListIndex === null) ? "" : nav}

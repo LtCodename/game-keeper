@@ -8,19 +8,19 @@
 .saveButton {
   background-color: inherit;
   padding: 0px;
-  margin-right: 10px;
+  margin-right: 15px;
 }
 
 .saveIcon {
-  height: 35px;
+  height: 37px;
 }
 
 .shareIcon {
-  height: 35px;
+  height: 37px;
 }
 
 .shareIcons-a {
-  margin-left: 10px;
+  margin-left: 15px;
 }
 
 .saveIconsWrapper {
@@ -33,6 +33,13 @@
   margin-right: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.copyrighth {
+  color: var(--content-color);
+  text-transform: uppercase;
+  font-family: var(--titles-font);
+  font-size: 30px;
 }
 
 @media (max-width: 450px) {

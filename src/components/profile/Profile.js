@@ -14,6 +14,7 @@ class Profile extends React.Component {
     this.onChangeName = this.onChangeName.bind(this);
     this.doOnCancel = this.doOnCancel.bind(this);
     this.doOnSubmitName = this.doOnSubmitName.bind(this);
+    this.onVerify = this.onVerify.bind(this);
 
     if (props.userData === null) {
       props.history.push('/');
@@ -22,7 +23,8 @@ class Profile extends React.Component {
     this.state = {
       emailInputValue: "",
       nameInputValue: "",
-      nameEditMode: false
+      nameEditMode: false,
+      verifyButtonText: "Verify Email"
     };
   }
 
@@ -41,6 +43,19 @@ class Profile extends React.Component {
   onChangeName() {
     this.setState({
       nameEditMode: true
+    });
+  }
+
+  onVerify() {
+
+    let actionCodeSettings = {
+      url: 'https://the-game-keeper.firebaseapp.com'
+    };
+
+    firebase.auth().currentUser.sendEmailVerification(actionCodeSettings).then(() => {
+      this.setState({
+        verifyButtonText:"Email Sent"
+      });
     });
   }
 
@@ -75,13 +90,20 @@ class Profile extends React.Component {
 
   render() {
     let userEmail = "";
+    let userName = "";
+    let userVerified = "";
+
     if (this.props.userData !== null) {
       userEmail = this.props.userData.email;
+      userName = this.props.userData.displayName;
+      userVerified = this.props.userData.emailVerified;
     }
 
-    let userName = "";
-    if (this.props.userData !== null) {
-      userName = this.props.userData.displayName;
+    let verifiedText = "";
+    if (userVerified) {
+      verifiedText = "(Verified)";
+    }else {
+      verifiedText = "(Not verified)";
     }
 
     const adminPanel = (
@@ -106,6 +128,10 @@ class Profile extends React.Component {
       <button className="btn profileButtons" onClick={this.onChangeName}>Change Name</button>
     );
 
+    const verifyButton = (
+      <button className="btn profileButtons" onClick={this.onVerify}>{this.state.verifyButtonText}</button>
+    );
+
     const changeNameForm = (
       <div className="editNameWrapper">
         <input className="form-control editNameInput" type="text" placeholder="Enter new name" value={this.state.nameInputValue} onChange={this.nameValueChange}></input>
@@ -123,7 +149,8 @@ class Profile extends React.Component {
 
     return (
       <div className="profileWrapper">
-        <p>Logged as {userEmail}</p>
+        <p>Logged as {userEmail} {verifiedText}</p>
+        {userVerified ? "" : verifyButton}
         <p>Display name: {userName}</p>
         {this.state.nameEditMode ? changeNameForm : changeNameButton}
         {adminSign}
