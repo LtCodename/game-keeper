@@ -8,6 +8,7 @@ import Dashboard from './components/dashboard/Dashboard.js';
 import Profile from './components/profile/Profile.js';
 import Developers from './components/developers/Developers.js';
 import Suggested from './components/suggested/Suggested.js';
+import Preloader from './components/preloader/Preloader.js';
 import reducers from './redux/reducers';
 import { connect } from 'react-redux'
 import { BrowserRouter, Route } from 'react-router-dom'
@@ -24,7 +25,10 @@ class App extends React.Component {
     this.fecthPlatforms();
 
     this.state = {
-      authDataLoaded: false
+      userDataLoaded: false,
+      developersDataLoaded: false,
+      suggestedDataLoaded: false,
+      platformsDataLoaded: false
     }
   }
 
@@ -35,8 +39,8 @@ class App extends React.Component {
           user.admin = idTokenResult.claims.admin;
           this.props.checkUserPresence(user);
           this.setState({
-            authDataLoaded: true
-          })
+            userDataLoaded: true
+          });
         })
       }else {
         this.props.checkUserPresence(user);
@@ -47,6 +51,9 @@ class App extends React.Component {
   fecthDevelopers() {
     firebase.firestore().collection('developers').orderBy("name").onSnapshot(snapshot => {
       this.props.fecthDevelopers(snapshot);
+      this.setState({
+        developersDataLoaded: true
+      });
     }, error => {
       console.log(error.message);
     });
@@ -55,6 +62,9 @@ class App extends React.Component {
   fecthSuggested() {
     firebase.firestore().collection('suggestedDevelopers').orderBy("name").onSnapshot(snapshot => {
       this.props.fecthSuggestedDevelopers(snapshot);
+      this.setState({
+        suggestedDataLoaded: true
+      });
     }, error => {
       console.log(error.message);
     });
@@ -63,6 +73,9 @@ class App extends React.Component {
   fecthPlatforms() {
     firebase.firestore().collection('platforms').get().then(snapshot => {
       this.props.fecthPlatforms(snapshot);
+      this.setState({
+        platformsDataLoaded: true
+      });
     }).catch(error => {
       console.log(error.message);
     });
@@ -101,21 +114,31 @@ class App extends React.Component {
       </div>
     )
 
+    const content = (
+      <div className="appWrapper">
+        <header>
+          {header}
+          {routes}
+        </header>
+        <div className="contentWrapper">
+            {(this.props.selectedListIndex === null) ? "" : nav}
+            {listOrDashboard}
+        </div>
+        <footer>
+          {footer}
+        </footer>
+      </div>
+    );
+
+    const fake = (
+      <div className="appWrapper">
+        <Preloader/>
+      </div>
+    );
+
     return (
       <BrowserRouter>
-        <div className="appWrapper">
-          <header>
-            {header}
-            {this.state.authDataLoaded ? routes : ""}
-          </header>
-          <div className="contentWrapper">
-              {(this.props.selectedListIndex === null) ? "" : nav}
-              {listOrDashboard}
-          </div>
-          <footer>
-            {footer}
-          </footer>
-        </div>
+        {(this.state.userDataLoaded && this.state.developersDataLoaded && this.state.suggestedDataLoaded && this.state.platformsDataLoaded) ? content : fake}
       </BrowserRouter>
     );
   }
