@@ -319,17 +319,21 @@ class BlockModalWindow extends React.Component {
 
     const devSelectValue = this.state.localGameData.developer || '';
 
+    const addDeveloper = (
+      <div>
+        Add developer
+        <input className="form-control" type="text" placeholder="Developer Name" value={this.state.developerInputValue} onChange={this.developerInputValueChange}></input>
+        <button className="btn btn-dark" onClick={this.doOnAddDeveloper}>Add</button>
+      </div>
+    );
+
     const developerSelector = (
       <div className="modalPiece">
         Assing developer
         <select style={{fontWeight:"bold"}} value={devSelectValue} className="custom-select" onChange={this.developerChangeHandler}>
           {developerSectionOptions}
         </select>
-        Add developer
-        <div>
-          <input className="form-control" type="text" placeholder="Developer Name" value={this.state.developerInputValue} onChange={this.developerInputValueChange}></input>
-          <button className="btn btn-dark" onClick={this.doOnAddDeveloper}>Add</button>
-        </div>
+        {this.props.userData.admin ? addDeveloper : ""}
       </div>
     );
 
@@ -393,7 +397,8 @@ const stateToProps = (state = {}) => {
     allLists: state.lists,
     listIndex: state.selectedListIndex,
     developers: state.developers,
-    platforms: state.platforms
+    platforms: state.platforms,
+    userData: state.userData
   }
 };
 

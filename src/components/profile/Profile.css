@@ -1,5 +1,6 @@
 .profileWrapper p {
   color: var(--titles-color);
+  margin-bottom: 15px;
 }
 
 .profileWrapper {
@@ -15,4 +16,28 @@
   text-transform: uppercase;
   font-family: var(--titles-font);
   font-size: 21px;
+  margin-bottom: 15px;
+}
+
+.addAdminButton {
+  border-radius: 0;
+  color: var(--content-color);
+  background-color: var(--titles-color);
+  text-transform: uppercase;
+  font-family: var(--titles-font);
+  font-size: 21px;
+}
+
+.emailInputLabel {
+  display: none;
+}
+
+.emailInput {
+  width: 250px;
+  height: 43px;
+  margin:0 10px 0 0;
+}
+
+.adminPanel {
+  display: flex
 }

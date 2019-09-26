@@ -24,7 +24,14 @@ class App extends React.Component {
 
   fecthUser() {
     firebase.auth().onAuthStateChanged(user => {
-      this.props.checkUserPresence(user);
+      if (user !== null) {
+        user.getIdTokenResult().then(idTokenResult => {
+          user.admin = idTokenResult.claims.admin;
+          this.props.checkUserPresence(user);
+        })
+      }else {
+        this.props.checkUserPresence(user);
+      }
     })
   }
 

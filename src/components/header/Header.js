@@ -4,7 +4,7 @@ import reducers from '../../redux/reducers';
 import { connect } from 'react-redux'
 import SignUpModalWindow from '../sign-up-modal-window/SignUpModalWindow.js';
 import LogInModalWindow from '../log-in-modal-window/LogInModalWindow.js';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 declare var $;
 declare var firebase;
 
@@ -49,6 +49,7 @@ class Header extends React.Component {
       console.log(error.message);
     });
     this.props.changeListIndex(null, this.props.allLists.length);
+    this.props.history.push('/');
   }
 
   closeSignUpModal() {
@@ -147,4 +148,4 @@ const stateToProps = (state = {}) => {
 
 const HeaderConnected = connect(stateToProps, headerDispatchToProps)(Header);
 
-export default HeaderConnected;
+export default withRouter(HeaderConnected);
