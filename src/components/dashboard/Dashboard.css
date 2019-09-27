@@ -1,5 +1,5 @@
 .dashboardWrapper {
-  background-color: var(--nav-color);
+  background-color: var(--first-color);
   min-height: calc(100vh - 118px);
   width: 100%;
   padding-bottom: 10px;
@@ -35,9 +35,9 @@
 .btnAddListFromDashboard {
   font-family: var(--titles-font);
   border-radius: 0;
-  background-color: var(--add-list-color);
+  background-color: var(--third-color);
   font-size: 41px;
-  color: rgba(0, 121, 197, 1);
+  color: var(--first-color);
   padding: 0;
   margin: 0;
   height: 200px;

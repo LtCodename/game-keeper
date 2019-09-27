@@ -1,5 +1,5 @@
 .footerWrapper {
-  background-color: var(--footer-color);
+  background-color: var(--third-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -35,11 +35,15 @@
   margin-bottom: 10px;
 }
 
-.copyrighth {
-  color: var(--content-color);
+.copyright {
+  color: var(--first-color);
   text-transform: uppercase;
   font-family: var(--titles-font);
   font-size: 30px;
+}
+
+.copyright:hover, .copyright:focus {
+  color: var(--first-color);
 }
 
 @media (max-width: 450px) {

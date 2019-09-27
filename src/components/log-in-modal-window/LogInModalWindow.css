@@ -11,6 +11,6 @@
 }
 
 .errorText {
-  color: #f64747;
+  color: var(--color-sunset-orange);
   margin-top: 10px;
 }

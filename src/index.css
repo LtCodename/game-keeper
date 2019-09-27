@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  /*Section Colors*/
   /*Blue*/
   --color-air-force-blue: rgba(75, 119, 190, 1);
   --color-alice-blue: rgba(228, 241, 254, 1);
@@ -31,23 +32,21 @@
   --color-supernova: rgba(255, 203, 5, 1);
   --color-cape-honey: rgba(253, 227, 167, 1);
 
-  --nav-color: rgba(0, 121, 197, 1);
-  --content-color: rgba(0, 121, 197, 1);
-  --list-color: rgba(255, 246, 143, 1);
-  --add-list-color: rgba(240, 240, 214, 1);
-  --titles-color: rgba(255, 249, 222, 1);
-  --footer-color: rgba(255, 249, 222, 1);
-  --header-color: rgba(255, 249, 222, 1);
-
+  /*Fonts*/
   --main-font: 'Comfortaa', cursive;
   --titles-font: 'Luckiest Guy', cursive;
+
+  /*Main Colors*/
+  --first-color: rgba(0, 121, 197, 1);
+  --second-color: rgba(255, 246, 143, 1);
+  --third-color: rgba(255, 249, 222, 1);
 }
 
 body {
   font-family: var(--main-font);
   padding: 0;
   margin: 0;
-  background-color: var(--footer-color);
+  background-color: var(--third-color);
 }
 
 .appWrappaer {
@@ -68,7 +67,7 @@ input {
   display: flex;
   position: relative;
   align-items: flex-start;
-  background-color: var(--content-color);
+  background-color: var(--first-color);
 }
 
 .allContent {
@@ -76,7 +75,7 @@ input {
   flex: 1;
   min-height: calc(100vh - 118px);
   max-width: calc(100% - 220px);
-  background-color: var(--content-color);
+  background-color: var(--first-color);
 }
 
 ul {
@@ -84,11 +83,11 @@ ul {
 }
 
 h2, p {
-  color: var(--titles-color);
+  color: var(--third-color);
 }
 
 h1 {
-  color: var(--list-color);
+  color: var(--second-color);
 }
 
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {

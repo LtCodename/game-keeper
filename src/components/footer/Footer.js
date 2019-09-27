@@ -73,7 +73,7 @@ class Footer extends React.Component {
     );
 
     const copyrighth = (
-      <a className="copyrighth" href="" target="blank">© 2019 The Codename</a>
+      <a className="copyright" href="" target="blank">© 2019 The Codename</a>
     );
 
     const alertWindow = (

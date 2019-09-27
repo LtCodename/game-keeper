@@ -28,7 +28,7 @@
   width: 60px;
   height: 35px;
   margin-left: 4px;
-  background-color: var(--add-list-color);
+  background-color: var(--second-color);
 }
 
 .listWrapper {
@@ -42,7 +42,7 @@
   padding: 0;
   width: 30px;
   margin-right: 10px;
-  background-color: var(--content-color);
+  background-color: var(--first-color);
 }
 
 .actionButtons {

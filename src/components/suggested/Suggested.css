@@ -1,9 +1,9 @@
 .suggestedWrapper p {
-  color: var(--titles-color);
+  color: var(--third-color);
 }
 
 .suggestedWrapper {
-  background-color: var(--content-color);
+  background-color: var(--first-color);
   padding: 10px 20px;
   min-height: calc(100vh - 118px);
 }
@@ -14,8 +14,8 @@
 }
 
 .developersBlock {
-  background-color: var(--titles-color);
-  color: var(--content-color);
+  background-color: var(--third-color);
+  color: var(--first-color);
   margin: 0 5px 5px 0;
   text-transform: uppercase;
   font-family: var(--titles-font);
@@ -30,5 +30,5 @@
 .actionButton {
   margin: 0 0 0 5px;;
   padding: 0;
-  background-color: var(--titles-color);
+  background-color: var(--third-color);
 }

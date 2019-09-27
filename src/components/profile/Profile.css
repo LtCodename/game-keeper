@@ -1,18 +1,18 @@
 .profileWrapper p {
-  color: var(--titles-color);
+  color: var(--third-color);
   margin-bottom: 15px;
 }
 
 .profileWrapper {
-  background-color: var(--content-color);
+  background-color: var(--first-color);
   padding: 10px 20px;
   min-height: calc(100vh - 118px);
 }
 
 .profileButtons {
   border-radius: 0;
-  color: var(--content-color);
-  background-color: var(--titles-color);
+  color: var(--first-color);
+  background-color: var(--third-color);
   text-transform: uppercase;
   font-family: var(--titles-font);
   font-size: 21px;
@@ -22,8 +22,8 @@
 
 .addAdminButton {
   border-radius: 0;
-  color: var(--content-color);
-  background-color: var(--titles-color);
+  color: var(--first-color);
+  background-color: var(--third-color);
   text-transform: uppercase;
   font-family: var(--titles-font);
   font-size: 21px;

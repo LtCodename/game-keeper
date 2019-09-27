@@ -6,8 +6,8 @@
 .logoWrapper .btn {
   width: auto;
   font-family: var(--titles-font);
-  background-color: var(--header-color);
-  color: var(--content-color);
+  background-color: var(--third-color);
+  color: var(--first-color);
   font-size: 41px;
   padding: 0;
   margin: 0;
@@ -19,7 +19,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  background-color: var(--header-color);
+  background-color: var(--third-color);
   padding: 0 20px;
 }
 
@@ -31,8 +31,8 @@
 .profileButton {
   height: 40px;
   margin-left: 10px;
-  background-color: #1885c7;
-  color: #fff9de;
+  background-color: var(--first-color);
+  color: var(--third-color);
   border-radius: 0;
   text-transform: uppercase;
   font-family: var(--titles-font);
@@ -41,8 +41,8 @@
 }
 
 .profileButtonAlt {
-  background-color: #1885c7;
-  color: #fff9de;
+  background-color: var(--first-color);
+  color: var(--third-color);
   border-radius: 0;
   font-family: var(--titles-font);
   margin: 0;

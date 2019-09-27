@@ -1,6 +1,6 @@
 .preloaderContent {
   height: calc(100vh - 118px);
-  background-color: var(--nav-color);
+  background-color: var(--first-color);
 }
 
 .loaderWrapper {

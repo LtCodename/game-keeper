@@ -1,9 +1,9 @@
 .modalParagraph {
-  color: black;
+  color: #000000;
 }
 
 .modalPiece {
-  border: 1px solid black;
+  border: 1px solid #000000;
   padding: 5px;
   margin-bottom: 5px;
 }

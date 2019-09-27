@@ -135,7 +135,7 @@ class Section extends React.Component {
           <button className="btn" onClick={this.openModalWarningWindow}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-section.svg'}></img></button>
         </div>
         <div className="positionPickerWrapper">
-          <select value={this.props.sectionIndex} className="custom-select listPositionPicker" onChange={this.sectionPositionChangeHandler}>
+          <select value={this.props.sectionIndex} className="custom-select sectionPositionPicker" onChange={this.sectionPositionChangeHandler}>
             {positionOptions}
           </select>
         </div>
