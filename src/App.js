@@ -28,7 +28,8 @@ class App extends React.Component {
       userDataLoaded: false,
       developersDataLoaded: false,
       suggestedDataLoaded: false,
-      platformsDataLoaded: false
+      platformsDataLoaded: false,
+      unauthorized: false,
     }
   }
 
@@ -44,6 +45,9 @@ class App extends React.Component {
         })
       }else {
         this.props.checkUserPresence(user);
+        this.setState({
+          unauthorized: true
+        });
       }
     })
   }
@@ -135,10 +139,10 @@ class App extends React.Component {
         <Preloader/>
       </div>
     );
-
+    
     return (
       <BrowserRouter>
-        {(this.state.userDataLoaded && this.state.developersDataLoaded && this.state.suggestedDataLoaded && this.state.platformsDataLoaded) ? content : fake}
+        {((this.state.userDataLoaded && this.state.developersDataLoaded && this.state.suggestedDataLoaded && this.state.platformsDataLoaded) || this.state.unauthorized) ? content : fake}
       </BrowserRouter>
     );
   }

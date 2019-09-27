@@ -15,7 +15,7 @@ class AlertModalWindow extends React.Component {
               </button>
             </div>
             <div className="modalBody">
-              <p className="modal-message">{this.props.message}</p>
+              <p className="modalMessage">{this.props.message}</p>
             </div>
             <div className="modal-footer">
               <button type="button" className="btn" data-dismiss="modal">OK</button>

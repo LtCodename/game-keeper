@@ -2,6 +2,7 @@ import React from 'react';
 import './Developers.css';
 import { connect } from 'react-redux'
 import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
+import EditNameModalWindow from '../edit-name-modal-window/EditNameModalWindow.js';
 declare var firebase;
 declare var $;
 
@@ -11,12 +12,17 @@ class Developers extends React.Component {
 
     this.deleteItem = this.deleteItem.bind(this);
     this.onDeleteItem = this.onDeleteItem.bind(this);
+    this.onEditItem = this.onEditItem.bind(this);
     this.openModalWarningWindow = this.openModalWarningWindow.bind(this);
     this.resetState = this.resetState.bind(this);
+    this.editItem = this.editItem.bind(this);
 
     this.state = {
       idToDelete: "",
-      showModalWindow: false
+      idToEdit: "",
+      oldName: "",
+      showWarningWindow: false,
+      showEditWindow: false
     };
   }
 
@@ -36,9 +42,38 @@ class Developers extends React.Component {
     );
   }
 
+  editItem(newName, id) {
+    firebase.firestore().collection('developers').doc(id).update({
+      name: newName
+    }).then(() => {
+      this.resetState();
+    }).catch(error => {
+      console.log(error.message);
+    });
+  }
+
+  onEditItem(id, oldName) {
+    this.setState({
+      idToEdit: id,
+      oldName: oldName
+    },() => {
+        this.openEditWindow();
+      }
+    );
+  }
+
+  openEditWindow() {
+    this.setState({
+      showEditWindow: true
+    }, () => {
+      $("#editNameWindow").modal('show');
+      $("#editNameWindow").on('hidden.bs.modal', this.resetState);
+    });
+  }
+
   openModalWarningWindow() {
     this.setState({
-      showModalWindow: true
+      showWarningWindow: true
     }, () => {
       $("#modalWarning").modal('show');
       $("#modalWarning").on('hidden.bs.modal', this.resetState);
@@ -47,11 +82,15 @@ class Developers extends React.Component {
 
   componentWillUnmount() {
     $("#modalWarning").unbind('hidden.bs.modal');
+    $("#editNameWindow").unbind('hidden.bs.modal');
   }
 
   resetState() {
     this.setState({
-      showModalWindow: false,
+      showWarningWindow: false,
+      showEditWindow: false,
+      idToEdit: "",
+      oldName: "",
       idToDelete: ""
     });
   }
@@ -65,7 +104,7 @@ class Developers extends React.Component {
             <img className="deleteIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-developer.svg'}></img>
           </button>
           <button className="btn actionButton">
-            <img className="deleteIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-developer.svg'}></img>
+            <img className="deleteIcon" onClick={() => this.onEditItem(elem.id, elem.name)} alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-developer.svg'}></img>
           </button>
         </div>
       );
@@ -77,6 +116,11 @@ class Developers extends React.Component {
         message={`Are you sure you want to delete this item?`} />
     );
 
+    const modalEditWindow = (
+      <EditNameModalWindow
+        onProceed={(newName) => this.editItem(newName, this.state.idToEdit)} oldName={this.state.oldName} />
+    );
+
     return (
       <div className="developersWrapper">
         <p>Edit or delete developers from database. Items are sorted alphabetically.</p>
@@ -84,7 +128,8 @@ class Developers extends React.Component {
           {developersToRender}
         </div>
 
-        {this.state.showModalWindow ? modalWarningWindow : ""}
+        {this.state.showWarningWindow ? modalWarningWindow : ""}
+        {this.state.showEditWindow ? modalEditWindow : ""}
       </div>
     )
   }

@@ -17,6 +17,7 @@
   font-family: var(--titles-font);
   font-size: 21px;
   margin-bottom: 15px;
+  margin-right: 10px;
 }
 
 .addAdminButton {
