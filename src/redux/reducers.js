@@ -18,7 +18,6 @@ const defaultStore = {
 }
 
 const LIST_RENAME = 'LIST_RENAME';
-const LIST_ADD = 'LIST_ADD';
 const LIST_ADD_SECTION = 'LIST_ADD_SECTION';
 const LIST_DELETE = 'LIST_DELETE';
 const LIST_CHANGE_POSITION = 'LIST_CHANGE_POSITION';
@@ -42,19 +41,6 @@ const listsReducer = (state = defaultStore.lists, action) => {
         return copy;
       } else {
         return state;
-      }
-      break;
-    case LIST_ADD:
-      uniqueIndex = `id${new Date().getTime()}`;
-      if (!action.listName) {
-        return state;
-      }else {
-        copy.push({
-          id: uniqueIndex,
-          name: action.listName,
-          content: []
-        });
-        return copy;
       }
       break;
     case LIST_DELETE:
@@ -283,7 +269,6 @@ export default {
   actions: {
     listsActions: {
       LIST_RENAME,
-      LIST_ADD,
       LIST_DELETE,
       LIST_CHANGE_POSITION,
       LIST_ADD_SECTION,

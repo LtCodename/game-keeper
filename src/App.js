@@ -90,21 +90,21 @@ class App extends React.Component {
   }
 
   fecthData(uid) {
-    firebase.firestore().collection('users').doc(uid).get().then(doc => {
-      if (doc.exists) {
-         console.log("Document data:", doc.data());
-         const allUserData = doc.data() || {};
-         this.props.setListsToStore(allUserData.lists);
-         this.props.setSectionsToStore(allUserData.sections);
-         this.props.setBlocksToStore(allUserData.blocks);
-     } else {
-         console.log("No such document!");
-     }this.setState({
-       userDataLoaded: true
-     });
-    }).catch(error => {
-      console.log(error.message);
-    });
+    firebase.firestore().collection('users').doc(uid).onSnapshot(
+      doc => {
+        if (doc.exists) {
+           console.log("Document data:", doc.data());
+           const allUserData = doc.data() || {};
+           this.props.setListsToStore(allUserData.lists);
+           this.props.setSectionsToStore(allUserData.sections);
+           this.props.setBlocksToStore(allUserData.blocks);
+       } else {
+           console.log("No such document!");
+       }this.setState({
+         userDataLoaded: true
+       });
+      }
+    );
   }
 
   render() {

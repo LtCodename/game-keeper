@@ -3,6 +3,7 @@ import './AddListModalWindow.css';
 import reducers from '../../redux/reducers';
 import { connect } from 'react-redux'
 declare var $;
+declare var firebase;
 
 class AddListModalWindow extends React.Component {
 
@@ -51,7 +52,20 @@ class AddListModalWindow extends React.Component {
       return;
     }
 
-    this.props.addList(this.state.nameInputValue);
+    const newList = {
+      id: `id${new Date().getTime()}`,
+      name: this.state.nameInputValue
+    }
+
+    const allLists = [...this.props.userLists, newList];
+
+    firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+      lists: allLists
+    }).then((data) => {
+    }).catch(error => {
+      console.log(error.message);
+    });
+
     $("#addListWindow").modal('hide');
   }
 
@@ -91,14 +105,13 @@ class AddListModalWindow extends React.Component {
   }
 }
 
-const addListModalWindowDispatchToProps = (dispatch) => {
+const stateToProps = (state = {}) => {
   return {
-    addList: (listName) => {
-      dispatch({ type: reducers.actions.listsActions.LIST_ADD, listName: listName});
-    }
+    userLists: state.userLists,
+    userData: state.userData
   }
 };
 
-const AddListModalWindowConnected = connect(null, addListModalWindowDispatchToProps)(AddListModalWindow);
+const AddListModalWindowConnected = connect(stateToProps, null)(AddListModalWindow);
 
 export default AddListModalWindowConnected;
