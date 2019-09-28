@@ -7,6 +7,9 @@ const deepCopy = function (objectToCopy) {
 
 const defaultStore = {
   lists: lists,
+  userLists: [],
+  userSections: [],
+  userBlocks: [],
   developers: [],
   suggestedDevelopers: [],
   platforms: [],
@@ -170,6 +173,46 @@ const suggestedReducer = (state = defaultStore.suggestedDevelopers, action) => {
   }
 };
 
+//****************
+
+const LISTS_SET = 'LISTS_SET';
+
+const userListsReducer = (state = defaultStore.userLists, action) => {
+  switch(action.type) {
+    case LISTS_SET:
+      return action.lists;
+      break;
+    default:
+      return state;
+  }
+};
+
+const SECTIONS_SET = 'SECTIONS_SET';
+
+const userSectionsReducer = (state = defaultStore.userSections, action) => {
+  switch(action.type) {
+    case SECTIONS_SET:
+      return action.sections;
+      break;
+    default:
+      return state;
+  }
+};
+
+const BLOCKS_SET = 'BLOCKS_SET';
+
+const userBlocksReducer = (state = defaultStore.userBlocks, action) => {
+  switch(action.type) {
+    case BLOCKS_SET:
+      return action.blocks;
+      break;
+    default:
+      return state;
+  }
+};
+
+//****************
+
 const PLATFORMS_FETCH = 'PLATFORMS_FETCH';
 
 const platformsReducer = (state = defaultStore.platforms, action) => {
@@ -225,6 +268,9 @@ const selectedListIndexReducer = (state = defaultStore.selectedListIndex, action
 
 const rootReducer = combineReducers({
   lists: listsReducer,
+  userLists: userListsReducer,
+  userSections: userSectionsReducer,
+  userBlocks: userBlocksReducer,
   developers: developersReducer,
   suggestedDevelopers: suggestedReducer,
   platforms: platformsReducer,
@@ -261,6 +307,15 @@ export default {
     selectedListIndexActions: {
       SLI_CHANGE,
       SLI_CHANGE_ON_DELETE
+    },
+    userListsActions: {
+      LISTS_SET
+    },
+    userSectionsActions: {
+      SECTIONS_SET
+    },
+    userBlocksActions: {
+      BLOCKS_SET
     },
     userActions: {
       USER_CHECK

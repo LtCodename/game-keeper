@@ -22,7 +22,7 @@ class List extends React.Component {
     this.resetState = this.resetState.bind(this);
     this.listPositionChangeHandler = this.listPositionChangeHandler.bind(this);
     this.beforeAddingNewSection = this.beforeAddingNewSection.bind(this);
-
+    
     this.state = {
       renameListMode: false,
       addSectionMode: false,

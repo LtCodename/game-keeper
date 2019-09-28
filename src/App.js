@@ -19,6 +19,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.fecthData = this.fecthData.bind(this);
+
     this.fecthUser();
     this.fecthDevelopers();
     this.fecthSuggested();
@@ -26,30 +28,12 @@ class App extends React.Component {
 
     this.state = {
       userDataLoaded: false,
+      userAuthDataLoaded: false,
       developersDataLoaded: false,
       suggestedDataLoaded: false,
       platformsDataLoaded: false,
       unauthorized: false,
     }
-  }
-
-  fecthUser() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user !== null) {
-        user.getIdTokenResult().then(idTokenResult => {
-          user.admin = idTokenResult.claims.admin;
-          this.props.checkUserPresence(user);
-          this.setState({
-            userDataLoaded: true
-          });
-        })
-      }else {
-        this.props.checkUserPresence(user);
-        this.setState({
-          unauthorized: true
-        });
-      }
-    })
   }
 
   fecthDevelopers() {
@@ -80,6 +64,44 @@ class App extends React.Component {
       this.setState({
         platformsDataLoaded: true
       });
+    }).catch(error => {
+      console.log(error.message);
+    });
+  }
+
+  fecthUser() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user !== null) {
+        user.getIdTokenResult().then(idTokenResult => {
+          user.admin = idTokenResult.claims.admin;
+          this.props.checkUserPresence(user);
+          this.setState({
+            userAuthDataLoaded: true
+          });
+        });
+        this.fecthData(user.uid);
+      }else {
+        this.props.checkUserPresence(user);
+        this.setState({
+          unauthorized: true
+        });
+      }
+    })
+  }
+
+  fecthData(uid) {
+    firebase.firestore().collection('users').doc(uid).get().then(doc => {
+      if (doc.exists) {
+         console.log("Document data:", doc.data());
+         const allUserData = doc.data() || {};
+         this.props.setListsToStore(allUserData.lists);
+         this.props.setSectionsToStore(allUserData.sections);
+         this.props.setBlocksToStore(allUserData.blocks);
+     } else {
+         console.log("No such document!");
+     }this.setState({
+       userDataLoaded: true
+     });
     }).catch(error => {
       console.log(error.message);
     });
@@ -139,10 +161,14 @@ class App extends React.Component {
         <Preloader/>
       </div>
     );
-    
+
     return (
       <BrowserRouter>
-        {((this.state.userDataLoaded && this.state.developersDataLoaded && this.state.suggestedDataLoaded && this.state.platformsDataLoaded) || this.state.unauthorized) ? content : fake}
+        {((this.state.userDataLoaded
+           && this.state.developersDataLoaded
+           && this.state.suggestedDataLoaded
+           && this.state.userAuthDataLoaded
+           && this.state.platformsDataLoaded) || this.state.unauthorized) ? content : fake}
       </BrowserRouter>
     );
   }
@@ -167,6 +193,15 @@ const appDispatchToProps = (dispatch) => {
     },
     fecthPlatforms: (snapshot) => {
       dispatch({ type: reducers.actions.platformsActions.PLATFORMS_FETCH, snapshot: snapshot });
+    },
+    setListsToStore: (lists) => {
+      dispatch({ type: reducers.actions.userListsActions.LISTS_SET, lists: lists });
+    },
+    setSectionsToStore: (sections) => {
+      dispatch({ type: reducers.actions.userSectionsActions.SECTIONS_SET, sections: sections });
+    },
+    setBlocksToStore: (blocks) => {
+      dispatch({ type: reducers.actions.userBlocksActions.BLOCKS_SET, blocks: blocks });
     }
   }
 };
