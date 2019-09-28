@@ -33,7 +33,7 @@ const listBlockDispatchToProps = (dispatch) => {
 
 const stateToProps = (state = {}) => {
   return {
-    allLists: state.lists
+    allLists: state.userLists
   }
 };
 

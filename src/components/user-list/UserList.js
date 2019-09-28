@@ -1,17 +1,19 @@
 import React from 'react';
 import Section from '../section/Section.js';
 import Colors from '../colors/Colors.js';
-import './List.css';
+import './UserList.css';
 import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
 import reducers from '../../redux/reducers';
 import { connect } from 'react-redux'
 declare var $;
+declare var firebase;
 
-class List extends React.Component {
+class UserList extends React.Component {
   constructor(props) {
     super(props);
 
     this.doOnEdit = this.doOnEdit.bind(this);
+    this.onDeleteList = this.onDeleteList.bind(this);
     this.doOnCancel = this.doOnCancel.bind(this);
     this.doOnSubmitListName = this.doOnSubmitListName.bind(this);
     this.doOnAddSection = this.doOnAddSection.bind(this);
@@ -21,12 +23,12 @@ class List extends React.Component {
     this.openModalWarningWindow = this.openModalWarningWindow.bind(this);
     this.resetState = this.resetState.bind(this);
     this.listPositionChangeHandler = this.listPositionChangeHandler.bind(this);
-    this.beforeAddingNewSection = this.beforeAddingNewSection.bind(this);
-    
+    this.addNewSection = this.addNewSection.bind(this);
+
     this.state = {
       renameListMode: false,
       addSectionMode: false,
-      listNameInputValue: this.props.allLists[this.props.listIndex].name,
+      listNameInputValue: this.props.userLists[this.props.listIndex].name,
       sectionNameInputValue: "",
       colorFofNewSection: "",
       showModalWindow: false
@@ -38,17 +40,48 @@ class List extends React.Component {
     newListName: ""
   }
 
-  beforeAddingNewSection() {
+  addNewSection() {
     if (!this.state.sectionNameInputValue) {
       this.doOnCancel();
       return;
     }
 
-    this.props.addSection(this.state.sectionNameInputValue, this.state.colorForNewSection, this.props.listIndex);
+    const newSection = {
+      id: `id${new Date().getTime()}`,
+      name: this.state.sectionNameInputValue,
+      color: this.state.colorForNewSection || "ce-soir",
+      listId: this.props.userLists[this.props.listIndex].id
+    }
+
+    const allSections = [...this.props.userSections, newSection];
+
+    firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+      sections: allSections
+    }).then((data) => {
+    }).catch(error => {
+      console.log(error.message);
+    });
+
+    this.setState({
+      colorForNewSection: ""
+    });
   }
 
   listPositionChangeHandler(event) {
-    this.props.changeListPosition(event.target.value, this.props.listIndex, this.props.allLists.length);
+    const copy = [...this.props.userLists];
+    if (this.props.listIndex === event.target.value) {
+      return;
+    }
+    let spliced = copy.splice(this.props.listIndex, 1);
+    copy.splice(event.target.value, 0, spliced[0]);
+
+    this.props.changeListIndex(event.target.value, this.props.userLists.length);
+    firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+      lists: copy
+    }).then((data) => {
+    }).catch(error => {
+      console.log(error.message);
+    });
   }
 
   openModalWarningWindow() {
@@ -94,7 +127,7 @@ class List extends React.Component {
     if (!this.state.renameListMode) {
       this.setState({
         renameListMode: true,
-        listNameInputValue: this.props.allLists[this.props.listIndex].name
+        listNameInputValue: this.props.userLists[this.props.listIndex].name
       });
     }
   }
@@ -103,17 +136,32 @@ class List extends React.Component {
     this.setState({
       renameListMode: false,
       addSectionMode: false,
-      listNameInputValue: this.props.allLists[this.props.listIndex].name,
+      listNameInputValue: this.props.userLists[this.props.listIndex].name,
       sectionNameInputValue: ""
     });
   }
 
   doOnSubmitListName() {
-    this.props.rename(this.props.listIndex, this.state.listNameInputValue);
+    const copy = [...this.props.userLists];
 
-    this.setState({
-      renameListMode: false,
-      listNameInputValue: ""
+    copy[this.props.listIndex] = {
+      ...copy[this.props.listIndex],
+      name: this.state.listNameInputValue
+    };
+
+    firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+      lists: copy
+    }).then((data) => {
+      this.setState({
+        renameListMode: false,
+        listNameInputValue: ""
+      });
+    }).catch(error => {
+      this.setState({
+        renameListMode: false,
+        listNameInputValue: ""
+      });
+      console.log(error.message);
     });
   }
 
@@ -129,23 +177,36 @@ class List extends React.Component {
     });
   }
 
-  render() {
-    const sectionsToRender = this.props.allLists[this.props.listIndex].content.map((elem, index) => {
+  onDeleteList() {
+    const copy = [...this.props.userLists];
+    copy.splice(this.props.listIndex, 1);
 
-      return (
-        <Section
-          key={elem.id}
-          id={elem.id}
-          sectionIndex={index}/>);
-    })
+    this.props.changeListIndexOnDelete(this.props.userLists.length);
+    firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+      lists: copy
+    }).then((data) => {
+    }).catch(error => {
+      console.log(error.message);
+    });
+  }
+
+  render() {
+    const sectionsToRender = this.props.userSections.filter((elem) => elem.listId === this.props.userLists[this.props.listIndex].id)
+      .map((section, index) => {
+        return (
+          <Section
+            key={section.id}
+            id={section.id}
+            sectionIndex={index}/>);
+      });
 
     const modalWarningWindow = (
       <WarningModalWindow
-        onProceed={() => this.props.deleteList(this.props.listIndex, this.props.allLists.length)}
-        message={`Are you sure you want to delete list ${this.props.allLists[this.props.listIndex].name}?`} />
+        onProceed={this.onDeleteList}
+        message={`Are you sure you want to delete list ${this.props.userLists[this.props.listIndex].name}?`} />
     );
 
-    const positionOptions = this.props.allLists.map((elem, index) => {
+    const positionOptions = this.props.userLists.map((elem, index) => {
       return (
         <option key={index} value={index}>{index}</option>
       );
@@ -161,7 +222,7 @@ class List extends React.Component {
 
     const nameAndButtonsBlock = (
       <div className="listWrapper">
-        <h1 className="listName">{this.props.allLists[this.props.listIndex].name}</h1>
+        <h1 className="listName">{this.props.userLists[this.props.listIndex].name}</h1>
         <div className="actionButtons">
           <button className="btn" onClick={this.doOnEdit}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-list.svg'}></img></button>
           <button className="btn" onClick={this.doOnAddSection}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-add-list.svg'}></img></button>
@@ -183,7 +244,7 @@ class List extends React.Component {
     const addNewSectionForm = (
       <div className="addListDiv">
         <input className="addListInput form-control" type="text" placeholder="Enter section name" value={this.state.sectionNameInputValue} onChange={this.sectionNameInputValueChange}></input>
-        <button className="btn btn-dark" onClick={this.beforeAddingNewSection}>OK</button>
+        <button className="btn btn-dark" onClick={this.addNewSection}>OK</button>
         <button className="btn" onClick={this.doOnCancel}>Cancel</button>
         <Colors passColorToSection={this.holdColorForNewSection}/>
       </div>
@@ -201,30 +262,24 @@ class List extends React.Component {
 
 const listDispatchToProps = (dispatch) => {
   return {
-    rename: (listIndex, name) => {
-      dispatch({ type: reducers.actions.listsActions.LIST_RENAME, listIndex: listIndex, name: name });
-    },
-    changeListPosition: (newListPosition, oldListPosition, listsLength) => {
-      dispatch({ type: reducers.actions.listsActions.LIST_CHANGE_POSITION, newListPosition: newListPosition, oldListPosition: oldListPosition });
+    changeListIndex: (newListPosition, listsLength) => {
       dispatch({ type: reducers.actions.selectedListIndexActions.SLI_CHANGE, index: newListPosition, listsLength: listsLength });
     },
-    deleteList: (index, listsLength) => {
-      dispatch({ type: reducers.actions.listsActions.LIST_DELETE, index: index });
+    changeListIndexOnDelete: (listsLength) => {
       dispatch({ type: reducers.actions.selectedListIndexActions.SLI_CHANGE_ON_DELETE, listsLength: listsLength });
-    },
-    addSection: (sectionName, sectionColor, listIndex) => {
-      dispatch({ type: reducers.actions.listsActions.LIST_ADD_SECTION, sectionName: sectionName, sectionColor: sectionColor, listIndex: listIndex });
     }
   }
 };
 
 const stateToProps = (state = {}) => {
   return {
-    allLists: state.lists,
-    listIndex: state.selectedListIndex
+    listIndex: state.selectedListIndex,
+    userLists: state.userLists,
+    userSections: state.userSections,
+    userData: state.userData
   }
 };
 
-const ListConnected = connect(stateToProps, listDispatchToProps)(List);
+const UserListConnected = connect(stateToProps, listDispatchToProps)(UserList);
 
-export default ListConnected;
+export default UserListConnected;

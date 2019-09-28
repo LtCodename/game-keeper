@@ -17,10 +17,6 @@ const defaultStore = {
   userData: null
 }
 
-const LIST_RENAME = 'LIST_RENAME';
-const LIST_ADD_SECTION = 'LIST_ADD_SECTION';
-const LIST_DELETE = 'LIST_DELETE';
-const LIST_CHANGE_POSITION = 'LIST_CHANGE_POSITION';
 const BLOCK_DELETE = 'BLOCK_DELETE';
 const BLOCK_SAVE = 'BLOCK_SAVE';
 const BLOCK_ADD = 'BLOCK_ADD';
@@ -35,36 +31,6 @@ const listsReducer = (state = defaultStore.lists, action) => {
   let uniqueIndex = 0;
 
   switch(action.type) {
-    case LIST_RENAME:
-      if (copy[action.listIndex]) {
-        copy[action.listIndex].name = action.name;
-        return copy;
-      } else {
-        return state;
-      }
-      break;
-    case LIST_DELETE:
-      copy.splice(action.index, 1);
-      return copy;
-      break;
-    case LIST_ADD_SECTION:
-      uniqueIndex = `id${new Date().getTime()}`;
-      copy[action.listIndex].content.push({
-        id: uniqueIndex,
-        name: action.sectionName,
-        color: action.sectionColor || "ce-soir",
-        games: []
-      });
-      return copy;
-      break;
-    case LIST_CHANGE_POSITION:
-      if (action.oldListPosition === action.newListPosition) {
-        return copy;
-      }
-      spliced = copy.splice(action.oldListPosition, 1);
-      copy.splice(action.newListPosition, 0, spliced[0]);
-      return copy;
-      break;
     case BLOCK_DELETE:
       copy[action.listIndex].content[action.sectionIndex].games.splice(action.blockIndex, 1);
       return copy;
@@ -268,10 +234,6 @@ export default {
   reducer: rootReducer,
   actions: {
     listsActions: {
-      LIST_RENAME,
-      LIST_DELETE,
-      LIST_CHANGE_POSITION,
-      LIST_ADD_SECTION,
       BLOCK_DELETE,
       BLOCK_SAVE,
       BLOCK_ADD,

@@ -1,6 +1,5 @@
 import React from 'react';
 import './AddListModalWindow.css';
-import reducers from '../../redux/reducers';
 import { connect } from 'react-redux'
 declare var $;
 declare var firebase;

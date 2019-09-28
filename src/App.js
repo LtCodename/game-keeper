@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import List from './components/list/List.js';
+import UserList from './components/user-list/UserList.js';
 import Nav from './components/nav/Nav.js';
 import Footer from './components/footer/Footer.js';
 import Header from './components/header/Header.js';
@@ -117,7 +117,7 @@ class App extends React.Component {
     if (this.props.selectedListIndex === null) {
       listOrDashboard = dashboard;
     }else {
-      listOrDashboard = <List/>
+      listOrDashboard = <UserList/>;
     }
 
     const nav = (

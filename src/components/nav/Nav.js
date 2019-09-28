@@ -115,7 +115,7 @@ const listDispatchToProps = (dispatch) => {
 
 const stateToProps = (state = {}) => {
   return {
-    allLists: state.lists,
+    allLists: state.userLists,
     listIndex: state.selectedListIndex
   }
 };
