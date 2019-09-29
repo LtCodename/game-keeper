@@ -20,7 +20,7 @@ class UserBlock extends React.Component {
   }
 
   componentWillUnmount() {
-    $("#bModal" + this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex].id + this.props.sectionIndex).unbind('hidden.bs.modal');
+    $("#blockModalWindow").unbind('hidden.bs.modal');
   }
 
   resetState() {
@@ -33,25 +33,25 @@ class UserBlock extends React.Component {
     this.setState({
       showModalWindow: true
     }, () => {
-      $("#bModal" + this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex].id + this.props.sectionIndex).modal('show');
-      $("#bModal" + this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex].id + this.props.sectionIndex).on('hidden.bs.modal', this.resetState);
+      $("#blockModalWindow").modal('show');
+      $("#blockModalWindow").on('hidden.bs.modal', this.resetState);
     });
   }
 
   closeModal() {
-    $("#bModal" + this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex].id + this.props.sectionIndex).modal('hide');
+    $("#blockModalWindow").modal('hide');
   }
 
   render() {
     let className = 'gameBlock gameBlock_';
-    let color = this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].color;
+    let color = this.props.color;
 
     if (color) {
       className += color;
     }
 
-    const platformsToShow = (this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex].hasOwnProperty('platforms')) ? (
-      this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex].platforms.map((elem, index) => {
+    const platformsToShow = (this.props.gameData.hasOwnProperty('platforms')) ? (
+      this.props.gameData.platforms.map((elem, index) => {
         const path = `${elem.iconName}`;
         let fullPath = '/icons/' + path + '.svg';
         return (<img key={index} className="platformIcon" alt="" src={process.env.PUBLIC_URL + fullPath}></img>);
@@ -63,15 +63,14 @@ class UserBlock extends React.Component {
       </div>
     );
 
-    const dateToShow = (this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex].releaseDate ? <span className="releaseDate">{moment(this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex].releaseDate).format('DD-MM-YYYY')}</span> : "");
+    const dateToShow = (this.props.gameData.releaseDate ? <span className="releaseDate">{moment(this.props.gameData.releaseDate).format('DD-MM-YYYY')}</span> : "");
 
     const modalWindow = (
       <BlockModalWindow
-        modalId={"bModal" + this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex].id + this.props.sectionIndex}
-        gameData={this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex]}
+        modalId={"blockModalWindow"}
+        gameData={this.props.gameData}
         fullMode={true}
-        sectionIndex={this.props.sectionIndex}
-        blockIndex={this.props.blockIndex}
+        sectionId={this.props.sectionId}
         closeModal={this.closeModal}/>
     );
 
@@ -79,7 +78,7 @@ class UserBlock extends React.Component {
       <div className="cardWrapper">
         <button className={className} data-toggle="modal" onClick={this.openModalWindow}>
           <div className="gameBlockContent">
-            <span className="gameName">{this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[this.props.blockIndex].name}</span>
+            <span className="gameName">{this.props.gameData.name}</span>
             <div className="gameBlockFooter">
               {dateToShow}
               {platfotmsOnBlock}
@@ -95,8 +94,7 @@ class UserBlock extends React.Component {
 
 const stateToProps = (state = {}) => {
   return {
-    allLists: state.lists,
-    listIndex: state.selectedListIndex
+    userBlocks: state.userBlocks
   }
 };
 

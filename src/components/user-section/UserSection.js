@@ -167,21 +167,23 @@ class UserSection extends React.Component {
     const gamesToRender = this.props.userBlocks.filter((elem) => elem.sectionId === this.props.id).map((elem, index) => {
       return <UserBlock
         key={elem.id}
+        color={this.props.color}
         blockIndex={index}
+        gameData={elem}
+        sectionId={this.props.id}
         sectionIndex={this.props.sectionIndex}/>;
+    }).sort((a, b) => {
+      const releaseDateA = a.props.gameData.releaseDate || "";
+      const releaseDateB = b.props.gameData.releaseDate || "";
+
+      if (releaseDateA < releaseDateB) {
+        return -1;
+      }
+      if (releaseDateA > releaseDateB) {
+        return 1;
+      }
+      return 0;
     });
-    // .sort((a, b) => {
-    //   const releaseDateA = this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[a.props.blockIndex].releaseDate || "";
-    //   const releaseDateB = this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[b.props.blockIndex].releaseDate || "";
-    //
-    //   if (releaseDateA < releaseDateB) {
-    //     return -1;
-    //   }
-    //   if (releaseDateA > releaseDateB) {
-    //     return 1;
-    //   }
-    //   return 0;
-    // });
 
     const positionOptions = this.props.sectionsArray.map((elem, index) => {
       return (
@@ -225,7 +227,7 @@ class UserSection extends React.Component {
         modalId={"addGame"}
         gameData={{name:"New game"}}
         fullMode={false}
-        sectionIndex={this.props.sectionIndex}
+        sectionId={this.props.id}
         closeModal={this.closeAddGameModal}/>
     );
 

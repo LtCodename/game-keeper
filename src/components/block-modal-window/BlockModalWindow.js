@@ -1,7 +1,6 @@
 import React from 'react';
 import './BlockModalWindow.css';
 import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
-import reducers from '../../redux/reducers';
 import { connect } from 'react-redux'
 declare var $;
 declare var firebase;
@@ -44,15 +43,20 @@ class BlockModalWindow extends React.Component {
       descriptionInputValue: "",
       platforms: this.preparePlatformsForState(),
       showModalWindow: false,
-      newListForBlock: this.props.listIndex,
-      newSectionForBlock:this.props.sectionIndex
+      newListForBlock: this.props.userLists[this.props.listIndex].id,
+      newSectionForBlock: this.props.sectionId
     };
   }
 
   newListSelectChangeHandler(event) {
+    const sections = this.props.userSections.filter((elem) => {
+      return elem.listId === event.target.value;
+    });
+    const firstSectionId = sections[0].id;
+
     this.setState({
       newListForBlock: event.target.value,
-      newSectionForBlock: 0
+      newSectionForBlock: firstSectionId
     });
   }
 
@@ -63,8 +67,24 @@ class BlockModalWindow extends React.Component {
   }
 
   deleteBlock() {
-    this.props.deleteBlock(this.props.listIndex, this.props.sectionIndex, this.props.blockIndex)
+    const copy = [...this.props.userBlocks];
+
+    const targetBlockIndex = copy.findIndex((elem) => {
+      return elem.id === this.props.gameData.id;
+    })
+
+    if (targetBlockIndex > -1) {
+      copy.splice(targetBlockIndex, 1);
+    }
+
     this.props.closeModal();
+
+    firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+      blocks: copy
+    }).then((data) => {
+    }).catch(error => {
+      console.log(error.message);
+    });
   }
 
   developerChangeHandler(event) {
@@ -223,23 +243,65 @@ class BlockModalWindow extends React.Component {
   }
 
   modalSave(event) {
-      const mappedPlatforms = this.state.platforms
-                                                .filter((elem) => elem.checked)
-                                                .map((elem) => {
-                                                  return {
-                                                    name: elem.name,
-                                                    iconName: elem.iconName
-                                                  }
-                                                });
-
-      if (!this.props.fullMode) {
-        this.props.addGame({...this.props.gameData, ...this.state.localGameData, platforms: mappedPlatforms}, this.props.listIndex, this.props.sectionIndex);
-      }else {
-        this.props.saveBlock({...this.props.gameData, ...this.state.localGameData, platforms: mappedPlatforms}, this.props.listIndex, this.props.sectionIndex, this.props.blockIndex, this.state.newListForBlock, this.state.newSectionForBlock);
-      }
-
-      this.props.closeModal();
+    const mappedPlatforms = this.state.platforms
+                                              .filter((elem) => elem.checked)
+                                              .map((elem) => {
+                                                return {
+                                                  name: elem.name,
+                                                  iconName: elem.iconName
+                                                }
+                                              });
+    if (!this.props.fullMode) {
+      this.addNewBlock(mappedPlatforms);
+    }else {
+      this.updateBlock(mappedPlatforms);
     }
+
+    this.props.closeModal();
+  }
+
+  updateBlock(platforms) {
+    const allBlocks = [...this.props.userBlocks];
+
+    let targetBlockIndex = allBlocks.findIndex(elem => {
+      return elem.id === this.props.gameData.id
+    });
+
+    if (targetBlockIndex > -1) {
+      allBlocks[targetBlockIndex] = {
+        ...this.props.gameData,
+        ...this.state.localGameData,
+        platforms: platforms,
+        sectionId: this.state.newSectionForBlock
+      };
+
+      firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+        blocks: allBlocks
+      }).then((data) => {
+      }).catch(error => {
+        console.log(error.message);
+      });
+    }
+  }
+
+  addNewBlock(platforms) {
+    const newBlock = {
+      ...this.props.gameData,
+      ...this.state.localGameData,
+      id: `id${new Date().getTime()}`,
+      platforms: platforms,
+      sectionId: this.props.sectionId
+    }
+
+    const allBlocks = [...this.props.userBlocks, newBlock];
+
+    firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+      blocks: allBlocks
+    }).then((data) => {
+    }).catch(error => {
+      console.log(error.message);
+    });
+  }
 
   render() {
     const descriptionEdit = (
@@ -304,15 +366,17 @@ class BlockModalWindow extends React.Component {
     let newHomeSelector = "";
 
     if (this.props.fullMode) {
-      const listSectionOptions = this.props.allLists.map((elem, index) => {
+      const listSectionOptions = this.props.userLists.map((elem, index) => {
         return (
-          <option key={index} value={index}>{elem.name}</option>
+          <option key={index} value={elem.id}>{elem.name}</option>
         );
       });
 
-      const sectionSectionOptions = this.props.allLists[this.state.newListForBlock].content.map((elem, index) => {
+      const sectionSectionOptions = this.props.userSections.filter((elem) => {
+        return elem.listId === this.state.newListForBlock;
+      }).map((elem, index) => {
         return (
-          <option key={index} value={index}>{elem.name}</option>
+          <option key={index} value={elem.id}>{elem.name}</option>
         );
       });
 
@@ -413,30 +477,18 @@ class BlockModalWindow extends React.Component {
   }
 }
 
-const blockModalWindowDispatchToProps = (dispatch) => {
-  return {
-    saveBlock: (saveData, listIndex, sectionIndex, blockIndex, newListIndex, newSectionIndex) => {
-      dispatch({ type: reducers.actions.listsActions.BLOCK_SAVE, saveData: saveData, listIndex: listIndex, sectionIndex: sectionIndex, blockIndex: blockIndex, newListIndex: newListIndex, newSectionIndex: newSectionIndex });
-    },
-    deleteBlock: (listIndex, sectionIndex, blockIndex) => {
-      dispatch({ type: reducers.actions.listsActions.BLOCK_DELETE, listIndex: listIndex, sectionIndex: sectionIndex, blockIndex: blockIndex });
-    },
-    addGame: (saveData, listIndex, sectionIndex) => {
-      dispatch({ type: reducers.actions.listsActions.BLOCK_ADD, saveData: saveData, listIndex: listIndex, sectionIndex: sectionIndex });
-    }
-  }
-};
-
 const stateToProps = (state = {}) => {
   return {
-    allLists: state.lists,
     listIndex: state.selectedListIndex,
     developers: state.developers,
     platforms: state.platforms,
-    userData: state.userData
+    userData: state.userData,
+    userBlocks: state.userBlocks,
+    userSections: state.userSections,
+    userLists: state.userLists
   }
 };
 
-const BlockModalWindowConnected = connect(stateToProps, blockModalWindowDispatchToProps)(BlockModalWindow);
+const BlockModalWindowConnected = connect(stateToProps, null)(BlockModalWindow);
 
 export default BlockModalWindowConnected;
