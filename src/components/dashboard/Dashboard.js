@@ -38,7 +38,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    const listsToRender = this.props.allLists.map((elem, index) => {
+    const listsToRender = this.props.userLists.map((elem, index) => {
       return <ListBlock
         key={elem.id}
         listBlockIndex={index}/>;
@@ -46,7 +46,7 @@ class Dashboard extends React.Component {
 
     let btnAddListClassName = "btn btnAddListFromDashboard";
 
-    if (this.props.allLists.length === 0) {
+    if (this.props.userLists.length === 0) {
       btnAddListClassName += " btnAddListFromDashboardSpecial";
     }
 
@@ -60,7 +60,7 @@ class Dashboard extends React.Component {
 
     let matrixClassName = "listsMatrix";
 
-    switch(this.props.allLists.length) {
+    switch(this.props.userLists.length) {
       case 2:
         matrixClassName += " threeCells";
         break;
@@ -101,7 +101,7 @@ class Dashboard extends React.Component {
 
 const stateToProps = (state = {}) => {
   return {
-    allLists: state.userLists,
+    userLists: state.userLists,
     userData: state.userData
   }
 };

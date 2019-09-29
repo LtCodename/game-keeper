@@ -95,14 +95,16 @@ class App extends React.Component {
         if (doc.exists) {
            console.log("Document data:", doc.data());
            const allUserData = doc.data() || {};
-           this.props.setListsToStore(allUserData.lists);
-           this.props.setSectionsToStore(allUserData.sections);
-           this.props.setBlocksToStore(allUserData.blocks);
+           this.props.setListsToStore(allUserData.lists || []);
+           this.props.setSectionsToStore(allUserData.sections || []);
+           this.props.setBlocksToStore(allUserData.blocks || []);
        } else {
            console.log("No such document!");
        }this.setState({
          userDataLoaded: true
        });
+      }, error => {
+        console.log(error.message);
       }
     );
   }

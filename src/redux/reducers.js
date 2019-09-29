@@ -1,8 +1,6 @@
-import lists from '../mocks/lists.js';
 import { combineReducers } from 'redux';
 
 const defaultStore = {
-  lists: lists,
   userLists: [],
   userSections: [],
   userBlocks: [],

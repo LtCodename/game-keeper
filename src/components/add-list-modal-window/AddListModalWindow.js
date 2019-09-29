@@ -56,10 +56,10 @@ class AddListModalWindow extends React.Component {
       name: this.state.nameInputValue
     }
 
-    const allLists = [...this.props.userLists, newList];
+    const copy = [...this.props.userLists, newList];
 
     firebase.firestore().collection('users').doc(this.props.userData.uid).update({
-      lists: allLists
+      lists: copy
     }).then((data) => {
     }).catch(error => {
       console.log(error.message);

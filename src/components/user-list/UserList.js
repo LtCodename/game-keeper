@@ -178,12 +178,30 @@ class UserList extends React.Component {
   }
 
   onDeleteList() {
+    const deletedSectionsIds = [];
+
     const copy = [...this.props.userLists];
+
+    const sectionCopy = [...this.props.userSections].filter((elem) => {
+      if (elem.listId !== copy[this.props.listIndex].id) {
+        return true;
+      } else {
+        deletedSectionsIds.push(elem.id);
+        return false;
+      }
+    });
+
+    const blocksCopy = [...this.props.userBlocks].filter((elem) => {
+      return deletedSectionsIds.indexOf(elem.sectionId) === -1;
+    });
+
     copy.splice(this.props.listIndex, 1);
 
     this.props.changeListIndexOnDelete(this.props.userLists.length);
     firebase.firestore().collection('users').doc(this.props.userData.uid).update({
-      lists: copy
+      lists: copy,
+      sections: sectionCopy,
+      blocks: blocksCopy
     }).then((data) => {
     }).catch(error => {
       console.log(error.message);
@@ -279,6 +297,7 @@ const stateToProps = (state = {}) => {
   return {
     listIndex: state.selectedListIndex,
     userLists: state.userLists,
+    userBlocks: state.userBlocks,
     userSections: state.userSections,
     userData: state.userData
   }

@@ -48,7 +48,7 @@ class Header extends React.Component {
     }).catch(error => {
       console.log(error.message);
     });
-    this.props.changeListIndex(null, this.props.allLists.length);
+    this.props.changeListIndex(null, this.props.userLists.length);
     this.props.history.push('/');
   }
 
@@ -75,7 +75,7 @@ class Header extends React.Component {
   render() {
     const logo = (
       <div className="logoWrapper">
-        <NavLink to="/"><button className="btn" onClick={() => this.props.changeListIndex(null, this.props.allLists.length)}>Game Keeper</button></NavLink>
+        <NavLink to="/"><button className="btn" onClick={() => this.props.changeListIndex(null, this.props.userLists.length)}>Game Keeper</button></NavLink>
       </div>
     );
 
@@ -102,8 +102,8 @@ class Header extends React.Component {
 
     const profileButton = (
       <div className="authButtonWrapper">
-        <NavLink to="/profile"><button className="btn profileButton" onClick={() => this.props.changeListIndex(null, this.props.allLists.length)}>Profile<img className="authIcon" alt="" src={process.env.PUBLIC_URL + '/icons/auth-profile.svg'}></img></button></NavLink>
-        <NavLink to="/profile"><button className="btn profileButtonAlt" onClick={() => this.props.changeListIndex(null, this.props.allLists.length)}><img className="authIconAlt" alt="" src={process.env.PUBLIC_URL + '/icons/auth-profile.svg'}></img></button></NavLink>
+        <NavLink to="/profile"><button className="btn profileButton" onClick={() => this.props.changeListIndex(null, this.props.userLists.length)}>Profile<img className="authIcon" alt="" src={process.env.PUBLIC_URL + '/icons/auth-profile.svg'}></img></button></NavLink>
+        <NavLink to="/profile"><button className="btn profileButtonAlt" onClick={() => this.props.changeListIndex(null, this.props.userLists.length)}><img className="authIconAlt" alt="" src={process.env.PUBLIC_URL + '/icons/auth-profile.svg'}></img></button></NavLink>
       </div>
     );
 
@@ -141,7 +141,7 @@ const headerDispatchToProps = (dispatch) => {
 
 const stateToProps = (state = {}) => {
   return {
-    allLists: state.lists,
+    userLists: state.userLists,
     userData: state.userData
   }
 };

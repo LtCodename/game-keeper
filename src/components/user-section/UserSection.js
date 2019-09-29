@@ -134,6 +134,9 @@ class UserSection extends React.Component {
 
   sectionDelete() {
     const copy = [...this.props.userSections];
+    const blockCopy = [...this.props.userBlocks].filter((elem) => {
+      return elem.sectionId !== this.props.id;
+    });
 
     const targetSectionIndex = copy.findIndex((elem) => {
       return elem.id === this.props.id;
@@ -148,7 +151,8 @@ class UserSection extends React.Component {
     });
 
     firebase.firestore().collection('users').doc(this.props.userData.uid).update({
-      sections: copy
+      sections: copy,
+      blocks: blockCopy
     }).then((data) => {
     }).catch(error => {
       console.log(error.message);
