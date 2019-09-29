@@ -1,14 +1,14 @@
 import React from 'react';
-import Block from '../block/Block.js';
+import UserBlock from '../user-block/UserBlock.js';
 import Colors from '../colors/Colors.js';
-import './Section.css';
+import './UserSection.css';
 import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
 import BlockModalWindow from '../block-modal-window/BlockModalWindow.js';
-import reducers from '../../redux/reducers';
 import { connect } from 'react-redux'
 declare var $;
+declare var firebase;
 
-class Section extends React.Component {
+class UserSection extends React.Component {
   static defaultProps = {
     games: []
   }
@@ -24,17 +24,40 @@ class Section extends React.Component {
     this.resetState = this.resetState.bind(this);
     this.openAddGameWindow = this.openAddGameWindow.bind(this);
     this.sectionPositionChangeHandler = this.sectionPositionChangeHandler.bind(this);
+    this.sectionDelete = this.sectionDelete.bind(this);
 
     this.state = {
       editMode: false,
-      sectionInputValue: this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].name,
+      sectionInputValue: this.props.name,
       showModalWindow: false,
       showAddGameWindow: false
     };
   }
 
   sectionPositionChangeHandler(event) {
-    this.props.changeSectionPosition(event.target.value, this.props.sectionIndex, this.props.listIndex);
+    if (this.props.sectionIndex === event.target.value) {
+      return;
+    }
+
+    const copy = [...this.props.userSections];
+
+    const oldSectionPosition = copy.findIndex((elem) => {
+      return elem.id === this.props.sectionsArray[this.props.sectionIndex].id;
+    });
+
+    const newSectionPosition = copy.findIndex((elem) => {
+      return elem.id === this.props.sectionsArray[event.target.value].id;
+    });
+
+    let spliced = copy.splice(oldSectionPosition, 1);
+    copy.splice(newSectionPosition, 0, spliced[0]);
+
+    firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+      sections: copy
+    }).then((data) => {
+    }).catch(error => {
+      console.log(error.message);
+    });
   }
 
   closeAddGameModal() {
@@ -75,7 +98,7 @@ class Section extends React.Component {
     if (!this.state.editMode) {
       this.setState({
         editMode: true,
-        sectionInputValue: this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].name
+        sectionInputValue: this.props.name
       });
     }
   }
@@ -87,9 +110,48 @@ class Section extends React.Component {
   }
 
   doOnSubmit() {
-    this.props.renameSection(this.props.listIndex, this.props.sectionIndex, this.state.sectionInputValue);
+    const copy = [...this.props.userSections];
+
+    let targetSection = copy.find((elem) => {
+      return elem.id === this.props.id;
+    })
+
+    if (targetSection) {
+      targetSection.name = this.state.sectionInputValue;
+    }
+
+    firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+      sections: copy
+    }).then((data) => {
+    }).catch(error => {
+      console.log(error.message);
+    });
+
     this.setState({
       editMode: false
+    });
+  }
+
+  sectionDelete() {
+    const copy = [...this.props.userSections];
+
+    const targetSectionIndex = copy.findIndex((elem) => {
+      return elem.id === this.props.id;
+    })
+
+    if (targetSectionIndex > -1) {
+      copy.splice(targetSectionIndex, 1);
+    }
+
+    this.setState({
+      editMode: false
+    });
+
+    firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+      sections: copy
+    }).then((data) => {
+    }).catch(error => {
+      console.log(error.message);
     });
   }
 
@@ -97,30 +159,31 @@ class Section extends React.Component {
     this.setState({
       editMode: false,
       gameInputValue: "",
-      sectionInputValue: this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].name
+      sectionInputValue: this.props.name
     });
   }
 
   render() {
-    const gamesToRender = this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games.map((elem, index) => {
-      return <Block
+    const gamesToRender = this.props.userBlocks.filter((elem) => elem.sectionId === this.props.id).map((elem, index) => {
+      return <UserBlock
         key={elem.id}
         blockIndex={index}
         sectionIndex={this.props.sectionIndex}/>;
-    }).sort((a, b) => {
-      const releaseDateA = this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[a.props.blockIndex].releaseDate || "";
-      const releaseDateB = this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[b.props.blockIndex].releaseDate || "";
-
-      if (releaseDateA < releaseDateB) {
-        return -1;
-      }
-      if (releaseDateA > releaseDateB) {
-        return 1;
-      }
-      return 0;
     });
+    // .sort((a, b) => {
+    //   const releaseDateA = this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[a.props.blockIndex].releaseDate || "";
+    //   const releaseDateB = this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].games[b.props.blockIndex].releaseDate || "";
+    //
+    //   if (releaseDateA < releaseDateB) {
+    //     return -1;
+    //   }
+    //   if (releaseDateA > releaseDateB) {
+    //     return 1;
+    //   }
+    //   return 0;
+    // });
 
-    const positionOptions = this.props.allLists[this.props.listIndex].content.map((elem, index) => {
+    const positionOptions = this.props.sectionsArray.map((elem, index) => {
       return (
         <option key={index} value={index}>{index}</option>
       );
@@ -128,7 +191,7 @@ class Section extends React.Component {
 
     const nameAndButtonsBlock = (
       <div className="nameAndButtonsWrapper">
-        <h2>{this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].name}</h2>
+        <h2>{this.props.name}</h2>
         <div className="sectionActionButtons">
           <button className="btn" onClick={this.doOnEdit}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-section.svg'}></img></button>
           <button className="btn" onClick={this.openAddGameWindow}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-add-section.svg'}></img></button>
@@ -147,14 +210,14 @@ class Section extends React.Component {
           <input className="form-control editSectionInput" type="text" placeholder="Enter new name" value={this.state.sectionInputValue} onChange={this.sectionInputValueChange}></input>
           <button className="btn btn-dark" onClick={this.doOnSubmit}>OK</button>
           <button className="btn" onClick={this.doOnCancel}>Cancel</button>
-          <Colors sectionIndex={this.props.sectionIndex}/>
+          <Colors sectionId={this.props.id} color={this.props.color}/>
         </div>
     );
 
     const modalWarningWindow = (
       <WarningModalWindow
-        onProceed={() => this.props.sectionDelete(this.props.listIndex, this.props.sectionIndex)}
-        message={`Are you sure you want to delete section ${this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].name}?`} />
+        onProceed={this.sectionDelete}
+        message={`Are you sure you want to delete section ${this.props.name}?`} />
     );
 
     const addGameWindow = (
@@ -180,27 +243,14 @@ class Section extends React.Component {
   }
 }
 
-const sectionDispatchToProps = (dispatch) => {
-  return {
-    renameSection: (listIndex, sectionIndex, sectionName) => {
-      dispatch({ type: reducers.actions.listsActions.SECTION_RENAME, listIndex: listIndex, sectionIndex: sectionIndex, sectionName: sectionName });
-    },
-    sectionDelete: (listIndex, sectionIndex) => {
-      dispatch({ type: reducers.actions.listsActions.SECTION_DELETE, listIndex: listIndex, sectionIndex: sectionIndex});
-    },
-    changeSectionPosition: (newSectionPosition, oldSectionPosition, listIndex) => {
-      dispatch({ type: reducers.actions.listsActions.SECTION_CHANGE_POSITION, newSectionPosition: newSectionPosition, oldSectionPosition: oldSectionPosition, listIndex: listIndex });
-    },
-  }
-};
-
 const stateToProps = (state = {}) => {
   return {
-    allLists: state.lists,
-    listIndex: state.selectedListIndex
+    userSections: state.userSections,
+    userBlocks: state.userBlocks,
+    userData: state.userData
   }
 };
 
-const ConnectedSection = connect(stateToProps, sectionDispatchToProps)(Section);
+const ConnectedUserSection = connect(stateToProps, null)(UserSection);
 
-export default ConnectedSection;
+export default ConnectedUserSection;

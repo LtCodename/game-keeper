@@ -20,10 +20,6 @@ const defaultStore = {
 const BLOCK_DELETE = 'BLOCK_DELETE';
 const BLOCK_SAVE = 'BLOCK_SAVE';
 const BLOCK_ADD = 'BLOCK_ADD';
-const SECTION_CHANGE_COLOR = 'SECTION_CHANGE_COLOR';
-const SECTION_RENAME = 'SECTION_RENAME';
-const SECTION_DELETE = 'SECTION_DELETE';
-const SECTION_CHANGE_POSITION = 'SECTION_CHANGE_POSITION';
 
 const listsReducer = (state = defaultStore.lists, action) => {
   const copy = deepCopy(state);
@@ -58,26 +54,6 @@ const listsReducer = (state = defaultStore.lists, action) => {
         id: `${uniqueIndex}`,
         ...action.saveData
       });
-      return copy;
-      break;
-    case SECTION_CHANGE_COLOR:
-      copy[action.listIndex].content[action.sectionIndex].color = action.color;
-      return copy;
-      break;
-    case SECTION_RENAME:
-      copy[action.listIndex].content[action.sectionIndex].name = action.sectionName;
-      return copy;
-      break;
-    case SECTION_DELETE:
-      copy[action.listIndex].content.splice(action.sectionIndex, 1);
-      return copy;
-      break;
-    case SECTION_CHANGE_POSITION:
-      if (action.oldSectionPosition === action.newSectionPosition) {
-        return copy;
-      }
-      spliced = copy[action.listIndex].content.splice(action.oldSectionPosition, 1);
-      copy[action.listIndex].content.splice(action.newSectionPosition, 0, spliced[0]);
       return copy;
       break;
     default:
@@ -236,11 +212,7 @@ export default {
     listsActions: {
       BLOCK_DELETE,
       BLOCK_SAVE,
-      BLOCK_ADD,
-      SECTION_CHANGE_COLOR,
-      SECTION_RENAME,
-      SECTION_CHANGE_POSITION,
-      SECTION_DELETE
+      BLOCK_ADD
     },
     developersActions: {
       DEVELOPERS_FETCH

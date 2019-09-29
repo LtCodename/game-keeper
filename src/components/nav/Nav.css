@@ -55,7 +55,8 @@
 }
 
 .btnAddList:hover {
-  background-color: var(--add-list-color);
+  color: var(--first-color);
+  background-color: var(--third-color);
   opacity: 0.8;
 }
 

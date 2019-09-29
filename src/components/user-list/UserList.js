@@ -1,5 +1,5 @@
 import React from 'react';
-import Section from '../section/Section.js';
+import UserSection from '../user-section/UserSection.js';
 import Colors from '../colors/Colors.js';
 import './UserList.css';
 import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
@@ -192,11 +192,15 @@ class UserList extends React.Component {
 
   render() {
     const sectionsToRender = this.props.userSections.filter((elem) => elem.listId === this.props.userLists[this.props.listIndex].id)
-      .map((section, index) => {
+      .map((section, index, array) => {
         return (
-          <Section
+          <UserSection
             key={section.id}
             id={section.id}
+            name={section.name}
+            color={section.color}
+            listId={section.listId}
+            sectionsArray={array}
             sectionIndex={index}/>);
       });
 

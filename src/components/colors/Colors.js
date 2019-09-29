@@ -1,8 +1,8 @@
 import React from 'react';
 import availableColors from '../../mocks/availableColors.js';
 import './Colors.css';
-import reducers from '../../redux/reducers';
 import { connect } from 'react-redux'
+declare var firebase;
 
 class Colors extends React.Component {
 
@@ -12,11 +12,7 @@ class Colors extends React.Component {
     this.colorMagic = this.colorMagic.bind(this);
 
     this.state = {
-      currentColor: this.props.allLists
-        && this.props.allLists[this.props.listIndex]
-        && this.props.allLists[this.props.listIndex].content
-        && this.props.allLists[this.props.listIndex].content[this.props.sectionIndex]
-        && this.props.allLists[this.props.listIndex].content[this.props.sectionIndex].color
+      currentColor: this.props.color
     };
   }
 
@@ -24,7 +20,22 @@ class Colors extends React.Component {
     if (typeof this.props.passColorToSection === "function") {
       this.props.passColorToSection(color);
     }else {
-      this.props.changeSectionColor(this.props.listIndex, this.props.sectionIndex, color);
+      const copy = [...this.props.userSections];
+
+      let targetSection = copy.find((elem) => {
+        return elem.id === this.props.sectionId;
+      })
+
+      if (targetSection) {
+        targetSection.color = color;
+      }
+
+      firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+        sections: copy
+      }).then((data) => {
+      }).catch(error => {
+        console.log(error.message);
+      });
     }
 
     this.setState({
@@ -57,21 +68,13 @@ class Colors extends React.Component {
   }
 }
 
-const colorsDispatchToProps = (dispatch) => {
-  return {
-    changeSectionColor: (listIndex, sectionIndex, color) => {
-      dispatch({ type: reducers.actions.listsActions.SECTION_CHANGE_COLOR, listIndex: listIndex, sectionIndex: sectionIndex, color: color });
-    }
-  }
-};
-
 const stateToProps = (state = {}) => {
   return {
-    allLists: state.lists,
-    listIndex: state.selectedListIndex
+    userData: state.userData,
+    userSections: state.userSections
   }
 };
 
-const ConnectedColors = connect(stateToProps, colorsDispatchToProps)(Colors);
+const ConnectedColors = connect(stateToProps, null)(Colors);
 
 export default ConnectedColors;
