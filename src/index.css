@@ -40,6 +40,8 @@
   --first-color: rgba(0, 121, 197, 1);
   --second-color: rgba(255, 246, 143, 1);
   --third-color: rgba(255, 249, 222, 1);
+
+  --content-gap: 126px;
 }
 
 body {
@@ -83,6 +85,7 @@ input {
 
 .contentWrapper {
   display: flex;
+  padding-top: 5px;
   position: relative;
   align-items: flex-start;
   background-color: var(--first-color);
@@ -92,7 +95,7 @@ input {
 .allContent {
   padding: 0 0 20px 10px;
   flex: 1;
-  min-height: calc(100vh - 118px);
+  min-height: calc(100vh - var(--content-gap));
   max-width: calc(100% - 220px);
   background-color: var(--first-color);
 }

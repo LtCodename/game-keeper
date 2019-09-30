@@ -93,6 +93,10 @@ class UserList extends React.Component {
     });
   }
 
+  componentWillUnmount() {
+    $("#modalWarning").unbind('hidden.bs.modal');
+  }
+
   resetState() {
     this.setState({
       showModalWindow: false
@@ -246,8 +250,8 @@ class UserList extends React.Component {
       <div className="listWrapper">
         <h1 className="listName">{this.props.userLists[this.props.listIndex].name}</h1>
         <div className="actionButtons">
-          <button className="btn" onClick={this.doOnEdit}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-list.svg'}></img></button>
           <button className="btn" onClick={this.doOnAddSection}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-add-list.svg'}></img></button>
+          <button className="btn" onClick={this.doOnEdit}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-list.svg'}></img></button>
           <button className="btn" onClick={this.openModalWarningWindow}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-list.svg'}></img></button>
           {listPositionPicker}
         </div>

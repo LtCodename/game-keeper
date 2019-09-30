@@ -5,7 +5,7 @@
 .suggestedWrapper {
   background-color: var(--first-color);
   padding: 10px 20px;
-  min-height: calc(100vh - 118px);
+  min-height: calc(100vh - var(--content-gap));
 }
 
 .blocksWrapper {

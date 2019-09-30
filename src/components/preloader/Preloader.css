@@ -1,5 +1,5 @@
 .preloaderContent {
-  height: calc(100vh - 118px);
+  height: calc(100vh - var(--content-gap));
   background-color: var(--first-color);
 }
 
@@ -9,6 +9,8 @@
   height: 100%;
   justify-content: space-around;
   align-items: center;
+  position: relative;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 .loader {

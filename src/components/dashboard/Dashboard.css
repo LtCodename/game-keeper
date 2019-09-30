@@ -1,6 +1,6 @@
 .dashboardWrapper {
   background-color: var(--first-color);
-  min-height: calc(100vh - 118px);
+  min-height: calc(100vh - var(--content-gap));
   width: 100%;
   padding-bottom: 10px;
 }
@@ -14,24 +14,22 @@
 .listsMatrix {
   display: grid;
   grid-gap: 10px;
-  /* grid-auto-columns: minmax(300px, auto);
-  grid-auto-rows: minmax(300px, auto); */
 }
 
 .fourCells {
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, minmax(300px, auto));
 }
 
 .threeCells {
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(300px, auto));
 }
 
 .twoCells {
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(300px, auto));
 }
 
 .oneCell {
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(300px, auto);
 }
 
 .btnAddListFromDashboard {

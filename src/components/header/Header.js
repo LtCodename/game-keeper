@@ -116,16 +116,18 @@ class Header extends React.Component {
     );
 
     return (
-      <div className="headerWrappper">
-        {logo}
-        <div className="signWrapper">
-          {!this.props.userData ? logInButton : ""}
-          {!this.props.userData ? signUpButton : ""}
-          {this.props.userData ? logOutButton : ""}
-          {this.props.userData ? profileButton : ""}
+      <div>
+        <div className="headerWrappper">
+          {logo}
+          <div className="signWrapper">
+            {!this.props.userData ? logInButton : ""}
+            {!this.props.userData ? signUpButton : ""}
+            {this.props.userData ? logOutButton : ""}
+            {this.props.userData ? profileButton : ""}
+          </div>
         </div>
-        {this.state.showSignUpWindow ? signUpWindow : ""}
         {this.state.showLogInWindow ? logInWindow : ""}
+        {this.state.showSignUpWindow ? signUpWindow : ""}
       </div>
     )
   }

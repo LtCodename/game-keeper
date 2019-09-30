@@ -198,15 +198,17 @@ class UserSection extends React.Component {
     const nameAndButtonsBlock = (
       <div className="nameAndButtonsWrapper">
         <h2>{this.props.name}</h2>
-        <div className="sectionActionButtons">
-          <button className="btn" onClick={this.doOnEdit}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-section.svg'}></img></button>
-          <button className="btn" onClick={this.openAddGameWindow}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-add-section.svg'}></img></button>
-          <button className="btn" onClick={this.openModalWarningWindow}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-section.svg'}></img></button>
-        </div>
-        <div className="positionPickerWrapper">
-          <select value={this.props.sectionIndex} className="custom-select sectionPositionPicker" onChange={this.sectionPositionChangeHandler}>
-            {positionOptions}
-          </select>
+        <div className="sectionActions">
+          <div className="sectionActionButtons">
+            <button className="btn" onClick={this.openAddGameWindow}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-add-section.svg'}></img></button>
+            <button className="btn" onClick={this.doOnEdit}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-section.svg'}></img></button>
+            <button className="btn" onClick={this.openModalWarningWindow}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-section.svg'}></img></button>
+          </div>
+          <div className="positionPickerWrapper">
+            <select value={this.props.sectionIndex} className="custom-select sectionPositionPicker" onChange={this.sectionPositionChangeHandler}>
+              {positionOptions}
+            </select>
+          </div>
         </div>
       </div>
     );

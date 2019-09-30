@@ -23,7 +23,7 @@
 }
 
 .enterNewName {
-  width: 435px;
+  width: 468px;
 }
 
 .littleHeaders {
@@ -46,6 +46,11 @@ option {
 }
 
 .desctiptionLabel {
+  margin: 0;
+  padding: 0;
+}
+
+.nameLabel {
   margin: 0;
   padding: 0;
 }

@@ -10,8 +10,6 @@ class BlockModalWindow extends React.Component {
   constructor(props) {
     super(props);
 
-    this.changeGameName = this.changeGameName.bind(this);
-    this.doOnNameChange = this.doOnNameChange.bind(this);
     this.doOnAddDeveloper = this.doOnAddDeveloper.bind(this);
     this.doOnSuggestDeveloper = this.doOnSuggestDeveloper.bind(this);
     this.doOnCancel = this.doOnCancel.bind(this);
@@ -32,7 +30,6 @@ class BlockModalWindow extends React.Component {
     this.deleteBlock = this.deleteBlock.bind(this);
 
     this.state = {
-      nameEditMode: false,
       localGameData: {...this.props.gameData, releaseDate: this.props.gameData.releaseDate || ""},
       nameInputValue: this.props.gameData.name,
       developerInputValue: "",
@@ -151,19 +148,6 @@ class BlockModalWindow extends React.Component {
     });
   }
 
-  changeGameName() {
-    this.setState({
-      nameEditMode: true
-    });
-  }
-
-  doOnNameChange() {
-    this.setState({
-      nameEditMode: false,
-      localGameData: {...this.state.localGameData, name:this.state.nameInputValue}
-    });
-  }
-
   doOnAddDeveloper() {
     if (!this.state.developerInputValue) {
       return;
@@ -202,7 +186,6 @@ class BlockModalWindow extends React.Component {
 
   doOnCancel() {
     this.setState({
-      nameEditMode: false,
       descriptionInputValue: "",
       nameInputValue: this.props.gameData.name
     });
@@ -217,7 +200,8 @@ class BlockModalWindow extends React.Component {
 
   nameInputValueChange(event) {
     this.setState({
-      nameInputValue: event.target.value
+      nameInputValue: event.target.value,
+      localGameData: {...this.state.localGameData, name:event.target.value}
     });
   }
 
@@ -289,18 +273,6 @@ class BlockModalWindow extends React.Component {
   }
 
   render() {
-    const gameName = (
-      <h5 className="modal-title gameTitle" onClick={this.changeGameName}>{this.state.localGameData.name}</h5>
-    );
-
-    const gameNameEdit = (
-      <div>
-        <input className="form-control enterNewName" type="text" placeholder="Enter new name" value={this.state.nameInputValue} onChange={this.nameInputValueChange}></input>
-        <button className="btn btn-success" onClick={this.doOnNameChange}>OK</button>
-        <button className="btn btn-warning" onClick={this.doOnCancel}>Cancel</button>
-      </div>
-    );
-
     const datePicker = (
       <div className="modalPiece">
         <label className="dateLabel" >
@@ -413,6 +385,15 @@ class BlockModalWindow extends React.Component {
       </div>
     );
 
+    const name = (
+      <div className="nameArea">
+        <label className="nameLabel" htmlFor="name">
+          <p className="littleHeaders">Name</p>
+        </label>
+        <textarea placeholder="Enter name" className="form-control enterNewName" id="name" rows="1" value={this.state.nameInputValue} onChange={this.nameInputValueChange}></textarea>
+      </div>
+    );
+
     return (
       <div>
         <div className="modal fade" id={this.props.modalId} tabIndex="-1" role="dialog">
@@ -420,7 +401,7 @@ class BlockModalWindow extends React.Component {
             <div className="modal-content">
               <div className="modal-header">
                 {/*title*/}
-                {(this.state.nameEditMode) ? gameNameEdit : gameName}
+                {name}
               </div>
               <div className="modal-body">
                 {/*New list and section selector*/}
