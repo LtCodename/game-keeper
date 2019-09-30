@@ -3,17 +3,60 @@
 }
 
 .modalPiece {
-  border: 1px solid #000000;
-  padding: 5px;
   margin-bottom: 5px;
+}
+
+.custom-select {
+  background-color: var(--third-color);
+  color: #000000;
+  border-radius: 0;
+}
+
+.form-control {
+  background-color: var(--third-color);
+  color: #000000;
+  border-radius: 0;
+}
+
+.form-control::placeholder {
+  color: #000000;
+}
+
+.nameControl {
+  font-family: var(--titles-font);
+  font-size: 30px;
+  color: var(--first-color);
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 
 .enterNewName {
   width: 435px;
 }
 
-.developerSelector .custom-select {
-  font-weight: bold;
+.littleHeaders {
+  color: #000000;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.btn {
+  margin-top: 3px;
+}
+
+option {
+  padding: 3px 0;
+}
+
+.dateLabel {
+  margin: 0;
+  padding: 0;
+}
+
+.desctiptionLabel {
+  margin: 0;
+  padding: 0;
 }
 
 @media (max-width: 1050px) {

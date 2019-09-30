@@ -15,9 +15,7 @@ class BlockModalWindow extends React.Component {
     this.doOnAddDeveloper = this.doOnAddDeveloper.bind(this);
     this.doOnSuggestDeveloper = this.doOnSuggestDeveloper.bind(this);
     this.doOnCancel = this.doOnCancel.bind(this);
-    this.changeDescription = this.changeDescription.bind(this);
     this.descriptionInputValueChange = this.descriptionInputValueChange.bind(this);
-    this.doOnDescriptionChange = this.doOnDescriptionChange.bind(this);
     this.nameInputValueChange = this.nameInputValueChange.bind(this);
     this.developerInputValueChange = this.developerInputValueChange.bind(this);
     this.developerSuggestInputValueChange = this.developerSuggestInputValueChange.bind(this);
@@ -35,12 +33,11 @@ class BlockModalWindow extends React.Component {
 
     this.state = {
       nameEditMode: false,
-      descriptionEditMode: false,
       localGameData: {...this.props.gameData, releaseDate: this.props.gameData.releaseDate || ""},
       nameInputValue: this.props.gameData.name,
       developerInputValue: "",
       developerSuggestInputValue: "",
-      descriptionInputValue: "",
+      descriptionInputValue: this.props.gameData.description,
       platforms: this.preparePlatformsForState(),
       showModalWindow: false,
       newListForBlock: this.props.userLists[this.props.listIndex].id,
@@ -206,28 +203,15 @@ class BlockModalWindow extends React.Component {
   doOnCancel() {
     this.setState({
       nameEditMode: false,
-      descriptionEditMode: false,
       descriptionInputValue: "",
       nameInputValue: this.props.gameData.name
     });
   }
 
-  changeDescription() {
-    this.setState({
-      descriptionEditMode: true
-    });
-  }
-
-  doOnDescriptionChange() {
-    this.setState({
-      descriptionEditMode: false,
-      localGameData: {...this.state.localGameData, description:this.state.descriptionInputValue}
-    });
-  }
-
   descriptionInputValueChange(event) {
     this.setState({
-      descriptionInputValue: event.target.value
+      descriptionInputValue: event.target.value,
+      localGameData: {...this.state.localGameData, description:event.target.value}
     });
   }
 
@@ -305,36 +289,22 @@ class BlockModalWindow extends React.Component {
   }
 
   render() {
-    const descriptionEdit = (
-      <div className="modalPiece">
-        <textarea className="form-control" row="3" type="text" placeholder="Add your text" value={this.state.descriptionInputValue} onChange={this.descriptionInputValueChange}></textarea>
-        <button className="btn btn-dark" onClick={this.doOnDescriptionChange}>OK</button>
-        <button className="btn" onClick={this.doOnCancel}>Cancel</button>
-      </div>
-    );
-
-    const descriptionCustom = (
-      <div className="modalPiece">
-        <p className="modalParagraph" onClick={this.changeDescription}>{(this.state.localGameData.description) ? this.state.localGameData.description : "Click this text to enter description"}</p>
-      </div>
-    );
-
     const gameName = (
       <h5 className="modal-title" onClick={this.changeGameName}>{this.state.localGameData.name}</h5>
     );
 
     const gameNameEdit = (
       <div>
-        <input className="form-control enterNewName" type="text" placeholder="Enter new name" value={this.state.nameInputValue} onChange={this.nameInputValueChange}></input>
-        <button className="btn btn-dark" onClick={this.doOnNameChange}>OK</button>
-        <button className="btn" onClick={this.doOnCancel}>Cancel</button>
+        <input className="form-control nameControl enterNewName" type="text" placeholder="Enter new name" value={this.state.nameInputValue} onChange={this.nameInputValueChange}></input>
+        <button className="btn btn-success" onClick={this.doOnNameChange}>OK</button>
+        <button className="btn btn-warning" onClick={this.doOnCancel}>Cancel</button>
       </div>
     );
 
     const datePicker = (
       <div className="modalPiece">
-        <label>
-          Release Date
+        <label className="dateLabel" >
+          <p className="littleHeaders">Release Date</p>
           <input className="form-control" type="date" value={this.state.localGameData.releaseDate} onChange={this.dateInputValueChange}></input>
         </label>
       </div>
@@ -383,14 +353,11 @@ class BlockModalWindow extends React.Component {
 
       newHomeSelector = (
         <div className="modalPiece">
-          Move to another List or Section
-          <br></br>
-          <br></br>
-          Pick a List
+          <p className="littleHeaders">Pick a List</p>
           <select value={this.state.newListForBlock} className="custom-select" onChange={this.newListSelectChangeHandler}>
             {listSectionOptions}
           </select>
-          Pick a Section
+          <p className="littleHeaders">Pick a Section</p>
           <select value={this.state.newSectionForBlock} className="custom-select" onChange={this.newSectionSelectChangeHandler}>
             {sectionSectionOptions}
           </select>
@@ -398,7 +365,7 @@ class BlockModalWindow extends React.Component {
       );
     }
 
-    const deleteButton = (this.props.fullMode) ? <button type="button" className="btn" onClick={this.openModalWarningWindow}>Delete</button> : "";
+    const deleteButton = (this.props.fullMode) ? <button type="button" className="btn btn-danger" onClick={this.openModalWarningWindow}>Delete</button> : "";
 
     const developerSectionOptions = this.props.developers.map((elem, index) => {
       return (
@@ -412,28 +379,37 @@ class BlockModalWindow extends React.Component {
 
     const addDeveloper = (
       <div>
-        Add developer
+        <p className="littleHeaders">Add developer</p>
         <input className="form-control" type="text" placeholder="Developer Name" value={this.state.developerInputValue} onChange={this.developerInputValueChange}></input>
-        <button className="btn btn-dark" onClick={this.doOnAddDeveloper}>Add</button>
+        <button className="btn btn-success" onClick={this.doOnAddDeveloper}>Add</button>
       </div>
     );
 
     const suggestDeveloper = (
       <div>
-        Suggest developer
+        <p className="littleHeaders">Suggest developer</p>
         <input className="form-control" type="text" placeholder="Developer Name" value={this.state.developerSuggestInputValue} onChange={this.developerSuggestInputValueChange}></input>
-        <button className="btn btn-dark" onClick={this.doOnSuggestDeveloper}>Suggest</button>
+        <button className="btn btn-success" onClick={this.doOnSuggestDeveloper}>Suggest</button>
       </div>
     );
 
     const developerSelector = (
       <div className="modalPiece">
-        Assing developer
-        <select style={{fontWeight:"bold"}} value={devSelectValue} className="custom-select" onChange={this.developerChangeHandler}>
+        <p className="littleHeaders">Assign developer</p>
+        <select value={devSelectValue} className="custom-select" onChange={this.developerChangeHandler}>
           {developerSectionOptions}
         </select>
         {suggestDeveloper}
         {this.props.userData.admin ? addDeveloper : ""}
+      </div>
+    );
+
+    const description = (
+      <div className="desctiptionArea">
+        <label className="desctiptionLabel" htmlFor="description">
+          <p className="littleHeaders">Description</p>
+        </label>
+        <textarea placeholder="Enter description" className="form-control" id="description" rows="1" value={this.state.descriptionInputValue} onChange={this.descriptionInputValueChange}></textarea>
       </div>
     );
 
@@ -445,29 +421,26 @@ class BlockModalWindow extends React.Component {
               <div className="modal-header">
                 {/*title*/}
                 {(this.state.nameEditMode) ? gameNameEdit : gameName}
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
               </div>
               <div className="modal-body">
                 {/*New list and section selector*/}
                 {newHomeSelector}
                 {/*description*/}
-                {(this.state.descriptionEditMode) ? descriptionEdit : descriptionCustom}
+                {description}
                 {/*developer*/}
                 {developerSelector}
                 {/*release date*/}
                 {datePicker}
                 {/*platform*/}
                 <div className="modalPiece">
-                  Select platform
+                  <p className="littleHeaders">Select platform</p>
                   {platformPicker}
                 </div>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn" data-dismiss="modal">Cancel</button>
+                <button type="button" className="btn btn-warning" data-dismiss="modal">Cancel</button>
                 {deleteButton}
-                <button type="button" className="btn btn-dark" onClick={this.modalSave}>Save</button>
+                <button type="button" className="btn btn-success" onClick={this.modalSave}>Save</button>
               </div>
             </div>
           </div>

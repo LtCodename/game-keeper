@@ -1,0 +1,26 @@
+.listNameEditWrapper {
+  padding-bottom: 16px;
+}
+
+.warningWrapper {
+  padding-left: 16px;
+  padding-bottom: 16px;
+}
+
+.enterNewName {
+  font-family: var(--titles-font);
+  font-size: 30px;
+  color: var(--first-color);
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.warning {
+  color: var(--color-sunset-orange);
+  margin: 0;
+}
+
+.editButtonsWrapper {
+  padding-top: 10px;
+}

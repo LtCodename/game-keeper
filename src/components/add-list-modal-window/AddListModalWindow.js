@@ -17,14 +17,15 @@ class AddListModalWindow extends React.Component {
 
     this.state = {
       nameEditMode: false,
-      nameInputValue: `Click here to pass a new list name`
+      warningMode: false,
+      nameInputValue: `Click here`
     };
   }
 
   doOnCancel() {
     this.setState({
       nameEditMode: false,
-      nameInputValue: `Click here to pass a new list name`
+      nameInputValue: `Click here`
     });
   }
 
@@ -36,7 +37,8 @@ class AddListModalWindow extends React.Component {
 
   nameInputValueChange(event) {
     this.setState({
-      nameInputValue: event.target.value
+      nameInputValue: event.target.value,
+      warningMode: false
     });
   }
 
@@ -47,7 +49,10 @@ class AddListModalWindow extends React.Component {
   }
 
   onProceed() {
-    if (this.state.nameInputValue === `Click here to pass a new list name`) {
+    if (this.state.nameInputValue === `Click here`) {
+      this.setState({
+        warningMode: true
+      });
       return;
     }
 
@@ -71,14 +76,29 @@ class AddListModalWindow extends React.Component {
   render() {
 
     const listName = (
-      <h5 className="modal-title" onClick={this.changeListName}>{(this.state.nameInputValue) ? this.state.nameInputValue : `Click here to pass a new list name`}</h5>
+      <h5 className="modal-title" onClick={this.changeListName}>{(this.state.nameInputValue) ? this.state.nameInputValue : `Click here`}</h5>
     );
 
     const listNameEdit = (
-      <div>
+      <div className="listNameEditWrapper">
         <input className="form-control enterNewName" type="text" placeholder="Enter new name" value={this.state.nameInputValue} onChange={this.nameInputValueChange}></input>
-        <button className="btn btn-dark" onClick={this.doOnNameChange}>OK</button>
-        <button className="btn" onClick={this.doOnCancel}>Cancel</button>
+        <div className="editButtonsWrapper">
+          <button className="btn btn-warning" onClick={this.doOnCancel}>Cancel</button>
+          <button className="btn btn-success" onClick={this.doOnNameChange}>Accept</button>
+        </div>
+      </div>
+    );
+
+    const buttonsWrapper = (
+      <div className="buttonsWrapper">
+        <button type="button" className="btn btn-warning" data-dismiss="modal">Cancel</button>
+        <button type="button" className="btn btn-success" onClick={this.onProceed}>Proceed</button>
+      </div>
+    );
+
+    const warning = (
+      <div className="warningWrapper">
+        <p className="warning">You have to enter new name to proceed!</p>
       </div>
     );
 
@@ -89,13 +109,10 @@ class AddListModalWindow extends React.Component {
             <div className="modal-header">
               {/*list title*/}
               {(this.state.nameEditMode) ? listNameEdit : listName}
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
             </div>
+            {(this.state.warningMode) ? warning : ""}
             <div className="modal-footer">
-              <button type="button" className="btn" data-dismiss="modal">Cancel</button>
-              <button type="button" className="btn btn-dark" onClick={this.onProceed}>Proceed</button>
+              {(!this.state.nameEditMode) ? buttonsWrapper : ""}
             </div>
           </div>
         </div>

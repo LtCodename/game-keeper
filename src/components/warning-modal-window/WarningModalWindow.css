@@ -1,7 +1,22 @@
 .modal-header {
-    border-bottom: 0;
+  border-bottom: 0;
 }
 
 .modal-footer {
-    border-top: 0;
+  border-top: 0;
+}
+
+.message {
+  color: #000000;
+  margin: 0;
+  padding: 0;
+}
+
+.messageWrapper {
+  padding-left: 16px;
+  padding-bottom: 5px;
+}
+
+.mainContent {
+  background-color: var(--color-wax-flower)
 }

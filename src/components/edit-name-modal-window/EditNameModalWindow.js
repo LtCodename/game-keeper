@@ -2,7 +2,7 @@ import React from 'react';
 import './EditNameModalWindow.css';
 declare var $;
 
-class EditNameModalWIndow extends React.Component {
+class EditNameModalWindow extends React.Component {
 
   constructor(props) {
     super(props);
@@ -62,8 +62,8 @@ class EditNameModalWIndow extends React.Component {
     const listNameEdit = (
       <div>
         <input className="form-control enterNewName" type="text" placeholder="Enter new name" value={this.state.nameInputValue} onChange={this.nameInputValueChange}></input>
-        <button className="btn btn-dark" onClick={this.doOnNameChange}>OK</button>
-        <button className="btn" onClick={this.doOnCancel}>Cancel</button>
+        <button className="btn btn-success" onClick={this.doOnNameChange}>OK</button>
+        <button className="btn btn-warning" onClick={this.doOnCancel}>Cancel</button>
       </div>
     );
 
@@ -74,13 +74,10 @@ class EditNameModalWIndow extends React.Component {
             <div className="modal-header">
               {/*list title*/}
               {(this.state.nameEditMode) ? listNameEdit : developerName}
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn" data-dismiss="modal">Cancel</button>
-              <button type="button" className="btn btn-dark" onClick={this.onProceed}>Proceed</button>
+              <button type="button" className="btn btn-warning" data-dismiss="modal">Cancel</button>
+              <button type="button" className="btn btn-success" onClick={this.onProceed}>Proceed</button>
             </div>
           </div>
         </div>
@@ -89,4 +86,4 @@ class EditNameModalWIndow extends React.Component {
   }
 }
 
-export default EditNameModalWIndow;
+export default EditNameModalWindow;

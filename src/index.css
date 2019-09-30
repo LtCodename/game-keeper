@@ -49,6 +49,30 @@ body {
   background-color: var(--third-color);
 }
 
+.modal-content {
+  background-color: var(--third-color);
+  border: none;
+  border-radius: 0;
+}
+
+.modal-title {
+  font-family: var(--titles-font);
+  font-size: 30px;
+  color: var(--first-color);
+}
+
+.modal-body {
+  padding: 0 16px 0 16px;
+}
+
+.modal-header {
+  padding: 5px 16px 0 16px;
+}
+
+.modal-footer {
+  padding: 0 16px 16px 16px;
+}
+
 .appWrappaer {
   display: flex;
   flex-direction: column;

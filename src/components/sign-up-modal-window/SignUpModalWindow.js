@@ -79,22 +79,19 @@ class SignUpModalWindow extends React.Component {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title">Sign Up</h5>
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
             </div>
             <div className="modalBody">
               <form id="signupForm" onSubmit={this.createUser}>
                 <div className="inputField">
-                  <input className="signupInput" autoComplete="username email" placeholder="Enter email" type="email" id="signupEmail" value={this.state.emailInputValue} onChange={this.emailValueChange} required></input>
-                  <label htmlFor="signupEmail">Email address*</label>
+                  <input className="form-control signupInput" autoComplete="username email" placeholder="Enter email" type="email" id="signupEmail" value={this.state.emailInputValue} onChange={this.emailValueChange} required></input>
+                  <label className="signUpLabel" htmlFor="signupEmail">Email address*</label>
                 </div>
                 <div className="inputField">
-                  <input className="signupInput" autoComplete="current-password" placeholder="Enter password" type="password" id="signupPassword" value={this.state.passwordInputValue} onChange={this.passwordValueChange} required></input>
-                  <label htmlFor="signupPassword">Choose password*</label>
+                  <input className="form-control signupInput" autoComplete="current-password" placeholder="Enter password" type="password" id="signupPassword" value={this.state.passwordInputValue} onChange={this.passwordValueChange} required></input>
+                  <label className="signUpLabel" htmlFor="signupPassword">Choose password*</label>
                 </div>
                 <div className="inputField">
-                  <input className="signupInput" placeholder="Enter name" type="text" id="signupDisplayName" value={this.state.nameInputValue} onChange={this.nameValueChange} required></input>
+                  <input className="signUpLabel" className="form-control signupInput" placeholder="Enter name" type="text" id="signupDisplayName" value={this.state.nameInputValue} onChange={this.nameValueChange} required></input>
                   <label htmlFor="signupDisplayName">Display Name*</label>
                 </div>
                 <button className="btn signupButton btn-warning">Sign Up</button>
