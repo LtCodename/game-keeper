@@ -290,12 +290,12 @@ class BlockModalWindow extends React.Component {
 
   render() {
     const gameName = (
-      <h5 className="modal-title" onClick={this.changeGameName}>{this.state.localGameData.name}</h5>
+      <h5 className="modal-title gameTitle" onClick={this.changeGameName}>{this.state.localGameData.name}</h5>
     );
 
     const gameNameEdit = (
       <div>
-        <input className="form-control nameControl enterNewName" type="text" placeholder="Enter new name" value={this.state.nameInputValue} onChange={this.nameInputValueChange}></input>
+        <input className="form-control enterNewName" type="text" placeholder="Enter new name" value={this.state.nameInputValue} onChange={this.nameInputValueChange}></input>
         <button className="btn btn-success" onClick={this.doOnNameChange}>OK</button>
         <button className="btn btn-warning" onClick={this.doOnCancel}>Cancel</button>
       </div>

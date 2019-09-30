@@ -83,16 +83,16 @@ class AddListModalWindow extends React.Component {
       <div className="listNameEditWrapper">
         <input className="form-control enterNewName" type="text" placeholder="Enter new name" value={this.state.nameInputValue} onChange={this.nameInputValueChange}></input>
         <div className="editButtonsWrapper">
-          <button className="btn btn-warning" onClick={this.doOnCancel}>Cancel</button>
-          <button className="btn btn-success" onClick={this.doOnNameChange}>Accept</button>
+          <button className="editListModalWindowButton btn btn-warning" onClick={this.doOnCancel}>Cancel</button>
+          <button className="editListModalWindowButton btn btn-success" onClick={this.doOnNameChange}>Accept</button>
         </div>
       </div>
     );
 
     const buttonsWrapper = (
       <div className="buttonsWrapper">
-        <button type="button" className="btn btn-warning" data-dismiss="modal">Cancel</button>
-        <button type="button" className="btn btn-success" onClick={this.onProceed}>Proceed</button>
+        <button type="button" className="editListModalWindowButton btn btn-warning" data-dismiss="modal">Cancel</button>
+        <button type="button" className="editListModalWindowButton btn btn-success" onClick={this.onProceed}>Proceed</button>
       </div>
     );
 
