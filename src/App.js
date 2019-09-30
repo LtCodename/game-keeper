@@ -23,6 +23,7 @@ class App extends React.Component {
 
     this.fecthUser();
     this.fecthDevelopers();
+    this.fecthColors();
     this.fecthSuggested();
     this.fecthPlatforms();
 
@@ -31,6 +32,7 @@ class App extends React.Component {
       userAuthDataLoaded: false,
       developersDataLoaded: false,
       suggestedDataLoaded: false,
+      colorsDataLoaded: false,
       platformsDataLoaded: false,
       unauthorized: false,
     }
@@ -41,6 +43,17 @@ class App extends React.Component {
       this.props.fecthDevelopers(snapshot);
       this.setState({
         developersDataLoaded: true
+      });
+    }, error => {
+      console.log(error.message);
+    });
+  }
+
+  fecthColors() {
+    firebase.firestore().collection('availableColors').onSnapshot(snapshot => {
+      this.props.fecthColors(snapshot);
+      this.setState({
+        colorsDataLoaded: true
       });
     }, error => {
       console.log(error.message);
@@ -169,6 +182,7 @@ class App extends React.Component {
         {((this.state.userDataLoaded
            && this.state.developersDataLoaded
            && this.state.suggestedDataLoaded
+           && this.state.colorsDataLoaded
            && this.state.userAuthDataLoaded
            && this.state.platformsDataLoaded) || this.state.unauthorized) ? content : fake}
       </BrowserRouter>
@@ -189,6 +203,9 @@ const appDispatchToProps = (dispatch) => {
     },
     fecthDevelopers: (snapshot) => {
       dispatch({ type: reducers.actions.developersActions.DEVELOPERS_FETCH, snapshot: snapshot });
+    },
+    fecthColors: (snapshot) => {
+      dispatch({ type: reducers.actions.colorsActions.COLORS_FETCH, snapshot: snapshot });
     },
     fecthSuggestedDevelopers: (snapshot) => {
       dispatch({ type: reducers.actions.suggestedActions.SUGGESTED_FETCH, snapshot: snapshot });

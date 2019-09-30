@@ -6,6 +6,7 @@ const defaultStore = {
   userBlocks: [],
   developers: [],
   suggestedDevelopers: [],
+  colors: [],
   platforms: [],
   selectedListIndex: null,
   userData: null
@@ -36,6 +37,25 @@ const suggestedReducer = (state = defaultStore.suggestedDevelopers, action) => {
   const copy = [];
   switch(action.type) {
     case SUGGESTED_FETCH:
+      action.snapshot.forEach(doc => {
+        let otherData = doc.data();
+        copy.push({
+          id: doc.id,
+          ...otherData
+        });
+      });
+      return copy;
+    default:
+      return state;
+  }
+};
+
+const COLORS_FETCH = 'COLORS_FETCH';
+
+const colorsReducer = (state = defaultStore.colors, action) => {
+  const copy = [];
+  switch(action.type) {
+    case COLORS_FETCH:
       action.snapshot.forEach(doc => {
         let otherData = doc.data();
         copy.push({
@@ -136,6 +156,7 @@ const rootReducer = combineReducers({
   userSections: userSectionsReducer,
   userBlocks: userBlocksReducer,
   developers: developersReducer,
+  colors: colorsReducer,
   suggestedDevelopers: suggestedReducer,
   platforms: platformsReducer,
   selectedListIndex: selectedListIndexReducer,
@@ -150,6 +171,9 @@ export default {
     },
     suggestedActions: {
       SUGGESTED_FETCH
+    },
+    colorsActions: {
+      COLORS_FETCH
     },
     platformsActions: {
       PLATFORMS_FETCH

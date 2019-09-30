@@ -1,5 +1,4 @@
 import React from 'react';
-import availableColors from '../../mocks/availableColors.js';
 import './Colors.css';
 import { connect } from 'react-redux'
 declare var firebase;
@@ -44,7 +43,7 @@ class Colors extends React.Component {
   }
 
   render() {
-    let colorsToRender = availableColors.map((elem, index) => {
+    let colorsToRender = this.props.colors.map((elem, index) => {
       let classNameReal = "colorsSpan color_";
       classNameReal += elem.name;
 
@@ -71,6 +70,7 @@ class Colors extends React.Component {
 const stateToProps = (state = {}) => {
   return {
     userData: state.userData,
+    colors: state.colors,
     userSections: state.userSections
   }
 };

@@ -207,7 +207,8 @@ class BlockModalWindow extends React.Component {
     this.setState({
       nameEditMode: false,
       descriptionEditMode: false,
-      descriptionInputValue: ""
+      descriptionInputValue: "",
+      nameInputValue: this.props.gameData.name
     });
   }
 

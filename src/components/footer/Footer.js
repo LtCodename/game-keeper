@@ -50,13 +50,13 @@ class Footer extends React.Component {
     );
 
     const copyrighth = (
-      <a className="copyright" href="" target="blank">© 2019 The Codename</a>
+      <a className="copyright" href="https://ltcodename.com/" target="blank">© 2019 LtCodename</a>
     );
 
     const alertWindow = (
       <AlertModalWindow
         title={`Game Keeper Alpha`}
-        message={`Version: 0.010. Release date: 27.09.19.`}/>
+        message={`Version: 0.011. Release date: 30.09.19.`}/>
     );
 
     return (

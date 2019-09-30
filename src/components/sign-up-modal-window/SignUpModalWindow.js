@@ -97,13 +97,11 @@ class SignUpModalWindow extends React.Component {
                   <input className="signupInput" placeholder="Enter name" type="text" id="signupDisplayName" value={this.state.nameInputValue} onChange={this.nameValueChange} required></input>
                   <label htmlFor="signupDisplayName">Display Name*</label>
                 </div>
-                <button className="btn signupButton">Sign Up</button>
+                <button className="btn signupButton btn-warning">Sign Up</button>
+                <button type="button" className="btn cancelButton btn-danger" data-dismiss="modal">Cancel</button>
               </form>
               <p className="requiredText">Fields marked with * are required.</p>
               <p className="errorText">{this.state.errorText}</p>
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn" data-dismiss="modal">OK</button>
             </div>
           </div>
         </div>
