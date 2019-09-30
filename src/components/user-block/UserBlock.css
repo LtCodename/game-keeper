@@ -2,10 +2,16 @@
   --footer-content-height: 20px;
   border: none;
   text-align: center;
-  margin: 3px 4px 1px 0;
+  margin: 3px 15px 1px 0;
   min-width: 150px;
   max-width: 250px;
   padding: 5px 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.gameBlock:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 .gameName {
@@ -49,10 +55,6 @@
 
 .gameBlock_air-force-blue {
   background-color: var(--color-air-force-blue);
-}
-
-.gameBlock:hover {
-  opacity: 0.8;
 }
 
 .gameBlock_alice-blue {
