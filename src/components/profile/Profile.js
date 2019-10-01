@@ -140,6 +140,10 @@ class Profile extends React.Component {
       </div>
     );
 
+    const privacyButton = (
+      <NavLink to="/privacy"><button className="btn profileButtons">Privacy Policy</button></NavLink>
+    );
+
     let adminSign = (<p></p>);
     if (this.props.userData !== null) {
       adminSign = (
@@ -157,6 +161,7 @@ class Profile extends React.Component {
         {this.props.userData.admin ? developersButton : ""}
         {this.props.userData.admin ? suggestedDevelopersButton : ""}
         {this.props.userData.admin ? adminPanel : ""}
+        {privacyButton}
       </div>
     )
   }

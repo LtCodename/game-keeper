@@ -1,5 +1,6 @@
 import React from 'react';
 import './SignUpModalWindow.css';
+import { NavLink } from 'react-router-dom';
 declare var $;
 declare var firebase;
 
@@ -11,6 +12,7 @@ class SignUpModalWindow extends React.Component {
     this.nameValueChange = this.nameValueChange.bind(this);
     this.passwordValueChange = this.passwordValueChange.bind(this);
     this.createUser = this.createUser.bind(this);
+    this.onPolicy = this.onPolicy.bind(this);
 
     this.state = {
       emailInputValue: "",
@@ -18,6 +20,21 @@ class SignUpModalWindow extends React.Component {
       nameInputValue: "",
       errorText: ""
     };
+  }
+
+  onPolicy() {
+      $("#signUpWindow").modal('hide');
+  }
+
+  componentWillUnmount() {
+    $("#signUpWindow").unbind('hidden.bs.modal');
+  }
+
+  resetState() {
+    this.setState({
+      showSignUpWindow: false,
+      showLogInWindow: false
+    })
   }
 
   nameValueChange(event) {
@@ -98,6 +115,7 @@ class SignUpModalWindow extends React.Component {
                 <button type="button" className="btn cancelButton btn-danger" data-dismiss="modal">Cancel</button>
               </form>
               <p className="requiredText">Fields marked with * are required.</p>
+              <NavLink to="/privacy"><button className="btn policyButton" onClick={this.onPolicy}>Privacy Policy</button></NavLink>
               <p className="errorText">{this.state.errorText}</p>
             </div>
           </div>

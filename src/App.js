@@ -8,6 +8,7 @@ import Dashboard from './components/dashboard/Dashboard.js';
 import Profile from './components/profile/Profile.js';
 import Developers from './components/developers/Developers.js';
 import Suggested from './components/suggested/Suggested.js';
+import Privacy from './components/privacy/Privacy.js';
 import Preloader from './components/preloader/Preloader.js';
 import reducers from './redux/reducers';
 import { connect } from 'react-redux'
@@ -152,6 +153,7 @@ class App extends React.Component {
         <Route path="/profile" component={Profile} />
         <Route path="/developers" component={Developers} />
         <Route path="/suggested" component={Suggested} />
+        <Route path="/privacy" component={Privacy} />
       </div>
     )
 

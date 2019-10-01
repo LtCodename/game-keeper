@@ -19,9 +19,14 @@
   margin-top: 10px;
 }
 
+.policyButton {
+  margin: 0;
+}
+
 .requiredText {
   color: #000000;
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 #signupForm {
