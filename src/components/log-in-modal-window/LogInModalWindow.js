@@ -63,19 +63,17 @@ class LogInModalWindow extends React.Component {
             <div className="modalBody">
               <form id="loginForm" onSubmit={this.loginUser}>
                 <div className="inputField">
-                  <input className="loginInput" autoComplete="username email" placeholder="Enter email" type="email" id="loginEmail" value={this.state.emailInputValue} onChange={this.emailValueChange} required></input>
-                  <label htmlFor="loginEmail">Email address</label>
+                  <label className="loginLabel" htmlFor="loginEmail">Your Email address</label>
+                  <input className="form-control loginInput" autoComplete="username email" placeholder="Enter email" type="email" id="loginEmail" value={this.state.emailInputValue} onChange={this.emailValueChange} required></input>
                 </div>
                 <div className="inputField">
-                  <input className="loginInput" autoComplete="current-password" placeholder="Enter password" type="password" id="loginPassword"  value={this.state.passwordInputValue} onChange={this.passwordValueChange} required></input>
-                  <label htmlFor="loginPassword">Your password</label>
+                  <label className="loginLabel" htmlFor="loginPassword">Your password</label>
+                  <input className="form-control loginInput" autoComplete="current-password" placeholder="Enter password" type="password" id="loginPassword"  value={this.state.passwordInputValue} onChange={this.passwordValueChange} required></input>
                 </div>
-                <button className="btn loginButton">Log In</button>
+                <button className="btn loginButton btn-warning">Log In</button>
+                <button type="button cancelButton" className="btn btn-danger" data-dismiss="modal">Cancel</button>
               </form>
               <p className="errorText">{this.state.errorText}</p>
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn" data-dismiss="modal">OK</button>
             </div>
           </div>
         </div>

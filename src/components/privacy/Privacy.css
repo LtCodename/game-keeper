@@ -1,0 +1,14 @@
+.privacyWrapper {
+  background-color: var(--first-color);
+  padding: 10px 20px;
+  min-height: calc(100vh - var(--content-gap));
+}
+
+.privacyLink {
+  color: var(--third-color);
+  text-decoration: underline;
+}
+
+.privacyLink:hover {
+  color: var(--third-color);
+}

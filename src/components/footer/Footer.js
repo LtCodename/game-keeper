@@ -1,6 +1,5 @@
 import React from 'react';
 import './Footer.css';
-import { connect } from 'react-redux'
 import AlertModalWindow from '../alert-modal-window/AlertModalWindow.js';
 declare var $;
 
@@ -9,33 +8,12 @@ class Footer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onSaveLists = this.onSaveLists.bind(this);
     this.onVersionClick = this.onVersionClick.bind(this);
     this.resetState = this.resetState.bind(this);
 
     this.state = {
-      listsUrl: null,
       showAlertWindow: false,
     };
-  }
-
-  onSaveLists() {
-    const stringified = JSON.stringify(this.props.lists);
-    const fileStructure = `const lists = ${stringified}; export default lists;`
-    const data = new Blob([fileStructure], {type: 'text/plain'});
-    if (this.state.listsUrl) {
-      window.URL.revokeObjectURL(this.state.listsUrl);
-    }
-    this.setState({
-      listsUrl: window.URL.createObjectURL(data)
-    }, () => {
-      let a = document.createElement('a');
-      a.href = this.state.listsUrl;
-      a.download = "lists.js";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    });
   }
 
   onVersionClick() {
@@ -65,26 +43,26 @@ class Footer extends React.Component {
       </div>
     );
 
-    const saveListsIcon = (
-      <div className="saveIconsWrapper">
-          <button type="button" className="btn saveButton saveListsButton" onClick={this.onSaveLists}><img className="saveIcon" alt="" src={process.env.PUBLIC_URL + '/icons/save-lists.svg'}></img></button>
-          <button type="button" className="btn saveButton checkVersionButton" onClick={this.onVersionClick}><img className="saveIcon" alt="" src={process.env.PUBLIC_URL + '/icons/version.svg'}></img></button>
+    const versionIcon = (
+      <div className="versionIconWrapper">
+          <button type="button" className="btn leftFooterButton" onClick={this.onVersionClick}><img className="saveIcon" alt="" src={process.env.PUBLIC_URL + '/icons/version.svg'}></img></button>
+          <a className="shareTrelloButton" href="https://trello.com/b/GT6AY0oi/game-keeper-roadmap" target="blank"><img className="shareIcon" alt="" src={process.env.PUBLIC_URL + '/icons/share-trello.svg'}></img></a>
       </div>
     );
 
     const copyrighth = (
-      <a className="copyright" href="" target="blank">© 2019 The Codename</a>
+      <a className="copyright" href="https://ltcodename.com/" target="blank">© 2019 LtCodename</a>
     );
 
     const alertWindow = (
       <AlertModalWindow
         title={`Game Keeper Alpha`}
-        message={`Version: 0.010. Release date: 27.09.19.`}/>
+        message={`Version: 0.014. Release date: 1.10.19.`}/>
     );
 
     return (
       <div className="footerWrapper">
-        {saveListsIcon}
+        {versionIcon}
         {copyrighth}
         {shareIcons}
         {this.state.showAlertWindow ? alertWindow : ""}
@@ -93,12 +71,4 @@ class Footer extends React.Component {
   }
 }
 
-const stateToProps = (state = {}) => {
-  return {
-    lists: state.lists
-  }
-};
-
-const FooterConnected = connect(stateToProps, null)(Footer);
-
-export default FooterConnected;
+export default Footer;

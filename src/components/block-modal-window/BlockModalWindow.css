@@ -3,17 +3,65 @@
 }
 
 .modalPiece {
-  border: 1px solid #000000;
-  padding: 5px;
   margin-bottom: 5px;
 }
 
-.enterNewName {
-  width: 435px;
+.custom-select {
+  background-color: var(--third-color);
+  color: #000000;
+  border-radius: 0;
 }
 
-.developerSelector .custom-select {
-  font-weight: bold;
+.form-control {
+  background-color: var(--third-color);
+  color: #000000;
+  border-radius: 0;
+}
+
+.checkboxWrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.checkbox {
+  margin-right: 15px;
+}
+
+.form-control::placeholder {
+  color: #000000;
+}
+
+.enterNewName {
+  width: 468px;
+}
+
+.littleHeaders {
+  color: #000000;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.btn {
+  margin-top: 3px;
+}
+
+option {
+  padding: 3px 0;
+}
+
+.dateLabel {
+  margin: 0;
+  padding: 0;
+}
+
+.desctiptionLabel {
+  margin: 0;
+  padding: 0;
+}
+
+.nameLabel {
+  margin: 0;
+  padding: 0;
 }
 
 @media (max-width: 1050px) {

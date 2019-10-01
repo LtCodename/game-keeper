@@ -6,7 +6,7 @@
 .profileWrapper {
   background-color: var(--first-color);
   padding: 10px 20px;
-  min-height: calc(100vh - 118px);
+  min-height: calc(100vh - var(--content-gap));
 }
 
 .profileButtons {
@@ -27,6 +27,7 @@
   text-transform: uppercase;
   font-family: var(--titles-font);
   font-size: 21px;
+  margin: 0;
 }
 
 .emailInputLabel {
@@ -40,7 +41,8 @@
 }
 
 .adminPanel {
-  display: flex
+  display: flex;
+  margin-bottom: 15px;
 }
 
 .editNameWrapper {

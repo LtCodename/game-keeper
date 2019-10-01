@@ -7,7 +7,11 @@
 }
 
 .signupButton {
-  margin-top: 5px;
+  margin: 0 5px 0 0;
+}
+
+.cancelButton {
+  margin: 0 5px 0 0;
 }
 
 .errorText {
@@ -15,7 +19,26 @@
   margin-top: 10px;
 }
 
+.policyButton {
+  margin: 0;
+}
+
 .requiredText {
   color: #000000;
   margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#signupForm {
+  margin-right: 16px;
+}
+
+.signUpLabel {
+  margin: 0;
+}
+
+.signupInput {
+  background-color: var(--third-color);
+  color: #000000;
+  border-radius: 0;
 }

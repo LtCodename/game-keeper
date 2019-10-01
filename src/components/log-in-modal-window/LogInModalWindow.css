@@ -1,16 +1,30 @@
-.modalBody {
-  padding-left: 18px;
-}
-
 .loginInput {
   margin-right: 10px;
 }
 
 .loginButton {
-  margin-top: 5px;
+  margin: 0 5px 0 0;
+}
+
+.cancelButton {
+  margin: 0 5px 0 0;
 }
 
 .errorText {
   color: var(--color-sunset-orange);
   margin-top: 10px;
+}
+
+.loginLabel {
+  margin: 0;
+}
+
+#loginForm {
+  margin-right: 16px;
+}
+
+.loginInput {
+  background-color: var(--third-color);
+  color: #000000;
+  border-radius: 0;
 }

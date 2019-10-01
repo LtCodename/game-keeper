@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import List from './components/list/List.js';
+import UserList from './components/user-list/UserList.js';
 import Nav from './components/nav/Nav.js';
 import Footer from './components/footer/Footer.js';
 import Header from './components/header/Header.js';
@@ -8,6 +8,7 @@ import Dashboard from './components/dashboard/Dashboard.js';
 import Profile from './components/profile/Profile.js';
 import Developers from './components/developers/Developers.js';
 import Suggested from './components/suggested/Suggested.js';
+import Privacy from './components/privacy/Privacy.js';
 import Preloader from './components/preloader/Preloader.js';
 import reducers from './redux/reducers';
 import { connect } from 'react-redux'
@@ -19,37 +20,23 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.fecthData = this.fecthData.bind(this);
+
     this.fecthUser();
     this.fecthDevelopers();
+    this.fecthColors();
     this.fecthSuggested();
     this.fecthPlatforms();
 
     this.state = {
       userDataLoaded: false,
+      userAuthDataLoaded: false,
       developersDataLoaded: false,
       suggestedDataLoaded: false,
+      colorsDataLoaded: false,
       platformsDataLoaded: false,
       unauthorized: false,
     }
-  }
-
-  fecthUser() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user !== null) {
-        user.getIdTokenResult().then(idTokenResult => {
-          user.admin = idTokenResult.claims.admin;
-          this.props.checkUserPresence(user);
-          this.setState({
-            userDataLoaded: true
-          });
-        })
-      }else {
-        this.props.checkUserPresence(user);
-        this.setState({
-          unauthorized: true
-        });
-      }
-    })
   }
 
   fecthDevelopers() {
@@ -57,6 +44,17 @@ class App extends React.Component {
       this.props.fecthDevelopers(snapshot);
       this.setState({
         developersDataLoaded: true
+      });
+    }, error => {
+      console.log(error.message);
+    });
+  }
+
+  fecthColors() {
+    firebase.firestore().collection('availableColors').onSnapshot(snapshot => {
+      this.props.fecthColors(snapshot);
+      this.setState({
+        colorsDataLoaded: true
       });
     }, error => {
       console.log(error.message);
@@ -85,6 +83,46 @@ class App extends React.Component {
     });
   }
 
+  fecthUser() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user !== null) {
+        user.getIdTokenResult().then(idTokenResult => {
+          user.admin = idTokenResult.claims.admin;
+          this.props.checkUserPresence(user);
+          this.setState({
+            userAuthDataLoaded: true
+          });
+        });
+        this.fecthData(user.uid);
+      }else {
+        this.props.checkUserPresence(user);
+        this.setState({
+          unauthorized: true
+        });
+      }
+    })
+  }
+
+  fecthData(uid) {
+    firebase.firestore().collection('users').doc(uid).onSnapshot(
+      doc => {
+        if (doc.exists) {
+           console.log("Document data:", doc.data());
+           const allUserData = doc.data() || {};
+           this.props.setListsToStore(allUserData.lists || []);
+           this.props.setSectionsToStore(allUserData.sections || []);
+           this.props.setBlocksToStore(allUserData.blocks || []);
+       } else {
+           console.log("No such document!");
+       }this.setState({
+         userDataLoaded: true
+       });
+      }, error => {
+        console.log(error.message);
+      }
+    );
+  }
+
   render() {
     const dashboard = (
       <Route exact path="/" component={Dashboard} />
@@ -95,7 +133,7 @@ class App extends React.Component {
     if (this.props.selectedListIndex === null) {
       listOrDashboard = dashboard;
     }else {
-      listOrDashboard = <List/>
+      listOrDashboard = <UserList/>;
     }
 
     const nav = (
@@ -115,6 +153,7 @@ class App extends React.Component {
         <Route path="/profile" component={Profile} />
         <Route path="/developers" component={Developers} />
         <Route path="/suggested" component={Suggested} />
+        <Route path="/privacy" component={Privacy} />
       </div>
     )
 
@@ -139,10 +178,15 @@ class App extends React.Component {
         <Preloader/>
       </div>
     );
-    
+
     return (
       <BrowserRouter>
-        {((this.state.userDataLoaded && this.state.developersDataLoaded && this.state.suggestedDataLoaded && this.state.platformsDataLoaded) || this.state.unauthorized) ? content : fake}
+        {((this.state.userDataLoaded
+           && this.state.developersDataLoaded
+           && this.state.suggestedDataLoaded
+           && this.state.colorsDataLoaded
+           && this.state.userAuthDataLoaded
+           && this.state.platformsDataLoaded) || this.state.unauthorized) ? content : fake}
       </BrowserRouter>
     );
   }
@@ -162,11 +206,23 @@ const appDispatchToProps = (dispatch) => {
     fecthDevelopers: (snapshot) => {
       dispatch({ type: reducers.actions.developersActions.DEVELOPERS_FETCH, snapshot: snapshot });
     },
+    fecthColors: (snapshot) => {
+      dispatch({ type: reducers.actions.colorsActions.COLORS_FETCH, snapshot: snapshot });
+    },
     fecthSuggestedDevelopers: (snapshot) => {
       dispatch({ type: reducers.actions.suggestedActions.SUGGESTED_FETCH, snapshot: snapshot });
     },
     fecthPlatforms: (snapshot) => {
       dispatch({ type: reducers.actions.platformsActions.PLATFORMS_FETCH, snapshot: snapshot });
+    },
+    setListsToStore: (lists) => {
+      dispatch({ type: reducers.actions.userListsActions.LISTS_SET, lists: lists });
+    },
+    setSectionsToStore: (sections) => {
+      dispatch({ type: reducers.actions.userSectionsActions.SECTIONS_SET, sections: sections });
+    },
+    setBlocksToStore: (blocks) => {
+      dispatch({ type: reducers.actions.userBlocksActions.BLOCKS_SET, blocks: blocks });
     }
   }
 };

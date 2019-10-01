@@ -1,7 +1,6 @@
 import React from 'react';
 import './BlockModalWindow.css';
 import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
-import reducers from '../../redux/reducers';
 import { connect } from 'react-redux'
 declare var $;
 declare var firebase;
@@ -11,14 +10,10 @@ class BlockModalWindow extends React.Component {
   constructor(props) {
     super(props);
 
-    this.changeGameName = this.changeGameName.bind(this);
-    this.doOnNameChange = this.doOnNameChange.bind(this);
     this.doOnAddDeveloper = this.doOnAddDeveloper.bind(this);
     this.doOnSuggestDeveloper = this.doOnSuggestDeveloper.bind(this);
     this.doOnCancel = this.doOnCancel.bind(this);
-    this.changeDescription = this.changeDescription.bind(this);
     this.descriptionInputValueChange = this.descriptionInputValueChange.bind(this);
-    this.doOnDescriptionChange = this.doOnDescriptionChange.bind(this);
     this.nameInputValueChange = this.nameInputValueChange.bind(this);
     this.developerInputValueChange = this.developerInputValueChange.bind(this);
     this.developerSuggestInputValueChange = this.developerSuggestInputValueChange.bind(this);
@@ -35,24 +30,27 @@ class BlockModalWindow extends React.Component {
     this.deleteBlock = this.deleteBlock.bind(this);
 
     this.state = {
-      nameEditMode: false,
-      descriptionEditMode: false,
       localGameData: {...this.props.gameData, releaseDate: this.props.gameData.releaseDate || ""},
       nameInputValue: this.props.gameData.name,
       developerInputValue: "",
       developerSuggestInputValue: "",
-      descriptionInputValue: "",
+      descriptionInputValue: this.props.gameData.description,
       platforms: this.preparePlatformsForState(),
       showModalWindow: false,
-      newListForBlock: this.props.listIndex,
-      newSectionForBlock:this.props.sectionIndex
+      newListForBlock: this.props.userLists[this.props.listIndex].id,
+      newSectionForBlock: this.props.sectionId
     };
   }
 
   newListSelectChangeHandler(event) {
+    const sections = this.props.userSections.filter((elem) => {
+      return elem.listId === event.target.value;
+    });
+    const firstSectionId = sections[0].id;
+
     this.setState({
       newListForBlock: event.target.value,
-      newSectionForBlock: 0
+      newSectionForBlock: firstSectionId
     });
   }
 
@@ -63,8 +61,24 @@ class BlockModalWindow extends React.Component {
   }
 
   deleteBlock() {
-    this.props.deleteBlock(this.props.listIndex, this.props.sectionIndex, this.props.blockIndex)
+    const copy = [...this.props.userBlocks];
+
+    const targetBlockIndex = copy.findIndex((elem) => {
+      return elem.id === this.props.gameData.id;
+    })
+
+    if (targetBlockIndex > -1) {
+      copy.splice(targetBlockIndex, 1);
+    }
+
     this.props.closeModal();
+
+    firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+      blocks: copy
+    }).then((data) => {
+    }).catch(error => {
+      console.log(error.message);
+    });
   }
 
   developerChangeHandler(event) {
@@ -134,19 +148,6 @@ class BlockModalWindow extends React.Component {
     });
   }
 
-  changeGameName() {
-    this.setState({
-      nameEditMode: true
-    });
-  }
-
-  doOnNameChange() {
-    this.setState({
-      nameEditMode: false,
-      localGameData: {...this.state.localGameData, name:this.state.nameInputValue}
-    });
-  }
-
   doOnAddDeveloper() {
     if (!this.state.developerInputValue) {
       return;
@@ -185,34 +186,22 @@ class BlockModalWindow extends React.Component {
 
   doOnCancel() {
     this.setState({
-      nameEditMode: false,
-      descriptionEditMode: false,
-      descriptionInputValue: ""
-    });
-  }
-
-  changeDescription() {
-    this.setState({
-      descriptionEditMode: true
-    });
-  }
-
-  doOnDescriptionChange() {
-    this.setState({
-      descriptionEditMode: false,
-      localGameData: {...this.state.localGameData, description:this.state.descriptionInputValue}
+      descriptionInputValue: "",
+      nameInputValue: this.props.gameData.name
     });
   }
 
   descriptionInputValueChange(event) {
     this.setState({
-      descriptionInputValue: event.target.value
+      descriptionInputValue: event.target.value,
+      localGameData: {...this.state.localGameData, description:event.target.value}
     });
   }
 
   nameInputValueChange(event) {
     this.setState({
-      nameInputValue: event.target.value
+      nameInputValue: event.target.value,
+      localGameData: {...this.state.localGameData, name:event.target.value}
     });
   }
 
@@ -223,55 +212,71 @@ class BlockModalWindow extends React.Component {
   }
 
   modalSave(event) {
-      const mappedPlatforms = this.state.platforms
-                                                .filter((elem) => elem.checked)
-                                                .map((elem) => {
-                                                  return {
-                                                    name: elem.name,
-                                                    iconName: elem.iconName
-                                                  }
-                                                });
-
-      if (!this.props.fullMode) {
-        this.props.addGame({...this.props.gameData, ...this.state.localGameData, platforms: mappedPlatforms}, this.props.listIndex, this.props.sectionIndex);
-      }else {
-        this.props.saveBlock({...this.props.gameData, ...this.state.localGameData, platforms: mappedPlatforms}, this.props.listIndex, this.props.sectionIndex, this.props.blockIndex, this.state.newListForBlock, this.state.newSectionForBlock);
-      }
-
-      this.props.closeModal();
+    const mappedPlatforms = this.state.platforms
+                                              .filter((elem) => elem.checked)
+                                              .map((elem) => {
+                                                return {
+                                                  name: elem.name,
+                                                  iconName: elem.iconName
+                                                }
+                                              });
+    if (!this.props.fullMode) {
+      this.addNewBlock(mappedPlatforms);
+    }else {
+      this.updateBlock(mappedPlatforms);
     }
 
+    this.props.closeModal();
+  }
+
+  updateBlock(platforms) {
+    const allBlocks = [...this.props.userBlocks];
+
+    let targetBlockIndex = allBlocks.findIndex(elem => {
+      return elem.id === this.props.gameData.id
+    });
+
+    if (targetBlockIndex > -1) {
+      allBlocks[targetBlockIndex] = {
+        ...this.props.gameData,
+        ...this.state.localGameData,
+        platforms: platforms,
+        sectionId: this.state.newSectionForBlock
+      };
+
+      firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+        blocks: allBlocks
+      }).then((data) => {
+      }).catch(error => {
+        console.log(error.message);
+      });
+    }
+  }
+
+  addNewBlock(platforms) {
+    const newBlock = {
+      ...this.props.gameData,
+      ...this.state.localGameData,
+      id: `id${new Date().getTime()}`,
+      platforms: platforms,
+      sectionId: this.props.sectionId
+    }
+
+    const allBlocks = [...this.props.userBlocks, newBlock];
+
+    firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+      blocks: allBlocks
+    }).then((data) => {
+    }).catch(error => {
+      console.log(error.message);
+    });
+  }
+
   render() {
-    const descriptionEdit = (
-      <div className="modalPiece">
-        <textarea className="form-control" row="3" type="text" placeholder="Add your text" value={this.state.descriptionInputValue} onChange={this.descriptionInputValueChange}></textarea>
-        <button className="btn btn-dark" onClick={this.doOnDescriptionChange}>OK</button>
-        <button className="btn" onClick={this.doOnCancel}>Cancel</button>
-      </div>
-    );
-
-    const descriptionCustom = (
-      <div className="modalPiece">
-        <p className="modalParagraph" onClick={this.changeDescription}>{(this.state.localGameData.description) ? this.state.localGameData.description : "Click this text to enter description"}</p>
-      </div>
-    );
-
-    const gameName = (
-      <h5 className="modal-title" onClick={this.changeGameName}>{this.state.localGameData.name}</h5>
-    );
-
-    const gameNameEdit = (
-      <div>
-        <input className="form-control enterNewName" type="text" placeholder="Enter new name" value={this.state.nameInputValue} onChange={this.nameInputValueChange}></input>
-        <button className="btn btn-dark" onClick={this.doOnNameChange}>OK</button>
-        <button className="btn" onClick={this.doOnCancel}>Cancel</button>
-      </div>
-    );
-
     const datePicker = (
       <div className="modalPiece">
-        <label>
-          Release Date
+        <label className="dateLabel" >
+          <p className="littleHeaders">Release Date</p>
           <input className="form-control" type="date" value={this.state.localGameData.releaseDate} onChange={this.dateInputValueChange}></input>
         </label>
       </div>
@@ -279,19 +284,19 @@ class BlockModalWindow extends React.Component {
 
     const platformPicker = this.state.platforms.map((elem, index) => {
       return (
-        <div className="form-check" key={elem.id}>
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value={elem.id}
-            checked={elem.checked}
-            onChange={this.handleCheckboxInputChange}
-            id={"" + elem.id + elem.name}>
-          </input>
-          <label className="form-check-label" htmlFor={"" + elem.id + elem.name}>
-            {elem.name}
-          </label>
-        </div>
+          <div className="form-check checkbox" key={elem.id}>
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value={elem.id}
+              checked={elem.checked}
+              onChange={this.handleCheckboxInputChange}
+              id={"" + elem.id + elem.name}>
+            </input>
+            <label className="form-check-label" htmlFor={"" + elem.id + elem.name}>
+              {elem.name}
+            </label>
+          </div>
         );
     });
 
@@ -304,28 +309,27 @@ class BlockModalWindow extends React.Component {
     let newHomeSelector = "";
 
     if (this.props.fullMode) {
-      const listSectionOptions = this.props.allLists.map((elem, index) => {
+      const listSectionOptions = this.props.userLists.map((elem, index) => {
         return (
-          <option key={index} value={index}>{elem.name}</option>
+          <option key={index} value={elem.id}>{elem.name}</option>
         );
       });
 
-      const sectionSectionOptions = this.props.allLists[this.state.newListForBlock].content.map((elem, index) => {
+      const sectionSectionOptions = this.props.userSections.filter((elem) => {
+        return elem.listId === this.state.newListForBlock;
+      }).map((elem, index) => {
         return (
-          <option key={index} value={index}>{elem.name}</option>
+          <option key={index} value={elem.id}>{elem.name}</option>
         );
       });
 
       newHomeSelector = (
         <div className="modalPiece">
-          Move to another List or Section
-          <br></br>
-          <br></br>
-          Pick a List
+          <p className="littleHeaders">Pick a List</p>
           <select value={this.state.newListForBlock} className="custom-select" onChange={this.newListSelectChangeHandler}>
             {listSectionOptions}
           </select>
-          Pick a Section
+          <p className="littleHeaders">Pick a Section</p>
           <select value={this.state.newSectionForBlock} className="custom-select" onChange={this.newSectionSelectChangeHandler}>
             {sectionSectionOptions}
           </select>
@@ -333,7 +337,7 @@ class BlockModalWindow extends React.Component {
       );
     }
 
-    const deleteButton = (this.props.fullMode) ? <button type="button" className="btn" onClick={this.openModalWarningWindow}>Delete</button> : "";
+    const deleteButton = (this.props.fullMode) ? <button type="button" className="btn btn-danger" onClick={this.openModalWarningWindow}>Delete</button> : "";
 
     const developerSectionOptions = this.props.developers.map((elem, index) => {
       return (
@@ -347,28 +351,46 @@ class BlockModalWindow extends React.Component {
 
     const addDeveloper = (
       <div>
-        Add developer
+        <p className="littleHeaders">Add developer</p>
         <input className="form-control" type="text" placeholder="Developer Name" value={this.state.developerInputValue} onChange={this.developerInputValueChange}></input>
-        <button className="btn btn-dark" onClick={this.doOnAddDeveloper}>Add</button>
+        <button className="btn btn-success" onClick={this.doOnAddDeveloper}>Add</button>
       </div>
     );
 
     const suggestDeveloper = (
       <div>
-        Suggest developer
+        <p className="littleHeaders">Suggest developer</p>
         <input className="form-control" type="text" placeholder="Developer Name" value={this.state.developerSuggestInputValue} onChange={this.developerSuggestInputValueChange}></input>
-        <button className="btn btn-dark" onClick={this.doOnSuggestDeveloper}>Suggest</button>
+        <button className="btn btn-success" onClick={this.doOnSuggestDeveloper}>Suggest</button>
       </div>
     );
 
     const developerSelector = (
       <div className="modalPiece">
-        Assing developer
-        <select style={{fontWeight:"bold"}} value={devSelectValue} className="custom-select" onChange={this.developerChangeHandler}>
+        <p className="littleHeaders">Assign developer</p>
+        <select value={devSelectValue} className="custom-select" onChange={this.developerChangeHandler}>
           {developerSectionOptions}
         </select>
         {suggestDeveloper}
         {this.props.userData.admin ? addDeveloper : ""}
+      </div>
+    );
+
+    const description = (
+      <div className="desctiptionArea">
+        <label className="desctiptionLabel" htmlFor="description">
+          <p className="littleHeaders">Description</p>
+        </label>
+        <textarea placeholder="Enter description" className="form-control" id="description" rows="4" value={this.state.descriptionInputValue} onChange={this.descriptionInputValueChange}></textarea>
+      </div>
+    );
+
+    const name = (
+      <div className="nameArea">
+        <label className="nameLabel" htmlFor="name">
+          <p className="littleHeaders">Name</p>
+        </label>
+        <textarea placeholder="Enter name" className="form-control enterNewName" id="name" rows="1" value={this.state.nameInputValue} onChange={this.nameInputValueChange}></textarea>
       </div>
     );
 
@@ -379,30 +401,29 @@ class BlockModalWindow extends React.Component {
             <div className="modal-content">
               <div className="modal-header">
                 {/*title*/}
-                {(this.state.nameEditMode) ? gameNameEdit : gameName}
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+                {name}
               </div>
               <div className="modal-body">
                 {/*New list and section selector*/}
                 {newHomeSelector}
                 {/*description*/}
-                {(this.state.descriptionEditMode) ? descriptionEdit : descriptionCustom}
+                {description}
                 {/*developer*/}
                 {developerSelector}
                 {/*release date*/}
                 {datePicker}
                 {/*platform*/}
                 <div className="modalPiece">
-                  Select platform
-                  {platformPicker}
+                  <p className="littleHeaders">Select platform</p>
+                  <div className="checkboxWrapper">
+                    {platformPicker}
+                  </div>
                 </div>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn" data-dismiss="modal">Cancel</button>
+                <button type="button" className="btn btn-warning" data-dismiss="modal">Cancel</button>
                 {deleteButton}
-                <button type="button" className="btn btn-dark" onClick={this.modalSave}>Save</button>
+                <button type="button" className="btn btn-success" onClick={this.modalSave}>Save</button>
               </div>
             </div>
           </div>
@@ -413,30 +434,18 @@ class BlockModalWindow extends React.Component {
   }
 }
 
-const blockModalWindowDispatchToProps = (dispatch) => {
-  return {
-    saveBlock: (saveData, listIndex, sectionIndex, blockIndex, newListIndex, newSectionIndex) => {
-      dispatch({ type: reducers.actions.listsActions.BLOCK_SAVE, saveData: saveData, listIndex: listIndex, sectionIndex: sectionIndex, blockIndex: blockIndex, newListIndex: newListIndex, newSectionIndex: newSectionIndex });
-    },
-    deleteBlock: (listIndex, sectionIndex, blockIndex) => {
-      dispatch({ type: reducers.actions.listsActions.BLOCK_DELETE, listIndex: listIndex, sectionIndex: sectionIndex, blockIndex: blockIndex });
-    },
-    addGame: (saveData, listIndex, sectionIndex) => {
-      dispatch({ type: reducers.actions.listsActions.BLOCK_ADD, saveData: saveData, listIndex: listIndex, sectionIndex: sectionIndex });
-    }
-  }
-};
-
 const stateToProps = (state = {}) => {
   return {
-    allLists: state.lists,
     listIndex: state.selectedListIndex,
     developers: state.developers,
     platforms: state.platforms,
-    userData: state.userData
+    userData: state.userData,
+    userBlocks: state.userBlocks,
+    userSections: state.userSections,
+    userLists: state.userLists
   }
 };
 
-const BlockModalWindowConnected = connect(stateToProps, blockModalWindowDispatchToProps)(BlockModalWindow);
+const BlockModalWindowConnected = connect(stateToProps, null)(BlockModalWindow);
 
 export default BlockModalWindowConnected;

@@ -40,7 +40,7 @@ class Nav extends React.Component {
   }
 
   switchBetweenTabs(index) {
-    this.props.changeListIndex(index, this.props.allLists.length);
+    this.props.changeListIndex(index, this.props.userLists.length);
     this.setState({
       navbarVisible: false
     });
@@ -59,7 +59,7 @@ class Nav extends React.Component {
   }
 
   render() {
-    let buttonsToRender = this.props.allLists.map((elem, index) => {
+    let buttonsToRender = this.props.userLists.map((elem, index) => {
 
       let className = "navButton btn btn-light";
 
@@ -115,7 +115,7 @@ const listDispatchToProps = (dispatch) => {
 
 const stateToProps = (state = {}) => {
   return {
-    allLists: state.lists,
+    userLists: state.userLists,
     listIndex: state.selectedListIndex
   }
 };

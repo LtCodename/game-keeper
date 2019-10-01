@@ -40,6 +40,8 @@
   --first-color: rgba(0, 121, 197, 1);
   --second-color: rgba(255, 246, 143, 1);
   --third-color: rgba(255, 249, 222, 1);
+
+  --content-gap: 126px;
 }
 
 body {
@@ -47,6 +49,24 @@ body {
   padding: 0;
   margin: 0;
   background-color: var(--third-color);
+}
+
+.modal-content {
+  background-color: var(--third-color);
+  border: none;
+  border-radius: 0;
+}
+
+.modal-body {
+  padding: 0 16px 0 16px;
+}
+
+.modal-header {
+  padding: 16px 16px 0 16px;
+}
+
+.modal-footer {
+  padding: 0 16px 16px 16px;
 }
 
 .appWrappaer {
@@ -65,15 +85,17 @@ input {
 
 .contentWrapper {
   display: flex;
+  padding-top: 5px;
   position: relative;
   align-items: flex-start;
   background-color: var(--first-color);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 .allContent {
   padding: 0 0 20px 10px;
   flex: 1;
-  min-height: calc(100vh - 118px);
+  min-height: calc(100vh - var(--content-gap));
   max-width: calc(100% - 220px);
   background-color: var(--first-color);
 }

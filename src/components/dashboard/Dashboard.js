@@ -2,7 +2,6 @@ import React from 'react';
 import ListBlock from '../list-block/ListBlock.js';
 import './Dashboard.css'
 import AddListModalWindow from '../add-list-modal-window/AddListModalWindow.js';
-import reducers from '../../redux/reducers';
 import { connect } from 'react-redux'
 declare var $;
 
@@ -39,7 +38,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    const listsToRender = this.props.allLists.map((elem, index) => {
+    const listsToRender = this.props.userLists.map((elem, index) => {
       return <ListBlock
         key={elem.id}
         listBlockIndex={index}/>;
@@ -47,7 +46,7 @@ class Dashboard extends React.Component {
 
     let btnAddListClassName = "btn btnAddListFromDashboard";
 
-    if (this.props.allLists.length === 0) {
+    if (this.props.userLists.length === 0) {
       btnAddListClassName += " btnAddListFromDashboardSpecial";
     }
 
@@ -61,7 +60,7 @@ class Dashboard extends React.Component {
 
     let matrixClassName = "listsMatrix";
 
-    switch(this.props.allLists.length) {
+    switch(this.props.userLists.length) {
       case 2:
         matrixClassName += " threeCells";
         break;
@@ -100,21 +99,13 @@ class Dashboard extends React.Component {
   }
 }
 
-const listDispatchToProps = (dispatch) => {
-  return {
-    doOnAdd: (listName) => {
-      dispatch({ type: reducers.actions.listsActions.LIST_ADD, listName: listName});
-    }
-  }
-};
-
 const stateToProps = (state = {}) => {
   return {
-    allLists: state.lists,
+    userLists: state.userLists,
     userData: state.userData
   }
 };
 
-const DashboardConnected = connect(stateToProps, listDispatchToProps)(Dashboard);
+const DashboardConnected = connect(stateToProps, null)(Dashboard);
 
 export default DashboardConnected;

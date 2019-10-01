@@ -1,6 +1,12 @@
 .nameAndButtonsWrapper {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  margin-right: 20px;
+}
+
+.sectionActions {
+  display: flex;
 }
 
 .editSectionInput {
@@ -42,7 +48,10 @@
   padding: 0;
   width: 30px;
   background-color: var(--first-color);
-    margin-right: 10px;
+  margin-right: 10px;
+  border: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .editIcon:hover {

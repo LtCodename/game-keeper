@@ -123,7 +123,7 @@ class Developers extends React.Component {
 
     return (
       <div className="developersWrapper">
-        <p>Edit or delete developers from database. Items are sorted alphabetically.</p>
+        <p className="developersWrapperP">Edit or delete developers from database. Items are sorted alphabetically.</p>
         <div className="blocksWrapper">
           {developersToRender}
         </div>
