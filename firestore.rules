@@ -8,6 +8,9 @@ service cloud.firestore {
     match /suggestedDevelopers/{developerId} {
       allow read, write: if request.auth.uid != null;
     }
+     match /availableColors/{availableColorsId} {
+      allow read, write: if request.auth.uid != null;
+    }
     match /platforms/{platformId} {
       allow read, write: if request.auth.uid != null;
     }
