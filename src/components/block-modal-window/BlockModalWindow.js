@@ -284,19 +284,19 @@ class BlockModalWindow extends React.Component {
 
     const platformPicker = this.state.platforms.map((elem, index) => {
       return (
-        <div className="form-check" key={elem.id}>
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value={elem.id}
-            checked={elem.checked}
-            onChange={this.handleCheckboxInputChange}
-            id={"" + elem.id + elem.name}>
-          </input>
-          <label className="form-check-label" htmlFor={"" + elem.id + elem.name}>
-            {elem.name}
-          </label>
-        </div>
+          <div className="form-check checkbox" key={elem.id}>
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value={elem.id}
+              checked={elem.checked}
+              onChange={this.handleCheckboxInputChange}
+              id={"" + elem.id + elem.name}>
+            </input>
+            <label className="form-check-label" htmlFor={"" + elem.id + elem.name}>
+              {elem.name}
+            </label>
+          </div>
         );
     });
 
@@ -381,7 +381,7 @@ class BlockModalWindow extends React.Component {
         <label className="desctiptionLabel" htmlFor="description">
           <p className="littleHeaders">Description</p>
         </label>
-        <textarea placeholder="Enter description" className="form-control" id="description" rows="1" value={this.state.descriptionInputValue} onChange={this.descriptionInputValueChange}></textarea>
+        <textarea placeholder="Enter description" className="form-control" id="description" rows="4" value={this.state.descriptionInputValue} onChange={this.descriptionInputValueChange}></textarea>
       </div>
     );
 
@@ -415,7 +415,9 @@ class BlockModalWindow extends React.Component {
                 {/*platform*/}
                 <div className="modalPiece">
                   <p className="littleHeaders">Select platform</p>
-                  {platformPicker}
+                  <div className="checkboxWrapper">
+                    {platformPicker}
+                  </div>
                 </div>
               </div>
               <div className="modal-footer">

@@ -45,7 +45,8 @@ class Footer extends React.Component {
 
     const versionIcon = (
       <div className="versionIconWrapper">
-          <button type="button" className="btn checkVersionButton" onClick={this.onVersionClick}><img className="saveIcon" alt="" src={process.env.PUBLIC_URL + '/icons/version.svg'}></img></button>
+          <button type="button" className="btn leftFooterButton" onClick={this.onVersionClick}><img className="saveIcon" alt="" src={process.env.PUBLIC_URL + '/icons/version.svg'}></img></button>
+          <a className="shareTrelloButton" href="https://trello.com/b/GT6AY0oi/game-keeper-roadmap" target="blank"><img className="shareIcon" alt="" src={process.env.PUBLIC_URL + '/icons/share-trello.svg'}></img></a>
       </div>
     );
 

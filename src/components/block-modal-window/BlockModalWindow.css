@@ -18,6 +18,15 @@
   border-radius: 0;
 }
 
+.checkboxWrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.checkbox {
+  margin-right: 15px;
+}
+
 .form-control::placeholder {
   color: #000000;
 }
