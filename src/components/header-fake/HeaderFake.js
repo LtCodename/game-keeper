@@ -1,5 +1,4 @@
 import React from 'react';
-import './HeaderFake.css';
 
 class HeaderFake extends React.Component {
   render() {
@@ -10,8 +9,10 @@ class HeaderFake extends React.Component {
     );
 
     return (
-      <div className="headerWrappper">
-        {logo}
+      <div className="ultimateHeaderWrappper">
+        <div className="headerWrappper">
+          {logo}
+        </div>
       </div>
     )
   }
