@@ -46,7 +46,7 @@ class BlockModalWindow extends React.Component {
     const sections = this.props.userSections.filter((elem) => {
       return elem.listId === event.target.value;
     });
-    const firstSectionId = sections[0].id;
+    const firstSectionId = sections[0] ? sections[0].id : 0;
 
     this.setState({
       newListForBlock: event.target.value,
@@ -231,21 +231,39 @@ class BlockModalWindow extends React.Component {
 
   updateBlock(platforms) {
     const allBlocks = [...this.props.userBlocks];
+    const allSections = [...this.props.userSections];
 
     let targetBlockIndex = allBlocks.findIndex(elem => {
       return elem.id === this.props.gameData.id
     });
 
     if (targetBlockIndex > -1) {
+      let sectionId = this.state.newSectionForBlock;
+
+      if (this.state.newSectionForBlock === 0) {
+        const newSectionId = `id${new Date().getTime()}`
+        sectionId = newSectionId;
+
+        const newSection = {
+          id: newSectionId,
+          name: 'New section',
+          color: "ce-soir",
+          listId: this.state.newListForBlock
+        };
+
+        allSections.push(newSection);
+      }
+
       allBlocks[targetBlockIndex] = {
         ...this.props.gameData,
         ...this.state.localGameData,
         platforms: platforms,
-        sectionId: this.state.newSectionForBlock
+        sectionId: sectionId
       };
 
       firebase.firestore().collection('users').doc(this.props.userData.uid).update({
-        blocks: allBlocks
+        blocks: allBlocks,
+        sections: allSections,
       }).then((data) => {
       }).catch(error => {
         console.log(error.message);
