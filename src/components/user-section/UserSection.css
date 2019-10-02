@@ -63,16 +63,13 @@
 }
 
 @media (max-width: 1050px) {
-  .sectionActionButtons {
-    display: none;
-  }
-
-  .positionPickerWrapper {
-    display: none;
-  }
-
   .nameAndButtonsWrapper {
     text-align: center;
+    justify-content: center;
+    display: block;
+  }
+
+  .sectionActions {
     justify-content: center;
   }
 

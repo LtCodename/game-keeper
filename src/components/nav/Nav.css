@@ -96,7 +96,7 @@
     height: 0px;
     overflow: hidden;
     transition: height .5s;
-    margin: 0 5px;
+    margin: 5px;
   }
 
   .hideNavButton {

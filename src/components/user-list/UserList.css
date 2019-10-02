@@ -62,7 +62,8 @@
 
 @media (max-width: 1050px) {
   .listWrapper {
-    display: none;
+    display: flex;
+    flex-direction: column;
   }
 }
 

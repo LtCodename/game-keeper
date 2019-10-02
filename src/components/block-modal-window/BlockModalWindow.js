@@ -399,11 +399,9 @@ class BlockModalWindow extends React.Component {
         <div className="modal fade" id={this.props.modalId} tabIndex="-1" role="dialog">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
-              <div className="modal-header">
+              <div className="modal-body">
                 {/*title*/}
                 {name}
-              </div>
-              <div className="modal-body">
                 {/*New list and section selector*/}
                 {newHomeSelector}
                 {/*description*/}

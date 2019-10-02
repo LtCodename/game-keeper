@@ -96,6 +96,10 @@
   .profileButtonAlt {
     display: block;
   }
+
+  .ultimateHeaderWrappper {
+    box-shadow: none;
+  }
 }
 
 @media (max-width: 580px) {
