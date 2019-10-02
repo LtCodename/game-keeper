@@ -38,7 +38,6 @@ class Footer extends React.Component {
   render() {
     const shareIcons = (
       <div className="shareIconsWrapper">
-          <a className="shareIcons-a shareLinkedinButton" href="https://www.linkedin.com/in/yevhen-chernenko/" target="blank"><img className="shareIcon" alt="" src={process.env.PUBLIC_URL + '/icons/share-linkedin.svg'}></img></a>
           <a className="shareIcons-a shareTwitterButton" href="https://twitter.com/LtCodename" target="blank"><img className="shareIcon" alt="" src={process.env.PUBLIC_URL + '/icons/share-twitter.svg'}></img></a>
       </div>
     );
@@ -51,13 +50,13 @@ class Footer extends React.Component {
     );
 
     const copyrighth = (
-      <a className="copyright" href="https://ltcodename.com/" target="blank">© 2019 LtCodename</a>
+      <a className="copyrightWrapper" href="https://ltcodename.com/" target="blank">{/*<span>© 2019</span>*/}<span className="copyright">LtCodename</span></a>
     );
 
     const alertWindow = (
       <AlertModalWindow
         title={`Game Keeper Alpha`}
-        message={`Version: 0.014. Release date: 1.10.19.`}/>
+        message={`Version: 0.017. Release date: 2.10.19.`}/>
     );
 
     return (

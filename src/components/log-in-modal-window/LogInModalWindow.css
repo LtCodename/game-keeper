@@ -2,12 +2,8 @@
   margin-right: 10px;
 }
 
-.loginButton {
-  margin: 0 5px 0 0;
-}
-
-.cancelButton {
-  margin: 0 5px 0 0;
+.loginFormButton {
+  margin: 10px 10px 0 0;
 }
 
 .errorText {

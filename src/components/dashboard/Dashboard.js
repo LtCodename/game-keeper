@@ -2,6 +2,8 @@ import React from 'react';
 import ListBlock from '../list-block/ListBlock.js';
 import './Dashboard.css'
 import AddListModalWindow from '../add-list-modal-window/AddListModalWindow.js';
+import SignUpModalWindow from '../sign-up-modal-window/SignUpModalWindow.js';
+import LogInModalWindow from '../log-in-modal-window/LogInModalWindow.js';
 import { connect } from 'react-redux'
 declare var $;
 
@@ -12,10 +14,42 @@ class Dashboard extends React.Component {
 
     this.openAddListWindow = this.openAddListWindow.bind(this);
     this.resetState = this.resetState.bind(this);
+    this.onSignUpClick = this.onSignUpClick.bind(this);
+    this.onLogInClick = this.onLogInClick.bind(this);
+    this.closeSignUpModal = this.closeSignUpModal.bind(this);
+    this.closeLogInModal = this.closeLogInModal.bind(this);
 
     this.state = {
-        showAddListWindow: false
+        showAddListWindow: false,
+        showSignUpWindow: false,
+        showLogInWindow: false
     };
+  }
+
+  onSignUpClick() {
+    this.setState({
+      showSignUpWindow: true
+    }, () => {
+      $("#signUpWindow").modal('show');
+      $("#signUpWindow").on('hidden.bs.modal', this.resetState);
+    });
+  }
+
+  onLogInClick() {
+    this.setState({
+      showLogInWindow: true
+    }, () => {
+      $("#logInWindow").modal('show');
+      $("#logInWindow").on('hidden.bs.modal', this.resetState);
+    });
+  }
+
+  closeSignUpModal() {
+    $("#signUpWindow").modal('hide');
+  }
+
+  closeLogInModal() {
+    $("#logInWindow").modal('hide');
   }
 
   openAddListWindow() {
@@ -29,12 +63,16 @@ class Dashboard extends React.Component {
 
   resetState() {
     this.setState({
-      showAddListWindow: false
+      showAddListWindow: false,
+      showSignUpWindow: false,
+      showLogInWindow: false
     })
   }
 
   componentWillUnmount() {
     $("#addListWindow").unbind('hidden.bs.modal');
+    $("#signUpWindow").unbind('hidden.bs.modal');
+    $("#logInWindow").unbind('hidden.bs.modal');
   }
 
   render() {
@@ -74,26 +112,39 @@ class Dashboard extends React.Component {
         matrixClassName += " fourCells"
     }
 
-    const forRegisteredUsers = (
+    const authorized = (
       <div className={matrixClassName}>
         {listsToRender}
         {addListButton}
       </div>
     );
 
-    const forNotRegisteredUsers = (
+    const authPanel = (
       <div>
-        <p className="signInMessage">Please sign up or log in</p>
+        <div className="authButtonsMatrix">
+          <button className="btn authButton" onClick={this.onSignUpClick}>Sign Up<img className="authButtonIcon" alt="" src={process.env.PUBLIC_URL + '/icons/auth-signup-blue.svg'}></img></button>
+          <button className="btn authButton" onClick={this.onLogInClick}>Log In<img className="authButtonIcon" alt="" src={process.env.PUBLIC_URL + '/icons/auth-login-blue.svg'}></img></button>
+        </div>
       </div>
+    );
+
+    const signUpWindow = (
+      <SignUpModalWindow close={this.closeSignUpModal} />
+    );
+
+    const logInWindow = (
+      <LogInModalWindow close={this.closeLogInModal}/>
     );
 
     return (
       <div className="dashboardWrapper">
         <div className="dashboard">
-          {this.props.userData ? forRegisteredUsers : forNotRegisteredUsers}
+          {this.props.userData ? authorized : authPanel}
         </div>
 
         {this.state.showAddListWindow ? modalAddListWindow : ""}
+        {this.state.showLogInWindow ? logInWindow : ""}
+        {this.state.showSignUpWindow ? signUpWindow : ""}
       </div>
     )
   }

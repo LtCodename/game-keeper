@@ -395,7 +395,7 @@ class BlockModalWindow extends React.Component {
     );
 
     return (
-      <div>
+      <div className="block-modal">
         <div className="modal fade" id={this.props.modalId} tabIndex="-1" role="dialog">
           <div className="modal-dialog" role="document">
             <div className="modal-content">

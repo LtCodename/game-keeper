@@ -70,10 +70,10 @@
 }
 
 @media (max-width: 1050px) {
-  .logoWrapper .btn {
-    font-size: 30px;
+  .headerWrappper {
+    justify-content: center;
   }
-
+  
   .authIcon {
     margin-left: 0;
   }

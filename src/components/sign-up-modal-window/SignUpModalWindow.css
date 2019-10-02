@@ -6,12 +6,8 @@
   margin-right: 10px;
 }
 
-.signupButton {
-  margin: 0 5px 0 0;
-}
-
-.cancelButton {
-  margin: 0 5px 0 0;
+.signupFormButton {
+  margin: 10px 10px 0 0;
 }
 
 .errorText {

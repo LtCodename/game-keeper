@@ -100,19 +100,19 @@ class SignUpModalWindow extends React.Component {
             <div className="modalBody">
               <form id="signupForm" onSubmit={this.createUser}>
                 <div className="inputField">
-                  <input className="form-control signupInput" autoComplete="username email" placeholder="Enter email" type="email" id="signupEmail" value={this.state.emailInputValue} onChange={this.emailValueChange} required></input>
                   <label className="signUpLabel" htmlFor="signupEmail">Email address*</label>
+                  <input className="form-control signupInput" autoComplete="username email" placeholder="Enter email" type="email" id="signupEmail" value={this.state.emailInputValue} onChange={this.emailValueChange} required></input>
                 </div>
                 <div className="inputField">
-                  <input className="form-control signupInput" autoComplete="current-password" placeholder="Enter password" type="password" id="signupPassword" value={this.state.passwordInputValue} onChange={this.passwordValueChange} required></input>
                   <label className="signUpLabel" htmlFor="signupPassword">Choose password*</label>
+                  <input className="form-control signupInput" autoComplete="current-password" placeholder="Enter password" type="password" id="signupPassword" value={this.state.passwordInputValue} onChange={this.passwordValueChange} required></input>
                 </div>
                 <div className="inputField">
-                  <input className="form-control signupInput" placeholder="Enter name" type="text" id="signupDisplayName" value={this.state.nameInputValue} onChange={this.nameValueChange} required></input>
                   <label className="signUpLabel" htmlFor="signupDisplayName">Display Name*</label>
+                  <input className="form-control signupInput" placeholder="Enter name" type="text" id="signupDisplayName" value={this.state.nameInputValue} onChange={this.nameValueChange} required></input>
                 </div>
-                <button className="btn signupButton btn-warning">Sign Up</button>
-                <button type="button" className="btn cancelButton btn-danger" data-dismiss="modal">Cancel</button>
+                <button className="btn signupFormButton btn-warning">Sign Up</button>
+                <button className="btn signupFormButton btn-danger" data-dismiss="modal">Cancel</button>
               </form>
               <p className="requiredText">Fields marked with * are required.</p>
               <NavLink to="/privacy"><button className="btn policyButton" onClick={this.onPolicy}>Privacy Policy</button></NavLink>
