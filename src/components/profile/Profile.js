@@ -112,7 +112,7 @@ class Profile extends React.Component {
           <input className="emailInput" autoComplete="username email" placeholder="Enter email" type="email" id="adminEmail" value={this.state.emailInputValue} onChange={this.emailValueChange} required></input>
           <label className="emailInputLabel" htmlFor="adminEmail">Email address</label>
         </div>
-        <button className="btn addAdminButton">Make Admin</button>
+        <button className="btn profileButtons">Make Admin</button>
       </form>
     );
 
@@ -144,18 +144,18 @@ class Profile extends React.Component {
       <NavLink to="/privacy"><button className="btn profileButtons">Privacy Policy</button></NavLink>
     );
 
-    let adminSign = (<p></p>);
+    let adminSign = (<p className="profileParagraph"></p>);
     if (this.props.userData !== null) {
       adminSign = (
-        <p>Permissions: {this.props.userData.admin ? "Admin" : "User"}</p>
+        <p className="profileParagraph">Permissions: {this.props.userData.admin ? "Admin" : "User"}</p>
       );
     }
 
     return (
       <div className="profileWrapper">
-        <p>Logged as {userEmail} {verifiedText}</p>
+        <p className="profileParagraph">Logged as {userEmail} {verifiedText}</p>
         {userVerified ? "" : verifyButton}
-        <p>Display name: {userName}</p>
+        <p className="profileParagraph">Display name: {userName}</p>
         {this.state.nameEditMode ? changeNameForm : changeNameButton}
         {adminSign}
         {this.props.userData.admin ? developersButton : ""}

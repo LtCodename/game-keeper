@@ -12,3 +12,14 @@
 .privacyLink:hover {
   color: var(--third-color);
 }
+
+
+@media (max-width: 580px) {
+  .privacyWrapper {
+    text-align: center;
+  }
+
+  .policyName {
+    font-size: 30px;
+  }
+}
