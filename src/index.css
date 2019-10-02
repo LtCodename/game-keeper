@@ -147,10 +147,14 @@ h2 {
   .contentWrapper {
     padding-top: 0;
   }
+
+  * {
+    --content-gap: 120px;
+  }
 }
 
 @media (max-width: 580px) {
   * {
-    /* --content-gap: 171px; */
+    /* --content-gap: 166px; */
   }
 }
