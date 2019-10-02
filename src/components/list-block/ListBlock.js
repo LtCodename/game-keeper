@@ -15,9 +15,8 @@ class ListBlock extends React.Component {
   render() {
 
     return (
-      <div className="listBlockWrapper">
-        <button className="listBlock" onClick={() => this.props.changeListIndex(this.props.listBlockIndex, this.props.userLists.length)}>{this.props.userLists[this.props.listBlockIndex].name}</button>
-      </div>
+      <button className="listBlock" onClick={() => this.props.changeListIndex(this.props.listBlockIndex, this.props.userLists.length)}>{this.props.userLists[this.props.listBlockIndex].name}</button>
+
     )
   }
 }

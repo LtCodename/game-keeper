@@ -18,12 +18,15 @@
 .headerWrappper {
   width: 100%;
   display: flex;
-  position: relative;
-  z-index: 5;
   justify-content: space-between;
   background-color: var(--third-color);
   padding: 0 20px;
+}
+
+.ultimateHeaderWrappper {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  position: relative;
+  z-index: 5;
 }
 
 .signWrapper {
@@ -55,9 +58,10 @@
   border-radius: 0;
   font-family: var(--titles-font);
   margin: 0;
-  padding: 3px;
+  padding: 5px;
   display: none;
-  margin-left: 5px;
+  width: 100%;
+  /* margin-left: 5px; */
 }
 
 .authIcon {
@@ -69,20 +73,42 @@
   height: 25px;
 }
 
+.altButtonsWrapper {
+  display: none;
+}
+
+.authButtonWrapper {
+  width: 50%;
+  padding-bottom: 8px;
+}
+
+.authButtonWrapper:nth-child(2n+1) {
+  padding-right: 3px;
+  padding-left: 6px;
+}
+
+.authButtonWrapper:nth-child(2n) {
+  padding-left: 3px;
+  padding-right: 6px;
+}
+
 @media (max-width: 1050px) {
+  .profileButtonAlt {
+    display: block;
+  }
+}
+
+@media (max-width: 580px) {
   .headerWrappper {
     justify-content: center;
   }
-  
-  .authIcon {
-    margin-left: 0;
-  }
 
-  .profileButton {
+  .signWrapper {
     display: none;
   }
 
-  .profileButtonAlt {
-    display: block;
+  .altButtonsWrapper {
+    display: flex;
+    justify-content: center;
   }
 }

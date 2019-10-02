@@ -104,7 +104,8 @@
   }
 
   .btnAddListFromDashboard {
-    height: 81px;
+    height: auto;
+    min-height: 81px;
   }
 }
 
