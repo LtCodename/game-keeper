@@ -56,7 +56,7 @@ class Footer extends React.Component {
     const alertWindow = (
       <AlertModalWindow
         title={`Game Keeper Alpha`}
-        message={`Version: 0.020. Release date: 2.10.19.`}/>
+        message={`Version: 0.022. Release date: 3.10.19.`}/>
     );
 
     return (

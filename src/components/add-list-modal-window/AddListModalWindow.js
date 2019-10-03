@@ -10,29 +10,12 @@ class AddListModalWindow extends React.Component {
     super(props);
 
     this.onProceed = this.onProceed.bind(this);
-    this.changeListName = this.changeListName.bind(this);
     this.nameInputValueChange = this.nameInputValueChange.bind(this);
-    this.doOnNameChange = this.doOnNameChange.bind(this);
-    this.doOnCancel = this.doOnCancel.bind(this);
 
     this.state = {
-      nameEditMode: false,
       warningMode: false,
-      nameInputValue: `Click here`
+      nameInputValue: ``
     };
-  }
-
-  doOnCancel() {
-    this.setState({
-      nameEditMode: false,
-      nameInputValue: `Click here`
-    });
-  }
-
-  doOnNameChange() {
-    this.setState({
-      nameEditMode: false
-    });
   }
 
   nameInputValueChange(event) {
@@ -42,14 +25,8 @@ class AddListModalWindow extends React.Component {
     });
   }
 
-  changeListName() {
-    this.setState({
-      nameEditMode: true
-    });
-  }
-
   onProceed() {
-    if (this.state.nameInputValue === `Click here`) {
+    if (this.state.nameInputValue === ``) {
       this.setState({
         warningMode: true
       });
@@ -76,17 +53,7 @@ class AddListModalWindow extends React.Component {
   render() {
 
     const listName = (
-      <h5 className="modal-title" onClick={this.changeListName}>{(this.state.nameInputValue) ? this.state.nameInputValue : `Click here`}</h5>
-    );
-
-    const listNameEdit = (
-      <div className="listNameEditWrapper">
-        <input className="form-control enterNewName" type="text" placeholder="Enter new name" value={this.state.nameInputValue} onChange={this.nameInputValueChange}></input>
-        <div className="editButtonsWrapper">
-          <button className="editListModalWindowButton btn btn-warning" onClick={this.doOnCancel}>Cancel</button>
-          <button className="editListModalWindowButton btn btn-success" onClick={this.doOnNameChange}>Accept</button>
-        </div>
-      </div>
+      <textarea placeholder="Enter List Name" className="form-control" id="listName" rows="1" value={this.state.nameInputValue} onChange={this.nameInputValueChange}></textarea>
     );
 
     const buttonsWrapper = (
@@ -108,11 +75,11 @@ class AddListModalWindow extends React.Component {
           <div className="modal-content">
             <div className="modal-header">
               {/*list title*/}
-              {(this.state.nameEditMode) ? listNameEdit : listName}
+              {listName}
             </div>
             {(this.state.warningMode) ? warning : ""}
             <div className="modal-footer">
-              {(!this.state.nameEditMode) ? buttonsWrapper : ""}
+              {buttonsWrapper}
             </div>
           </div>
         </div>
