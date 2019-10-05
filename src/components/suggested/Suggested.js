@@ -175,7 +175,7 @@ class Suggested extends React.Component {
 
     return (
       <div className="suggestedWrapper">
-        <p>Press add or delete button to add or remove developer from Firestore. Items are sorted alphabetically.</p>
+        <p className="suggestedWrapperParagraph">Press add or delete button to add or remove developer from Firestore. Items are sorted alphabetically.</p>
         <div className="blocksWrapper">
           {developersToRender}
         </div>

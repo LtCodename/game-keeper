@@ -1,44 +1,75 @@
+.tableWrapper {
+  background-color: var(--third-color);
+  padding: 0 20px 0 20px;
+  color: var(--first-color);
+}
+
+.profileHeader {
+  color: var(--main-color);
+  margin-bottom: 5px;
+}
+
+th {
+  font-weight: normal;
+}
+
+.makeItFlex {
+  display: flex;
+}
+
+.tableWrapper a:hover {
+  text-decoration: none;
+}
+
+.adminForm {
+  display: flex;
+}
+
+.tableWrapper p {
+  color: var(--first-color);
+}
+
 .profileWrapper {
   background-color: var(--first-color);
-  padding: 10px 20px;
+  padding: 20px;
   min-height: calc(100vh - var(--content-gap));
 }
 
 .profileButtons {
   border-radius: 0;
-  color: var(--first-color);
-  background-color: var(--third-color);
-  text-transform: uppercase;
-  font-family: var(--titles-font);
-  font-size: 21px;
-  margin: 5px 0;
+  background-color: var(--first-color);
+  padding: 0;
+  margin: 0;
   display: block;
+  color: #FFFFFF;
+  padding: 0 5px;
 }
 
-.emailInputLabel {
-  display: none;
+.buttonWithMarginLeft {
+  margin-left: 5px;
 }
 
 .emailInput {
   width: 250px;
-  height: 43px;
-  margin:0 10px 0 0;
+  margin:0 5px 0 0;
+  background-color: var(--third-color);
 }
 
-.adminPanel {
-  /* display: flex; */
-}
-
-.editNameWrapper {
-  margin-bottom: 15px;
+.emailInput::placeholder {
+  color: var(--first-color);
 }
 
 .editNameInput {
   width: 300px;
+  margin: 0;
+  color: var(--first-color);
+}
+
+.editNameInput::placeholder {
+  color: var(--first-color);
 }
 
 .profileParagraph {
-  margin: 5px 0;
+  margin: 0;
   padding: 0;
-  color: var(--third-color);
 }

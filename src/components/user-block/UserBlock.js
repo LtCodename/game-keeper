@@ -70,6 +70,7 @@ class UserBlock extends React.Component {
         modalId={"blockModalWindow"}
         gameData={this.props.gameData}
         fullMode={true}
+        listId={this.props.listId}
         sectionId={this.props.sectionId}
         closeModal={this.closeModal}/>
     );

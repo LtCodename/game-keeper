@@ -37,7 +37,7 @@ class BlockModalWindow extends React.Component {
       descriptionInputValue: this.props.gameData.description,
       platforms: this.preparePlatformsForState(),
       showModalWindow: false,
-      newListForBlock: this.props.userLists[this.props.listIndex].id,
+      newListForBlock: this.props.listId || this.props.userLists[this.props.listIndex].id,
       newSectionForBlock: this.props.sectionId
     };
   }

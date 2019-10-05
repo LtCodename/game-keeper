@@ -1,0 +1,37 @@
+.searchIcon {
+  height: 35px;
+  color: var(--second-color)
+}
+
+.searchButton {
+  margin: 0 auto 10px;
+  padding: 0;
+  background-color: var(--first-colors);
+  border: none;
+  display: block;
+}
+
+.card {
+  border-radius: 0;
+}
+
+.searchPanel {
+  margin-bottom: 10px;
+}
+
+.searchPanel .gameBlock {
+    width: 100%;
+    margin-right: 0;
+    max-width: 300px;
+}
+
+.foundText {
+  color: black;
+  display: none;
+  margin: 10px 0;
+  padding: 0;
+}
+
+.foundTextVisible {
+  display: block;
+}

@@ -12,18 +12,20 @@ class Profile extends React.Component {
     this.nameValueChange = this.nameValueChange.bind(this);
     this.makeAdmin = this.makeAdmin.bind(this);
     this.onChangeName = this.onChangeName.bind(this);
-    this.doOnCancel = this.doOnCancel.bind(this);
-    this.doOnSubmitName = this.doOnSubmitName.bind(this);
     this.onVerify = this.onVerify.bind(this);
 
     if (props.userData === null) {
       props.history.push('/');
     }
 
+    let userName = "";
+    if (this.props.userData !== null) {
+      userName = this.props.userData.displayName;
+    }
+
     this.state = {
       emailInputValue: "",
-      nameInputValue: "",
-      nameEditMode: false,
+      nameInputValue: userName,
       verifyButtonText: "Verify Email"
     };
   }
@@ -41,13 +43,15 @@ class Profile extends React.Component {
   }
 
   onChangeName() {
-    this.setState({
-      nameEditMode: true
+    firebase.auth().currentUser.updateProfile({
+        displayName: this.state.nameInputValue
+    }).then(() => {
+    }, function (error) {
+        console.log(error.message);
     });
   }
 
   onVerify() {
-
     let actionCodeSettings = {
       url: 'https://the-game-keeper.firebaseapp.com'
     };
@@ -56,26 +60,6 @@ class Profile extends React.Component {
       this.setState({
         verifyButtonText:"Email Sent"
       });
-    });
-  }
-
-  doOnSubmitName() {
-    firebase.auth().currentUser.updateProfile({
-        displayName: this.state.nameInputValue
-    }).then(() => {
-      this.setState({
-        nameEditMode: false,
-        nameInputValue: ""
-      });
-    }, function (error) {
-        console.log(error.message);
-    });
-  }
-
-  doOnCancel() {
-    this.setState({
-      nameEditMode: false,
-      nameInputValue: ""
     });
   }
 
@@ -90,78 +74,120 @@ class Profile extends React.Component {
 
   render() {
     let userEmail = "";
-    let userName = "";
     let userVerified = "";
 
     if (this.props.userData !== null) {
       userEmail = this.props.userData.email;
-      userName = this.props.userData.displayName;
       userVerified = this.props.userData.emailVerified;
     }
 
     let verifiedText = "";
     if (userVerified) {
-      verifiedText = "(Verified)";
+      verifiedText = "";
     }else {
-      verifiedText = "(Not verified)";
+      verifiedText = "Not verified";
     }
 
-    const adminPanel = (
-      <form className="adminPanel" onSubmit={this.makeAdmin}>
+    const makeAdmin = (
+      <form onSubmit={this.makeAdmin} className="adminForm">
         <div className="inputField">
-          <input className="emailInput" autoComplete="username email" placeholder="Enter email" type="email" id="adminEmail" value={this.state.emailInputValue} onChange={this.emailValueChange} required></input>
-          <label className="emailInputLabel" htmlFor="adminEmail">Email address</label>
+          <input className="form-control emailInput" autoComplete="username email" placeholder="Enter email" type="email" id="adminEmail" value={this.state.emailInputValue} onChange={this.emailValueChange} required></input>
+          <label className="emailInputLabel sr-only" htmlFor="adminEmail">Email address</label>
         </div>
-        <button className="btn profileButtons">Make Admin</button>
+        <button className="btn profileButtons">OK</button>
       </form>
     );
 
     const developersButton = (
-      <NavLink to="/developers"><button className="btn profileButtons">Manage Developers</button></NavLink>
+      <NavLink to="/developers"><button className="btn profileButtons">Manage</button></NavLink>
     );
 
     const suggestedDevelopersButton = (
-      <NavLink to="/suggested"><button className="btn profileButtons">Suggested Developers</button></NavLink>
+      <NavLink to="/suggested"><button className="btn profileButtons">Manage</button></NavLink>
     );
 
     const changeNameButton = (
-      <button className="btn profileButtons" onClick={this.onChangeName}>Change Name</button>
+      <button className="btn profileButtons buttonWithMarginLeft" onClick={this.onChangeName}>Change</button>
     );
 
     const verifyButton = (
-      <button className="btn profileButtons" onClick={this.onVerify}>{this.state.verifyButtonText}</button>
-    );
-
-    const changeNameForm = (
-      <div className="editNameWrapper">
-        <input className="form-control editNameInput" type="text" placeholder="Enter new name" value={this.state.nameInputValue} onChange={this.nameValueChange}></input>
-        <button className="btn btn-dark" onClick={this.doOnSubmitName}>OK</button>
-        <button className="btn" onClick={this.doOnCancel}>Cancel</button>
-      </div>
+      <button className="btn profileButtons buttonWithMarginLeft" onClick={this.onVerify}>{this.state.verifyButtonText}</button>
     );
 
     const privacyButton = (
-      <NavLink to="/privacy"><button className="btn profileButtons">Privacy Policy</button></NavLink>
+      <NavLink to="/privacy"><button className="btn profileButtons">Read</button></NavLink>
     );
 
     let adminSign = (<p className="profileParagraph"></p>);
     if (this.props.userData !== null) {
       adminSign = (
-        <p className="profileParagraph">Permissions: {this.props.userData.admin ? "Admin" : "User"}</p>
+        <p className="profileParagraph">{this.props.userData.admin ? "Admin" : "User"}</p>
       );
     }
 
+    const manageDevelopers = (
+      <tr>
+        <th scope="row">Manage developers</th>
+        <td>{developersButton}</td>
+      </tr>
+    );
+
+    const manageSuggested = (
+      <tr>
+        <th scope="row">Suggested developers</th>
+        <td>{suggestedDevelopersButton}</td>
+      </tr>
+    );
+
+    const adminMaker = (
+      <tr>
+        <th scope="row">Make admin</th>
+        <td>{makeAdmin}</td>
+      </tr>
+    );
+
+    const changeNameForm = (
+      <div className="editNameWrapper">
+        <input className="form-control editNameInput" type="text" placeholder="Enter new name" value={this.state.nameInputValue} onChange={this.nameValueChange}></input>
+      </div>
+    );
+
+    const table = (
+      <div className="tableWrapper">
+        <h1 className="profileHeader">Account Details</h1>
+        <table className="table">
+          <tbody>
+            <tr>
+              <th scope="row">Display name</th>
+              <td className="makeItFlex">{changeNameForm}{changeNameButton}</td>
+            </tr>
+            <tr>
+              <th scope="row">Email</th>
+              <td className="makeItFlex">{userEmail} {userVerified ? verifiedText : verifyButton}</td>
+            </tr>
+            <tr>
+              <th scope="row">Permissions</th>
+              <td>{adminSign}</td>
+            </tr>
+            <tr>
+              <th scope="row">Privacy Policy</th>
+              <td>{privacyButton}</td>
+            </tr>
+            {this.props.userData.admin ? manageDevelopers : ""}
+            {this.props.userData.admin ? manageSuggested : ""}
+            {this.props.userData.admin ? adminMaker : ""}
+            <tr>
+              <th scope="row"></th>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    );
+
     return (
       <div className="profileWrapper">
-        <p className="profileParagraph">Logged as {userEmail} {verifiedText}</p>
-        {userVerified ? "" : verifyButton}
-        <p className="profileParagraph">Display name: {userName}</p>
-        {this.state.nameEditMode ? changeNameForm : changeNameButton}
-        {adminSign}
-        {this.props.userData.admin ? developersButton : ""}
-        {this.props.userData.admin ? suggestedDevelopersButton : ""}
-        {this.props.userData.admin ? adminPanel : ""}
-        {privacyButton}
+        {table}
       </div>
     )
   }

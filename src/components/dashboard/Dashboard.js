@@ -1,5 +1,6 @@
 import React from 'react';
 import ListBlock from '../list-block/ListBlock.js';
+import SearchPanel from '../search-panel/SearchPanel.js';
 import './Dashboard.css'
 import AddListModalWindow from '../add-list-modal-window/AddListModalWindow.js';
 import SignUpModalWindow from '../sign-up-modal-window/SignUpModalWindow.js';
@@ -22,7 +23,7 @@ class Dashboard extends React.Component {
     this.state = {
         showAddListWindow: false,
         showSignUpWindow: false,
-        showLogInWindow: false
+        showLogInWindow: false,
     };
   }
 
@@ -96,7 +97,7 @@ class Dashboard extends React.Component {
       <AddListModalWindow/>
     );
 
-    let matrixClassName = "listsMatrix";
+    let matrixClassName = "listsMatrix listsMatrixPanel";
 
     switch(this.props.userLists.length) {
       case 2:
@@ -113,9 +114,12 @@ class Dashboard extends React.Component {
     }
 
     const authorized = (
-      <div className={matrixClassName}>
-        {listsToRender}
-        {addListButton}
+      <div>
+        <SearchPanel />
+        <div className={matrixClassName}>
+          {listsToRender}
+          {addListButton}
+        </div>
       </div>
     );
 

@@ -180,10 +180,8 @@ class UserSection extends React.Component {
       return <UserBlock
         key={elem.id}
         color={this.props.color}
-        blockIndex={index}
         gameData={elem}
-        sectionId={this.props.id}
-        sectionIndex={this.props.sectionIndex}/>;
+        sectionId={this.props.id}/>;
     }).sort((a, b) => {
       const releaseDateA = a.props.gameData.releaseDate || "";
       const releaseDateB = b.props.gameData.releaseDate || "";
