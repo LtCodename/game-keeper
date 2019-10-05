@@ -24,6 +24,7 @@ class UserList extends React.Component {
     this.resetState = this.resetState.bind(this);
     this.listPositionChangeHandler = this.listPositionChangeHandler.bind(this);
     this.addNewSection = this.addNewSection.bind(this);
+    this.toggleButtons = this.toggleButtons.bind(this);
 
     this.state = {
       renameListMode: false,
@@ -31,7 +32,8 @@ class UserList extends React.Component {
       listNameInputValue: this.props.userLists[this.props.listIndex].name,
       sectionNameInputValue: "",
       colorFofNewSection: "",
-      showModalWindow: false
+      showModalWindow: false,
+      buttonsVisible: false
     };
   }
 
@@ -212,6 +214,12 @@ class UserList extends React.Component {
     });
   }
 
+  toggleButtons() {
+    this.setState({
+      buttonsVisible: !this.state.buttonsVisible
+    });
+  }
+
   render() {
     const sectionsToRender = this.props.userSections.filter((elem) => elem.listId === this.props.userLists[this.props.listIndex].id)
       .map((section, index, array) => {
@@ -246,13 +254,16 @@ class UserList extends React.Component {
       </div>
     );
 
+    let actionButtonsClassName = `listActionButtons ${this.state.buttonsVisible ? 'listActionButtonsVisible' : ''}`;
+
     const nameAndButtonsBlock = (
       <div className="listWrapper">
         <h1 className="listName">{this.props.userLists[this.props.listIndex].name}</h1>
-        <div className="actionButtons">
-          <button className="btn" onClick={this.doOnAddSection}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-add-list.svg'}></img></button>
-          <button className="btn" onClick={this.doOnEdit}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-list.svg'}></img></button>
-          <button className="btn" onClick={this.openModalWarningWindow}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-list.svg'}></img></button>
+        <div className={actionButtonsClassName}>
+          <button className="btn" onClick={this.toggleButtons}><img className="listsEditIcon toggleButton" alt="" src={process.env.PUBLIC_URL + '/icons/navbar-arrow-lists.svg'}></img></button>
+          <button className="btn" onClick={this.doOnAddSection}><img className="listsEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-add-list.svg'}></img></button>
+          <button className="btn" onClick={this.doOnEdit}><img className="listsEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-list.svg'}></img></button>
+          <button className="btn" onClick={this.openModalWarningWindow}><img className="listsEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-list.svg'}></img></button>
           {listPositionPicker}
         </div>
 

@@ -1,12 +1,41 @@
-.actionButtons {
-  display: flex;
+.listsEditIcon.toggleButton {
+  transform: rotate(90deg);
+  transition: all 1s;
 }
 
-.actionButtons .btn {
+.listActionButtonsVisible .listsEditIcon.toggleButton {
+  transform: rotate(-90deg);
+}
+
+.listActionButtons {
+  display: flex;
+  margin-right: 20px;
+  overflow: hidden;
+  width: 35px;
+  transition: width 1s;
+}
+
+.listActionButtonsVisible {
+  width: 224px;
+}
+
+.listActionButtons .btn {
   margin-bottom: 2px;
   border: 0;
   margin-top: 0;
   margin-bottom: 0;
+  padding: 0;
+  width: 30px;
+  margin-right: 10px;
+  background-color: var(--first-color);
+}
+
+.listActionButtons .btn:first-child {
+  margin-right: 0;
+}
+
+.listActionButtons .btn:nth-child(2) {
+  margin-left: 5px;
 }
 
 .editListDiv {
@@ -21,6 +50,7 @@
   text-overflow: ellipsis;
   overflow-x: hidden;
   overflow-y: hidden;
+  flex: 1;
 }
 
 .addListInput {
@@ -30,7 +60,7 @@
 .listPositionPicker {
   width: 60px;
   height: 35px;
-  margin-left: 4px;
+  margin: 0 0 0 4px;
   background-color: var(--second-color);
 }
 
@@ -41,34 +71,26 @@
   justify-content: space-between;
 }
 
-.actionButtons .btn {
-  padding: 0;
-  width: 30px;
-  margin-right: 10px;
-  background-color: var(--first-color);
-}
-
-.actionButtons {
-  margin-right: 20px;
-}
-
-.editIcon {
+.listsEditIcon {
   height: 35px;
 }
 
-.editIcon:hover {
+.editIlistsEditIconcon:hover {
   opacity: 0.8;
 }
 
-@media (max-width: 1050px) {
-  .listWrapper {
-    display: flex;
-    flex-direction: column;
+@media (max-width: 576px) {
+  .listName {
+    font-size: 45px;
   }
-}
 
-@media (max-width: 1050px) {
-  .actionButtons {
-    flex-wrap: wrap;
+  .listWrapper {
+    display: block;
+    text-align: center;
+  }
+
+  .listActionButtons {
+    justify-content: flex-start;
+    margin: 0 auto;
   }
 }

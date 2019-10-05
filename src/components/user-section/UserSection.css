@@ -1,3 +1,42 @@
+.sectionEditIcon.toggleButton {
+  transform: rotate(90deg);
+  transition: all 1s;
+}
+
+.sectionActionButtonsVisible .sectionEditIcon.toggleButton {
+  transform: rotate(-90deg);
+}
+
+.sectionActionButtons {
+  display: flex;
+  margin-left: 20px;
+  overflow: hidden;
+  width: 35px;
+  transition: width 1s;
+}
+
+.sectionActionButtonsVisible {
+  width: 224px;
+}
+
+.sectionActionButtons .btn {
+  padding: 0;
+  width: 30px;
+  background-color: var(--first-color);
+  border: 0;
+  margin-top: 0;
+  margin-right: 10px;
+  margin-bottom: 0;
+}
+
+.sectionActionButtons .btn:first-child {
+  margin-right: 0;
+}
+
+.sectionActionButtons .btn:nth-child(2) {
+  margin-left: 5px;
+}
+
 .nameAndButtonsWrapper {
   display: flex;
   justify-content: space-between;
@@ -40,32 +79,17 @@
     width: 118px;
 }
 
-.sectionActionButtons {
-  margin-left: 20px;
-}
-
-.sectionActionButtons .btn {
-  padding: 0;
-  width: 30px;
-  background-color: var(--first-color);
-  margin-right: 10px;
-  border: 0;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.editIcon:hover {
+.sectionEditIcon:hover {
   opacity: 0.8;
 }
 
-.editIcon {
+.sectionEditIcon {
   height: 35px;
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 576px) {
   .nameAndButtonsWrapper {
     text-align: center;
-    justify-content: center;
     display: block;
   }
 

@@ -25,13 +25,21 @@ class UserSection extends React.Component {
     this.openAddGameWindow = this.openAddGameWindow.bind(this);
     this.sectionPositionChangeHandler = this.sectionPositionChangeHandler.bind(this);
     this.sectionDelete = this.sectionDelete.bind(this);
+    this.toggleButtons = this.toggleButtons.bind(this);
 
     this.state = {
       editMode: false,
       sectionInputValue: this.props.name,
       showModalWindow: false,
-      showAddGameWindow: false
+      showAddGameWindow: false,
+      buttonsVisible:false
     };
+  }
+
+  toggleButtons() {
+    this.setState({
+      buttonsVisible: !this.state.buttonsVisible
+    });
   }
 
   sectionPositionChangeHandler(event) {
@@ -195,19 +203,26 @@ class UserSection extends React.Component {
       );
     })
 
+    const positionPicker = (
+      <div className="positionPickerWrapper">
+        <select value={this.props.sectionIndex} className="custom-select sectionPositionPicker" onChange={this.sectionPositionChangeHandler}>
+          {positionOptions}
+        </select>
+      </div>
+    );
+
+    let actionButtonsClassName = `sectionActionButtons ${this.state.buttonsVisible ? 'sectionActionButtonsVisible' : ''}`;
+
     const nameAndButtonsBlock = (
       <div className="nameAndButtonsWrapper">
         <h2>{this.props.name}</h2>
         <div className="sectionActions">
-          <div className="sectionActionButtons">
-            <button className="btn" onClick={this.openAddGameWindow}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-add-section.svg'}></img></button>
-            <button className="btn" onClick={this.doOnEdit}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-section.svg'}></img></button>
-            <button className="btn" onClick={this.openModalWarningWindow}><img className="editIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-section.svg'}></img></button>
-          </div>
-          <div className="positionPickerWrapper">
-            <select value={this.props.sectionIndex} className="custom-select sectionPositionPicker" onChange={this.sectionPositionChangeHandler}>
-              {positionOptions}
-            </select>
+          <div className={actionButtonsClassName}>
+            <button className="btn" onClick={this.toggleButtons}><img className="sectionEditIcon toggleButton" alt="" src={process.env.PUBLIC_URL + '/icons/navbar-arrow-sections.svg'}></img></button>
+            <button className="btn" onClick={this.openAddGameWindow}><img className="sectionEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-add-section.svg'}></img></button>
+            <button className="btn" onClick={this.doOnEdit}><img className="sectionEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-section.svg'}></img></button>
+            <button className="btn" onClick={this.openModalWarningWindow}><img className="sectionEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-section.svg'}></img></button>
+            {positionPicker}
           </div>
         </div>
       </div>
