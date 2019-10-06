@@ -92,7 +92,7 @@ class SearchPanel extends React.Component {
 
     return (
       <div className="searchPanel">
-        <button className="btn btn-primary searchButton" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onClick={this.onCollapse}>
+        <button className="searchButton" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onClick={this.onCollapse}>
           <img className="searchIcon" alt="" src={process.env.PUBLIC_URL + '/icons/search.svg'}></img>
         </button>
         <div className="collapse" id="collapseExample">
