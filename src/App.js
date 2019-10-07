@@ -18,14 +18,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.fecthUser();
-    this.fecthDevelopers();
-    this.fecthColors();
-    this.fecthSuggested();
-    this.fecthPlatforms();
-
     this.state = {
-      userDataLoaded: false,
+      listsSectionsBlocksLoaded: false,
       userAuthDataLoaded: false,
       developersDataLoaded: false,
       suggestedDataLoaded: false,
@@ -35,12 +29,26 @@ class App extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.fetchEverything();
+  }
+
+  fetchEverything = () => {
+    this.fecthUser();
+    this.fecthDevelopers();
+    this.fecthColors();
+    this.fecthSuggested();
+    this.fecthPlatforms();
+  }
+
   fecthDevelopers() {
     firebase.firestore().collection('developers').orderBy("name").onSnapshot(snapshot => {
       this.props.fecthDevelopers(snapshot);
-      this.setState({
-        developersDataLoaded: true
-      });
+      setTimeout(() => {
+        this.setState({
+          developersDataLoaded: true
+        });
+      }, 0);
     }, error => {
       console.log(error.message);
     });
@@ -49,9 +57,11 @@ class App extends React.Component {
   fecthColors() {
     firebase.firestore().collection('availableColors').onSnapshot(snapshot => {
       this.props.fecthColors(snapshot);
-      this.setState({
-        colorsDataLoaded: true
-      });
+      setTimeout(() => {
+        this.setState({
+          colorsDataLoaded: true
+        });
+      }, 0);
     }, error => {
       console.log(error.message);
     });
@@ -60,9 +70,11 @@ class App extends React.Component {
   fecthSuggested() {
     firebase.firestore().collection('suggestedDevelopers').orderBy("name").onSnapshot(snapshot => {
       this.props.fecthSuggestedDevelopers(snapshot);
-      this.setState({
-        suggestedDataLoaded: true
-      });
+      setTimeout(() => {
+        this.setState({
+          suggestedDataLoaded: true
+        });
+      }, 0);
     }, error => {
       console.log(error.message);
     });
@@ -71,9 +83,11 @@ class App extends React.Component {
   fecthPlatforms() {
     firebase.firestore().collection('platforms').get().then(snapshot => {
       this.props.fecthPlatforms(snapshot);
-      this.setState({
-        platformsDataLoaded: true
-      });
+      setTimeout(() => {
+        this.setState({
+          platformsDataLoaded: true
+        });
+      }, 0);
     }).catch(error => {
       console.log(error.message);
     });
@@ -85,9 +99,11 @@ class App extends React.Component {
         user.getIdTokenResult().then(idTokenResult => {
           user.admin = idTokenResult.claims.admin;
           this.props.checkUserPresence(user);
-          this.setState({
-            userAuthDataLoaded: true
-          });
+          setTimeout(() => {
+            this.setState({
+              userAuthDataLoaded: true
+            });
+          }, 0);
         });
         this.fecthData(user.uid);
       }else {
@@ -110,9 +126,12 @@ class App extends React.Component {
            this.props.setBlocksToStore(allUserData.blocks || []);
        } else {
            console.log("No such document!");
-       }this.setState({
-         userDataLoaded: true
-       });
+       }
+       setTimeout(() => {
+         this.setState({
+           listsSectionsBlocksLoaded: true
+         });
+       }, 0);
       }, error => {
         console.log(error.message);
       }
@@ -177,7 +196,7 @@ class App extends React.Component {
 
     return (
       <BrowserRouter>
-        {((this.state.userDataLoaded
+        {((this.state.listsSectionsBlocksLoaded
            && this.state.developersDataLoaded
            && this.state.suggestedDataLoaded
            && this.state.colorsDataLoaded

@@ -167,9 +167,9 @@ class Profile extends React.Component {
               <th scope="row">Privacy Policy</th>
               <td>{privacyButton}</td>
             </tr>
-            {this.props.userData.admin ? manageDevelopers : ""}
-            {this.props.userData.admin ? manageSuggested : ""}
-            {this.props.userData.admin ? adminMaker : ""}
+            {this.props.userData.admin ? manageDevelopers : null}
+            {this.props.userData.admin ? manageSuggested : null}
+            {this.props.userData.admin ? adminMaker : null}
             <tr>
               <th scope="row"></th>
               <td></td>
