@@ -6,13 +6,8 @@ import { connect } from 'react-redux'
 declare var $;
 
 class Nav extends React.Component {
-
   constructor(props) {
     super(props);
-    this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.switchBetweenTabs = this.switchBetweenTabs.bind(this);
-    this.openAddListWindow = this.openAddListWindow.bind(this);
-    this.resetState = this.resetState.bind(this);
 
     this.state = {
       navbarVisible: false,
@@ -20,7 +15,7 @@ class Nav extends React.Component {
     };
   }
 
-  openAddListWindow() {
+  openAddListWindow = () => {
     this.setState({
       showAddListWindow: true
     }, () => {
@@ -29,7 +24,7 @@ class Nav extends React.Component {
     });
   }
 
-  resetState() {
+  resetState = () => {
     this.setState({
       showAddListWindow: false
     })
@@ -39,14 +34,14 @@ class Nav extends React.Component {
     $("#addListWindow").unbind('hidden.bs.modal');
   }
 
-  switchBetweenTabs(index) {
+  switchBetweenTabs = (index) => {
     this.props.changeListIndex(index, this.props.userLists.length);
     this.setState({
       navbarVisible: false
     });
   }
 
-  toggleNavbar() {
+  toggleNavbar = () => {
     if (!this.state.navbarVisible) {
       this.setState({
         navbarVisible: true

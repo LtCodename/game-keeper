@@ -9,16 +9,8 @@ import { connect } from 'react-redux'
 declare var $;
 
 class Dashboard extends React.Component {
-
   constructor(props) {
     super(props);
-
-    this.openAddListWindow = this.openAddListWindow.bind(this);
-    this.resetState = this.resetState.bind(this);
-    this.onSignUpClick = this.onSignUpClick.bind(this);
-    this.onLogInClick = this.onLogInClick.bind(this);
-    this.closeSignUpModal = this.closeSignUpModal.bind(this);
-    this.closeLogInModal = this.closeLogInModal.bind(this);
 
     this.state = {
         showAddListWindow: false,
@@ -27,7 +19,7 @@ class Dashboard extends React.Component {
     };
   }
 
-  onSignUpClick() {
+  onSignUpClick = () => {
     this.setState({
       showSignUpWindow: true
     }, () => {
@@ -36,7 +28,7 @@ class Dashboard extends React.Component {
     });
   }
 
-  onLogInClick() {
+  onLogInClick = () => {
     this.setState({
       showLogInWindow: true
     }, () => {
@@ -45,15 +37,15 @@ class Dashboard extends React.Component {
     });
   }
 
-  closeSignUpModal() {
+  closeSignUpModal = () => {
     $("#signUpWindow").modal('hide');
   }
 
-  closeLogInModal() {
+  closeLogInModal = () => {
     $("#logInWindow").modal('hide');
   }
 
-  openAddListWindow() {
+  openAddListWindow = () => {
     this.setState({
       showAddListWindow: true
     }, () => {
@@ -62,7 +54,7 @@ class Dashboard extends React.Component {
     });
   }
 
-  resetState() {
+  resetState = () => {
     this.setState({
       showAddListWindow: false,
       showSignUpWindow: false,

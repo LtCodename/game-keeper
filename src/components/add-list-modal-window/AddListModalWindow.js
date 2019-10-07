@@ -5,12 +5,8 @@ declare var $;
 declare var firebase;
 
 class AddListModalWindow extends React.Component {
-
   constructor(props) {
     super(props);
-
-    this.onProceed = this.onProceed.bind(this);
-    this.nameInputValueChange = this.nameInputValueChange.bind(this);
 
     this.state = {
       warningMode: false,
@@ -18,14 +14,14 @@ class AddListModalWindow extends React.Component {
     };
   }
 
-  nameInputValueChange(event) {
+  nameInputValueChange = (event) => {
     this.setState({
       nameInputValue: event.target.value,
       warningMode: false
     });
   }
 
-  onProceed() {
+  onProceed = () => {
     if (this.state.nameInputValue === ``) {
       this.setState({
         warningMode: true

@@ -6,28 +6,8 @@ declare var $;
 declare var firebase;
 
 class BlockModalWindow extends React.Component {
-
   constructor(props) {
     super(props);
-
-    this.doOnAddDeveloper = this.doOnAddDeveloper.bind(this);
-    this.doOnSuggestDeveloper = this.doOnSuggestDeveloper.bind(this);
-    this.doOnCancel = this.doOnCancel.bind(this);
-    this.descriptionInputValueChange = this.descriptionInputValueChange.bind(this);
-    this.nameInputValueChange = this.nameInputValueChange.bind(this);
-    this.developerInputValueChange = this.developerInputValueChange.bind(this);
-    this.developerSuggestInputValueChange = this.developerSuggestInputValueChange.bind(this);
-    this.dateInputValueChange = this.dateInputValueChange.bind(this);
-    this.handleCheckboxInputChange = this.handleCheckboxInputChange.bind(this);
-    this.deepCopy = this.deepCopy.bind(this);
-    this.rewriteLists = this.rewriteLists.bind(this);
-    this.modalSave = this.modalSave.bind(this);
-    this.openModalWarningWindow = this.openModalWarningWindow.bind(this);
-    this.resetState = this.resetState.bind(this);
-    this.newListSelectChangeHandler = this.newListSelectChangeHandler.bind(this);
-    this.newSectionSelectChangeHandler = this.newSectionSelectChangeHandler.bind(this);
-    this.developerChangeHandler = this.developerChangeHandler.bind(this);
-    this.deleteBlock = this.deleteBlock.bind(this);
 
     this.state = {
       localGameData: {...this.props.gameData, releaseDate: this.props.gameData.releaseDate || ""},
@@ -42,7 +22,7 @@ class BlockModalWindow extends React.Component {
     };
   }
 
-  newListSelectChangeHandler(event) {
+  newListSelectChangeHandler = (event) => {
     const sections = this.props.userSections.filter((elem) => {
       return elem.listId === event.target.value;
     });
@@ -54,13 +34,13 @@ class BlockModalWindow extends React.Component {
     });
   }
 
-  newSectionSelectChangeHandler(event) {
+  newSectionSelectChangeHandler = (event) => {
     this.setState({
       newSectionForBlock: event.target.value
     });
   }
 
-  deleteBlock() {
+  deleteBlock = () => {
     const copy = [...this.props.userBlocks];
 
     const targetBlockIndex = copy.findIndex((elem) => {
@@ -81,25 +61,25 @@ class BlockModalWindow extends React.Component {
     });
   }
 
-  developerChangeHandler(event) {
+  developerChangeHandler = (event) => {
     this.setState({
       localGameData: {...this.state.localGameData, developer:event.target.value}
     });
   }
 
-  developerInputValueChange(event) {
+  developerInputValueChange = (event) => {
     this.setState({
       developerInputValue: event.target.value
     });
   }
 
-  developerSuggestInputValueChange(event) {
+  developerSuggestInputValueChange = (event) => {
     this.setState({
       developerSuggestInputValue: event.target.value
     });
   }
 
-  openModalWarningWindow() {
+  openModalWarningWindow = () => {
     this.setState({
       showModalWindow: true
     }, () => {
@@ -112,24 +92,24 @@ class BlockModalWindow extends React.Component {
     $("#modalWarning").unbind('hidden.bs.modal');
   }
 
-  resetState() {
+  resetState = () => {
     this.setState({
       showModalWindow: false
     })
   }
 
-  handleCheckboxInputChange(event) {
+  handleCheckboxInputChange = (event) => {
     const copy = this.deepCopy(this.state.platforms);
     copy[event.target.value].checked = event.target.checked;
 
     this.rewriteLists(copy);
   }
 
-  deepCopy(objectToCopy) {
+  deepCopy = (objectToCopy) => {
     return JSON.parse(JSON.stringify(objectToCopy));
   }
 
-  rewriteLists(newData) {
+  rewriteLists = (newData) => {
     this.setState({
       platforms: newData
     });
@@ -148,7 +128,7 @@ class BlockModalWindow extends React.Component {
     });
   }
 
-  doOnAddDeveloper() {
+  doOnAddDeveloper = () => {
     if (!this.state.developerInputValue) {
       return;
     }
@@ -166,7 +146,7 @@ class BlockModalWindow extends React.Component {
     });
   }
 
-  doOnSuggestDeveloper() {
+  doOnSuggestDeveloper = () => {
     if (!this.state.developerSuggestInputValue) {
       return;
     }
@@ -184,34 +164,34 @@ class BlockModalWindow extends React.Component {
     });
   }
 
-  doOnCancel() {
+  doOnCancel = () => {
     this.setState({
       descriptionInputValue: "",
       nameInputValue: this.props.gameData.name
     });
   }
 
-  descriptionInputValueChange(event) {
+  descriptionInputValueChange = (event) => {
     this.setState({
       descriptionInputValue: event.target.value,
       localGameData: {...this.state.localGameData, description:event.target.value}
     });
   }
 
-  nameInputValueChange(event) {
+  nameInputValueChange = (event) => {
     this.setState({
       nameInputValue: event.target.value,
       localGameData: {...this.state.localGameData, name:event.target.value}
     });
   }
 
-  dateInputValueChange(event) {
+  dateInputValueChange = (event) => {
     this.setState({
       localGameData: {...this.state.localGameData, releaseDate:event.target.value}
     });
   }
 
-  modalSave(event) {
+  modalSave = (event) => {
     const mappedPlatforms = this.state.platforms
                                               .filter((elem) => elem.checked)
                                               .map((elem) => {

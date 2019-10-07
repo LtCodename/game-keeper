@@ -3,31 +3,22 @@ import Footer from '../footer/Footer.js';
 import HeaderFake from '../header-fake/HeaderFake.js';
 import './Preloader.css';
 
-class Preloader extends React.Component {
-  constructor(props) {
-    super(props);
+const Preloader = () => {
+  const preloader = (
+    <div className="loaderWrapper">
+      <div className="loader"></div>
+    </div>
+  );
 
-    this.state = {
-    };
-  }
-
-  render() {
-    const preloader = (
-      <div className="loaderWrapper">
-        <div className="loader"></div>
+  return (
+    <div className="preloaderWrapper">
+      <HeaderFake/>
+      <div className="preloaderContent">
+        {preloader}
       </div>
-    );
-
-    return (
-      <div className="preloaderWrapper">
-        <HeaderFake/>
-        <div className="preloaderContent">
-          {preloader}
-        </div>
-        <Footer/>
-      </div>
-    )
-  }
+      <Footer/>
+    </div>
+  );
 }
 
 export default Preloader;

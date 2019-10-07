@@ -12,20 +12,6 @@ class UserList extends React.Component {
   constructor(props) {
     super(props);
 
-    this.doOnEdit = this.doOnEdit.bind(this);
-    this.onDeleteList = this.onDeleteList.bind(this);
-    this.doOnCancel = this.doOnCancel.bind(this);
-    this.doOnSubmitListName = this.doOnSubmitListName.bind(this);
-    this.doOnAddSection = this.doOnAddSection.bind(this);
-    this.listNameInputValueChange = this.listNameInputValueChange.bind(this);
-    this.sectionNameInputValueChange = this.sectionNameInputValueChange.bind(this);
-    this.holdColorForNewSection = this.holdColorForNewSection.bind(this);
-    this.openModalWarningWindow = this.openModalWarningWindow.bind(this);
-    this.resetState = this.resetState.bind(this);
-    this.listPositionChangeHandler = this.listPositionChangeHandler.bind(this);
-    this.addNewSection = this.addNewSection.bind(this);
-    this.toggleButtons = this.toggleButtons.bind(this);
-
     this.state = {
       renameListMode: false,
       addSectionMode: false,
@@ -37,12 +23,7 @@ class UserList extends React.Component {
     };
   }
 
-  static defaultProps = {
-    content: [],
-    newListName: ""
-  }
-
-  addNewSection() {
+  addNewSection = () => {
     if (!this.state.sectionNameInputValue) {
       this.doOnCancel();
       return;
@@ -69,7 +50,7 @@ class UserList extends React.Component {
     });
   }
 
-  listPositionChangeHandler(event) {
+  listPositionChangeHandler = (event) => {
     const copy = [...this.props.userLists];
     if (this.props.listIndex === event.target.value) {
       return;
@@ -86,7 +67,7 @@ class UserList extends React.Component {
     });
   }
 
-  openModalWarningWindow() {
+  openModalWarningWindow = () => {
     this.setState({
       showModalWindow: true
     }, () => {
@@ -99,13 +80,13 @@ class UserList extends React.Component {
     $("#modalWarning").unbind('hidden.bs.modal');
   }
 
-  resetState() {
+  resetState = () => {
     this.setState({
       showModalWindow: false
-    })
+    });
   }
 
-  holdColorForNewSection(color) {
+  holdColorForNewSection = (color) => {
     this.setState({
       colorForNewSection: color
     });
@@ -120,7 +101,7 @@ class UserList extends React.Component {
     });
   }
 
-  doOnAddSection() {
+  doOnAddSection = () => {
     if (!this.state.addSectionMode) {
       this.setState({
         addSectionMode: true,
@@ -129,7 +110,7 @@ class UserList extends React.Component {
     }
   }
 
-  doOnEdit() {
+  doOnEdit = () => {
     if (!this.state.renameListMode) {
       this.setState({
         renameListMode: true,
@@ -138,7 +119,7 @@ class UserList extends React.Component {
     }
   }
 
-  doOnCancel() {
+  doOnCancel = () => {
     this.setState({
       renameListMode: false,
       addSectionMode: false,
@@ -147,7 +128,7 @@ class UserList extends React.Component {
     });
   }
 
-  doOnSubmitListName() {
+  doOnSubmitListName = () => {
     const copy = [...this.props.userLists];
 
     copy[this.props.listIndex] = {
@@ -171,21 +152,20 @@ class UserList extends React.Component {
     });
   }
 
-  listNameInputValueChange(event) {
+  listNameInputValueChange = (event) => {
     this.setState({
       listNameInputValue: event.target.value
     });
   }
 
-  sectionNameInputValueChange(event) {
+  sectionNameInputValueChange = (event) => {
     this.setState({
       sectionNameInputValue: event.target.value
     });
   }
 
-  onDeleteList() {
+  onDeleteList = () => {
     const deletedSectionsIds = [];
-
     const copy = [...this.props.userLists];
 
     const sectionCopy = [...this.props.userSections].filter((elem) => {
@@ -214,7 +194,7 @@ class UserList extends React.Component {
     });
   }
 
-  toggleButtons() {
+  toggleButtons = () => {
     this.setState({
       buttonsVisible: !this.state.buttonsVisible
     });

@@ -8,12 +8,6 @@ class SignUpModalWindow extends React.Component {
   constructor(props) {
     super(props);
 
-    this.emailValueChange = this.emailValueChange.bind(this);
-    this.nameValueChange = this.nameValueChange.bind(this);
-    this.passwordValueChange = this.passwordValueChange.bind(this);
-    this.createUser = this.createUser.bind(this);
-    this.onPolicy = this.onPolicy.bind(this);
-
     this.state = {
       emailInputValue: "",
       passwordInputValue: "",
@@ -22,7 +16,7 @@ class SignUpModalWindow extends React.Component {
     };
   }
 
-  onPolicy() {
+  onPolicy = () => {
       $("#signUpWindow").modal('hide');
   }
 
@@ -30,32 +24,32 @@ class SignUpModalWindow extends React.Component {
     $("#signUpWindow").unbind('hidden.bs.modal');
   }
 
-  resetState() {
+  resetState = () => {
     this.setState({
       showSignUpWindow: false,
       showLogInWindow: false
     })
   }
 
-  nameValueChange(event) {
+  nameValueChange = (event) => {
     this.setState({
       nameInputValue: event.target.value
     });
   }
 
-  passwordValueChange(event) {
+  passwordValueChange = (event) => {
     this.setState({
       passwordInputValue: event.target.value
     });
   }
 
-  emailValueChange(event) {
+  emailValueChange = (event) => {
     this.setState({
       emailInputValue: event.target.value
     });
   }
 
-  createUser(event) {
+  createUser = (event) => {
     event.preventDefault();
     if (!this.state.emailInputValue || !this.state.passwordInputValue) {
       return;

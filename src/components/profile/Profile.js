@@ -8,12 +8,6 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
 
-    this.emailValueChange = this.emailValueChange.bind(this);
-    this.nameValueChange = this.nameValueChange.bind(this);
-    this.makeAdmin = this.makeAdmin.bind(this);
-    this.onChangeName = this.onChangeName.bind(this);
-    this.onVerify = this.onVerify.bind(this);
-
     if (props.userData === null) {
       props.history.push('/');
     }
@@ -30,19 +24,19 @@ class Profile extends React.Component {
     };
   }
 
-  emailValueChange(event) {
+  emailValueChange = (event) => {
     this.setState({
       emailInputValue: event.target.value
     });
   }
 
-  nameValueChange(event) {
+  nameValueChange = (event) => {
     this.setState({
       nameInputValue: event.target.value
     });
   }
 
-  onChangeName() {
+  onChangeName = () => {
     firebase.auth().currentUser.updateProfile({
         displayName: this.state.nameInputValue
     }).then(() => {
@@ -51,7 +45,7 @@ class Profile extends React.Component {
     });
   }
 
-  onVerify() {
+  onVerify = () => {
     let actionCodeSettings = {
       url: 'https://the-game-keeper.firebaseapp.com'
     };
@@ -63,7 +57,7 @@ class Profile extends React.Component {
     });
   }
 
-  makeAdmin(event) {
+  makeAdmin = (event) => {
     event.preventDefault();
     console.log(`I'm about to make ${this.state.emailInputValue} an admin`);
     const addAdminRole = firebase.functions().httpsCallable('addAdminRole');
@@ -127,7 +121,7 @@ class Profile extends React.Component {
 
     const manageDevelopers = (
       <tr>
-        <th scope="row">Manage developers</th>
+        <th scope="row">Developers</th>
         <td>{developersButton}</td>
       </tr>
     );

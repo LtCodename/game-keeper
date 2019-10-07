@@ -1,15 +1,10 @@
 import React from 'react';
 import './LogInModalWindow.css';
-declare var $;
 declare var firebase;
 
 class LogInModalWindow extends React.Component {
   constructor(props) {
     super(props);
-
-    this.emailValueChange = this.emailValueChange.bind(this);
-    this.passwordValueChange = this.passwordValueChange.bind(this);
-    this.loginUser = this.loginUser.bind(this);
 
     this.state = {
       emailInputValue: "",
@@ -18,19 +13,19 @@ class LogInModalWindow extends React.Component {
     };
   }
 
-  passwordValueChange(event) {
+  passwordValueChange = (event) => {
     this.setState({
       passwordInputValue: event.target.value
     });
   }
 
-  emailValueChange(event) {
+  emailValueChange = (event) => {
     this.setState({
       emailInputValue: event.target.value
     });
   }
 
-  loginUser(event) {
+  loginUser = (event) => {
     event.preventDefault();
     if (!this.state.emailInputValue || !this.state.passwordInputValue) {
       return;

@@ -4,19 +4,15 @@ import AlertModalWindow from '../alert-modal-window/AlertModalWindow.js';
 declare var $;
 
 class Footer extends React.Component {
-
   constructor(props) {
     super(props);
-
-    this.onVersionClick = this.onVersionClick.bind(this);
-    this.resetState = this.resetState.bind(this);
 
     this.state = {
       showAlertWindow: false,
     };
   }
 
-  onVersionClick() {
+  onVersionClick = () => {
     this.setState({
       showAlertWindow: true
     }, () => {
@@ -25,7 +21,7 @@ class Footer extends React.Component {
     });
   }
 
-  resetState() {
+  resetState = () => {
     this.setState({
       showAlertWindow: false
     })
@@ -56,7 +52,7 @@ class Footer extends React.Component {
     const alertWindow = (
       <AlertModalWindow
         title={`Game Keeper Alpha`}
-        message={`Version: 0.022. Release date: 3.10.19.`}/>
+        message={`Version: 0.023. Release date: 7.10.19.`}/>
     );
 
     return (

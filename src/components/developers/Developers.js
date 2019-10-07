@@ -10,13 +10,6 @@ class Developers extends React.Component {
   constructor(props) {
     super(props);
 
-    this.deleteItem = this.deleteItem.bind(this);
-    this.onDeleteItem = this.onDeleteItem.bind(this);
-    this.onEditItem = this.onEditItem.bind(this);
-    this.openModalWarningWindow = this.openModalWarningWindow.bind(this);
-    this.resetState = this.resetState.bind(this);
-    this.editItem = this.editItem.bind(this);
-
     this.state = {
       idToDelete: "",
       idToEdit: "",
@@ -26,14 +19,14 @@ class Developers extends React.Component {
     };
   }
 
-  deleteItem() {
+  deleteItem = () => {
     firebase.firestore().collection('developers').doc(this.state.idToDelete).delete();
     this.setState({
       idToDelete: ""
     });
   }
 
-  onDeleteItem(id) {
+  onDeleteItem = (id) => {
     this.setState({
       idToDelete: id
     },() => {
@@ -42,7 +35,7 @@ class Developers extends React.Component {
     );
   }
 
-  editItem(newName, id) {
+  editItem = (newName, id) => {
     firebase.firestore().collection('developers').doc(id).update({
       name: newName
     }).then(() => {
@@ -52,7 +45,7 @@ class Developers extends React.Component {
     });
   }
 
-  onEditItem(id, oldName) {
+  onEditItem = (id, oldName) => {
     this.setState({
       idToEdit: id,
       oldName: oldName
@@ -71,7 +64,7 @@ class Developers extends React.Component {
     });
   }
 
-  openModalWarningWindow() {
+  openModalWarningWindow = () => {
     this.setState({
       showWarningWindow: true
     }, () => {
@@ -85,7 +78,7 @@ class Developers extends React.Component {
     $("#editNameWindow").unbind('hidden.bs.modal');
   }
 
-  resetState() {
+  resetState = () => {
     this.setState({
       showWarningWindow: false,
       showEditWindow: false,

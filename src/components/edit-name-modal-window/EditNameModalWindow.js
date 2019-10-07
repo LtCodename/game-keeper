@@ -3,15 +3,8 @@ import './EditNameModalWindow.css';
 declare var $;
 
 class EditNameModalWindow extends React.Component {
-
   constructor(props) {
     super(props);
-
-    this.onProceed = this.onProceed.bind(this);
-    this.changeDeveloperName = this.changeDeveloperName.bind(this);
-    this.nameInputValueChange = this.nameInputValueChange.bind(this);
-    this.doOnNameChange = this.doOnNameChange.bind(this);
-    this.doOnCancel = this.doOnCancel.bind(this);
 
     this.state = {
       nameEditMode: false,
@@ -19,32 +12,32 @@ class EditNameModalWindow extends React.Component {
     };
   }
 
-  doOnCancel() {
+  doOnCancel = () => {
     this.setState({
       nameEditMode: false,
       nameInputValue: this.props.oldName
     });
   }
 
-  doOnNameChange() {
+  doOnNameChange = () => {
     this.setState({
       nameEditMode: false
     });
   }
 
-  nameInputValueChange(event) {
+  nameInputValueChange = (event) => {
     this.setState({
       nameInputValue: event.target.value
     });
   }
 
-  changeDeveloperName() {
+  changeDeveloperName = () => {
     this.setState({
       nameEditMode: true
     });
   }
 
-  onProceed() {
+  onProceed = () => {
     if (this.state.nameInputValue === this.props.oldName) {
       return;
     }

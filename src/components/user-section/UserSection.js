@@ -9,23 +9,8 @@ declare var $;
 declare var firebase;
 
 class UserSection extends React.Component {
-  static defaultProps = {
-    games: []
-  }
-
   constructor(props) {
     super(props);
-
-    this.doOnEdit = this.doOnEdit.bind(this);
-    this.sectionInputValueChange = this.sectionInputValueChange.bind(this);
-    this.doOnSubmit = this.doOnSubmit.bind(this);
-    this.doOnCancel = this.doOnCancel.bind(this);
-    this.openModalWarningWindow = this.openModalWarningWindow.bind(this);
-    this.resetState = this.resetState.bind(this);
-    this.openAddGameWindow = this.openAddGameWindow.bind(this);
-    this.sectionPositionChangeHandler = this.sectionPositionChangeHandler.bind(this);
-    this.sectionDelete = this.sectionDelete.bind(this);
-    this.toggleButtons = this.toggleButtons.bind(this);
 
     this.state = {
       editMode: false,
@@ -36,13 +21,13 @@ class UserSection extends React.Component {
     };
   }
 
-  toggleButtons() {
+  toggleButtons = () => {
     this.setState({
       buttonsVisible: !this.state.buttonsVisible
     });
   }
 
-  sectionPositionChangeHandler(event) {
+  sectionPositionChangeHandler = (event) => {
     if (this.props.sectionIndex === event.target.value) {
       return;
     }
@@ -72,7 +57,7 @@ class UserSection extends React.Component {
     $("#addGame").modal('hide');
   }
 
-  openModalWarningWindow() {
+  openModalWarningWindow = () => {
     this.setState({
       showModalWindow: true
     }, () => {
@@ -81,7 +66,7 @@ class UserSection extends React.Component {
     });
   }
 
-  openAddGameWindow() {
+  openAddGameWindow = () => {
     this.setState({
       showAddGameWindow: true
     }, () => {
@@ -95,14 +80,14 @@ class UserSection extends React.Component {
     $("#addGame").unbind('hidden.bs.modal');
   }
 
-  resetState() {
+  resetState = () => {
     this.setState({
       showModalWindow: false,
       showAddGameWindow: false
     })
   }
 
-  doOnEdit() {
+  doOnEdit = () => {
     if (!this.state.editMode) {
       this.setState({
         editMode: true,
@@ -111,13 +96,13 @@ class UserSection extends React.Component {
     }
   }
 
-  sectionInputValueChange(event) {
+  sectionInputValueChange = (event) => {
     this.setState({
       sectionInputValue: event.target.value
     });
   }
 
-  doOnSubmit() {
+  doOnSubmit = () => {
     const copy = [...this.props.userSections];
 
     let targetSection = copy.find((elem) => {
@@ -140,7 +125,7 @@ class UserSection extends React.Component {
     });
   }
 
-  sectionDelete() {
+  sectionDelete = () => {
     const copy = [...this.props.userSections];
     const blockCopy = [...this.props.userBlocks].filter((elem) => {
       return elem.sectionId !== this.props.id;
@@ -167,7 +152,7 @@ class UserSection extends React.Component {
     });
   }
 
-  doOnCancel() {
+  doOnCancel = () => {
     this.setState({
       editMode: false,
       gameInputValue: "",

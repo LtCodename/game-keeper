@@ -3,24 +3,12 @@ import './ListBlock.css';
 import reducers from '../../redux/reducers';
 import { connect } from 'react-redux'
 
-class ListBlock extends React.Component {
+const ListBlock = ({changeListIndex, listBlockIndex, userLists}) => {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-    };
-  }
-
-  render() {
-
-    return (
-      <button className="listBlock" onClick={() => this.props.changeListIndex(this.props.listBlockIndex, this.props.userLists.length)}>{this.props.userLists[this.props.listBlockIndex].name}</button>
-
-    )
-  }
+  return (
+    <button className="listBlock" onClick={() => changeListIndex(listBlockIndex, userLists.length)}>{userLists[listBlockIndex].name}</button>
+  )
 }
-
 
 const listBlockDispatchToProps = (dispatch) => {
   return {

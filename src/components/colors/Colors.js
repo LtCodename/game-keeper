@@ -4,18 +4,15 @@ import { connect } from 'react-redux'
 declare var firebase;
 
 class Colors extends React.Component {
-
   constructor(props) {
     super(props);
-
-    this.colorMagic = this.colorMagic.bind(this);
 
     this.state = {
       currentColor: this.props.color
     };
   }
 
-  colorMagic(color) {
+  colorMagic = (color) => {
     if (typeof this.props.passColorToSection === "function") {
       this.props.passColorToSection(color);
     }else {

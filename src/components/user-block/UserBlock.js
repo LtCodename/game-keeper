@@ -6,13 +6,8 @@ import { connect } from 'react-redux'
 declare var $;
 
 class UserBlock extends React.Component {
-
   constructor(props) {
     super(props);
-
-    this.closeModal = this.closeModal.bind(this);
-    this.resetState = this.resetState.bind(this);
-    this.openModalWindow = this.openModalWindow.bind(this);
 
     this.state = {
       showModalWindow: false
@@ -23,13 +18,13 @@ class UserBlock extends React.Component {
     $("#blockModalWindow").unbind('hidden.bs.modal');
   }
 
-  resetState() {
+  resetState = () => {
     this.setState({
       showModalWindow: false
     })
   }
 
-  openModalWindow() {
+  openModalWindow = () => {
     this.setState({
       showModalWindow: true
     }, () => {
@@ -38,7 +33,7 @@ class UserBlock extends React.Component {
     });
   }
 
-  closeModal() {
+  closeModal = () => {
     $("#blockModalWindow").modal('hide');
   }
 

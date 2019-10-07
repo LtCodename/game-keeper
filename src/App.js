@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import UserList from './components/user-list/UserList.js';
 import Nav from './components/nav/Nav.js';
 import Footer from './components/footer/Footer.js';
@@ -16,11 +15,8 @@ import { BrowserRouter, Route } from 'react-router-dom'
 declare var firebase;
 
 class App extends React.Component {
-
   constructor(props) {
     super(props);
-
-    this.fecthData = this.fecthData.bind(this);
 
     this.fecthUser();
     this.fecthDevelopers();
@@ -103,7 +99,7 @@ class App extends React.Component {
     })
   }
 
-  fecthData(uid) {
+  fecthData = (uid) => {
     firebase.firestore().collection('users').doc(uid).onSnapshot(
       doc => {
         if (doc.exists) {

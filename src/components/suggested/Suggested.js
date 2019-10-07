@@ -10,16 +10,6 @@ class Suggested extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onDeleteItem = this.onDeleteItem.bind(this);
-    this.deleteItem = this.deleteItem.bind(this);
-    this.onEditItem = this.onEditItem.bind(this);
-    this.editItem = this.editItem.bind(this);
-    this.onAddItem = this.onAddItem.bind(this);
-    this.addItem = this.addItem.bind(this);
-    this.openModalDeleteWindow = this.openModalDeleteWindow.bind(this);
-    this.openModalAddWindow = this.openModalAddWindow.bind(this);
-    this.resetState = this.resetState.bind(this);
-
     this.state = {
       idToDelete: "",
       nameToAdd: "",
@@ -31,7 +21,7 @@ class Suggested extends React.Component {
     };
   }
 
-  openEditWindow() {
+  openEditWindow = () => {
     this.setState({
       showEditWindow: true
     }, () => {
@@ -40,7 +30,7 @@ class Suggested extends React.Component {
     });
   }
 
-  onEditItem(id, oldName) {
+  onEditItem = (id, oldName) => {
     this.setState({
       idToEdit: id,
       oldName: oldName
@@ -50,7 +40,7 @@ class Suggested extends React.Component {
     );
   }
 
-  editItem(newName, id) {
+  editItem = (newName, id) => {
     firebase.firestore().collection('suggestedDevelopers').doc(id).update({
       name: newName
     }).then(() => {
@@ -60,7 +50,7 @@ class Suggested extends React.Component {
     });
   }
 
-  openModalDeleteWindow() {
+  openModalDeleteWindow = () => {
     this.setState({
       showDeleteModalWindow: true
     }, () => {
@@ -69,17 +59,16 @@ class Suggested extends React.Component {
     });
   }
 
-  onDeleteItem(id) {
+  onDeleteItem = (id) => {
     this.setState({
       idToDelete: id
     },() => {
-        console.log(this.state.idToDelete);
         this.openModalDeleteWindow();
       }
     );
   }
 
-  deleteItem() {
+  deleteItem = () => {
     firebase.firestore().collection('suggestedDevelopers').doc(this.state.idToDelete).delete().then(() => {
       this.setState({
         idToDelete: ""
@@ -92,7 +81,7 @@ class Suggested extends React.Component {
     $("#editNameWindow").unbind('hidden.bs.modal');
   }
 
-  resetState() {
+  resetState = () => {
     this.setState({
       showDeleteModalWindow: false,
       showAddModalWindow: false,
@@ -102,7 +91,7 @@ class Suggested extends React.Component {
     });
   }
 
-  openModalAddWindow() {
+  openModalAddWindow = () => {
     this.setState({
       showAddModalWindow: true
     }, () => {
@@ -111,7 +100,7 @@ class Suggested extends React.Component {
     });
     }
 
-  onAddItem(name, id) {
+  onAddItem = (name, id) => {
     this.setState({
       idToDelete: id,
       nameToAdd: name
@@ -121,7 +110,7 @@ class Suggested extends React.Component {
     );
   }
 
-  addItem() {
+  addItem = () => {
     firebase.firestore().collection('developers').add({
       name: this.state.nameToAdd
     }).then(() => {

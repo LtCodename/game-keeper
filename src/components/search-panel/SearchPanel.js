@@ -7,16 +7,13 @@ class SearchPanel extends React.Component {
   constructor(props) {
     super(props);
 
-    this.searchInputValueChange = this.searchInputValueChange.bind(this);
-    this.onCollapse = this.onCollapse.bind(this);
-
     this.state = {
       searchInputValue: '',
       findedGames: []
     };
   }
 
-  searchInputValueChange(event) {
+  searchInputValueChange = (event) => {
     const gamesToDisplay = event.target.value ? this.props.userBlocks.filter(block => {
       const searchQuery = event.target.value.toLowerCase();
       return block.name.toLowerCase().indexOf(searchQuery) > -1;
@@ -28,7 +25,7 @@ class SearchPanel extends React.Component {
     });
   }
 
-  onCollapse() {
+  onCollapse = () => {
     this.setState({
       searchInputValue: '',
       findedGames: []
