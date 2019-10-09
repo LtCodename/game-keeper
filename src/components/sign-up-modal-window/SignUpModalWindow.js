@@ -63,7 +63,7 @@ class SignUpModalWindow extends React.Component {
       return firebase.firestore().collection('users').doc(credential.user.uid).set({
         lists: [{
           id: `id${new Date().getTime()}`,
-          name: "New List"
+          name: "My List"
         }],
         sections: [],
         blocks: []
