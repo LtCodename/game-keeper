@@ -58,7 +58,11 @@ class UserBlock extends React.Component {
       </div>
     );
 
-    const dateToShow = (this.props.gameData.releaseDate ? <span className="releaseDate">{moment(this.props.gameData.releaseDate).format('DD-MM-YYYY')}</span> : "");
+    const shortenedDate = this.props.gameData.releaseDate.slice(0, 4);
+    console.log(shortenedDate)
+
+    //const dateToShow = (this.props.gameData.releaseDate ? <span className="releaseDate">{moment(this.props.gameData.releaseDate).format('DD-MM-YYYY')}</span> : "");
+    const dateToShow = (this.props.gameData.releaseDate ? <span className="releaseDate">{shortenedDate}</span> : "");
 
     const modalWindow = (
       <BlockModalWindow

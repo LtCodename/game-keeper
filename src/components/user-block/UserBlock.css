@@ -23,8 +23,10 @@
   line-height: var(--footer-content-height);
   padding: 0 2px;
   margin-right: 5px;
-  font-size: 18px;
-  font-family: var(--main-font);
+  /* font-size: 18px; */
+  font-size: 25px;
+  color: var(--first-color);
+  font-family: var(--titles-font);
 }
 
 .gameBlockContent {
