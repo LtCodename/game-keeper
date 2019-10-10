@@ -1,7 +1,7 @@
 import React from 'react';
 import './Nav.css';
 import AddListModalWindow from '../add-list-modal-window/AddListModalWindow.js';
-import reducers from '../../redux/reducers';
+import indexActions from '../../redux/reducers/selectedListIndexReducer';
 import { connect } from 'react-redux'
 declare var $;
 
@@ -103,7 +103,7 @@ class Nav extends React.Component {
 const listDispatchToProps = (dispatch) => {
   return {
     changeListIndex: (index, listsLength) => {
-      dispatch({ type: reducers.actions.selectedListIndexActions.SLI_CHANGE, index: index, listsLength: listsLength });
+      dispatch({ type: indexActions.actions.SLI_CHANGE, index: index, listsLength: listsLength });
     }
   }
 };

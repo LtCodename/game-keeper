@@ -1,6 +1,6 @@
 import React from 'react';
 import './Header.css';
-import reducers from '../../redux/reducers';
+import indexActions from '../../redux/reducers/selectedListIndexReducer';
 import { connect } from 'react-redux'
 import { NavLink, withRouter } from 'react-router-dom';
 declare var firebase;
@@ -67,7 +67,7 @@ const Header = ({changeListIndex, history, userLists, userData}) => {
 const headerDispatchToProps = (dispatch) => {
   return {
     changeListIndex: (index, listsLength) => {
-      dispatch({ type: reducers.actions.selectedListIndexActions.SLI_CHANGE, index: index, listsLength: listsLength });
+      dispatch({ type: indexActions.actions.SLI_CHANGE, index: index, listsLength: listsLength });
     }
   }
 };

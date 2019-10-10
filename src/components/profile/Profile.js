@@ -1,16 +1,16 @@
 import React from 'react';
 import './Profile.css';
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 declare var firebase;
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
 
-    if (props.userData === null) {
-      props.history.push('/');
-    }
+    // if (props.userData === null) {
+    //   props.history.push('/');
+    // }
 
     let userName = "";
     if (this.props.userData !== null) {
@@ -67,6 +67,10 @@ class Profile extends React.Component {
   }
 
   render() {
+    if (this.props.userData === null) {
+      return <Redirect to='/' />;
+    }
+
     let userEmail = "";
     let userVerified = "";
 

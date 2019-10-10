@@ -3,7 +3,7 @@ import UserSection from '../user-section/UserSection.js';
 import Colors from '../colors/Colors.js';
 import './UserList.css';
 import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
-import reducers from '../../redux/reducers';
+import indexActions from '../../redux/reducers/selectedListIndexReducer';
 import { connect } from 'react-redux'
 declare var $;
 declare var firebase;
@@ -280,10 +280,10 @@ class UserList extends React.Component {
 const listDispatchToProps = (dispatch) => {
   return {
     changeListIndex: (newListPosition, listsLength) => {
-      dispatch({ type: reducers.actions.selectedListIndexActions.SLI_CHANGE, index: newListPosition, listsLength: listsLength });
+      dispatch({ type: indexActions.actions.SLI_CHANGE, index: newListPosition, listsLength: listsLength });
     },
     changeListIndexOnDelete: (listsLength) => {
-      dispatch({ type: reducers.actions.selectedListIndexActions.SLI_CHANGE_ON_DELETE, listsLength: listsLength });
+      dispatch({ type: indexActions.actions.SLI_CHANGE_ON_DELETE, listsLength: listsLength });
     }
   }
 };

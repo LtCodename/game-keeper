@@ -1,6 +1,6 @@
 import React from 'react';
 import './ListBlock.css';
-import reducers from '../../redux/reducers';
+import indexActions from '../../redux/reducers/selectedListIndexReducer';
 import { connect } from 'react-redux'
 
 const ListBlock = ({changeListIndex, listBlockIndex, userLists}) => {
@@ -13,7 +13,7 @@ const ListBlock = ({changeListIndex, listBlockIndex, userLists}) => {
 const listBlockDispatchToProps = (dispatch) => {
   return {
     changeListIndex: (index, listsLength) => {
-      dispatch({ type: reducers.actions.selectedListIndexActions.SLI_CHANGE, index: index, listsLength: listsLength  });
+      dispatch({ type: indexActions.actions.SLI_CHANGE, index: index, listsLength: listsLength  });
     }
   }
 };

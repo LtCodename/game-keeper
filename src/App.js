@@ -9,9 +9,16 @@ import Developers from './components/developers/Developers.js';
 import Suggested from './components/suggested/Suggested.js';
 import Privacy from './components/privacy/Privacy.js';
 import Preloader from './components/preloader/Preloader.js';
-import reducers from './redux/reducers';
-import { connect } from 'react-redux'
 import { BrowserRouter, Route } from 'react-router-dom'
+import { connect } from 'react-redux'
+import developersActions from './redux/reducers/developersReducer';
+import colorsActions from './redux/reducers/colorsReducer';
+import platformsActions from './redux/reducers/platformsReducer';
+import suggestedReducer from './redux/reducers/suggestedReducer';
+import userBlocksReducer from './redux/reducers/userBlocksReducer';
+import userListsReducer from './redux/reducers/userListsReducer';
+import userReducer from './redux/reducers/userReducer';
+import userSectionsReducer from './redux/reducers/userSectionsReducer';
 declare var firebase;
 
 class App extends React.Component {
@@ -216,28 +223,28 @@ const stateToProps = (state = {}) => {
 const appDispatchToProps = (dispatch) => {
   return {
     checkUserPresence: (user) => {
-      dispatch({ type: reducers.actions.userActions.USER_CHECK, user: user });
+      dispatch({ type: userReducer.actions.USER_CHECK, user: user });
     },
     fecthDevelopers: (snapshot) => {
-      dispatch({ type: reducers.actions.developersActions.DEVELOPERS_FETCH, snapshot: snapshot });
+      dispatch({ type: developersActions.actions.DEVELOPERS_FETCH, snapshot: snapshot });
     },
     fecthColors: (snapshot) => {
-      dispatch({ type: reducers.actions.colorsActions.COLORS_FETCH, snapshot: snapshot });
+      dispatch({ type: colorsActions.actions.COLORS_FETCH, snapshot: snapshot });
     },
     fecthSuggestedDevelopers: (snapshot) => {
-      dispatch({ type: reducers.actions.suggestedActions.SUGGESTED_FETCH, snapshot: snapshot });
+      dispatch({ type: suggestedReducer.actions.SUGGESTED_FETCH, snapshot: snapshot });
     },
     fecthPlatforms: (snapshot) => {
-      dispatch({ type: reducers.actions.platformsActions.PLATFORMS_FETCH, snapshot: snapshot });
+      dispatch({ type: platformsActions.actions.PLATFORMS_FETCH, snapshot: snapshot });
     },
     setListsToStore: (lists) => {
-      dispatch({ type: reducers.actions.userListsActions.LISTS_SET, lists: lists });
+      dispatch({ type: userListsReducer.actions.LISTS_SET, lists: lists });
     },
     setSectionsToStore: (sections) => {
-      dispatch({ type: reducers.actions.userSectionsActions.SECTIONS_SET, sections: sections });
+      dispatch({ type: userSectionsReducer.actions.SECTIONS_SET, sections: sections });
     },
     setBlocksToStore: (blocks) => {
-      dispatch({ type: reducers.actions.userBlocksActions.BLOCKS_SET, blocks: blocks });
+      dispatch({ type: userBlocksReducer.actions.BLOCKS_SET, blocks: blocks });
     }
   }
 };
