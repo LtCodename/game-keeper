@@ -5,6 +5,7 @@ import './Dashboard.css'
 import AddListModalWindow from '../add-list-modal-window/AddListModalWindow.js';
 import SignUpModalWindow from '../sign-up-modal-window/SignUpModalWindow.js';
 import LogInModalWindow from '../log-in-modal-window/LogInModalWindow.js';
+//import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux'
 declare var $;
 
@@ -70,9 +71,8 @@ class Dashboard extends React.Component {
 
   render() {
     const listsToRender = this.props.userLists.map((elem, index) => {
-      return <ListBlock
-        key={elem.id}
-        listBlockIndex={index}/>;
+      //return <NavLink key={elem.id} to={"/list/" + elem.id}><ListBlock key={elem.id} listBlockIndex={index}/></NavLink>;
+      return <ListBlock key={elem.id} listBlockIndex={index}/>
     });
 
     let btnAddListClassName = "btn btnAddListFromDashboard";
