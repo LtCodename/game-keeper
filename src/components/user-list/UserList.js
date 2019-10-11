@@ -32,7 +32,7 @@ class UserList extends React.Component {
     const newSection = {
       id: `id${new Date().getTime()}`,
       name: this.state.sectionNameInputValue,
-      color: this.state.colorForNewSection || "ce-soir",
+      color: this.state.colorForNewSection || "witch-haze",
       listId: this.props.userLists[this.props.listIndex].id
     }
 

@@ -23,10 +23,10 @@
   line-height: var(--footer-content-height);
   padding: 0 2px;
   margin-right: 5px;
-  /* font-size: 18px; */
-  font-size: 25px;
+  font-size: 18px;
+  /* font-size: 25px;
   color: var(--first-color);
-  font-family: var(--titles-font);
+  font-family: var(--titles-font); */
 }
 
 .gameBlockContent {
@@ -55,10 +55,6 @@
   display: flex;
 }
 
-.gameBlock_air-force-blue {
-  background-color: var(--color-air-force-blue);
-}
-
 .gameBlock_alice-blue {
   background-color: var(--color-alice-blue);
 }
@@ -67,16 +63,8 @@
   background-color: var(--color-wistful);
 }
 
-.gameBlock_ce-soir {
-  background-color: var(--color-ce-soir);
-}
-
 .gameBlock_vivid-tangerine {
   background-color: var(--color-vivid-tangerine);
-}
-
-.gameBlock_sunset-orange {
-  background-color: var(--color-sunset-orange);
 }
 
 .gameBlock_madang {
@@ -89,18 +77,6 @@
 
 .gameBlock_witch-haze {
   background-color: var(--color-witch-haze);
-}
-
-.gameBlock_yellow {
-  background-color: var(--color-yellow);
-}
-
-.gameBlock_california {
-  background-color: var(--color-california);
-}
-
-.gameBlock_burnt-orange {
-  background-color: var(--color-burnt-orange);
 }
 
 .gameBlock_shakespeare {
@@ -123,20 +99,8 @@
   background-color: var(--color-wax-flower);
 }
 
-.gameBlock_soft-red {
-  background-color: var(--color-soft-red);
-}
-
-.gameBlock_turquoise {
-  background-color: var(--color-turquoise);
-}
-
 .gameBlock_jade {
   background-color: var(--color-jade);
-}
-
-.gameBlock_marigold-yellow {
-  background-color: var(--color-marigold-yellow);
 }
 
 .gameBlock_orchid-white {

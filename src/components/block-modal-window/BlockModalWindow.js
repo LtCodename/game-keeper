@@ -227,7 +227,7 @@ class BlockModalWindow extends React.Component {
         const newSection = {
           id: newSectionId,
           name: 'New section',
-          color: "ce-soir",
+          color: "witch-haze",
           listId: this.state.newListForBlock
         };
 

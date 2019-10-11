@@ -2,33 +2,24 @@
     box-sizing: border-box;
     /*Section Colors*/
     /*Blue*/
-    --color-air-force-blue: rgba(75, 119, 190, 1);
     --color-alice-blue: rgba(228, 241, 254, 1);
     --color-shakespeare: rgba(82, 179, 217, 1);
     --color-malibu: rgba(107, 185, 240, 1);
     /*Purple*/
-    --color-ce-soir: rgba(169, 109, 173, 1);
     --color-wistful: rgba(174, 168, 211, 1);
     --color-blue-chalk: rgba(241, 231, 254, 1);
     --color-light-wisteria: rgba(190, 144, 212,1);
     /*Red*/
     --color-vivid-tangerine: rgba(255, 148, 120, 1);
-    --color-sunset-orange: rgba(246, 71, 71, 1);
     --color-wax-flower: rgba(241, 169, 160, 1);
-    --color-soft-red: rgba(236, 100, 75, 1);
     /*Green*/
     --color-madang: rgba(200, 247, 197, 1);
     --color-emerald: rgba(63, 195, 128, 1);
-    --color-turquoise: rgba(54, 215, 183, 1);
     --color-jade: rgba(0, 177, 106, 1);
     /*Yellow*/
     --color-witch-haze: rgba(255, 246, 143, 1);
-    --color-yellow: rgba(240, 255, 0, 1);
-    --color-marigold-yellow: rgba(244, 247, 118, 1);
     --color-orchid-white: rgba(240, 240, 214, 1);
     /*Orange*/
-    --color-california: rgba(248, 148, 6, 1);
-    --color-burnt-orange: rgba(211, 84, 0, 1);
     --color-supernova: rgba(255, 203, 5, 1);
     --color-cape-honey: rgba(253, 227, 167, 1);
 
