@@ -1,3 +1,5 @@
+//declare var self;
+
 // This optional code is used to register a service worker.
 // register() is not called by default.
 
@@ -9,6 +11,10 @@
 
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://bit.ly/CRA-PWA
+
+// self.addEventListener('fetch', evt => {
+//   console.log('fetch event', evt);
+// })
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
@@ -58,6 +64,9 @@ function registerValidSW(swUrl, config) {
   navigator.serviceWorker
     .register(swUrl)
     .then(registration => {
+      console.log("serviceWorker registered");
+      console.log(registration);
+
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         if (installingWorker == null) {
