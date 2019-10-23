@@ -9,31 +9,56 @@ class SearchPanel extends React.Component {
 
     this.state = {
       searchInputValue: '',
-      findedGames: []
+      foundGames: [],
+      searchMode: "name"
     };
   }
 
   searchInputValueChange = (event) => {
-    const gamesToDisplay = event.target.value ? this.props.userBlocks.filter(block => {
-      const searchQuery = event.target.value.toLowerCase();
-      return block.name.toLowerCase().indexOf(searchQuery) > -1;
-    }) : [];
+    let gamesToDisplay = [];
+    if (this.state.searchMode === "name") {
+      gamesToDisplay = event.target.value ? this.props.userBlocks.filter(block => {
+        const searchQuery = event.target.value.toLowerCase();
+        return block.name.toLowerCase().indexOf(searchQuery) > -1;
+      }) : [];
+    }else{
+      let developers = event.target.value ? this.props.developers.filter(developer => {
+        const searchingFor = event.target.value.toLowerCase();
+        return developer.name.toLowerCase().indexOf(searchingFor) > -1;
+      }) : [];
+
+      gamesToDisplay = this.props.userBlocks.filter(block => {
+        const developerInFoundList = developers.find(dev => {
+          return block.developer === dev.id;
+        });
+
+        return Boolean(developerInFoundList);
+      });
+    }
 
     this.setState({
       searchInputValue: event.target.value,
-      findedGames: gamesToDisplay
+      foundGames: gamesToDisplay
     });
-  }
+  };
+
+  searchModeChangeHandler = (event) => {
+    this.setState({
+      searchMode: event.target.value,
+      searchInputValue: "",
+      foundGames: []
+    });
+  };
 
   onCollapse = () => {
     this.setState({
       searchInputValue: '',
-      findedGames: []
+      foundGames: []
     });
-  }
+  };
 
   render() {
-    const gamesToRender = this.state.findedGames.map((elem, index) => {
+    const gamesToRender = this.state.foundGames.map((elem) => {
       const selectedSection = this.props.userSections.find(section => {
         return section.id === elem.sectionId;
       });
@@ -75,26 +100,52 @@ class SearchPanel extends React.Component {
         matrixClassName += " fourCells"
     }
 
-    if (this.state.findedGames.length) {
+    if (this.state.foundGames.length) {
       matrixClassName += " findedWrapper"
     }
 
     let foundTextClass = "foundText";
     let foundTextValue = 0;
 
-    if (this.state.findedGames.length) {
-      foundTextValue = this.state.findedGames.length;
+    if (this.state.foundGames.length) {
+      foundTextValue = this.state.foundGames.length;
       foundTextClass += " foundTextVisible";
     }
+
+    const searchPlaceholderText = (this.state.searchMode === "name") ? "Enter game name" : "Enter developer name";
+
+    const searchModeArray = [
+      {
+        id: "name",
+        name: "Search by game name"
+      },
+      {
+        id: "developer",
+        name: "Search by game developer"
+      }
+    ];
+
+    const searchModeOptions = searchModeArray.map((elem, index) => {
+      return (
+          <option key={index} value={elem.id}>{elem.name}</option>
+      );
+    });
+
+    const searchModeSelector = (
+        <select value={this.state.newListForBlock} className="custom-select searchModeSelector" onChange={this.searchModeChangeHandler}>
+          {searchModeOptions}
+        </select>
+    );
 
     return (
       <div className="searchPanel">
         <button className="searchButton" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onClick={this.onCollapse}>
-          <img className="searchIcon" alt="" src={process.env.PUBLIC_URL + '/icons/search.svg'}></img>
+          <img className="searchIcon" alt="" src={process.env.PUBLIC_URL + '/icons/search.svg'}/>
         </button>
         <div className="collapse" id="collapseExample">
           <div className="card card-body">
-            <input className="form-control" type="search" placeholder="Enter game name" value={this.state.searchInputValue} onChange={this.searchInputValueChange}></input>
+            {searchModeSelector}
+            <input className="form-control" type="search" placeholder={searchPlaceholderText} value={this.state.searchInputValue} onChange={this.searchInputValueChange}/>
             <p className={foundTextClass}>{`Games found in Game Keeper: ${foundTextValue}`}</p>
             <div className={matrixClassName}>
               {gamesToRender}
@@ -110,7 +161,8 @@ const stateToProps = (state = {}) => {
   return {
     userBlocks: state.userBlocks,
     userSections: state.userSections,
-    userLists: state.userLists
+    userLists: state.userLists,
+    developers: state.developers
   }
 };
 

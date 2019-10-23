@@ -8,7 +8,7 @@ const ListBlock = ({changeListIndex, listBlockIndex, userLists}) => {
   return (
     <button className="listBlock" onClick={() => changeListIndex(listBlockIndex, userLists.length)}>{userLists[listBlockIndex].name}</button>
   )
-}
+};
 
 const listBlockDispatchToProps = (dispatch) => {
   return {

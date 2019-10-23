@@ -20,6 +20,8 @@ class BlockModalWindow extends React.Component {
       newListForBlock: this.props.listId || this.props.userLists[this.props.listIndex].id,
       newSectionForBlock: this.props.sectionId
     };
+
+    console.log(this.props.gameData)
   }
 
   newListSelectChangeHandler = (event) => {
@@ -32,13 +34,13 @@ class BlockModalWindow extends React.Component {
       newListForBlock: event.target.value,
       newSectionForBlock: firstSectionId
     });
-  }
+  };
 
   newSectionSelectChangeHandler = (event) => {
     this.setState({
       newSectionForBlock: event.target.value
     });
-  }
+  };
 
   deleteBlock = () => {
     const copy = [...this.props.userBlocks];
@@ -59,25 +61,25 @@ class BlockModalWindow extends React.Component {
     }).catch(error => {
       console.log(error.message);
     });
-  }
+  };
 
   developerChangeHandler = (event) => {
     this.setState({
       localGameData: {...this.state.localGameData, developer:event.target.value}
     });
-  }
+  };
 
   developerInputValueChange = (event) => {
     this.setState({
       developerInputValue: event.target.value
     });
-  }
+  };
 
   developerSuggestInputValueChange = (event) => {
     this.setState({
       developerSuggestInputValue: event.target.value
     });
-  }
+  };
 
   openModalWarningWindow = () => {
     this.setState({
@@ -86,7 +88,7 @@ class BlockModalWindow extends React.Component {
       $("#modalWarning").modal('show');
       $("#modalWarning").on('hidden.bs.modal', this.resetState);
     });
-  }
+  };
 
   componentWillUnmount() {
     $("#modalWarning").unbind('hidden.bs.modal');
@@ -96,24 +98,24 @@ class BlockModalWindow extends React.Component {
     this.setState({
       showModalWindow: false
     })
-  }
+  };
 
   handleCheckboxInputChange = (event) => {
     const copy = this.deepCopy(this.state.platforms);
     copy[event.target.value].checked = event.target.checked;
 
     this.rewriteLists(copy);
-  }
+  };
 
   deepCopy = (objectToCopy) => {
     return JSON.parse(JSON.stringify(objectToCopy));
-  }
+  };
 
   rewriteLists = (newData) => {
     this.setState({
       platforms: newData
     });
-  }
+  };
 
   preparePlatformsForState(){
     const selectedPlatforms = this.props.gameData.platforms || [];
@@ -144,7 +146,7 @@ class BlockModalWindow extends React.Component {
         console.log(error.message);
       });
     });
-  }
+  };
 
   doOnSuggestDeveloper = () => {
     if (!this.state.developerSuggestInputValue) {
@@ -162,34 +164,34 @@ class BlockModalWindow extends React.Component {
         console.log(error.message);
       });
     });
-  }
+  };
 
   doOnCancel = () => {
     this.setState({
       descriptionInputValue: "",
       nameInputValue: this.props.gameData.name
     });
-  }
+  };
 
   descriptionInputValueChange = (event) => {
     this.setState({
       descriptionInputValue: event.target.value,
       localGameData: {...this.state.localGameData, description:event.target.value}
     });
-  }
+  };
 
   nameInputValueChange = (event) => {
     this.setState({
       nameInputValue: event.target.value,
       localGameData: {...this.state.localGameData, name:event.target.value}
     });
-  }
+  };
 
   dateInputValueChange = (event) => {
     this.setState({
       localGameData: {...this.state.localGameData, releaseDate:event.target.value}
     });
-  }
+  };
 
   modalSave = (event) => {
     const mappedPlatforms = this.state.platforms
@@ -207,7 +209,7 @@ class BlockModalWindow extends React.Component {
     }
 
     this.props.closeModal();
-  }
+  };
 
   updateBlock(platforms) {
     const allBlocks = [...this.props.userBlocks];
@@ -221,7 +223,7 @@ class BlockModalWindow extends React.Component {
       let sectionId = this.state.newSectionForBlock;
 
       if (this.state.newSectionForBlock === 0) {
-        const newSectionId = `id${new Date().getTime()}`
+        const newSectionId = `id${new Date().getTime()}`;
         sectionId = newSectionId;
 
         const newSection = {
@@ -258,7 +260,7 @@ class BlockModalWindow extends React.Component {
       id: `id${new Date().getTime()}`,
       platforms: platforms,
       sectionId: this.props.sectionId
-    }
+    };
 
     const allBlocks = [...this.props.userBlocks, newBlock];
 
@@ -275,12 +277,12 @@ class BlockModalWindow extends React.Component {
       <div className="modalPiece">
         <label className="dateLabel" >
           <p className="littleHeaders">Release Date</p>
-          <input className="form-control" type="date" value={this.state.localGameData.releaseDate} onChange={this.dateInputValueChange}></input>
+          <input className="form-control" type="date" value={this.state.localGameData.releaseDate} onChange={this.dateInputValueChange}/>
         </label>
       </div>
     );
 
-    const platformPicker = this.state.platforms.map((elem, index) => {
+    const platformPicker = this.state.platforms.map((elem) => {
       return (
           <div className="form-check checkbox" key={elem.id}>
             <input
@@ -337,7 +339,7 @@ class BlockModalWindow extends React.Component {
 
     const deleteButton = (this.props.fullMode) ? <button type="button" className="btn btn-danger" onClick={this.openModalWarningWindow}>Delete</button> : "";
 
-    const developerSectionOptions = this.props.developers.map((elem, index) => {
+    const developerSectionOptions = this.props.developers.map((elem) => {
       return (
         <option key={elem.id} value={elem.id}>{elem.name}</option>
       );
@@ -350,7 +352,7 @@ class BlockModalWindow extends React.Component {
     const addDeveloper = (
       <div>
         <p className="littleHeaders">Add developer</p>
-        <input className="form-control" type="text" placeholder="Developer Name" value={this.state.developerInputValue} onChange={this.developerInputValueChange}></input>
+        <input className="form-control" type="text" placeholder="Developer Name" value={this.state.developerInputValue} onChange={this.developerInputValueChange}/>
         <button className="btn btn-success" onClick={this.doOnAddDeveloper}>Add</button>
       </div>
     );
@@ -358,7 +360,7 @@ class BlockModalWindow extends React.Component {
     const suggestDeveloper = (
       <div>
         <p className="littleHeaders">Suggest developer</p>
-        <input className="form-control" type="text" placeholder="Developer Name" value={this.state.developerSuggestInputValue} onChange={this.developerSuggestInputValueChange}></input>
+        <input className="form-control" type="text" placeholder="Developer Name" value={this.state.developerSuggestInputValue} onChange={this.developerSuggestInputValueChange}/>
         <button className="btn btn-success" onClick={this.doOnSuggestDeveloper}>Suggest</button>
       </div>
     );
@@ -379,7 +381,7 @@ class BlockModalWindow extends React.Component {
         <label className="desctiptionLabel" htmlFor="description">
           <p className="littleHeaders">Description</p>
         </label>
-        <textarea placeholder="Enter description" className="form-control" id="description" rows="4" value={this.state.descriptionInputValue} onChange={this.descriptionInputValueChange}></textarea>
+        <textarea placeholder="Enter description" className="form-control" id="description" rows="4" value={this.state.descriptionInputValue} onChange={this.descriptionInputValueChange}/>
       </div>
     );
 
@@ -388,7 +390,7 @@ class BlockModalWindow extends React.Component {
         <label className="nameLabel" htmlFor="name">
           <p className="littleHeaders">Name</p>
         </label>
-        <textarea placeholder="Enter name" className="form-control enterNewName" id="name" rows="1" value={this.state.nameInputValue} onChange={this.nameInputValueChange}></textarea>
+        <textarea placeholder="Enter name" className="form-control enterNewName" id="name" rows="1" value={this.state.nameInputValue} onChange={this.nameInputValueChange}/>
       </div>
     );
 

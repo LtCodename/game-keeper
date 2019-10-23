@@ -33,7 +33,7 @@ class Developers extends React.Component {
         this.openModalWarningWindow();
       }
     );
-  }
+  };
 
   editItem = (newName, id) => {
     firebase.firestore().collection('developers').doc(id).update({
