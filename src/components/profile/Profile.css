@@ -4,6 +4,23 @@
   color: var(--first-color);
 }
 
+.profileTopWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.avatar {
+  background-color: var(--first-color);
+  color: var(--third-color);
+  font-size: 55px;
+  font-family: var(--titles-font);
+  border-radius: 50%;
+  padding: 5px 20px;
+  margin: 10px 0 15px 0;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
 .profileHeader {
   color: var(--main-color);
   margin-bottom: 5px;

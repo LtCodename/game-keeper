@@ -74,8 +74,45 @@
   flex: 1;
 }
 
-.addListInput {
+.addSectionInput {
+  background-color: var(--first-color) !important;
+  border: none;
+  color: var(--third-color) !important;
+  font-size: 40px;
+  font-family: var(--titles-font);
+  padding: 0 0 0 10px;
+  resize: none;
+}
+
+.addSectionInput::placeholder {
+  color: var(--third-color);
+}
+
+.addSectionInput:-ms-input-placeholder {
+  color: var(--third-color);
+}
+
+.addSectionInput::-webkit-input-placeholder {
+  color: var(--third-color);
+}
+
+.addSectionWrapper {
   margin-top: 10px;
+  padding-bottom: 15px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  width: 99%;
+}
+
+.sectionAddButtons {
+  margin-left: 10px;
+}
+
+.sectionAddButtons button {
+  margin-right: 10px;
+}
+
+.addSectionInput:focus {
+  box-shadow:none !important;
 }
 
 .listPositionPicker {
@@ -101,7 +138,7 @@
 }
 
 @media (max-width: 576px) {
-  .listName {
+  .listName, .editListInput {
     font-size: 45px;
   }
 

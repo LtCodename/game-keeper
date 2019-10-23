@@ -23,7 +23,8 @@ class UserList extends React.Component {
     };
   }
 
-  linkToTextarea;
+  linkToRenameListTextarea;
+  linkToAddSectionTextarea;
 
   addNewSection = () => {
     if (!this.state.sectionNameInputValue) {
@@ -108,6 +109,10 @@ class UserList extends React.Component {
       this.setState({
         addSectionMode: true,
         listNameInputValue: ""
+      }, () => {
+        if (this.linkToAddSectionTextarea) {
+          this.linkToAddSectionTextarea.focus();
+        }
       });
     }
   };
@@ -118,8 +123,8 @@ class UserList extends React.Component {
         renameListMode: true,
         listNameInputValue: this.props.userLists[this.props.listIndex].name
       }, () => {
-        if (this.linkToTextarea) {
-          this.linkToTextarea.focus();
+        if (this.linkToRenameListTextarea) {
+          this.linkToRenameListTextarea.focus();
         }
       });
     }
@@ -259,7 +264,7 @@ class UserList extends React.Component {
       <div className="editListDiv">
         <textarea
             ref={node => {
-              this.linkToTextarea = node;
+              this.linkToRenameListTextarea = node;
             }} placeholder="Enter List Name" className="form-control editListInput" rows="1" value={this.state.listNameInputValue} onChange={this.listNameInputValueChange}/>
         <div className="listEditButtons">
           <button className="btn btn-dark" onClick={this.doOnSubmitListName}>OK</button>
@@ -269,11 +274,16 @@ class UserList extends React.Component {
     );
 
     const addNewSectionForm = (
-      <div className="addListDiv">
-        <input className="addListInput form-control" type="text" placeholder="Enter section name" value={this.state.sectionNameInputValue} onChange={this.sectionNameInputValueChange}/>
-        <button className="btn btn-dark" onClick={this.addNewSection}>OK</button>
-        <button className="btn" onClick={this.doOnCancel}>Cancel</button>
+      <div className="addSectionWrapper">
+        <textarea
+            ref={node => {
+              this.linkToAddSectionTextarea = node;
+            }} placeholder="Enter Section Name" className="form-control addSectionInput" rows="1" value={this.state.sectionNameInputValue} onChange={this.sectionNameInputValueChange}/>
         <Colors passColorToSection={this.holdColorForNewSection}/>
+        <div className="sectionAddButtons">
+          <button className="btn btn-dark" onClick={this.addNewSection}>OK</button>
+          <button className="btn" onClick={this.doOnCancel}>Cancel</button>
+        </div>
       </div>
     );
 

@@ -28,13 +28,13 @@ class Profile extends React.Component {
     this.setState({
       emailInputValue: event.target.value
     });
-  }
+  };
 
   nameValueChange = (event) => {
     this.setState({
       nameInputValue: event.target.value
     });
-  }
+  };
 
   onChangeName = () => {
     firebase.auth().currentUser.updateProfile({
@@ -43,11 +43,11 @@ class Profile extends React.Component {
     }, function (error) {
         console.log(error.message);
     });
-  }
+  };
 
   onVerify = () => {
     let actionCodeSettings = {
-      url: 'https://the-game-keeper.firebaseapp.com'
+      url: 'https://gamekeeper.ltcodename.com'
     };
 
     firebase.auth().currentUser.sendEmailVerification(actionCodeSettings).then(() => {
@@ -55,7 +55,7 @@ class Profile extends React.Component {
         verifyButtonText:"Email Sent"
       });
     });
-  }
+  };
 
   makeAdmin = (event) => {
     event.preventDefault();
@@ -64,7 +64,7 @@ class Profile extends React.Component {
     addAdminRole({ email: this.state.emailInputValue }).then(result => {
       console.log(result);
     })
-  }
+  };
 
   render() {
     if (this.props.userData === null) {
@@ -89,7 +89,7 @@ class Profile extends React.Component {
     const makeAdmin = (
       <form onSubmit={this.makeAdmin} className="adminForm">
         <div className="inputField">
-          <input className="form-control emailInput" autoComplete="username email" placeholder="Enter email" type="email" id="adminEmail" value={this.state.emailInputValue} onChange={this.emailValueChange} required></input>
+          <input className="form-control emailInput" autoComplete="username email" placeholder="Enter email" type="email" id="adminEmail" value={this.state.emailInputValue} onChange={this.emailValueChange} required/>
           <label className="emailInputLabel sr-only" htmlFor="adminEmail">Email address</label>
         </div>
         <button className="btn profileButtons">OK</button>
@@ -116,7 +116,7 @@ class Profile extends React.Component {
       <NavLink to="/privacy"><button className="btn profileButtons">Read</button></NavLink>
     );
 
-    let adminSign = (<p className="profileParagraph"></p>);
+    let adminSign = (<p className="profileParagraph"/>);
     if (this.props.userData !== null) {
       adminSign = (
         <p className="profileParagraph">{this.props.userData.admin ? "Admin" : "User"}</p>
@@ -146,13 +146,27 @@ class Profile extends React.Component {
 
     const changeNameForm = (
       <div className="editNameWrapper">
-        <input className="form-control editNameInput" type="text" placeholder="Enter new name" value={this.state.nameInputValue} onChange={this.nameValueChange}></input>
+        <input className="form-control editNameInput" type="text" placeholder="Enter new name" value={this.state.nameInputValue} onChange={this.nameValueChange}/>
       </div>
     );
 
+    let avatarInitials;
+
+    if (this.state.nameInputValue.includes(" ")) {
+      let words = this.state.nameInputValue.split(" ");
+      avatarInitials = words[0][0] + words[1][0];
+      avatarInitials.toUpperCase();
+    }else {
+      avatarInitials = this.state.nameInputValue.slice(0, 2);
+      avatarInitials.toUpperCase();
+    }
+
     const table = (
       <div className="tableWrapper">
-        <h1 className="profileHeader">Account Details</h1>
+        <div className="profileTopWrapper">
+          <h1 className="profileHeader">Account Details</h1>
+          <div className="avatar">{avatarInitials}</div>
+        </div>
         <table className="table">
           <tbody>
             <tr>

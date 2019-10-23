@@ -49,7 +49,7 @@
 }
 
 .editSectionInput {
-  background-color: var(--first-color) !important;;
+  background-color: var(--first-color) !important;
   border: none;
   color: var(--third-color) !important;
   font-size: 40px;
@@ -60,6 +60,7 @@
 
 .editSectionInput:focus {
   box-shadow:none !important;
+  color: var(--third-color) !important;
 }
 
 .sectionEditButtons {
@@ -105,6 +106,12 @@
 
 .sectionEditIcon {
   height: 35px;
+}
+
+@media (max-width: 1050px) {
+  .editSectionInput {
+    font-size: 30px;
+  }
 }
 
 @media (max-width: 576px) {
