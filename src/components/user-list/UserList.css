@@ -39,11 +39,32 @@
 }
 
 .editListDiv {
-  padding-top: 10px;
+  margin-top: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  width: 99%;
+  padding-bottom: 15px;
 }
 
-.editListInput, .addListInput {
-  width: 50%;
+.editListInput {
+  background-color: var(--first-color) !important;
+  border: none;
+  color: var(--second-color) !important;
+  padding: 0 0 0 10px;
+  resize: none;
+  font-size: 55px;
+  font-family: var(--titles-font);
+}
+
+.editListInput:focus {
+  box-shadow:none !important;
+}
+
+.listEditButtons {
+  margin-left: 10px;
+}
+
+.listEditButtons button {
+  margin-right: 10px;
 }
 
 .listName {

@@ -23,6 +23,8 @@ class UserList extends React.Component {
     };
   }
 
+  linkToTextarea;
+
   addNewSection = () => {
     if (!this.state.sectionNameInputValue) {
       this.doOnCancel();
@@ -34,7 +36,7 @@ class UserList extends React.Component {
       name: this.state.sectionNameInputValue,
       color: this.state.colorForNewSection || "witch-haze",
       listId: this.props.userLists[this.props.listIndex].id
-    }
+    };
 
     const allSections = [...this.props.userSections, newSection];
 
@@ -48,7 +50,7 @@ class UserList extends React.Component {
     this.setState({
       colorForNewSection: ""
     });
-  }
+  };
 
   listPositionChangeHandler = (event) => {
     const copy = [...this.props.userLists];
@@ -65,7 +67,7 @@ class UserList extends React.Component {
     }).catch(error => {
       console.log(error.message);
     });
-  }
+  };
 
   openModalWarningWindow = () => {
     this.setState({
@@ -74,7 +76,7 @@ class UserList extends React.Component {
       $("#modalWarning").modal('show');
       $("#modalWarning").on('hidden.bs.modal', this.resetState);
     });
-  }
+  };
 
   componentWillUnmount() {
     $("#modalWarning").unbind('hidden.bs.modal');
@@ -84,13 +86,13 @@ class UserList extends React.Component {
     this.setState({
       showModalWindow: false
     });
-  }
+  };
 
   holdColorForNewSection = (color) => {
     this.setState({
       colorForNewSection: color
     });
-  }
+  };
 
   componentWillReceiveProps(newProps){
     this.setState({
@@ -108,16 +110,20 @@ class UserList extends React.Component {
         listNameInputValue: ""
       });
     }
-  }
+  };
 
   doOnEdit = () => {
     if (!this.state.renameListMode) {
       this.setState({
         renameListMode: true,
         listNameInputValue: this.props.userLists[this.props.listIndex].name
+      }, () => {
+        if (this.linkToTextarea) {
+          this.linkToTextarea.focus();
+        }
       });
     }
-  }
+  };
 
   doOnCancel = () => {
     this.setState({
@@ -126,7 +132,7 @@ class UserList extends React.Component {
       listNameInputValue: this.props.userLists[this.props.listIndex].name,
       sectionNameInputValue: ""
     });
-  }
+  };
 
   doOnSubmitListName = () => {
     const copy = [...this.props.userLists];
@@ -150,19 +156,19 @@ class UserList extends React.Component {
       });
       console.log(error.message);
     });
-  }
+  };
 
   listNameInputValueChange = (event) => {
     this.setState({
       listNameInputValue: event.target.value
     });
-  }
+  };
 
   sectionNameInputValueChange = (event) => {
     this.setState({
       sectionNameInputValue: event.target.value
     });
-  }
+  };
 
   onDeleteList = () => {
     const deletedSectionsIds = [];
@@ -192,13 +198,13 @@ class UserList extends React.Component {
     }).catch(error => {
       console.log(error.message);
     });
-  }
+  };
 
   toggleButtons = () => {
     this.setState({
       buttonsVisible: !this.state.buttonsVisible
     });
-  }
+  };
 
   render() {
     const sectionsToRender = this.props.userSections.filter((elem) => elem.listId === this.props.userLists[this.props.listIndex].id)
@@ -224,7 +230,7 @@ class UserList extends React.Component {
       return (
         <option key={index} value={index}>{index}</option>
       );
-    })
+    });
 
     const listPositionPicker = (
       <div>
@@ -240,27 +246,31 @@ class UserList extends React.Component {
       <div className="listWrapper">
         <h1 className="listName">{this.props.userLists[this.props.listIndex].name}</h1>
         <div className={actionButtonsClassName}>
-          <button className="btn" onClick={this.toggleButtons}><img className="listsEditIcon toggleButton" alt="" src={process.env.PUBLIC_URL + '/icons/navbar-arrow-lists.svg'}></img></button>
-          <button className="btn" onClick={this.doOnAddSection}><img className="listsEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-add-list.svg'}></img></button>
-          <button className="btn" onClick={this.doOnEdit}><img className="listsEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-list.svg'}></img></button>
-          <button className="btn" onClick={this.openModalWarningWindow}><img className="listsEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-list.svg'}></img></button>
+          <button className="btn" onClick={this.toggleButtons}><img className="listsEditIcon toggleButton" alt="" src={process.env.PUBLIC_URL + '/icons/navbar-arrow-lists.svg'}/></button>
+          <button className="btn" onClick={this.doOnAddSection}><img className="listsEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-add-list.svg'}/></button>
+          <button className="btn" onClick={this.doOnEdit}><img className="listsEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-list.svg'}/></button>
+          <button className="btn" onClick={this.openModalWarningWindow}><img className="listsEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-list.svg'}/></button>
           {listPositionPicker}
         </div>
-
       </div>
     );
 
     const editListNameForm = (
       <div className="editListDiv">
-        <input className="editListInput form-control" type="text" placeholder="Enter new name" value={this.state.listNameInputValue} onChange={this.listNameInputValueChange}></input>
-        <button className="btn btn-dark" onClick={this.doOnSubmitListName}>OK</button>
-        <button className="btn" onClick={this.doOnCancel}>Cancel</button>
+        <textarea
+            ref={node => {
+              this.linkToTextarea = node;
+            }} placeholder="Enter List Name" className="form-control editListInput" rows="1" value={this.state.listNameInputValue} onChange={this.listNameInputValueChange}/>
+        <div className="listEditButtons">
+          <button className="btn btn-dark" onClick={this.doOnSubmitListName}>OK</button>
+          <button className="btn" onClick={this.doOnCancel}>Cancel</button>
+        </div>
       </div>
     );
 
     const addNewSectionForm = (
       <div className="addListDiv">
-        <input className="addListInput form-control" type="text" placeholder="Enter section name" value={this.state.sectionNameInputValue} onChange={this.sectionNameInputValueChange}></input>
+        <input className="addListInput form-control" type="text" placeholder="Enter section name" value={this.state.sectionNameInputValue} onChange={this.sectionNameInputValueChange}/>
         <button className="btn btn-dark" onClick={this.addNewSection}>OK</button>
         <button className="btn" onClick={this.doOnCancel}>Cancel</button>
         <Colors passColorToSection={this.holdColorForNewSection}/>

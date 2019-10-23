@@ -49,11 +49,31 @@
 }
 
 .editSectionInput {
-  width: 50%;
+  background-color: var(--first-color) !important;;
+  border: none;
+  color: var(--third-color) !important;
+  font-size: 40px;
+  font-family: var(--titles-font);
+  padding: 0 0 0 10px;
+  resize: none;
+}
+
+.editSectionInput:focus {
+  box-shadow:none !important;
+}
+
+.sectionEditButtons {
+  margin-left: 10px;
+}
+
+.sectionEditButtons button {
+  margin-right: 10px;
 }
 
 .editSectionDiv {
-  margin-top: 10px;
+  padding-bottom: 15px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  width: 99%;
 }
 
 .sectionPositionPicker {
@@ -76,7 +96,7 @@
 }
 
 .cancelAddBlockBtn {
-    width: 118px;
+   width: 118px;
 }
 
 .sectionEditIcon:hover {

@@ -21,11 +21,13 @@ class UserSection extends React.Component {
     };
   }
 
+  linkToTextarea;
+
   toggleButtons = () => {
     this.setState({
       buttonsVisible: !this.state.buttonsVisible
     });
-  }
+  };
 
   sectionPositionChangeHandler = (event) => {
     if (this.props.sectionIndex === event.target.value) {
@@ -51,7 +53,7 @@ class UserSection extends React.Component {
     }).catch(error => {
       console.log(error.message);
     });
-  }
+  };
 
   closeAddGameModal() {
     $("#addGame").modal('hide');
@@ -64,7 +66,7 @@ class UserSection extends React.Component {
       $("#modalWarning").modal('show');
       $("#modalWarning").on('hidden.bs.modal', this.resetState);
     });
-  }
+  };
 
   openAddGameWindow = () => {
     this.setState({
@@ -73,7 +75,7 @@ class UserSection extends React.Component {
       $("#addGame").modal('show');
       $("#addGame").on('hidden.bs.modal', this.resetState);
     });
-  }
+  };
 
   componentWillUnmount() {
     $("#modalWarning").unbind('hidden.bs.modal');
@@ -85,29 +87,33 @@ class UserSection extends React.Component {
       showModalWindow: false,
       showAddGameWindow: false
     })
-  }
+  };
 
   doOnEdit = () => {
     if (!this.state.editMode) {
       this.setState({
         editMode: true,
         sectionInputValue: this.props.name
+      }, () => {
+        if (this.linkToTextarea) {
+          this.linkToTextarea.focus();
+        }
       });
     }
-  }
+  };
 
   sectionInputValueChange = (event) => {
     this.setState({
       sectionInputValue: event.target.value
     });
-  }
+  };
 
   doOnSubmit = () => {
     const copy = [...this.props.userSections];
 
     let targetSection = copy.find((elem) => {
       return elem.id === this.props.id;
-    })
+    });
 
     if (targetSection) {
       targetSection.name = this.state.sectionInputValue;
@@ -123,7 +129,7 @@ class UserSection extends React.Component {
     this.setState({
       editMode: false
     });
-  }
+  };
 
   sectionDelete = () => {
     const copy = [...this.props.userSections];
@@ -133,7 +139,7 @@ class UserSection extends React.Component {
 
     const targetSectionIndex = copy.findIndex((elem) => {
       return elem.id === this.props.id;
-    })
+    });
 
     if (targetSectionIndex > -1) {
       copy.splice(targetSectionIndex, 1);
@@ -150,7 +156,7 @@ class UserSection extends React.Component {
     }).catch(error => {
       console.log(error.message);
     });
-  }
+  };
 
   doOnCancel = () => {
     this.setState({
@@ -158,10 +164,10 @@ class UserSection extends React.Component {
       gameInputValue: "",
       sectionInputValue: this.props.name
     });
-  }
+  };
 
   render() {
-    const gamesToRender = this.props.userBlocks.filter((elem) => elem.sectionId === this.props.id).map((elem, index) => {
+    const gamesToRender = this.props.userBlocks.filter((elem) => elem.sectionId === this.props.id).map((elem) => {
       return <UserBlock
         key={elem.id}
         color={this.props.color}
@@ -184,7 +190,7 @@ class UserSection extends React.Component {
       return (
         <option key={index} value={index}>{index}</option>
       );
-    })
+    });
 
     const positionPicker = (
       <div className="positionPickerWrapper">
@@ -201,10 +207,10 @@ class UserSection extends React.Component {
         <h2>{this.props.name}</h2>
         <div className="sectionActions">
           <div className={actionButtonsClassName}>
-            <button className="btn" onClick={this.toggleButtons}><img className="sectionEditIcon toggleButton" alt="" src={process.env.PUBLIC_URL + '/icons/navbar-arrow-sections.svg'}></img></button>
-            <button className="btn" onClick={this.openAddGameWindow}><img className="sectionEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-add-section.svg'}></img></button>
-            <button className="btn" onClick={this.doOnEdit}><img className="sectionEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-section.svg'}></img></button>
-            <button className="btn" onClick={this.openModalWarningWindow}><img className="sectionEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-section.svg'}></img></button>
+            <button className="btn" onClick={this.toggleButtons}><img className="sectionEditIcon toggleButton" alt="" src={process.env.PUBLIC_URL + '/icons/navbar-arrow-sections.svg'}/></button>
+            <button className="btn" onClick={this.openAddGameWindow}><img className="sectionEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-add-section.svg'}/></button>
+            <button className="btn" onClick={this.doOnEdit}><img className="sectionEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-section.svg'}/></button>
+            <button className="btn" onClick={this.openModalWarningWindow}><img className="sectionEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-section.svg'}/></button>
             {positionPicker}
           </div>
         </div>
@@ -213,10 +219,15 @@ class UserSection extends React.Component {
 
     const editForm = (
         <div className="editSectionDiv">
-          <input className="form-control editSectionInput" type="text" placeholder="Enter new name" value={this.state.sectionInputValue} onChange={this.sectionInputValueChange}></input>
-          <button className="btn btn-dark" onClick={this.doOnSubmit}>OK</button>
-          <button className="btn" onClick={this.doOnCancel}>Cancel</button>
+          <textarea
+              ref={node => {
+                this.linkToTextarea = node;
+              }} placeholder="Enter Section Name" className="form-control editSectionInput" rows="1" value={this.state.sectionInputValue} onChange={this.sectionInputValueChange}/>
           <Colors sectionId={this.props.id} color={this.props.color}/>
+          <div className="sectionEditButtons">
+            <button className="btn btn-dark" onClick={this.doOnSubmit}>OK</button>
+            <button className="btn" onClick={this.doOnCancel}>Cancel</button>
+          </div>
         </div>
     );
 
