@@ -7,8 +7,8 @@
 }
 
 .errorText {
-  color: #000000;
-  margin-top: 10px;
+  color: #dc3545;
+  margin: 10px 0;
 }
 
 .loginLabel {

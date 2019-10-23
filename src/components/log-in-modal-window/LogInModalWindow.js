@@ -39,7 +39,7 @@ class LogInModalWindow extends React.Component {
     }).catch(error => {
       console.log(error.message);
       this.setState({
-        errorText: error.message
+        errorText: error.message + "."
       });
     });
   }

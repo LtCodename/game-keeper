@@ -19,7 +19,7 @@ class AddListModalWindow extends React.Component {
       nameInputValue: event.target.value,
       warningMode: false
     });
-  }
+  };
 
   onProceed = () => {
     if (this.state.nameInputValue === ``) {
@@ -32,7 +32,7 @@ class AddListModalWindow extends React.Component {
     const newList = {
       id: `id${new Date().getTime()}`,
       name: this.state.nameInputValue
-    }
+    };
 
     const copy = [...this.props.userLists, newList];
 
@@ -44,12 +44,12 @@ class AddListModalWindow extends React.Component {
     });
 
     $("#addListWindow").modal('hide');
-  }
+  };
 
   render() {
 
     const listName = (
-      <textarea placeholder="Enter List Name" className="form-control" id="listName" rows="1" value={this.state.nameInputValue} onChange={this.nameInputValueChange}></textarea>
+      <textarea placeholder="Enter List Name" className="form-control" id="listName" rows="1" value={this.state.nameInputValue} onChange={this.nameInputValueChange}/>
     );
 
     const buttonsWrapper = (

@@ -2,6 +2,10 @@
   padding-left: 18px;
 }
 
+.modal-header {
+  padding-bottom: 10px;
+}
+
 .signupInput {
   margin-right: 10px;
 }
@@ -10,9 +14,9 @@
   margin: 10px 10px 0 0;
 }
 
-.errorText {
-  color: #000000;
-  margin-top: 10px;
+.signupErrorText {
+  color: #dc3545;
+  margin: 10px 0;
 }
 
 .policyButton {

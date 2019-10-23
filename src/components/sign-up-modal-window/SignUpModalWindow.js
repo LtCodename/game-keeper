@@ -10,7 +10,12 @@ class SignUpModalWindow extends React.Component {
 
     this.state = {
       emailInputValue: "",
+      confirmEmailInputValue: "",
+      confirmEmailError: false,
+      confirmPasswordError: false,
+      confirmErrorMessage: "",
       passwordInputValue: "",
+      confirmPasswordInputValue: "",
       nameInputValue: "",
       errorText: ""
     };
@@ -43,14 +48,49 @@ class SignUpModalWindow extends React.Component {
     });
   }
 
+  confirmPasswordValueChange = (event) => {
+    this.setState({
+      confirmPasswordInputValue: event.target.value
+    });
+  }
+
   emailValueChange = (event) => {
     this.setState({
       emailInputValue: event.target.value
     });
   }
 
+  confirmEmailValueChange = (event) => {
+    this.setState({
+      confirmEmailInputValue: event.target.value
+    });
+  }
+
   createUser = (event) => {
     event.preventDefault();
+
+    this.setState({
+      confirmPasswordError: false,
+      confirmEmailError: false,
+      confirmErrorMessage: ""
+    });
+
+    if (this.state.emailInputValue !== this.state.confirmEmailInputValue) {
+      this.setState({
+        confirmEmailError: true,
+        confirmErrorMessage: "Please enter equal email addresses."
+      });
+      return;
+    }
+
+    if (this.state.passwordInputValue !== this.state.confirmPasswordInputValue) {
+      this.setState({
+        confirmPasswordError: true,
+        confirmErrorMessage: "Please enter equal passwords."
+      });
+      return;
+    }
+
     if (!this.state.emailInputValue || !this.state.passwordInputValue) {
       return;
     }
@@ -71,19 +111,25 @@ class SignUpModalWindow extends React.Component {
     }).then(() => {
         this.setState({
           emailInputValue: "",
+          confirmEmailInputValue: "",
           passwordInputValue: "",
+          confirmPasswordInputValue: "",
           nameInputValue: ""
         });
         this.props.close();
     }).catch(error => {
       console.log(error.message);
       this.setState({
-        errorText: error.message
+        errorText: error.message + "."
       });
     });
   };
 
   render() {
+    const confirmErrorDisplay = (
+      <p className="signupErrorText">{this.state.confirmErrorMessage}</p>
+    );
+
     return (
       <div className="modal fade" id="signUpWindow" tabIndex="-1" role="dialog">
         <div className="modal-dialog" role="document">
@@ -93,14 +139,27 @@ class SignUpModalWindow extends React.Component {
             </div>
             <div className="modalBody">
               <form id="signupForm" onSubmit={this.createUser}>
+                {/* ENTER EMAIL */}
                 <div className="inputField">
                   <label className="signUpLabel" htmlFor="signupEmail">Email address*</label>
                   <input className="form-control signupInput" autoComplete="username email" placeholder="Enter email" type="email" id="signupEmail" value={this.state.emailInputValue} onChange={this.emailValueChange} required></input>
                 </div>
+                {/* CONFIRM EMAIL */}
+                <div className="inputField">
+                  <label className="signUpLabel" htmlFor="confirmEmail">Confirm Email*</label>
+                  <input className="form-control signupInput" autoComplete="username email" placeholder="Confirm email" type="email" id="confirmEmail" value={this.state.confirmEmailInputValue} onChange={this.confirmEmailValueChange} required></input>
+                </div>
+                {/* ENTER PASSWORD */}
                 <div className="inputField">
                   <label className="signUpLabel" htmlFor="signupPassword">Choose password*</label>
                   <input className="form-control signupInput" autoComplete="current-password" placeholder="Enter password" type="password" id="signupPassword" value={this.state.passwordInputValue} onChange={this.passwordValueChange} required></input>
                 </div>
+                {/* CONFIRM PASSWORD */}
+                <div className="inputField">
+                  <label className="signUpLabel" htmlFor="confirmPassword">Confirm password*</label>
+                  <input className="form-control signupInput" autoComplete="current-password" placeholder="Confirm password" type="password" id="confirmPassword" value={this.state.confirmPasswordInputValue} onChange={this.confirmPasswordValueChange} required></input>
+                </div>
+                {/* ENTER DISPLAY NAME */}
                 <div className="inputField">
                   <label className="signUpLabel" htmlFor="signupDisplayName">Display Name*</label>
                   <input className="form-control signupInput" placeholder="Enter name" type="text" id="signupDisplayName" value={this.state.nameInputValue} onChange={this.nameValueChange} required></input>
@@ -110,7 +169,8 @@ class SignUpModalWindow extends React.Component {
               </form>
               <p className="requiredText">Fields marked with * are required.</p>
               <NavLink to="/privacy"><button className="btn policyButton" onClick={this.onPolicy}>Privacy Policy</button></NavLink>
-              <p className="errorText">{this.state.errorText}</p>
+              <p className="signupErrorText">{this.state.errorText}</p>
+              {(this.state.confirmEmailError || this.state.confirmPasswordError) ? confirmErrorDisplay : ""}
             </div>
           </div>
         </div>
