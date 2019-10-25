@@ -105,6 +105,8 @@ class App extends React.Component {
       if (user !== null) {
         user.getIdTokenResult().then(idTokenResult => {
           user.admin = idTokenResult.claims.admin;
+          console.log("User data:");
+          console.log(user);
           this.props.checkUserPresence(user);
           setTimeout(() => {
             this.setState({
@@ -126,7 +128,8 @@ class App extends React.Component {
     firebase.firestore().collection('users').doc(uid).onSnapshot(
       doc => {
         if (doc.exists) {
-           console.log("Document data:", doc.data());
+           console.log("User collections data:", doc.data());
+           console.log("User collections data:", doc.data());
            const allUserData = doc.data() || {};
            this.props.setListsToStore(allUserData.lists || []);
            this.props.setSectionsToStore(allUserData.sections || []);

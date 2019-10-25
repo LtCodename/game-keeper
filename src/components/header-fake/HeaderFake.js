@@ -14,6 +14,6 @@ const HeaderFake = () => {
       </div>
     </div>
   );
-}
+};
 
 export default HeaderFake;

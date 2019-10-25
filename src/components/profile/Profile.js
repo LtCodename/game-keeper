@@ -2,6 +2,7 @@ import React from 'react';
 import './Profile.css';
 import { connect } from 'react-redux'
 import { NavLink, Redirect } from 'react-router-dom';
+
 declare var firebase;
 
 class Profile extends React.Component {
@@ -35,6 +36,10 @@ class Profile extends React.Component {
       nameInputValue: event.target.value
     });
   };
+
+  /*avatarValueChange = (event) => {
+    console.log(event.target.files);
+  };*/
 
   onChangeName = () => {
     firebase.auth().currentUser.updateProfile({
@@ -155,17 +160,38 @@ class Profile extends React.Component {
     if (this.state.nameInputValue.includes(" ")) {
       let words = this.state.nameInputValue.split(" ");
       avatarInitials = words[0][0] + words[1][0];
-      avatarInitials.toUpperCase();
     }else {
       avatarInitials = this.state.nameInputValue.slice(0, 2);
+    }
+
+    if (avatarInitials) {
       avatarInitials.toUpperCase();
     }
+
+    if (avatarInitials.length > 2) {
+        avatarInitials = avatarInitials.slice(0, 2);
+    }
+
+      if (avatarInitials.length === 0) {
+          avatarInitials = "GK";
+      }
+
+      /*const uploadAvatar = (
+          <div className="uploadAvatarWrapper">
+              <input className="form-control" type="file" name="avatar" accept="image/png, image/jpeg" onChange={this.avatarValueChange}/>
+          </div>
+      );*/
 
     const table = (
       <div className="tableWrapper">
         <div className="profileTopWrapper">
           <h1 className="profileHeader">Account Details</h1>
-          <div className="avatar">{avatarInitials}</div>
+          <div>
+              <div className="avatar">
+                  <div className="avatarText">{avatarInitials}</div>
+              </div>
+
+          </div>
         </div>
         <table className="table">
           <tbody>
@@ -173,6 +199,10 @@ class Profile extends React.Component {
               <th scope="row">Display name</th>
               <td className="makeItFlex">{changeNameForm}{changeNameButton}</td>
             </tr>
+            {/*<tr>
+                <th scope="row">Avatar</th>
+                <td className="makeItFlex">{uploadAvatar}</td>
+            </tr>*/}
             <tr>
               <th scope="row">Email</th>
               <td className="makeItFlex">{userEmail} {userVerified ? verifiedText : verifyButton}</td>
