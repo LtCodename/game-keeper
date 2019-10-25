@@ -41,16 +41,16 @@ class App extends React.Component {
   }
 
   fetchEverything = () => {
-    this.fecthUser();
-    this.fecthDevelopers();
-    this.fecthColors();
-    this.fecthSuggested();
-    this.fecthPlatforms();
-  }
+    this.fetchUser();
+    this.fetchDevelopers();
+    this.fetchColors();
+    this.fetchSuggested();
+    this.fetchPlatforms();
+  };
 
-  fecthDevelopers() {
+  fetchDevelopers() {
     firebase.firestore().collection('developers').orderBy("name").onSnapshot(snapshot => {
-      this.props.fecthDevelopers(snapshot);
+      this.props.fetchDevelopers(snapshot);
       setTimeout(() => {
         this.setState({
           developersDataLoaded: true
@@ -61,9 +61,9 @@ class App extends React.Component {
     });
   }
 
-  fecthColors() {
+  fetchColors() {
     firebase.firestore().collection('availableColors').onSnapshot(snapshot => {
-      this.props.fecthColors(snapshot);
+      this.props.fetchColors(snapshot);
       setTimeout(() => {
         this.setState({
           colorsDataLoaded: true
@@ -74,9 +74,9 @@ class App extends React.Component {
     });
   }
 
-  fecthSuggested() {
+  fetchSuggested() {
     firebase.firestore().collection('suggestedDevelopers').orderBy("name").onSnapshot(snapshot => {
-      this.props.fecthSuggestedDevelopers(snapshot);
+      this.props.fetchSuggestedDevelopers(snapshot);
       setTimeout(() => {
         this.setState({
           suggestedDataLoaded: true
@@ -87,9 +87,9 @@ class App extends React.Component {
     });
   }
 
-  fecthPlatforms() {
+  fetchPlatforms() {
     firebase.firestore().collection('platforms').get().then(snapshot => {
-      this.props.fecthPlatforms(snapshot);
+      this.props.fetchPlatforms(snapshot);
       setTimeout(() => {
         this.setState({
           platformsDataLoaded: true
@@ -100,7 +100,7 @@ class App extends React.Component {
     });
   }
 
-  fecthUser() {
+  fetchUser() {
     firebase.auth().onAuthStateChanged(user => {
       if (user !== null) {
         user.getIdTokenResult().then(idTokenResult => {
@@ -114,7 +114,7 @@ class App extends React.Component {
             });
           }, 0);
         });
-        this.fecthData(user.uid);
+        this.fetchData(user.uid);
       }else {
         this.props.checkUserPresence(user);
         this.setState({
@@ -124,7 +124,7 @@ class App extends React.Component {
     })
   }
 
-  fecthData = (uid) => {
+  fetchData = (uid) => {
     firebase.firestore().collection('users').doc(uid).onSnapshot(
       doc => {
         if (doc.exists) {
@@ -146,7 +146,7 @@ class App extends React.Component {
         console.log(error.message);
       }
     );
-  }
+  };
 
   render() {
     const dashboard = (
@@ -181,7 +181,7 @@ class App extends React.Component {
         <Route path="/suggested" component={Suggested} />
         <Route path="/privacy" component={Privacy} />
       </div>
-    )
+    );
 
     const content = (
       <div className="appWrapper">
@@ -229,16 +229,16 @@ const appDispatchToProps = (dispatch) => {
     checkUserPresence: (user) => {
       dispatch({ type: userReducer.actions.USER_CHECK, user: user });
     },
-    fecthDevelopers: (snapshot) => {
+    fetchevelopers: (snapshot) => {
       dispatch({ type: developersActions.actions.DEVELOPERS_FETCH, snapshot: snapshot });
     },
-    fecthColors: (snapshot) => {
+    fetchColors: (snapshot) => {
       dispatch({ type: colorsActions.actions.COLORS_FETCH, snapshot: snapshot });
     },
-    fecthSuggestedDevelopers: (snapshot) => {
+    fetchSuggestedDevelopers: (snapshot) => {
       dispatch({ type: suggestedReducer.actions.SUGGESTED_FETCH, snapshot: snapshot });
     },
-    fecthPlatforms: (snapshot) => {
+    fetchPlatforms: (snapshot) => {
       dispatch({ type: platformsActions.actions.PLATFORMS_FETCH, snapshot: snapshot });
     },
     setListsToStore: (lists) => {
