@@ -229,7 +229,7 @@ const appDispatchToProps = (dispatch) => {
     checkUserPresence: (user) => {
       dispatch({ type: userReducer.actions.USER_CHECK, user: user });
     },
-    fetchevelopers: (snapshot) => {
+    fetchDevelopers: (snapshot) => {
       dispatch({ type: developersActions.actions.DEVELOPERS_FETCH, snapshot: snapshot });
     },
     fetchColors: (snapshot) => {
