@@ -22,7 +22,7 @@ class UserBlock extends React.Component {
     this.setState({
       showModalWindow: false
     })
-  }
+  };
 
   openModalWindow = () => {
     this.setState({
@@ -31,11 +31,11 @@ class UserBlock extends React.Component {
       $("#blockModalWindow").modal('show');
       $("#blockModalWindow").on('hidden.bs.modal', this.resetState);
     });
-  }
+  };
 
   closeModal = () => {
     $("#blockModalWindow").modal('hide');
-  }
+  };
 
   render() {
     let className = 'gameBlock gameBlock_';
@@ -49,7 +49,7 @@ class UserBlock extends React.Component {
       this.props.gameData.platforms.map((elem, index) => {
         const path = `${elem.iconName}`;
         let fullPath = '/icons/' + path + '.svg';
-        return (<img key={index} className="platformIcon" alt="" src={process.env.PUBLIC_URL + fullPath}></img>);
+        return (<img key={index} className="platformIcon" alt="" src={process.env.PUBLIC_URL + fullPath}/>);
       })) : [];
 
     const platfotmsOnBlock = (
@@ -58,9 +58,12 @@ class UserBlock extends React.Component {
       </div>
     );
 
-    const dateToShow = (this.props.gameData.releaseDate ? <span className="releaseDate">{moment(this.props.gameData.releaseDate).format('DD-MM-YYYY')}</span> : "");
-    //const shortenedDate = this.props.gameData.releaseDate.slice(0, 4);
-    //const dateToShow = (this.props.gameData.releaseDate ? <span className="releaseDate">{shortenedDate}</span> : "");
+    const dateToShow = (
+        this.props.gameData.releaseDate ? <span
+            className="releaseDate">
+          {moment(this.props.gameData.releaseDate).format('DD-MM-YYYY')}
+        </span> : ""
+    );
 
     const modalWindow = (
       <BlockModalWindow

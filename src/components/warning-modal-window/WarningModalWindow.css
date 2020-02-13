@@ -2,14 +2,22 @@
   border-bottom: 0;
 }
 
+.modal-title {
+  color: var(--first-color);
+  font-size: 31px;
+  font-weight: 700;
+}
+
 .modal-footer {
   border-top: 0;
 }
 
 .message {
-  color: #000000;
   margin: 0;
   padding: 0;
+  font-weight: 500;
+  font-size: 23px;
+  color: var(--first-color);
 }
 
 .messageWrapper {
@@ -18,5 +26,5 @@
 }
 
 .mainContent {
-  background-color: inherit;
+  background-color: var(--third-color);
 }
