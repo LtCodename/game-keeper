@@ -2,28 +2,12 @@
   background-color: var(--color-alice-blue);
 }
 
-.color_wistful {
-  background-color: var(--color-wistful);
-}
-
-.color_vivid-tangerine {
-  background-color: var(--color-vivid-tangerine);
-}
-
 .color_madang {
   background-color: var(--color-madang);
 }
 
-.color_emerald {
-  background-color: var(--color-emerald);
-}
-
 .color_witch-haze {
   background-color: var(--color-witch-haze);
-}
-
-.color_shakespeare {
-  background-color: var(--color-shakespeare);
 }
 
 .color_malibu {
@@ -34,24 +18,8 @@
   background-color: var(--color-blue-chalk);
 }
 
-.color_light-wisteria {
-  background-color: var(--color-light-wisteria);
-}
-
-.color_wax-flower {
-  background-color: var(--color-wax-flower);
-}
-
-.color_jade {
-  background-color: var(--color-jade);
-}
-
 .color_orchid-white {
   background-color: var(--color-orchid-white);
-}
-
-.color_supernova {
-  background-color: var(--color-supernova);
 }
 
 .color_cape-honey {

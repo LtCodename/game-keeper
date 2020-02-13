@@ -61,28 +61,12 @@
   background-color: var(--color-alice-blue);
 }
 
-.gameBlock_wistful {
-  background-color: var(--color-wistful);
-}
-
-.gameBlock_vivid-tangerine {
-  background-color: var(--color-vivid-tangerine);
-}
-
 .gameBlock_madang {
   background-color: var(--color-madang);
 }
 
-.gameBlock_emerald {
-  background-color: var(--color-emerald);
-}
-
 .gameBlock_witch-haze {
   background-color: var(--color-witch-haze);
-}
-
-.gameBlock_shakespeare {
-  background-color: var(--color-shakespeare);
 }
 
 .gameBlock_malibu {
@@ -93,24 +77,8 @@
   background-color: var(--color-blue-chalk);
 }
 
-.gameBlock_light-wisteria {
-  background-color: var(--color-light-wisteria);
-}
-
-.gameBlock_wax-flower {
-  background-color: var(--color-wax-flower);
-}
-
-.gameBlock_jade {
-  background-color: var(--color-jade);
-}
-
 .gameBlock_orchid-white {
   background-color: var(--color-orchid-white);
-}
-
-.gameBlock_supernova {
-  background-color: var(--color-supernova);
 }
 
 .gameBlock_cape-honey {

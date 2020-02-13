@@ -18,5 +18,5 @@
 }
 
 .mainContent {
-  background-color: var(--color-wax-flower)
+  background-color: inherit;
 }
