@@ -23,13 +23,13 @@ class Nav extends React.Component {
       $("#addListWindow").modal('show');
       $("#addListWindow").on('hidden.bs.modal', this.resetState);
     });
-  }
+  };
 
   resetState = () => {
     this.setState({
       showAddListWindow: false
     })
-  }
+  };
 
   componentWillUnmount() {
     $("#addListWindow").unbind('hidden.bs.modal');
@@ -40,7 +40,7 @@ class Nav extends React.Component {
     this.setState({
       navbarVisible: false
     });
-  }
+  };
 
   toggleNavbar = () => {
     if (!this.state.navbarVisible) {
@@ -52,7 +52,7 @@ class Nav extends React.Component {
         navbarVisible: false
       });
     }
-  }
+  };
 
   render() {
     let buttonsToRender = this.props.userLists.map((elem, index) => {
@@ -65,7 +65,7 @@ class Nav extends React.Component {
 
       //return <NavLink key={elem.id} to={"/list/" + elem.id}><button className={className} type="button" key={elem.id} onClick={() => this.switchBetweenTabs(index)}>{elem.name}</button></NavLink>;
       return <button className={className} type="button" key={elem.id} onClick={() => this.switchBetweenTabs(index)}>{elem.name}</button>;
-    })
+    });
 
     const addListButton = (
       <div>
@@ -74,7 +74,7 @@ class Nav extends React.Component {
     );
 
     const hideButton = (
-      <button className="btn hideNavButton" onClick={this.toggleNavbar}><img className="hideArrow" alt="" src={process.env.PUBLIC_URL + '/icons/navbar-arrow.svg'}></img></button>
+      <button className="btn hideNavButton" onClick={this.toggleNavbar}><img className="hideArrow" alt="" src={process.env.PUBLIC_URL + '/icons/navbar-arrow.svg'}/></button>
     );
 
     let navClassName = "navBar";

@@ -17,16 +17,18 @@
 .gameName {
   min-height: 48px;
   display: block;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--first-color);
 }
 
 .releaseDate {
   line-height: var(--footer-content-height);
   padding: 0 2px;
   margin-right: 5px;
-  font-size: 18px;
-  /* font-size: 25px;
+  font-size: 17px;
+  font-weight: 500;
   color: var(--first-color);
-  font-family: var(--titles-font); */
 }
 
 .gameBlockContent {

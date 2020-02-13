@@ -19,13 +19,13 @@ class Footer extends React.Component {
       $("#versionAlert").modal('show');
       $("#versionAlert").on('hidden.bs.modal', this.resetState);
     });
-  }
+  };
 
   resetState = () => {
     this.setState({
       showAlertWindow: false
     })
-  }
+  };
 
   componentWillUnmount() {
     $("#versionAlert").unbind('hidden.bs.modal');

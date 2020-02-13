@@ -3,6 +3,10 @@
   transition: all 1s;
 }
 
+.sectionName {
+  font-weight: 700;
+}
+
 .sectionActionButtonsVisible .sectionEditIcon.toggleButton {
   transform: rotate(-90deg);
 }
@@ -53,7 +57,7 @@
   border: none;
   color: var(--third-color) !important;
   font-size: 40px;
-  font-family: var(--titles-font);
+  font-family: var(--main-font);
   padding: 0 0 0 10px;
   resize: none;
 }

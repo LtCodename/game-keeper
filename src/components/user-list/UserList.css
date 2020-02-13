@@ -52,7 +52,7 @@
   padding: 0 0 0 10px;
   resize: none;
   font-size: 55px;
-  font-family: var(--titles-font);
+  font-family: var(--main-font);
 }
 
 .editListInput:focus {
@@ -72,6 +72,7 @@
   overflow-x: hidden;
   overflow-y: hidden;
   flex: 1;
+  font-weight: 800;
 }
 
 .addSectionInput {
@@ -79,7 +80,7 @@
   border: none;
   color: var(--third-color) !important;
   font-size: 40px;
-  font-family: var(--titles-font);
+  font-family: var(--main-font);
   padding: 0 0 0 10px;
   resize: none;
 }

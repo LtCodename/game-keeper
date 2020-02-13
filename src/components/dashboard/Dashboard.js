@@ -27,7 +27,7 @@ class Dashboard extends React.Component {
       $("#signUpWindow").modal('show');
       $("#signUpWindow").on('hidden.bs.modal', this.resetState);
     });
-  }
+  };
 
   onLogInClick = () => {
     this.setState({
@@ -36,15 +36,15 @@ class Dashboard extends React.Component {
       $("#logInWindow").modal('show');
       $("#logInWindow").on('hidden.bs.modal', this.resetState);
     });
-  }
+  };
 
   closeSignUpModal = () => {
     $("#signUpWindow").modal('hide');
-  }
+  };
 
   closeLogInModal = () => {
     $("#logInWindow").modal('hide');
-  }
+  };
 
   openAddListWindow = () => {
     this.setState({
@@ -53,7 +53,7 @@ class Dashboard extends React.Component {
       $("#addListWindow").modal('show');
       $("#addListWindow").on('hidden.bs.modal', this.resetState);
     });
-  }
+  };
 
   resetState = () => {
     this.setState({
@@ -61,7 +61,7 @@ class Dashboard extends React.Component {
       showSignUpWindow: false,
       showLogInWindow: false
     })
-  }
+  };
 
   componentWillUnmount() {
     $("#addListWindow").unbind('hidden.bs.modal');
@@ -82,7 +82,7 @@ class Dashboard extends React.Component {
     }
 
     const addListButton = (
-      <button className={btnAddListClassName} onClick={this.openAddListWindow}>ADD LIST</button>
+      <button className={btnAddListClassName} onClick={this.openAddListWindow}>Add List</button>
     );
 
     const modalAddListWindow = (
@@ -118,8 +118,22 @@ class Dashboard extends React.Component {
     const authPanel = (
       <div>
         <div className="authButtonsMatrix">
-          <button className="btn authButton" onClick={this.onSignUpClick}>Sign Up<img className="authButtonIcon" alt="" src={process.env.PUBLIC_URL + '/icons/auth-signup-blue.svg'}></img></button>
-          <button className="btn authButton" onClick={this.onLogInClick}>Log In<img className="authButtonIcon" alt="" src={process.env.PUBLIC_URL + '/icons/auth-login-blue.svg'}></img></button>
+          <button
+              className="btn authButton"
+              onClick={this.onSignUpClick}>
+            Sign Up
+            <img
+              className="authButtonIcon"
+              alt="" src={process.env.PUBLIC_URL + '/icons/auth-signup-blue.svg'}/>
+          </button>
+          <button
+              className="btn authButton"
+              onClick={this.onLogInClick}>
+            Log In
+            <img
+                className="authButtonIcon"
+                alt="" src={process.env.PUBLIC_URL + '/icons/auth-login-blue.svg'}/>
+          </button>
         </div>
       </div>
     );

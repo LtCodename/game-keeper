@@ -18,7 +18,7 @@
   color: var(--first-color);
   margin: 0 5px 5px 0;
   text-transform: uppercase;
-  font-family: var(--titles-font);
+  font-family: var(--main-font);
   font-size: 25px;
   padding: 0 5px;
 }
