@@ -1,8 +1,8 @@
 import React from 'react';
 import './AddListModalWindow.css';
 import { connect } from 'react-redux'
+import fire from "../../Firebase";
 declare var $;
-declare var firebase;
 
 class AddListModalWindow extends React.Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class AddListModalWindow extends React.Component {
 
     const copy = [...this.props.userLists, newList];
 
-    firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+    fire.firestore().collection('users').doc(this.props.userData.uid).update({
       lists: copy
     }).then((data) => {
     }).catch(error => {

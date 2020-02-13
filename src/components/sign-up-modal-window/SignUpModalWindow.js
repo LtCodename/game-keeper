@@ -1,8 +1,8 @@
 import React from 'react';
 import './SignUpModalWindow.css';
 import { NavLink } from 'react-router-dom';
+import fire from "../../Firebase";
 declare var $;
-declare var firebase;
 
 class SignUpModalWindow extends React.Component {
   constructor(props) {
@@ -95,12 +95,12 @@ class SignUpModalWindow extends React.Component {
       return;
     }
 
-    firebase.auth().createUserWithEmailAndPassword(this.state.emailInputValue, this.state.passwordInputValue).then(credential => {
+    fire.auth().createUserWithEmailAndPassword(this.state.emailInputValue, this.state.passwordInputValue).then(credential => {
       credential.user.updateProfile({
         displayName: this.state.nameInputValue
       });
 
-      return firebase.firestore().collection('users').doc(credential.user.uid).set({
+      return fire.firestore().collection('users').doc(credential.user.uid).set({
         lists: [{
           id: `id${new Date().getTime()}`,
           name: "My List"

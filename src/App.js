@@ -19,7 +19,7 @@ import userBlocksReducer from './redux/reducers/userBlocksReducer';
 import userListsReducer from './redux/reducers/userListsReducer';
 import userReducer from './redux/reducers/userReducer';
 import userSectionsReducer from './redux/reducers/userSectionsReducer';
-declare var firebase;
+import fire from "./Firebase";
 
 class App extends React.Component {
   constructor(props) {
@@ -49,7 +49,7 @@ class App extends React.Component {
   };
 
   fetchDevelopers() {
-    firebase.firestore().collection('developers').orderBy("name").onSnapshot(snapshot => {
+    fire.firestore().collection('developers').orderBy("name").onSnapshot(snapshot => {
       this.props.fetchDevelopers(snapshot);
       setTimeout(() => {
         this.setState({
@@ -62,7 +62,7 @@ class App extends React.Component {
   }
 
   fetchColors() {
-    firebase.firestore().collection('availableColors').onSnapshot(snapshot => {
+    fire.firestore().collection('availableColors').onSnapshot(snapshot => {
       this.props.fetchColors(snapshot);
       setTimeout(() => {
         this.setState({
@@ -75,7 +75,7 @@ class App extends React.Component {
   }
 
   fetchSuggested() {
-    firebase.firestore().collection('suggestedDevelopers').orderBy("name").onSnapshot(snapshot => {
+    fire.firestore().collection('suggestedDevelopers').orderBy("name").onSnapshot(snapshot => {
       this.props.fetchSuggestedDevelopers(snapshot);
       setTimeout(() => {
         this.setState({
@@ -88,7 +88,7 @@ class App extends React.Component {
   }
 
   fetchPlatforms() {
-    firebase.firestore().collection('platforms').get().then(snapshot => {
+    fire.firestore().collection('platforms').get().then(snapshot => {
       this.props.fetchPlatforms(snapshot);
       setTimeout(() => {
         this.setState({
@@ -101,7 +101,7 @@ class App extends React.Component {
   }
 
   fetchUser() {
-    firebase.auth().onAuthStateChanged(user => {
+    fire.auth().onAuthStateChanged(user => {
       if (user !== null) {
         user.getIdTokenResult().then(idTokenResult => {
           user.admin = idTokenResult.claims.admin;
@@ -125,7 +125,7 @@ class App extends React.Component {
   }
 
   fetchData = (uid) => {
-    firebase.firestore().collection('users').doc(uid).onSnapshot(
+    fire.firestore().collection('users').doc(uid).onSnapshot(
       doc => {
         if (doc.exists) {
            console.log("User collections data:", doc.data());

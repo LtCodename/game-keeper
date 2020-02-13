@@ -3,7 +3,7 @@ import './Developers.css';
 import { connect } from 'react-redux'
 import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
 import EditNameModalWindow from '../edit-name-modal-window/EditNameModalWindow.js';
-declare var firebase;
+import fire from "../../Firebase";
 declare var $;
 
 class Developers extends React.Component {
@@ -20,11 +20,11 @@ class Developers extends React.Component {
   }
 
   deleteItem = () => {
-    firebase.firestore().collection('developers').doc(this.state.idToDelete).delete();
+    fire.firestore().collection('developers').doc(this.state.idToDelete).delete();
     this.setState({
       idToDelete: ""
     });
-  }
+  };
 
   onDeleteItem = (id) => {
     this.setState({
@@ -36,14 +36,14 @@ class Developers extends React.Component {
   };
 
   editItem = (newName, id) => {
-    firebase.firestore().collection('developers').doc(id).update({
+    fire.firestore().collection('developers').doc(id).update({
       name: newName
     }).then(() => {
       this.resetState();
     }).catch(error => {
       console.log(error.message);
     });
-  }
+  };
 
   onEditItem = (id, oldName) => {
     this.setState({

@@ -5,8 +5,8 @@ import './UserList.css';
 import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
 import indexActions from '../../redux/reducers/selectedListIndexReducer';
 import { connect } from 'react-redux'
+import fire from "../../Firebase";
 declare var $;
-declare var firebase;
 
 class UserList extends React.Component {
   constructor(props) {
@@ -41,7 +41,7 @@ class UserList extends React.Component {
 
     const allSections = [...this.props.userSections, newSection];
 
-    firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+    fire.firestore().collection('users').doc(this.props.userData.uid).update({
       sections: allSections
     }).then((data) => {
     }).catch(error => {
@@ -62,7 +62,7 @@ class UserList extends React.Component {
     copy.splice(event.target.value, 0, spliced[0]);
 
     this.props.changeListIndex(event.target.value, this.props.userLists.length);
-    firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+    fire.firestore().collection('users').doc(this.props.userData.uid).update({
       lists: copy
     }).then((data) => {
     }).catch(error => {
@@ -147,7 +147,7 @@ class UserList extends React.Component {
       name: this.state.listNameInputValue
     };
 
-    firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+    fire.firestore().collection('users').doc(this.props.userData.uid).update({
       lists: copy
     }).then((data) => {
       this.setState({
@@ -195,7 +195,7 @@ class UserList extends React.Component {
     copy.splice(this.props.listIndex, 1);
 
     this.props.changeListIndexOnDelete(this.props.userLists.length);
-    firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+    fire.firestore().collection('users').doc(this.props.userData.uid).update({
       lists: copy,
       sections: sectionCopy,
       blocks: blocksCopy

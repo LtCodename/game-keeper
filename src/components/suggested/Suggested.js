@@ -3,7 +3,7 @@ import './Suggested.css';
 import { connect } from 'react-redux'
 import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
 import EditNameModalWindow from '../edit-name-modal-window/EditNameModalWindow.js';
-declare var firebase;
+import fire from "../../Firebase";
 declare var $;
 
 class Suggested extends React.Component {
@@ -38,17 +38,17 @@ class Suggested extends React.Component {
         this.openEditWindow();
       }
     );
-  }
+  };
 
   editItem = (newName, id) => {
-    firebase.firestore().collection('suggestedDevelopers').doc(id).update({
+    fire.firestore().collection('suggestedDevelopers').doc(id).update({
       name: newName
     }).then(() => {
       this.resetState();
     }).catch(error => {
       console.log(error.message);
     });
-  }
+  };
 
   openModalDeleteWindow = () => {
     this.setState({
@@ -57,7 +57,7 @@ class Suggested extends React.Component {
       $("#modalWarning").modal('show');
       $("#modalWarning").on('hidden.bs.modal', this.resetState);
     });
-  }
+  };
 
   onDeleteItem = (id) => {
     this.setState({
@@ -66,15 +66,15 @@ class Suggested extends React.Component {
         this.openModalDeleteWindow();
       }
     );
-  }
+  };
 
   deleteItem = () => {
-    firebase.firestore().collection('suggestedDevelopers').doc(this.state.idToDelete).delete().then(() => {
+    fire.firestore().collection('suggestedDevelopers').doc(this.state.idToDelete).delete().then(() => {
       this.setState({
         idToDelete: ""
       });
     });
-  }
+  };
 
   componentWillUnmount() {
     $("#modalWarning").unbind('hidden.bs.modal');
@@ -108,14 +108,14 @@ class Suggested extends React.Component {
         this.openModalAddWindow();
       }
     );
-  }
+  };
 
   addItem = () => {
-    firebase.firestore().collection('developers').add({
+    fire.firestore().collection('developers').add({
       name: this.state.nameToAdd
     }).then(() => {
-      firebase.firestore().collection('developers').get().then(snapshot => {
-        firebase.firestore().collection('suggestedDevelopers').doc(this.state.idToDelete).delete().then(() => {
+      fire.firestore().collection('developers').get().then(snapshot => {
+        fire.firestore().collection('suggestedDevelopers').doc(this.state.idToDelete).delete().then(() => {
           this.setState({
             idToDelete: "",
             nameToAdd: ""
@@ -125,7 +125,7 @@ class Suggested extends React.Component {
         console.log(error.message);
       });
     });
-  }
+  };
 
   render() {
     const developersToRender = this.props.suggestedDevelopers.map((elem, index) => {

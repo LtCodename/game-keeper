@@ -3,11 +3,11 @@ import './Header.css';
 import indexActions from '../../redux/reducers/selectedListIndexReducer';
 import { connect } from 'react-redux'
 import { NavLink, withRouter } from 'react-router-dom';
-declare var firebase;
+import fire from "../../Firebase";
 
 const Header = ({changeListIndex, history, userLists, userData}) => {
   const onLogOutClick = () => {
-    firebase.auth().signOut().then(() => {
+    fire.auth().signOut().then(() => {
     }).catch(error => {
       console.log(error.message);
     });

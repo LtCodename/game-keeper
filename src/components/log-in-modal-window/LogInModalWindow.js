@@ -1,6 +1,6 @@
 import React from 'react';
 import './LogInModalWindow.css';
-declare var firebase;
+import fire from "../../Firebase";
 
 class LogInModalWindow extends React.Component {
   constructor(props) {
@@ -23,14 +23,14 @@ class LogInModalWindow extends React.Component {
     this.setState({
       emailInputValue: event.target.value
     });
-  }
+  };
 
   loginUser = (event) => {
     event.preventDefault();
     if (!this.state.emailInputValue || !this.state.passwordInputValue) {
       return;
     }
-    firebase.auth().signInWithEmailAndPassword(this.state.emailInputValue, this.state.passwordInputValue).then(credential => {
+    fire.auth().signInWithEmailAndPassword(this.state.emailInputValue, this.state.passwordInputValue).then(credential => {
       this.setState({
         emailInputValue: "",
         passwordInputValue: ""
@@ -42,7 +42,7 @@ class LogInModalWindow extends React.Component {
         errorText: error.message + "."
       });
     });
-  }
+  };
 
   render() {
     return (

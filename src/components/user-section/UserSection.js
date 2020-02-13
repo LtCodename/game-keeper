@@ -5,8 +5,8 @@ import './UserSection.css';
 import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
 import BlockModalWindow from '../block-modal-window/BlockModalWindow.js';
 import { connect } from 'react-redux'
+import fire from "../../Firebase";
 declare var $;
-declare var firebase;
 
 class UserSection extends React.Component {
   constructor(props) {
@@ -47,7 +47,7 @@ class UserSection extends React.Component {
     let spliced = copy.splice(oldSectionPosition, 1);
     copy.splice(newSectionPosition, 0, spliced[0]);
 
-    firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+    fire.firestore().collection('users').doc(this.props.userData.uid).update({
       sections: copy
     }).then((data) => {
     }).catch(error => {
@@ -119,7 +119,7 @@ class UserSection extends React.Component {
       targetSection.name = this.state.sectionInputValue;
     }
 
-    firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+    fire.firestore().collection('users').doc(this.props.userData.uid).update({
       sections: copy
     }).then((data) => {
     }).catch(error => {
@@ -149,7 +149,7 @@ class UserSection extends React.Component {
       editMode: false
     });
 
-    firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+    fire.firestore().collection('users').doc(this.props.userData.uid).update({
       sections: copy,
       blocks: blockCopy
     }).then((data) => {

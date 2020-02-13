@@ -2,8 +2,7 @@ import React from 'react';
 import './Profile.css';
 import { connect } from 'react-redux'
 import { NavLink, Redirect } from 'react-router-dom';
-
-declare var firebase;
+import fire from "../../Firebase";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -42,7 +41,7 @@ class Profile extends React.Component {
   };*/
 
   onChangeName = () => {
-    firebase.auth().currentUser.updateProfile({
+    fire.auth().currentUser.updateProfile({
         displayName: this.state.nameInputValue
     }).then(() => {
     }, function (error) {
@@ -55,7 +54,7 @@ class Profile extends React.Component {
       url: 'https://gamekeeper.ltcodename.com'
     };
 
-    firebase.auth().currentUser.sendEmailVerification(actionCodeSettings).then(() => {
+    fire.auth().currentUser.sendEmailVerification(actionCodeSettings).then(() => {
       this.setState({
         verifyButtonText:"Email Sent"
       });
@@ -65,7 +64,7 @@ class Profile extends React.Component {
   makeAdmin = (event) => {
     event.preventDefault();
     console.log(`I'm about to make ${this.state.emailInputValue} an admin`);
-    const addAdminRole = firebase.functions().httpsCallable('addAdminRole');
+    const addAdminRole = fire.functions().httpsCallable('addAdminRole');
     addAdminRole({ email: this.state.emailInputValue }).then(result => {
       console.log(result);
     })

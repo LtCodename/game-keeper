@@ -2,8 +2,8 @@ import React from 'react';
 import './BlockModalWindow.css';
 import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
 import { connect } from 'react-redux'
+import fire from "../../Firebase";
 declare var $;
-declare var firebase;
 
 class BlockModalWindow extends React.Component {
   constructor(props) {
@@ -47,7 +47,7 @@ class BlockModalWindow extends React.Component {
 
     const targetBlockIndex = copy.findIndex((elem) => {
       return elem.id === this.props.gameData.id;
-    })
+    });
 
     if (targetBlockIndex > -1) {
       copy.splice(targetBlockIndex, 1);
@@ -55,7 +55,7 @@ class BlockModalWindow extends React.Component {
 
     this.props.closeModal();
 
-    firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+    fire.firestore().collection('users').doc(this.props.userData.uid).update({
       blocks: copy
     }).then((data) => {
     }).catch(error => {
@@ -135,10 +135,10 @@ class BlockModalWindow extends React.Component {
       return;
     }
 
-    firebase.firestore().collection('developers').add({
+    fire.firestore().collection('developers').add({
       name: this.state.developerInputValue
     }).then(() => {
-      firebase.firestore().collection('developers').get().then(snapshot => {
+      fire.firestore().collection('developers').get().then(snapshot => {
         this.setState({
           developerInputValue: ""
         });
@@ -153,10 +153,10 @@ class BlockModalWindow extends React.Component {
       return;
     }
 
-    firebase.firestore().collection('suggestedDevelopers').add({
+    fire.firestore().collection('suggestedDevelopers').add({
       name: this.state.developerSuggestInputValue
     }).then(() => {
-      firebase.firestore().collection('suggestedDevelopers').get().then(snapshot => {
+      fire.firestore().collection('suggestedDevelopers').get().then(snapshot => {
         this.setState({
           developerSuggestInputValue: ""
         });
@@ -243,7 +243,7 @@ class BlockModalWindow extends React.Component {
         sectionId: sectionId
       };
 
-      firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+      fire.firestore().collection('users').doc(this.props.userData.uid).update({
         blocks: allBlocks,
         sections: allSections,
       }).then((data) => {
@@ -264,7 +264,7 @@ class BlockModalWindow extends React.Component {
 
     const allBlocks = [...this.props.userBlocks, newBlock];
 
-    firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+    fire.firestore().collection('users').doc(this.props.userData.uid).update({
       blocks: allBlocks
     }).then((data) => {
     }).catch(error => {

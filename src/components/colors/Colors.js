@@ -1,7 +1,7 @@
 import React from 'react';
 import './Colors.css';
 import { connect } from 'react-redux'
-declare var firebase;
+import fire from "../../Firebase";
 
 class Colors extends React.Component {
   constructor(props) {
@@ -20,13 +20,13 @@ class Colors extends React.Component {
 
       let targetSection = copy.find((elem) => {
         return elem.id === this.props.sectionId;
-      })
+      });
 
       if (targetSection) {
         targetSection.color = color;
       }
 
-      firebase.firestore().collection('users').doc(this.props.userData.uid).update({
+      fire.firestore().collection('users').doc(this.props.userData.uid).update({
         sections: copy
       }).then((data) => {
       }).catch(error => {
@@ -37,7 +37,7 @@ class Colors extends React.Component {
     this.setState({
       currentColor: color
     })
-  }
+  };
 
   render() {
     let colorsToRender = this.props.colors.map((elem, index) => {
