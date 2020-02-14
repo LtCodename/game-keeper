@@ -52,7 +52,7 @@ class Colors extends React.Component {
           {(this.state.currentColor === elem.name) ? "X" : ""}
         </span>
       );
-    })
+    });
 
     return (
       <div >

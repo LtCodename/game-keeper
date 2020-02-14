@@ -218,8 +218,8 @@ class Profile extends React.Component {
             {this.props.userData.admin ? manageSuggested : null}
             {this.props.userData.admin ? adminMaker : null}
             <tr>
-              <th scope="row"></th>
-              <td></td>
+              <th scope="row"/>
+              <td/>
             </tr>
           </tbody>
         </table>

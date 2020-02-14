@@ -6,7 +6,7 @@ import './Preloader.css';
 const Preloader = () => {
   const preloader = (
     <div className="loaderWrapper">
-      <div className="loader"></div>
+      <div className="loader"/>
     </div>
   );
 
@@ -19,6 +19,6 @@ const Preloader = () => {
       <Footer/>
     </div>
   );
-}
+};
 
 export default Preloader;

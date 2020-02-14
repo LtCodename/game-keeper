@@ -7,7 +7,7 @@ const WarningModalWindow = ({message, onProceed}) => {
   const doOnProceed = () => {
     onProceed();
     $("#modalWarning").modal('hide');
-  }
+  };
 
   return (
     <div className="modal fade" id="modalWarning" tabIndex="-1" role="dialog">
@@ -27,6 +27,6 @@ const WarningModalWindow = ({message, onProceed}) => {
       </div>
     </div>
   );
-}
+};
 
 export default WarningModalWindow;

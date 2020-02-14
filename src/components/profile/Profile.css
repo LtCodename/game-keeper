@@ -36,7 +36,7 @@
 }
 
 .profileHeader {
-  color: var(--main-color);
+  color: var(--first-color);
   margin-bottom: 5px;
 }
 
@@ -69,7 +69,6 @@ th {
 .profileButtons {
   border-radius: 0;
   background-color: var(--first-color);
-  padding: 0;
   margin: 0;
   display: block;
   color: #FFFFFF;

@@ -17,7 +17,7 @@ class LogInModalWindow extends React.Component {
     this.setState({
       passwordInputValue: event.target.value
     });
-  }
+  };
 
   emailValueChange = (event) => {
     this.setState({
@@ -56,11 +56,11 @@ class LogInModalWindow extends React.Component {
               <form id="loginForm" onSubmit={this.loginUser}>
                 <div className="inputField">
                   <label className="loginLabel" htmlFor="loginEmail">Your Email address</label>
-                  <input className="form-control loginInput" autoComplete="username email" placeholder="Enter email" type="email" id="loginEmail" value={this.state.emailInputValue} onChange={this.emailValueChange} required></input>
+                  <input className="form-control loginInput" autoComplete="username email" placeholder="Enter email" type="email" id="loginEmail" value={this.state.emailInputValue} onChange={this.emailValueChange} required/>
                 </div>
                 <div className="inputField">
                   <label className="loginLabel" htmlFor="loginPassword">Your password</label>
-                  <input className="form-control loginInput" autoComplete="current-password" placeholder="Enter password" type="password" id="loginPassword"  value={this.state.passwordInputValue} onChange={this.passwordValueChange} required></input>
+                  <input className="form-control loginInput" autoComplete="current-password" placeholder="Enter password" type="password" id="loginPassword"  value={this.state.passwordInputValue} onChange={this.passwordValueChange} required/>
                 </div>
                 <button className="btn loginFormButton btn-warning">Log In</button>
                 <button className="btn loginFormButton btn-danger" data-dismiss="modal">Cancel</button>

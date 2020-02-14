@@ -53,7 +53,7 @@ class Developers extends React.Component {
         this.openEditWindow();
       }
     );
-  }
+  };
 
   openEditWindow() {
     this.setState({
@@ -71,7 +71,7 @@ class Developers extends React.Component {
       $("#modalWarning").modal('show');
       $("#modalWarning").on('hidden.bs.modal', this.resetState);
     });
-  }
+  };
 
   componentWillUnmount() {
     $("#modalWarning").unbind('hidden.bs.modal');
@@ -86,7 +86,7 @@ class Developers extends React.Component {
       oldName: "",
       idToDelete: ""
     });
-  }
+  };
 
   render() {
     const developersToRender = this.props.developers.map((elem, index) => {
@@ -94,10 +94,10 @@ class Developers extends React.Component {
         <div className="developersBlock" key={elem.id} value={elem.id}>
           {elem.name}
           <button className="btn actionButton" onClick={() => this.onDeleteItem(elem.id)}>
-            <img className="deleteIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-developer.svg'}></img>
+            <img className="deleteIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-developer.svg'}/>
           </button>
           <button className="btn actionButton">
-            <img className="deleteIcon" onClick={() => this.onEditItem(elem.id, elem.name)} alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-developer.svg'}></img>
+            <img className="deleteIcon" onClick={() => this.onEditItem(elem.id, elem.name)} alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-developer.svg'}/>
           </button>
         </div>
       );

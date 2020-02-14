@@ -377,8 +377,8 @@ class BlockModalWindow extends React.Component {
     );
 
     const description = (
-      <div className="desctiptionArea">
-        <label className="desctiptionLabel" htmlFor="description">
+      <div>
+        <label className="descriptionLabel" htmlFor="description">
           <p className="littleHeaders">Description</p>
         </label>
         <textarea placeholder="Enter description" className="form-control" id="description" rows="4" value={this.state.descriptionInputValue} onChange={this.descriptionInputValueChange}/>

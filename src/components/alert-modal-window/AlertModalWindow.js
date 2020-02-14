@@ -19,6 +19,6 @@ const AlertModalWindow = ({title, message}) => {
       </div>
     </div>
   );
-}
+};
 
 export default AlertModalWindow;

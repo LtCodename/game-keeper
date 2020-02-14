@@ -28,7 +28,7 @@ class Suggested extends React.Component {
       $("#editNameWindow").modal('show');
       $("#editNameWindow").on('hidden.bs.modal', this.resetState);
     });
-  }
+  };
 
   onEditItem = (id, oldName) => {
     this.setState({
@@ -89,7 +89,7 @@ class Suggested extends React.Component {
       idToEdit: "",
       oldName: ""
     });
-  }
+  };
 
   openModalAddWindow = () => {
     this.setState({
@@ -98,7 +98,7 @@ class Suggested extends React.Component {
       $("#modalWarning").modal('show');
       $("#modalWarning").on('hidden.bs.modal', this.resetState);
     });
-    }
+  };
 
   onAddItem = (name, id) => {
     this.setState({
@@ -133,13 +133,13 @@ class Suggested extends React.Component {
         <div className="developersBlock" key={elem.id} value={elem.id}>
           {elem.name}
           <button className="btn actionButton" onClick={() => this.onDeleteItem(elem.id)}>
-            <img className="actionIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-developer.svg'}></img>
+            <img className="actionIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-developer.svg'}/>
           </button>
           <button className="btn actionButton" onClick={() => this.onAddItem(elem.name, elem.id)}>
-            <img className="actionIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-add-developer.svg'}></img>
+            <img className="actionIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-add-developer.svg'}/>
           </button>
           <button className="btn actionButton">
-            <img className="deleteIcon" onClick={() => this.onEditItem(elem.id, elem.name)} alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-developer.svg'}></img>
+            <img className="deleteIcon" onClick={() => this.onEditItem(elem.id, elem.name)} alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-developer.svg'}/>
           </button>
         </div>
       );
