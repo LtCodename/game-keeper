@@ -3,7 +3,7 @@ import './Nav.css';
 import AddListModalWindow from '../add-list-modal-window/AddListModalWindow.js';
 import indexActions from '../../redux/reducers/selectedListIndexReducer';
 import { connect } from 'react-redux'
-//import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 declare var $;
 
 class Nav extends React.Component {
@@ -63,7 +63,8 @@ class Nav extends React.Component {
         className += " navButtonActive";
       }
 
-      //return <NavLink key={elem.id} to={"/list/" + elem.id}><button className={className} type="button" key={elem.id} onClick={() => this.switchBetweenTabs(index)}>{elem.name}</button></NavLink>;
+      const route = elem.name.replace(/\s+/g, '-').toLowerCase();
+      //return <NavLink key={elem.id} to={"/list/" + route}><button className={className} type="button" key={elem.id} onClick={() => this.switchBetweenTabs(index)}>{elem.name}</button></NavLink>;
       return <button className={className} type="button" key={elem.id} onClick={() => this.switchBetweenTabs(index)}>{elem.name}</button>;
     });
 

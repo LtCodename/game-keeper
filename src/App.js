@@ -159,7 +159,7 @@ class App extends React.Component {
       listOrDashboard = dashboard;
     }else {
       listOrDashboard = <UserList/>;
-      //<Route path="/list/:list_id" component={UserList} />
+      //listOrDashboard = <Route path="/list/:list_name" component={UserList} />
     }
 
     const nav = (
