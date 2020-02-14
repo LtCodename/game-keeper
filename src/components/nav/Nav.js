@@ -57,7 +57,7 @@ class Nav extends React.Component {
   render() {
     let buttonsToRender = this.props.userLists.map((elem, index) => {
 
-      let className = "navButton btn btn-light";
+      let className = "navButton";
 
       if (this.props.listIndex === index) {
         className += " navButtonActive";

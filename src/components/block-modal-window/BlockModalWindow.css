@@ -2,12 +2,17 @@
   padding-right: 0 !important;
 }
 
+.blockModalWindow {
+  color: var(--first-color);
+  font-weight: 600;
+}
+
 .block-modal #modalWarning {
   margin-left: -17px;
 }
 
 .modalParagraph {
-  color: #000000;
+  color: var(--first-color);
 }
 
 .modalPiece {
@@ -16,13 +21,13 @@
 
 .custom-select {
   background-color: var(--third-color);
-  color: #000000;
+  color: var(--first-color);
   border-radius: 0;
 }
 
 .form-control {
   background-color: var(--third-color);
-  color: #000000;
+  color: var(--first-color);
   border-radius: 0;
 }
 
@@ -36,11 +41,11 @@
 }
 
 .form-control::placeholder {
-  color: #000000;
+  color: var(--first-color);
 }
 
 .littleHeaders {
-  color: #000000;
+  color: var(--first-color);
   margin-bottom: 5px;
   margin-top: 5px;
 }

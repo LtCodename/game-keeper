@@ -395,7 +395,7 @@ class BlockModalWindow extends React.Component {
     );
 
     return (
-      <div className="block-modal">
+      <div className="block-modal blockModalWindow">
         <div className="modal fade" id={this.props.modalId} tabIndex="-1" role="dialog">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
@@ -405,7 +405,7 @@ class BlockModalWindow extends React.Component {
                 {/*New list and section selector*/}
                 {newHomeSelector}
                 {/*description*/}
-                {description}
+                {/*{description}*/}
                 {/*developer*/}
                 {developerSelector}
                 {/*release date*/}
