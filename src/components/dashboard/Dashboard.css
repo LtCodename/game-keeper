@@ -59,7 +59,7 @@
 
 .authButtonsMatrix {
   display: grid;
-  grid-template-columns: repeat(2, minmax(300px, auto));
+  grid-template-columns: repeat(3, minmax(300px, auto));
   grid-gap: 10px
 }
 

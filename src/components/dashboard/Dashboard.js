@@ -38,6 +38,10 @@ class Dashboard extends React.Component {
     });
   };
 
+  onDemoClick = () => {
+
+  };
+
   closeSignUpModal = () => {
     $("#signUpWindow").modal('hide');
   };
@@ -134,6 +138,14 @@ class Dashboard extends React.Component {
             <img
                 className="authButtonIcon"
                 alt="" src={process.env.PUBLIC_URL + '/icons/auth-login-blue.svg'}/>
+          </button>
+          <button
+              className="btn authButton"
+              onClick={this.onDemoClick}>
+            Demo
+            <img
+                className="authButtonIcon"
+                alt="" src={process.env.PUBLIC_URL + '/icons/demo.svg'}/>
           </button>
         </div>
       </div>

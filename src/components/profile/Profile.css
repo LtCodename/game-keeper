@@ -23,7 +23,7 @@
 
 .avatarText {
   color: var(--third-color);
-  font-size: 60px;
+  font-size: 50px;
   font-weight: 800;
   font-family: var(--main-font);
   position: absolute;
