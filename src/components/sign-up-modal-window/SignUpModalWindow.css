@@ -43,3 +43,22 @@
   color: #000000;
   border-radius: 0;
 }
+
+.signupInput {
+  background-color: var(--third-color);
+  color: #000000;
+  border-radius: 0;
+}
+
+.signupInput::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #000000;
+  opacity: 1; /* Firefox */
+}
+
+.signupInput:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #000000;
+}
+
+.signupInput::-ms-input-placeholder { /* Microsoft Edge */
+  color: #000000;
+}
