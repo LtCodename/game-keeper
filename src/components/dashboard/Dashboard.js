@@ -7,6 +7,7 @@ import SignUpModalWindow from '../sign-up-modal-window/SignUpModalWindow.js';
 import LogInModalWindow from '../log-in-modal-window/LogInModalWindow.js';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux'
+import fire from "../../Firebase";
 declare var $;
 
 class Dashboard extends React.Component {
@@ -38,8 +39,12 @@ class Dashboard extends React.Component {
     });
   };
 
-  onDemoClick = () => {
-
+  onDemoClick = (event) => {
+    event.preventDefault();
+    fire.auth().signInWithEmailAndPassword('fake@email.com', '1234567890').then(credential => {
+    }).catch(error => {
+      console.log(error.message);
+    });
   };
 
   closeSignUpModal = () => {
