@@ -28,6 +28,16 @@ body {
   background-color: var(--third-color);
 }
 
+.lt-row {
+    display: flex;
+    flex-flow: row;
+}
+
+.lt-col {
+    display: flex;
+    flex-flow: column;
+}
+
 .modal-content {
   background-color: var(--third-color);
   border: none;

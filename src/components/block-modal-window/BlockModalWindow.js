@@ -274,11 +274,13 @@ class BlockModalWindow extends React.Component {
 
   render() {
     const datePicker = (
-      <div className="modalPiece">
-        <label className="dateLabel" >
-          <p className="littleHeaders">Release Date</p>
-          <input className="form-control" type="date" value={this.state.localGameData.releaseDate} onChange={this.dateInputValueChange}/>
-        </label>
+      <div className="modalPiece lt-col">
+        <span className="littleHeaders">Release Date</span>
+        <input
+            className="block-date"
+            type="date"
+            value={this.state.localGameData.releaseDate}
+            onChange={this.dateInputValueChange}/>
       </div>
     );
 
@@ -324,20 +326,30 @@ class BlockModalWindow extends React.Component {
       });
 
       newHomeSelector = (
-        <div className="modalPiece">
-          <p className="littleHeaders">Pick a List</p>
-          <select value={this.state.newListForBlock} className="custom-select" onChange={this.newListSelectChangeHandler}>
-            {listSectionOptions}
-          </select>
-          <p className="littleHeaders">Pick a Section</p>
-          <select value={this.state.newSectionForBlock} className="custom-select" onChange={this.newSectionSelectChangeHandler}>
-            {sectionSectionOptions}
-          </select>
+        <div className="modalPiece lt-row">
+          <div className="lt-col home-selector">
+            <span className="littleHeaders">List</span>
+            <select
+                className="block-select"
+                value={this.state.newListForBlock}
+                onChange={this.newListSelectChangeHandler}>
+              {listSectionOptions}
+            </select>
+          </div>
+          <div className="lt-col">
+            <span className="littleHeaders">Pick a Section</span>
+            <select
+                className="block-select"
+                value={this.state.newSectionForBlock}
+                onChange={this.newSectionSelectChangeHandler}>
+              {sectionSectionOptions}
+            </select>
+          </div>
         </div>
       );
     }
 
-    const deleteButton = (this.props.fullMode) ? <button type="button" className="btn btn-danger" onClick={this.openModalWarningWindow}>Delete</button> : "";
+    const deleteButton = (this.props.fullMode) ? <button type="button" className="block-button" onClick={this.openModalWarningWindow}>Delete</button> : "";
 
     const developerSectionOptions = this.props.developers.map((elem) => {
       return (
@@ -350,25 +362,42 @@ class BlockModalWindow extends React.Component {
     const devSelectValue = this.state.localGameData.developer || '';
 
     const addDeveloper = (
-      <div>
-        <p className="littleHeaders">Add developer</p>
-        <input className="form-control" type="text" placeholder="Developer Name" value={this.state.developerInputValue} onChange={this.developerInputValueChange}/>
-        <button className="btn btn-success" onClick={this.doOnAddDeveloper}>Add</button>
+      <div className="lt-col">
+        <span className="littleHeaders">Add developer</span>
+        <input
+            className="block-input"
+            type="text"
+            placeholder="Developer Name"
+            value={this.state.developerInputValue}
+            onChange={this.developerInputValueChange}/>
+        <button className="block-button" onClick={this.doOnAddDeveloper}>Add</button>
       </div>
     );
 
     const suggestDeveloper = (
-      <div>
-        <p className="littleHeaders">Suggest developer</p>
-        <input className="form-control" type="text" placeholder="Developer Name" value={this.state.developerSuggestInputValue} onChange={this.developerSuggestInputValueChange}/>
-        <button className="btn btn-success" onClick={this.doOnSuggestDeveloper}>Suggest</button>
+      <div className="lt-col">
+        <span className="littleHeaders">Suggest developer</span>
+        <input
+            className="block-input"
+            type="text"
+            placeholder="Developer Name"
+            value={this.state.developerSuggestInputValue}
+            onChange={this.developerSuggestInputValueChange}/>
+        <button
+            className="block-button"
+            onClick={this.doOnSuggestDeveloper}>
+          Suggest
+        </button>
       </div>
     );
 
     const developerSelector = (
       <div className="modalPiece">
         <p className="littleHeaders">Assign developer</p>
-        <select value={devSelectValue} className="custom-select" onChange={this.developerChangeHandler}>
+        <select
+            className="block-select"
+            value={devSelectValue}
+            onChange={this.developerChangeHandler}>
           {developerSectionOptions}
         </select>
         {suggestDeveloper}
@@ -376,21 +405,15 @@ class BlockModalWindow extends React.Component {
       </div>
     );
 
-    const description = (
-      <div>
-        <label className="descriptionLabel" htmlFor="description">
-          <p className="littleHeaders">Description</p>
-        </label>
-        <textarea placeholder="Enter description" className="form-control" id="description" rows="4" value={this.state.descriptionInputValue} onChange={this.descriptionInputValueChange}/>
-      </div>
-    );
-
     const name = (
-      <div className="nameArea">
-        <label className="nameLabel" htmlFor="name">
-          <p className="littleHeaders">Name</p>
-        </label>
-        <textarea placeholder="Enter name" className="form-control enterNewName" id="name" rows="1" value={this.state.nameInputValue} onChange={this.nameInputValueChange}/>
+      <div className="lt-col">
+        <textarea
+            placeholder="Enter name"
+            className="block-textarea"
+            id="name"
+            rows={1}
+            value={this.state.nameInputValue}
+            onChange={this.nameInputValueChange}/>
       </div>
     );
 
@@ -399,13 +422,11 @@ class BlockModalWindow extends React.Component {
         <div className="modal fade" id={this.props.modalId} tabIndex="-1" role="dialog">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
-              <div className="modal-body">
+              <div className="modal-body properties-wrapper">
                 {/*title*/}
                 {name}
                 {/*New list and section selector*/}
                 {newHomeSelector}
-                {/*description*/}
-                {/*{description}*/}
                 {/*developer*/}
                 {developerSelector}
                 {/*release date*/}
@@ -419,9 +440,9 @@ class BlockModalWindow extends React.Component {
                 </div>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-warning" data-dismiss="modal">Cancel</button>
+                <button type="button" className="block-button" data-dismiss="modal">Cancel</button>
                 {deleteButton}
-                <button type="button" className="btn btn-success" onClick={this.modalSave}>Save</button>
+                <button type="button" className="block-button" onClick={this.modalSave}>Save</button>
               </div>
             </div>
           </div>

@@ -2,6 +2,10 @@
   padding-right: 0 !important;
 }
 
+.properties-wrapper {
+  padding: 15px 15px 0 15px;
+}
+
 .blockModalWindow {
   color: var(--first-color);
   font-weight: 600;
@@ -48,6 +52,15 @@
   color: var(--first-color);
   margin-bottom: 5px;
   margin-top: 5px;
+  font-weight: 300;
+}
+
+.home-selector {
+  margin-right: 10px;
+}
+
+.block-select:focus {
+  outline: none;
 }
 
 .btn {
@@ -58,11 +71,6 @@ option {
   padding: 3px 0;
 }
 
-.dateLabel {
-  margin: 0;
-  padding: 0;
-}
-
 .descriptionLabel {
   margin: 0;
   padding: 0;
@@ -71,4 +79,66 @@ option {
 .nameLabel {
   margin: 0;
   padding: 0;
+}
+
+.block-textarea {
+  outline: none;
+  resize: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 5px solid #0079c5;
+  background: var(--third-color);
+  color: #0079c5;
+  font-weight: 800;
+}
+
+.block-input {
+  outline: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 5px solid #0079c5;
+  background: var(--third-color);
+  color: #0079c5;
+  font-weight: 800;
+}
+
+.block-button {
+  margin: 5px 0 0 0;
+  border: none;
+  border-radius: 0;
+  background: #0079c5;
+  color: var(--third-color);
+  outline: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.block-button:focus {
+  outline: none;
+}
+
+.block-button:hover {
+  outline: none;
+}
+
+.block-date {
+  border: none;
+  background: #fef9de;
+  color: #0178c5;
+  font-weight: 800;
+  border-bottom: 5px solid;
+  outline: none;
+  cursor: pointer;
+}
+
+.block-date:focus {
+  outline: none;
+}
+
+.block-date:hover {
+  outline: none;
 }
