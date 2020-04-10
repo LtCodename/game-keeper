@@ -249,7 +249,7 @@ class UserList extends React.Component {
 
     const nameAndButtonsBlock = (
       <div className="listWrapper">
-        <h1 className="listName">{this.props.userLists[this.props.listIndex].name}</h1>
+        <span className="listName">{this.props.userLists[this.props.listIndex].name}</span>
         <div className={actionButtonsClassName}>
           <button className="btn" onClick={this.toggleButtons}><img className="listsEditIcon toggleButton" alt="" src={process.env.PUBLIC_URL + '/icons/navbar-arrow-lists.svg'}/></button>
           <button className="btn" onClick={this.doOnAddSection}><img className="listsEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-add-list.svg'}/></button>

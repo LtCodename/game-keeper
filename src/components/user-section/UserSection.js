@@ -204,7 +204,7 @@ class UserSection extends React.Component {
 
     const nameAndButtonsBlock = (
       <div className="nameAndButtonsWrapper">
-        <h2 className="sectionName">{this.props.name}</h2>
+        <span className="sectionName">{this.props.name}</span>
         <div className="sectionActions">
           <div className={actionButtonsClassName}>
             <button className="btn" onClick={this.toggleButtons}><img className="sectionEditIcon toggleButton" alt="" src={process.env.PUBLIC_URL + '/icons/navbar-arrow-sections.svg'}/></button>

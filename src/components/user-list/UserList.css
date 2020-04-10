@@ -72,6 +72,8 @@
   overflow-y: hidden;
   flex: 1;
   font-weight: 800;
+  font-size: 30px;
+  color: var(--second-color);
 }
 
 .addSectionInput {
@@ -123,7 +125,6 @@
 }
 
 .listWrapper {
-  margin-bottom: 5px;
   display: flex;
   align-items: center;
   justify-content: space-between;

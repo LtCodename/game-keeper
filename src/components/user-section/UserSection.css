@@ -4,7 +4,9 @@
 }
 
 .sectionName {
-  font-weight: 700;
+  font-weight: 800;
+  font-size: 25px;
+  color: var(--third-color);
 }
 
 .sectionActionButtonsVisible .sectionEditIcon.toggleButton {
@@ -92,7 +94,7 @@
   display: flex;
   flex-wrap: wrap;
   clear: both;
-  margin: 10px 0;
+  margin: 5px 0 0 0;
 }
 
 .addGameBlockDiv {
