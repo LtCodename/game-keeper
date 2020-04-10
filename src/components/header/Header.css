@@ -1,14 +1,14 @@
-.logoWrapper {
+.logoHolder {
   display: flex;
-  justify-content: left;
+  align-items: center;
 }
 
-.logoWrapper {
-  width: auto;
+.logoHolderFake {
+  padding: 13.5px 0;
 }
 
-.logoButton {
-  font-size: 41px;
+.logoLink {
+  font-size: 19px;
   font-weight: 800;
   outline: none !important;
   font-family: var(--main-font);
@@ -16,45 +16,31 @@
   color: var(--first-color);
   padding: 0;
   margin: 0;
-  border: none;
   cursor: pointer;
+  height: fit-content;
+  text-decoration: none;
 }
 
-.headerWrappper {
+.logoLink:hover {
+  text-decoration: none;
+  color: var(--first-color);
+}
+
+.headerWrapper {
   width: 100%;
   display: flex;
   justify-content: space-between;
   background-color: var(--third-color);
-  padding: 0 20px;
 }
 
-.ultimateHeaderWrappper {
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+.ultimateHeaderWrapper {
   position: relative;
   z-index: 5;
+  padding: 0 10px;
 }
 
-.signWrapper {
+.signPanelWrapper {
   display: flex;
-  align-items: center;
-}
-
-.profileButton {
-  height: 40px;
-  margin-left: 10px;
-  background-color: var(--first-color);
-  color: var(--third-color);
-  border-radius: 0;
-  font-family: var(--main-font);
-  font-size: 19px;
-  font-weight: 700;
-  line-height: 0;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-}
-
-.profileButton:hover {
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 .profileButtonAlt {
@@ -81,19 +67,37 @@
   display: none;
 }
 
-.authButtonWrapper {
-  width: 50%;
-  padding-bottom: 8px;
-}
-
 .authButtonWrapper:nth-child(2n+1) {
-  padding-right: 3px;
-  padding-left: 6px;
+  margin: 10px 10px 10px 0;
 }
 
 .authButtonWrapper:nth-child(2n) {
-  padding-left: 3px;
-  padding-right: 6px;
+  margin: 10px 0;
+}
+
+.profileButton {
+  background-color: var(--first-color);
+  color: var(--third-color);
+  border-radius: 0;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  font-family: var(--main-font);
+  font-size: 19px;
+  font-weight: 700;
+  padding: 5px;
+  line-height: 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.profileButton:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  outline: none;
+}
+
+.profileButton:focus {
+  outline: none;
 }
 
 @media (max-width: 1050px) {
@@ -101,22 +105,30 @@
     display: block;
   }
 
-  .ultimateHeaderWrappper {
+  .ultimateHeaderWrapper {
     box-shadow: none;
   }
 }
 
 @media (max-width: 580px) {
-  .headerWrappper {
+  .headerWrapper {
     justify-content: center;
   }
 
-  .signWrapper {
+  .signPanelWrapper {
     display: none;
   }
 
   .altButtonsWrapper {
     display: flex;
     justify-content: center;
+  }
+
+  .authButtonWrapper:nth-child(2n+1) {
+    margin: 5px 10px 10px 0;
+  }
+
+  .authButtonWrapper:nth-child(2n) {
+    margin: 5px 0 10px 0;
   }
 }

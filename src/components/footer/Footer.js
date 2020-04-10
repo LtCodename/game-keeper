@@ -45,7 +45,7 @@ class Footer extends React.Component {
       </div>
     );
 
-    const copyrighth = (
+    const copyright = (
       <a className="copyrightWrapper" href="https://ltcodename.com/" target="blank">{/*<span>© 2019</span>*/}<span className="copyright">LtCodename</span></a>
     );
 
@@ -59,7 +59,7 @@ class Footer extends React.Component {
       <div>
         <div className="footerWrapper">
           {versionIcon}
-          {copyrighth}
+          {copyright}
           {shareIcons}
         </div>
         {this.state.showAlertWindow ? alertWindow : ""}

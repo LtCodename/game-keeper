@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import {NavLink} from "react-router-dom";
 
 const LogoButton = styled.button`
     font-size: 41px;
@@ -16,14 +17,18 @@ const LogoButton = styled.button`
 
 const HeaderFake = () => {
   const logo = (
-    <div className="logoWrapper">
-      <LogoButton className="btn">Game Keeper</LogoButton>
-    </div>
+      <div className="logoHolder logoHolderFake">
+          <NavLink
+              className="logoLink"
+              to="/">
+              Game Keeper
+          </NavLink>
+      </div>
   );
 
   return (
-    <div className="ultimateHeaderWrappper">
-      <div className="headerWrappper">
+    <div className="ultimateHeaderWrapper">
+      <div className="headerWrapper">
         {logo}
       </div>
     </div>

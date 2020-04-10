@@ -5,12 +5,12 @@
   align-items: center;
   position: relative;
   z-index: 5;
-  box-shadow: 0 3px 6px 6px rgba(0,0,0,0.16), 0 3px 6px 6px rgba(0,0,0,0.23);
+  /*box-shadow: 0 3px 6px 6px rgba(0,0,0,0.16), 0 3px 6px 6px rgba(0,0,0,0.23);*/
 }
 
 .leftFooterButton {
   background-color: inherit;
-  padding: 0px;
+  padding: 0;
   margin-right: 15px;
 }
 
@@ -38,15 +38,15 @@
   margin-bottom: 10px;
 }
 
-.copyright {
+.copyrightWrapper {
   color: var(--first-color);
   font-family: var(--main-font);
-  font-size: 20px;
   font-weight: 800;
 }
 
-.copyright:hover, .copyright:focus {
+.copyrightWrapper:hover, .copyrightWrapper:focus {
   color: var(--first-color);
+  text-decoration: none;
 }
 
 @media (max-width: 450px) {

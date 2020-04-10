@@ -16,70 +16,68 @@ const Header = ({changeListIndex, history, userLists, userData}) => {
   };
 
   const logo = (
-    <div className="logoWrapper">
-      <NavLink
-          to="/">
-        <button
-          className="logoButton"
-          onClick={() => changeListIndex(null, userLists.length)}>Game Keeper
-        </button>
-      </NavLink>
-    </div>
+      <div className="logoHolder">
+        <NavLink
+            className="logoLink"
+            onClick={() => changeListIndex(null, userLists.length)}
+            to="/">
+          Game Keeper
+        </NavLink>
+      </div>
   );
 
   const logOutButton = (
-    <div className="authButtonWrapper">
-      <button
-          className="btn profileButton"
-          onClick={onLogOutClick}>
-        Log Out
-        <img className="authIcon" alt="" src={process.env.PUBLIC_URL + '/icons/auth-logout.svg'}/></button>
-    </div>
+      <div className="authButtonWrapper">
+        <button
+            className="profileButton"
+            onClick={onLogOutClick}>
+          Log Out
+          <img className="authIcon" alt="" src={process.env.PUBLIC_URL + '/icons/auth-logout.svg'}/></button>
+      </div>
   );
 
   const profileButton = (
-    <div className="authButtonWrapper">
-      <NavLink
-          to="/profile">
-        <button
-            className="btn profileButton"
-            onClick={() => changeListIndex(null, userLists.length)}>
-          Profile
-          <img className="authIcon" alt="" src={process.env.PUBLIC_URL + '/icons/auth-profile.svg'}/>
-        </button>
-      </NavLink>
-    </div>
+      <div className="authButtonWrapper">
+        <NavLink
+            to="/profile">
+          <button
+              className="profileButton"
+              onClick={() => changeListIndex(null, userLists.length)}>
+            Profile
+            <img className="authIcon" alt="" src={process.env.PUBLIC_URL + '/icons/auth-profile.svg'}/>
+          </button>
+        </NavLink>
+      </div>
   );
 
   const profileAltButton = (
-    <div className="authButtonWrapper">
-      <NavLink
-          to="/profile">
-        <button
-            className="btn profileButtonAlt"
-            onClick={() => changeListIndex(null, userLists.length)}>
-          <img
-              className="authIconAlt" alt="" src={process.env.PUBLIC_URL + '/icons/auth-profile.svg'}/>
-        </button>
-      </NavLink>
-    </div>
+      <div className="authButtonWrapper">
+        <NavLink
+            to="/profile">
+          <button
+              className="btn profileButtonAlt"
+              onClick={() => changeListIndex(null, userLists.length)}>
+            <img
+                className="authIconAlt" alt="" src={process.env.PUBLIC_URL + '/icons/auth-profile.svg'}/>
+          </button>
+        </NavLink>
+      </div>
   );
 
   const logOutAltButton = (
-    <div className="authButtonWrapper">
-      <button
-          className="btn profileButtonAlt"
-          onClick={onLogOutClick}>
-        <img className="authIconAlt" alt="" src={process.env.PUBLIC_URL + '/icons/auth-logout.svg'}/></button>
-    </div>
+      <div className="authButtonWrapper">
+        <button
+            className="btn profileButtonAlt"
+            onClick={onLogOutClick}>
+          <img className="authIconAlt" alt="" src={process.env.PUBLIC_URL + '/icons/auth-logout.svg'}/></button>
+      </div>
   );
 
   return (
-    <div>
-      <div className="ultimateHeaderWrappper">
-        <div className="headerWrappper">
+      <div className="ultimateHeaderWrapper">
+        <div className="headerWrapper">
           {logo}
-          <div className="signWrapper">
+          <div className="signPanelWrapper">
             {userData ? logOutButton : ""}
             {userData ? profileButton : ""}
           </div>
@@ -89,7 +87,6 @@ const Header = ({changeListIndex, history, userLists, userData}) => {
           {userData ? profileAltButton : ""}
         </div>
       </div>
-    </div>
   )
 };
 

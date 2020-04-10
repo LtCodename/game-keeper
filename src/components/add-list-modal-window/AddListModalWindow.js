@@ -49,19 +49,19 @@ class AddListModalWindow extends React.Component {
   render() {
 
     const listName = (
-      <textarea placeholder="Enter List Name" className="form-control" id="listName" rows="1" value={this.state.nameInputValue} onChange={this.nameInputValueChange}/>
+      <textarea placeholder="Enter List Name" className="addListTextarea" id="listName" rows="1" value={this.state.nameInputValue} onChange={this.nameInputValueChange}/>
     );
 
     const buttonsWrapper = (
       <div className="buttonsWrapper">
-        <button type="button" className="editListModalWindowButton btn btn-warning" data-dismiss="modal">Cancel</button>
-        <button type="button" className="editListModalWindowButton btn btn-success" onClick={this.onProceed}>Proceed</button>
+        <button type="button" className="addListButton" data-dismiss="modal">Cancel</button>
+        <button type="button" className="addListButton" onClick={this.onProceed}>Proceed</button>
       </div>
     );
 
     const warning = (
       <div className="warningWrapper">
-        <p className="warning">You have to enter new name to proceed!</p>
+        <span className="warning">You have to enter new name to proceed!</span>
       </div>
     );
 
@@ -70,11 +70,13 @@ class AddListModalWindow extends React.Component {
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              {/*list title*/}
-              {listName}
+              <div className={"name-wrapper"}>
+                {/*list title*/}
+                {listName}
+              </div>
             </div>
             {(this.state.warningMode) ? warning : ""}
-            <div className="modal-footer">
+            <div className={"buttons-wrapper"}>
               {buttonsWrapper}
             </div>
           </div>

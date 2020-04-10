@@ -1,20 +1,60 @@
-.listNameEditWrapper {
-  padding-bottom: 16px;
+.modal-header {
+  padding: 10px;
 }
 
 .warningWrapper {
-  padding-left: 16px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
-.editListModalWindowButton {
-  margin-right: 10px;
-}
 .warning {
-  color: #000000;
-  margin: 0;
-  padding: 5px 0 0 0;
+  color: #0079c5;
+  font-weight: 300;
 }
 
-.buttonsWrapper {
-  padding-top: 10px;
+.name-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.buttons-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.addListTextarea {
+  outline: none;
+  resize: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 5px solid #0079c5;
+  background: var(--third-color);
+  color: #0079c5;
+  font-weight: 800;
+}
+
+.addListButton {
+  margin: 0 5px;
+  border: none;
+  border-radius: 0;
+  background: #0079c5;
+  color: var(--third-color);
+  outline: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-weight: 600;
+}
+
+.addListButton:focus {
+  outline: none;
+}
+
+.addListButton:hover {
+  outline: none;
 }
