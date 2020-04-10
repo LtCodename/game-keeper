@@ -305,7 +305,7 @@ class BlockModalWindow extends React.Component {
     const modalWarningWindow = (
       <WarningModalWindow
         onProceed={this.deleteBlock}
-        message={`Are you sure you want to delete block ${this.state.localGameData.name}?`} />
+        message={`Are you sure you want to delete game ${this.state.localGameData.name}?`} />
     );
 
     let newHomeSelector = "";

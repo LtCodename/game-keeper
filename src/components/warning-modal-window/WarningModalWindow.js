@@ -14,14 +14,16 @@ const WarningModalWindow = ({message, onProceed}) => {
       <div className="modal-dialog" role="document">
         <div className="modal-content mainContent">
           <div className="modal-header">
-            <h5 className="modal-title">Warning!</h5>
+            <div className="title-row">
+              <span className="title">Warning!</span>
+            </div>
           </div>
-          <div className="messageWrapper">
-            <p className="message">{message}</p>
+          <div className="message-wrapper">
+            <span className="alert-message">{message}</span>
           </div>
-          <div className="modal-footer">
-            <button type="button" className="btn btn-warning" data-dismiss="modal">Cancel</button>
-            <button type="button" className="btn btn-success" onClick={doOnProceed}>Proceed</button>
+          <div className="buttons-wrapper">
+            <button type="button" className="warning-button" data-dismiss="modal">Cancel</button>
+            <button type="button" className="warning-button" onClick={doOnProceed}>Proceed</button>
           </div>
         </div>
       </div>

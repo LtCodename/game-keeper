@@ -24,7 +24,7 @@ const AlertModalWindow = ({title, message}) => {
             </div>
           </div>
           {message.length ? messageWrapper : ''}
-          <div className={"buttons-wrapper"}>
+          <div className="buttons-wrapper">
             {buttonsWrapper}
           </div>
         </div>
