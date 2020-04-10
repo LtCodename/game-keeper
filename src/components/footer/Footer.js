@@ -32,21 +32,40 @@ class Footer extends React.Component {
   }
 
   render() {
-    const shareIcons = (
-      <div className="shareIconsWrapper">
-          <a className="shareIcons-a shareTwitterButton" href="https://twitter.com/LtCodename" target="blank"><img className="shareIcon" alt="" src={process.env.PUBLIC_URL + '/icons/share-twitter.svg'}/></a>
+    const rightIcons = (
+      <div>
+          <a
+              className="right-a"
+              href="https://twitter.com/LtCodename"
+              target="blank">
+            <img
+              className="icon" alt="" src={process.env.PUBLIC_URL + '/icons/share-twitter.svg'}/>
+          </a>
       </div>
     );
 
-    const versionIcon = (
-      <div className="versionIconWrapper">
-          <button type="button" className="btn leftFooterButton" onClick={this.onVersionClick}><img className="saveIcon" alt="" src={process.env.PUBLIC_URL + '/icons/version.svg'}/></button>
-          <a className="shareTrelloButton" href="https://trello.com/b/GT6AY0oi/game-keeper-roadmap" target="blank"><img className="shareIcon" alt="" src={process.env.PUBLIC_URL + '/icons/share-trello.svg'}/></a>
+    const leftIcons = (
+      <div>
+          <a
+              className="left-a version-a"
+              onClick={this.onVersionClick}>
+            <img className="icon" alt="" src={process.env.PUBLIC_URL + '/icons/version.svg'}/>
+          </a>
+          <a
+              className="left-a"
+              href="https://trello.com/b/GT6AY0oi/game-keeper-roadmap"
+              target="blank">
+            <img className="icon" alt="" src={process.env.PUBLIC_URL + '/icons/share-trello.svg'}/>
+          </a>
       </div>
     );
 
     const copyright = (
-      <a className="copyrightWrapper" href="https://ltcodename.com/" target="blank">{/*<span>© 2019</span>*/}<span className="copyright">LtCodename</span></a>
+      <a className="copyright"
+         href="https://ltcodename.com/"
+         target="blank">
+        LtCodename
+      </a>
     );
 
     const alertWindow = (
@@ -58,9 +77,9 @@ class Footer extends React.Component {
     return (
       <div>
         <div className="footerWrapper">
-          {versionIcon}
+          {leftIcons}
           {copyright}
-          {shareIcons}
+          {rightIcons}
         </div>
         {this.state.showAlertWindow ? alertWindow : ""}
       </div>

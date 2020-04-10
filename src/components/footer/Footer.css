@@ -5,52 +5,35 @@
   align-items: center;
   position: relative;
   z-index: 5;
-  /*box-shadow: 0 3px 6px 6px rgba(0,0,0,0.16), 0 3px 6px 6px rgba(0,0,0,0.23);*/
+  padding: 10px;
 }
 
-.leftFooterButton {
+.left-a {
   background-color: inherit;
-  padding: 0;
-  margin-right: 15px;
+  cursor: pointer;
 }
 
-.saveIcon {
-  height: 35px;
-}
-
-.shareIcon {
-  height: 35px;
-}
-
-.shareIcons-a {
-  margin-left: 15px;
-}
-
-.versionIconWrapper {
-  margin-left: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.shareIconsWrapper {
+.version-a {
   margin-right: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
 }
 
-.copyrightWrapper {
+.icon {
+  height: 35px;
+}
+
+.copyright {
   color: var(--first-color);
   font-family: var(--main-font);
   font-weight: 800;
 }
 
-.copyrightWrapper:hover, .copyrightWrapper:focus {
+.copyright:hover {
   color: var(--first-color);
   text-decoration: none;
 }
 
 @media (max-width: 450px) {
-  .copyrightWrapper {
+  .copyright {
     display: none;
   }
 }
