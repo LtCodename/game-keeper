@@ -20,10 +20,12 @@
   border: none;
   display: block;
   cursor: pointer;
+  outline: none;
 }
 
 .searchButton:hover, .searchButton:focus, .searchButton:active {
   background-color: var(--first-color);
+  outline: none;
 }
 
 .card {

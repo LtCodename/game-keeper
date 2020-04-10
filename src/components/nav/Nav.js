@@ -75,7 +75,7 @@ class Nav extends React.Component {
     );
 
     const hideButton = (
-      <button className="btn hideNavButton" onClick={this.toggleNavbar}><img className="hideArrow" alt="" src={process.env.PUBLIC_URL + '/icons/navbar-arrow.svg'}/></button>
+      <button className="hideNavButton" onClick={this.toggleNavbar}><img className="hideArrow" alt="" src={process.env.PUBLIC_URL + '/icons/navbar-arrow.svg'}/></button>
     );
 
     let navClassName = "navBar";
