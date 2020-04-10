@@ -2,18 +2,30 @@ import React from 'react';
 import './AlertModalWindow.css';
 
 const AlertModalWindow = ({title, message}) => {
+  const buttonsWrapper = (
+      <div>
+        <button type="button" className="close-button" data-dismiss="modal">Close</button>
+      </div>
+  );
+
+  const messageWrapper = (
+      <div className="message-wrapper">
+        <span className="alert-message">{message}</span>
+      </div>
+  );
+
   return (
     <div className="modal fade" id="versionAlert" tabIndex="-1" role="dialog">
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">{title}</h5>
+            <div className="title-row">
+              <span className="title">{title}</span>
+            </div>
           </div>
-          <div className="modalBody">
-            <p className="modalMessage">{message}</p>
-          </div>
-          <div className="modal-footer">
-            <button type="button" className="btn btn-success" data-dismiss="modal">Close</button>
+          {message.length ? messageWrapper : ''}
+          <div className={"buttons-wrapper"}>
+            {buttonsWrapper}
           </div>
         </div>
       </div>

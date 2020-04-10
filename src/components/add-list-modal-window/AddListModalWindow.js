@@ -47,13 +47,12 @@ class AddListModalWindow extends React.Component {
   };
 
   render() {
-
     const listName = (
       <textarea placeholder="Enter List Name" className="addListTextarea" id="listName" rows="1" value={this.state.nameInputValue} onChange={this.nameInputValueChange}/>
     );
 
     const buttonsWrapper = (
-      <div className="buttonsWrapper">
+      <div>
         <button type="button" className="addListButton" data-dismiss="modal">Cancel</button>
         <button type="button" className="addListButton" onClick={this.onProceed}>Proceed</button>
       </div>

@@ -1,4 +1,49 @@
-.modalMessage {
-  margin-top: 10px;
-  color: #000000;
+.title-row {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.message-wrapper{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.title {
+  color: #0079c5;
+  font-weight: 800;
+}
+
+.alert-message {
+  color: #747474;
+  font-weight: 700;
+}
+
+.buttons-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.close-button {
+  margin: 0 5px;
+  border: none;
+  border-radius: 0;
+  background: #0079c5;
+  color: var(--third-color);
+  outline: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-weight: 600;
+}
+
+.close-button:hover {
+  outline: none;
+}
+
+.close-button:focus {
+  outline: none;
 }
