@@ -37,33 +37,33 @@
   margin-left: 5px;
 }
 
-.editListDiv {
-  margin-top: 10px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  width: 99%;
-  padding-bottom: 15px;
-}
-
-.editListInput {
-  background-color: var(--first-color) !important;
-  border: none;
-  color: var(--second-color) !important;
-  padding: 0 0 0 10px;
+.edit-list-input {
   resize: none;
-  font-size: 55px;
-  font-family: var(--main-font);
+  border: none;
+  background: inherit;
+  color: #fff68f;
+  font-size: 30px;
+  font-weight: 800;
+  outline: none;
+  padding: 0;
 }
 
-.editListInput:focus {
-  box-shadow:none !important;
+.edit-list-input:focus {
+  outline: none;
 }
 
-.listEditButtons {
-  margin-left: 10px;
+.edit-list-input:active {
+  outline: none;
 }
 
-.listEditButtons button {
+.list-edit-button {
   margin-right: 10px;
+  border: none;
+  outline: none;
+  color: #0178c5;
+  background: #fef9de;
+  font-weight: 800;
+  cursor: pointer;
 }
 
 .listName {
@@ -134,12 +134,12 @@
   height: 35px;
 }
 
-.editIlistsEditIconcon:hover {
+.listsEditIcon:hover {
   opacity: 0.8;
 }
 
 @media (max-width: 576px) {
-  .listName, .editListInput {
+  .listName, .edit-list-input {
     font-size: 45px;
   }
 

@@ -261,14 +261,19 @@ class UserList extends React.Component {
     );
 
     const editListNameForm = (
-      <div className="editListDiv">
+      <div className="lt-row">
         <textarea
             ref={node => {
               this.linkToRenameListTextarea = node;
-            }} placeholder="Enter List Name" className="form-control editListInput" rows="1" value={this.state.listNameInputValue} onChange={this.listNameInputValueChange}/>
-        <div className="listEditButtons">
-          <button className="btn btn-dark" onClick={this.doOnSubmitListName}>OK</button>
-          <button className="btn" onClick={this.doOnCancel}>Cancel</button>
+            }}
+            placeholder="Enter List Name"
+            className="edit-list-input"
+            rows="1"
+            value={this.state.listNameInputValue}
+            onChange={this.listNameInputValueChange}/>
+        <div className="lt-row">
+          <button className="list-edit-button" onClick={this.doOnSubmitListName}>Confirm</button>
+          <button className="list-edit-button" onClick={this.doOnCancel}>Cancel</button>
         </div>
       </div>
     );
