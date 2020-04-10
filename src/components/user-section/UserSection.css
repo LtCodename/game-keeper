@@ -55,13 +55,14 @@
 }
 
 .editSectionInput {
-  background-color: var(--first-color) !important;
-  border: none;
-  color: var(--third-color) !important;
-  font-size: 40px;
-  font-family: var(--main-font);
-  padding: 0 0 0 10px;
   resize: none;
+  border: none;
+  background: inherit;
+  color: var(--third-color);
+  font-size: 25px;
+  font-weight: 800;
+  outline: none;
+  padding: 0;
 }
 
 .editSectionInput:focus {
@@ -70,17 +71,28 @@
 }
 
 .sectionEditButtons {
-  margin-left: 10px;
+  /*margin-left: 10px;*/
 }
 
 .sectionEditButtons button {
+  /*margin-right: 10px;*/
+}
+
+.section-edit-button {
   margin-right: 10px;
+  border: none;
+  outline: none;
+  color: #0178c5;
+  background: #fef9de;
+  font-weight: 800;
+  cursor: pointer;
 }
 
 .editSectionDiv {
-  padding-bottom: 15px;
+  /*padding-bottom: 15px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  width: 99%;
+  width: 99%;*/
+  align-items: center;
 }
 
 .sectionPositionPicker {

@@ -261,7 +261,7 @@ class UserList extends React.Component {
     );
 
     const editListNameForm = (
-      <div className="lt-row">
+      <div className="lt-row list-edit-wrapper">
         <textarea
             ref={node => {
               this.linkToRenameListTextarea = node;

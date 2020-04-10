@@ -218,16 +218,20 @@ class UserSection extends React.Component {
     );
 
     const editForm = (
-        <div className="editSectionDiv">
+        <div className="editSectionDiv lt-row">
           <textarea
               ref={node => {
                 this.linkToTextarea = node;
-              }} placeholder="Enter Section Name" className="form-control editSectionInput" rows="1" value={this.state.sectionInputValue} onChange={this.sectionInputValueChange}/>
-          <Colors sectionId={this.props.id} color={this.props.color}/>
+              }}
+              placeholder="Enter Section Name"
+              className="editSectionInput"
+              rows="1" value={this.state.sectionInputValue}
+              onChange={this.sectionInputValueChange}/>
           <div className="sectionEditButtons">
-            <button className="btn btn-dark" onClick={this.doOnSubmit}>OK</button>
-            <button className="btn" onClick={this.doOnCancel}>Cancel</button>
+            <button className="section-edit-button" onClick={this.doOnSubmit}>OK</button>
+            <button className="section-edit-button" onClick={this.doOnCancel}>Cancel</button>
           </div>
+          <Colors sectionId={this.props.id} color={this.props.color}/>
         </div>
     );
 

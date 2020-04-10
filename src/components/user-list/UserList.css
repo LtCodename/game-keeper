@@ -56,6 +56,10 @@
   outline: none;
 }
 
+.list-edit-wrapper {
+  align-items: center;
+}
+
 .list-edit-button {
   margin-right: 10px;
   border: none;
@@ -64,6 +68,7 @@
   background: #fef9de;
   font-weight: 800;
   cursor: pointer;
+  eight: 30px;
 }
 
 .listName {
