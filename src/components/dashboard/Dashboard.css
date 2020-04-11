@@ -87,7 +87,7 @@
   margin-left: 5px;
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 1260px) {
   .listsMatrix {
       grid-template-columns: 1fr 1fr 1fr;
     }
@@ -97,7 +97,7 @@
   }
 }
 
-@media (max-width: 990px) {
+@media (max-width: 500px) {
   .fourCells {
     grid-template-columns: 1fr 1fr;
   }
@@ -107,17 +107,17 @@
   }
 }
 
-@media (max-width: 630px) {
+@media (max-width: 550px) {
   .listsMatrix {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   .authButton {
-    font-size: 30px;
+    font-size: 25px;
   }
 
   .authButtonIcon {
-    height: 30px;
+    height: 25px;
   }
 
   .authButtonsMatrix {

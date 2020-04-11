@@ -238,11 +238,9 @@ class UserList extends React.Component {
     });
 
     const listPositionPicker = (
-      <div>
         <select value={this.props.listIndex} className="custom-select listPositionPicker" onChange={this.listPositionChangeHandler}>
           {positionOptions}
         </select>
-      </div>
     );
 
     let actionButtonsClassName = `listActionButtons ${this.state.buttonsVisible ? 'listActionButtonsVisible' : ''}`;
@@ -254,7 +252,13 @@ class UserList extends React.Component {
           <button className="btn" onClick={this.toggleButtons}><img className="listsEditIcon toggleButton" alt="" src={process.env.PUBLIC_URL + '/icons/navbar-arrow-lists.svg'}/></button>
           <button className="btn" onClick={this.doOnAddSection}><img className="listsEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-add-list.svg'}/></button>
           <button className="btn" onClick={this.doOnEdit}><img className="listsEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-list.svg'}/></button>
-          <button className="btn" onClick={this.openModalWarningWindow}><img className="listsEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-list.svg'}/></button>
+          <button
+              className="btn"
+              onClick={this.openModalWarningWindow}>
+            <img
+                className="listsEditIcon"
+                alt=""
+                src={process.env.PUBLIC_URL + '/icons/action-delete-list.svg'}/></button>
           {listPositionPicker}
         </div>
       </div>

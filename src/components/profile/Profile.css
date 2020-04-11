@@ -86,3 +86,9 @@
   font-weight: 800;
   outline: none;
 }
+
+@media (max-width: 450px) {
+  .profile-input {
+    max-width: 150px;
+  }
+}

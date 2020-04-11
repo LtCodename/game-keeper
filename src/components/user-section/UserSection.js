@@ -256,7 +256,6 @@ class UserSection extends React.Component {
         <div className="inner-section">
           {gamesToRender}
         </div>
-
         {this.state.showModalWindow ? modalWarningWindow : ""}
         {this.state.showAddGameWindow ? addGameWindow : ""}
       </div>

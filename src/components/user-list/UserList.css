@@ -9,7 +9,6 @@
 
 .listActionButtons {
   display: flex;
-  margin-right: 20px;
   overflow: hidden;
   width: 35px;
   transition: width 1s;
@@ -129,14 +128,17 @@
   opacity: 0.8;
 }
 
-@media (max-width: 576px) {
-  .listName, .edit-list-input {
-    font-size: 45px;
+@media (max-width: 575px) {
+  .listPositionPicker {
+    display: none;
   }
 
-  .listWrapper {
-    display: block;
-    text-align: center;
+  .listActionButtonsVisible {
+    width: 155px;
+  }
+
+  .list-position-button {
+    display: none;
   }
 
   .listActionButtons {

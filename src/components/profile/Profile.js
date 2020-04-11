@@ -16,7 +16,7 @@ class Profile extends React.Component {
     this.state = {
       emailInputValue: "",
       nameInputValue: userName,
-      verifyButtonText: "Verify Email"
+      verifyButtonText: "Verify"
     };
   }
 

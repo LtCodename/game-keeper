@@ -47,7 +47,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-right: 20px;
 }
 
 .sectionActions {
@@ -121,10 +120,10 @@
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 575px) {
   .nameAndButtonsWrapper {
     text-align: center;
-    display: block;
+    margin-top: 5px;
   }
 
   .sectionActions {
@@ -133,6 +132,14 @@
 
   .inner-section {
     justify-content: center;
+  }
+
+  .positionPickerWrapper {
+    display: none;
+  }
+
+  .sectionActionButtonsVisible {
+    width: 155px;
   }
 }
 
