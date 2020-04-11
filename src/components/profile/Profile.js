@@ -230,7 +230,7 @@ class Profile extends React.Component {
     );
 
     return (
-      <div className="profile-general-wrapper">
+      <div className="profile-general-wrapper lt-row">
         {props}
       </div>
     )

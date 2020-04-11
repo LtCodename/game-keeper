@@ -30,6 +30,8 @@
 .profile-general-wrapper {
   background-color: var(--first-color);
   padding: 20px;
+  justify-content: center;
+  align-items: center;
   min-height: calc(100vh - var(--content-gap));
 }
 
@@ -62,7 +64,9 @@
 .profile-wrapper {
   background: #fef9de;
   align-items: center;
-  padding: 10px;
+  padding: 20px;
+  width: fit-content;
+  height: fit-content;
 }
 
 .profile-property {
