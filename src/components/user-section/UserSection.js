@@ -227,7 +227,7 @@ class UserSection extends React.Component {
               className="editSectionInput"
               rows="1" value={this.state.sectionInputValue}
               onChange={this.sectionInputValueChange}/>
-          <div className="sectionEditButtons">
+          <div>
             <button className="section-edit-button" onClick={this.doOnSubmit}>OK</button>
             <button className="section-edit-button" onClick={this.doOnCancel}>Cancel</button>
           </div>

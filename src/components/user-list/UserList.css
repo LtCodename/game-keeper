@@ -68,7 +68,7 @@
   background: #fef9de;
   font-weight: 800;
   cursor: pointer;
-  eight: 30px;
+  height: 30px;
 }
 
 .listName {
@@ -82,13 +82,14 @@
 }
 
 .addSectionInput {
-  background-color: var(--first-color) !important;
-  border: none;
-  color: var(--third-color) !important;
-  font-size: 40px;
-  font-family: var(--main-font);
-  padding: 0 0 0 10px;
   resize: none;
+  border: none;
+  background: inherit;
+  color: var(--third-color);
+  font-size: 25px;
+  font-weight: 800;
+  outline: none;
+  padding: 0;
 }
 
 .addSectionInput::placeholder {
@@ -104,22 +105,7 @@
 }
 
 .addSectionWrapper {
-  margin-top: 10px;
-  padding-bottom: 15px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  width: 99%;
-}
-
-.sectionAddButtons {
-  margin-left: 10px;
-}
-
-.sectionAddButtons button {
-  margin-right: 10px;
-}
-
-.addSectionInput:focus {
-  box-shadow:none !important;
+  align-items: center;
 }
 
 .listPositionPicker {

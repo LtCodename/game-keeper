@@ -132,20 +132,35 @@ class SearchPanel extends React.Component {
     });
 
     const searchModeSelector = (
-        <select value={this.state.newListForBlock} className="custom-select searchModeSelector" onChange={this.searchModeChangeHandler}>
+        <select
+            value={this.state.newListForBlock}
+            className="searchModeSelector"
+            onChange={this.searchModeChangeHandler}>
           {searchModeOptions}
         </select>
     );
 
     return (
       <div className="searchPanel">
-        <button className="searchButton" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onClick={this.onCollapse}>
+        <button
+            className="searchButton"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapseExample"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+            onClick={this.onCollapse}>
           <img className="searchIcon" alt="" src={process.env.PUBLIC_URL + '/icons/search.svg'}/>
         </button>
         <div className="collapse" id="collapseExample">
           <div className="card card-body">
             {searchModeSelector}
-            <input className="form-control" type="search" placeholder={searchPlaceholderText} value={this.state.searchInputValue} onChange={this.searchInputValueChange}/>
+            <input
+                className="search-input"
+                type="search"
+                placeholder={searchPlaceholderText}
+                value={this.state.searchInputValue}
+                onChange={this.searchInputValueChange}/>
             <p className={foundTextClass}>{`Games found in Game Keeper: ${foundTextValue}`}</p>
             <div className={matrixClassName}>
               {gamesToRender}

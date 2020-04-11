@@ -279,15 +279,20 @@ class UserList extends React.Component {
     );
 
     const addNewSectionForm = (
-      <div className="addSectionWrapper">
+      <div className="addSectionWrapper lt-row">
         <textarea
             ref={node => {
               this.linkToAddSectionTextarea = node;
-            }} placeholder="Enter Section Name" className="form-control addSectionInput" rows="1" value={this.state.sectionNameInputValue} onChange={this.sectionNameInputValueChange}/>
+            }}
+            placeholder="Enter Section Name"
+            className="addSectionInput"
+            rows="1"
+            value={this.state.sectionNameInputValue}
+            onChange={this.sectionNameInputValueChange}/>
         <Colors passColorToSection={this.holdColorForNewSection}/>
-        <div className="sectionAddButtons">
-          <button className="btn btn-dark" onClick={this.addNewSection}>OK</button>
-          <button className="btn" onClick={this.doOnCancel}>Cancel</button>
+        <div>
+          <button className="section-edit-button" onClick={this.addNewSection}>OK</button>
+          <button className="section-edit-button" onClick={this.doOnCancel}>Cancel</button>
         </div>
       </div>
     );

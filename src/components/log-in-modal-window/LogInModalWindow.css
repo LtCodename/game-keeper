@@ -1,39 +1,68 @@
-.loginInput {
-  margin-right: 10px;
+.loginFormButton {
+  margin: 5px 10px 0 0;
+  background: var(--first-color);
+  color: var(--third-color);
+  border-radius: 0;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  font-family: var(--main-font);
+  font-weight: 800;
+  padding: 5px;
 }
 
-.loginFormButton {
-  margin: 10px 10px 0 0;
+.loginFormButton:active {
+  outline: none;
+}
+
+.loginFormButton:focus {
+  outline: none;
 }
 
 .errorText {
   color: #dc3545;
-  margin: 10px 0;
+  margin: 5px 0;
+  font-weight: 500;
+}
+
+.loginForm {
+  margin-right: 18px;
+}
+
+.login-title {
+  color: var(--first-color);
+  font-weight: 800;
+  margin: 18px 0 5px 0;
 }
 
 .loginLabel {
   margin: 0;
-}
-
-#loginForm {
-  margin-right: 16px;
+  color: var(--first-color);
 }
 
 .loginInput {
-  background-color: var(--third-color);
-  color: #000000;
-  border-radius: 0;
+  margin: 0;
+  border: none;
+  background: var(--second-color);
+  padding-left: 5px;
+  color: var(--first-color);
+  font-weight: 800;
+  outline: none;
+  width: -webkit-fill-available;
 }
 
-.loginInput::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #000000;
-  opacity: 1; /* Firefox */
+.loginInput:focus {
+  outline: none;
 }
 
-.loginInput:-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: #000000;
+.loginInput:active {
+  outline: none;
 }
 
-.loginInput::-ms-input-placeholder { /* Microsoft Edge */
-  color: #000000;
+.input-col {
+  margin-bottom: 5px;
+}
+
+.login-buttons-row {
+  margin-bottom: 18px;
 }

@@ -70,14 +70,6 @@
   color: var(--third-color) !important;
 }
 
-.sectionEditButtons {
-  /*margin-left: 10px;*/
-}
-
-.sectionEditButtons button {
-  /*margin-right: 10px;*/
-}
-
 .section-edit-button {
   margin-right: 10px;
   border: none;
@@ -89,9 +81,6 @@
 }
 
 .editSectionDiv {
-  /*padding-bottom: 15px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  width: 99%;*/
   align-items: center;
 }
 

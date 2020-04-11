@@ -130,46 +130,61 @@ class SignUpModalWindow extends React.Component {
       <p className="signupErrorText">{this.state.confirmErrorMessage}</p>
     );
 
+    const errorNode = (
+        <span className="errorText">{this.state.errorText}</span>
+    )
+
     return (
       <div className="modal fade" id="signUpWindow" tabIndex="-1" role="dialog">
         <div className="modal-dialog" role="document">
           <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Sign Up</h5>
-            </div>
             <div className="modalBody">
-              <form id="signupForm" onSubmit={this.createUser}>
-                {/* ENTER EMAIL */}
-                <div className="inputField">
-                  <label className="signUpLabel" htmlFor="signupEmail">Email address*</label>
-                  <input className="form-control signupInput" autoComplete="username email" placeholder="Enter email" type="email" id="signupEmail" value={this.state.emailInputValue} onChange={this.emailValueChange} required/>
-                </div>
-                {/* CONFIRM EMAIL */}
-                <div className="inputField">
-                  <label className="signUpLabel" htmlFor="confirmEmail">Confirm Email*</label>
-                  <input className="form-control signupInput" autoComplete="username email" placeholder="Confirm email" type="email" id="confirmEmail" value={this.state.confirmEmailInputValue} onChange={this.confirmEmailValueChange} required/>
-                </div>
-                {/* ENTER PASSWORD */}
-                <div className="inputField">
-                  <label className="signUpLabel" htmlFor="signupPassword">Choose password*</label>
-                  <input className="form-control signupInput" autoComplete="current-password" placeholder="Enter password" type="password" id="signupPassword" value={this.state.passwordInputValue} onChange={this.passwordValueChange} required/>
-                </div>
-                {/* CONFIRM PASSWORD */}
-                <div className="inputField">
-                  <label className="signUpLabel" htmlFor="confirmPassword">Confirm password*</label>
-                  <input className="form-control signupInput" autoComplete="current-password" placeholder="Confirm password" type="password" id="confirmPassword" value={this.state.confirmPasswordInputValue} onChange={this.confirmPasswordValueChange} required/>
-                </div>
-                {/* ENTER DISPLAY NAME */}
-                <div className="inputField">
-                  <label className="signUpLabel" htmlFor="signupDisplayName">Display Name*</label>
-                  <input className="form-control signupInput" placeholder="Enter name" type="text" id="signupDisplayName" value={this.state.nameInputValue} onChange={this.nameValueChange} required/>
-                </div>
-                <button className="btn signupFormButton btn-warning">Sign Up</button>
-                <button className="btn signupFormButton btn-danger" data-dismiss="modal">Cancel</button>
-              </form>
-              <p className="requiredText">Fields marked with * are required.</p>
-              <NavLink to="/privacy"><button className="btn policyButton" onClick={this.onPolicy}>Privacy Policy</button></NavLink>
-              <p className="signupErrorText">{this.state.errorText}</p>
+              <div className="lt-col">
+                <span className="login-title">Sign Up</span>
+                <form id="signupForm" onSubmit={this.createUser}>
+                  {/* ENTER EMAIL */}
+                  <div className="input-col">
+                    {/*<label className="signUpLabel" htmlFor="signupEmail">Email address*</label>*/}
+                    <input className="loginInput" autoComplete="username email" placeholder="Enter email" type="email" id="signupEmail" value={this.state.emailInputValue} onChange={this.emailValueChange} required/>
+                  </div>
+                  {/* CONFIRM EMAIL */}
+                  <div className="input-col">
+                    {/*<label className="signUpLabel" htmlFor="confirmEmail">Confirm Email*</label>*/}
+                    <input
+                        className="loginInput"
+                        autoComplete="username email"
+                        placeholder="Confirm email"
+                        type="email"
+                        id="confirmEmail"
+                        value={this.state.confirmEmailInputValue}
+                        onChange={this.confirmEmailValueChange} required/>
+                  </div>
+                  {/* ENTER PASSWORD */}
+                  <div className="input-col">
+                    {/*<label className="signUpLabel" htmlFor="signupPassword">Choose password*</label>*/}
+                    <input className="loginInput" autoComplete="current-password" placeholder="Enter password" type="password" id="signupPassword" value={this.state.passwordInputValue} onChange={this.passwordValueChange} required/>
+                  </div>
+                  {/* CONFIRM PASSWORD */}
+                  <div className="input-col">
+                    {/*<label className="signUpLabel" htmlFor="confirmPassword">Confirm password*</label>*/}
+                    <input className="loginInput" autoComplete="current-password" placeholder="Confirm password" type="password" id="confirmPassword" value={this.state.confirmPasswordInputValue} onChange={this.confirmPasswordValueChange} required/>
+                  </div>
+                  {/* ENTER DISPLAY NAME */}
+                  <div className="input-col">
+                    {/*<label className="signUpLabel" htmlFor="signupDisplayName">Display Name*</label>*/}
+                    <input className="loginInput" placeholder="Enter display name" type="text" id="signupDisplayName" value={this.state.nameInputValue} onChange={this.nameValueChange} required/>
+                  </div>
+                  {this.state.errorText.length ? errorNode : ""}
+                  <div className="lt-row login-buttons-row">
+                    <button className="loginFormButton">Sign Up</button>
+                    <button className="loginFormButton" data-dismiss="modal">Cancel</button>
+                    <NavLink className="loginFormButton policyButton" to="/privacy" onClick={this.onPolicy}>
+                      Privacy Policy
+                    </NavLink>
+                  </div>
+                </form>
+              </div>
+              {/*<p className="requiredText">Fields marked with * are required.</p>*/}
               {(this.state.confirmEmailError || this.state.confirmPasswordError) ? confirmErrorDisplay : ""}
             </div>
           </div>

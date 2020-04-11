@@ -10,20 +10,6 @@
   margin-right: 10px;
 }
 
-.signupFormButton {
-  margin: 10px 10px 0 0;
-}
-
-.signupErrorText {
-  color: #dc3545;
-  margin: 10px 0;
-}
-
-.policyButton {
-  margin: 0;
-  background: darkgray;
-}
-
 .requiredText {
   color: #000000;
   margin-top: 10px;
@@ -61,4 +47,9 @@
 
 .signupInput::-ms-input-placeholder { /* Microsoft Edge */
   color: #000000;
+}
+
+.policyButton:hover {
+  text-decoration: none;
+  color: var(--third-color);
 }
