@@ -1,15 +1,3 @@
-.tableWrapper {
-  background-color: var(--third-color);
-  padding: 0 20px 0 20px;
-  color: var(--first-color);
-}
-
-.profileTopWrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .avatar {
   background-color: var(--first-color);
   border-radius: 50%;
@@ -17,7 +5,7 @@
   width: 100px;
   height: 100px;
   position: relative;
-  margin: 10px 0 15px 0;
+  margin: 0 0 10px 0;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
@@ -35,71 +23,66 @@
   width: 100%;
 }
 
-.profileHeader {
-  color: var(--first-color);
-  margin-bottom: 5px;
-}
-
-th {
-  font-weight: normal;
-}
-
-.makeItFlex {
-  display: flex;
-}
-
-.tableWrapper a:hover {
-  text-decoration: none;
-}
-
 .adminForm {
   display: flex;
 }
 
-.tableWrapper p {
-  color: var(--first-color);
-}
-
-.profileWrapper {
+.profile-general-wrapper {
   background-color: var(--first-color);
   padding: 20px;
   min-height: calc(100vh - var(--content-gap));
 }
 
 .profileButtons {
+  margin: 0 0 0 5px;
+  border: none;
   border-radius: 0;
-  background-color: var(--first-color);
+  background: #0079c5;
+  color: var(--third-color);
+  outline: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  min-width: 85px;
+  font-weight: 600;
+}
+
+.profileButtons:focus {
+  outline: none;
+}
+
+.profileButtons:hover {
+  outline: none;
+}
+
+.property-value {
+  color: #0178c5;
+  font-weight: 300;
+}
+
+.profile-wrapper {
+  background: #fef9de;
+  align-items: center;
+  padding: 10px;
+}
+
+.profile-property {
+  align-items: center;
+  margin-bottom: 10px;
+  justify-content: space-between;
+}
+
+.property-name {
+  margin-right: 10px;
+  color: #0178c5;
+  font-weight: 800;
+}
+
+.profile-input {
   margin: 0;
-  display: block;
-  color: #FFFFFF;
-  padding: 0 5px;
-}
-
-.buttonWithMarginLeft {
-  margin-left: 5px;
-}
-
-.emailInput {
-  width: 250px;
-  margin:0 5px 0 0;
-  background-color: var(--third-color);
-}
-
-.emailInput::placeholder {
+  border: none;
+  background: var(--second-color);
+  padding-left: 5px;
   color: var(--first-color);
-}
-
-.editNameInput {
-  width: 300px;
-  margin: 0;
-  color: var(--first-color);
-}
-
-.editNameInput::placeholder {
-  color: var(--first-color);
-}
-
-.profileParagraph {
-  margin: 0;
-  padding: 0;
+  font-weight: 800;
+  outline: none;
 }

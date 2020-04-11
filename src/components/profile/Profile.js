@@ -8,10 +8,6 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
 
-    // if (props.userData === null) {
-    //   props.history.push('/');
-    // }
-
     let userName = "";
     if (this.props.userData !== null) {
       userName = this.props.userData.displayName;
@@ -91,13 +87,17 @@ class Profile extends React.Component {
     }
 
     const makeAdmin = (
-      <form onSubmit={this.makeAdmin} className="adminForm">
-        <div className="inputField">
-          <input className="form-control emailInput" autoComplete="username email" placeholder="Enter email" type="email" id="adminEmail" value={this.state.emailInputValue} onChange={this.emailValueChange} required/>
-          <label className="emailInputLabel sr-only" htmlFor="adminEmail">Email address</label>
-        </div>
-        <button className="btn profileButtons">OK</button>
-      </form>
+    <form onSubmit={this.makeAdmin} className="adminForm">
+      <input
+        className="profile-input"
+        autoComplete="username email"
+        placeholder="Enter email"
+        type="email"
+        id="adminEmail"
+        value={this.state.emailInputValue} onChange={this.emailValueChange} required/>
+      <label className="emailInputLabel sr-only" htmlFor="adminEmail">Email address</label>
+      <button className="btn profileButtons">Submit</button>
+    </form>
     );
 
     const developersButton = (
@@ -120,38 +120,47 @@ class Profile extends React.Component {
       <NavLink to="/privacy"><button className="btn profileButtons">Read</button></NavLink>
     );
 
-    let adminSign = (<p className="profileParagraph"/>);
+    let adminSign = (<span className="property-value"/>);
     if (this.props.userData !== null) {
       adminSign = (
-        <p className="profileParagraph">{this.props.userData.admin ? "Admin" : "User"}</p>
+        <span className="property-value">{this.props.userData.admin ? "Admin" : "User"}</span>
       );
     }
 
     const manageDevelopers = (
-      <tr>
-        <th scope="row">Developers</th>
-        <td>{developersButton}</td>
-      </tr>
+        <div className="profile-property lt-row">
+          <span className="property-name">Developers</span>
+          <div className="lt-row">
+            {developersButton}
+          </div>
+        </div>
     );
 
     const manageSuggested = (
-      <tr>
-        <th scope="row">Suggested developers</th>
-        <td>{suggestedDevelopersButton}</td>
-      </tr>
+        <div className="profile-property lt-row">
+          <span className="property-name">Suggested Developers</span>
+          <div className="lt-row">
+            {suggestedDevelopersButton}
+          </div>
+        </div>
     );
 
     const adminMaker = (
-      <tr>
-        <th scope="row">Make admin</th>
-        <td>{makeAdmin}</td>
-      </tr>
+        <div className="profile-property lt-row">
+          <span className="property-name">Make Admin</span>
+          <div className="lt-row">
+            {makeAdmin}
+          </div>
+        </div>
     );
 
     const changeNameForm = (
-      <div className="editNameWrapper">
-        <input className="form-control editNameInput" type="text" placeholder="Enter new name" value={this.state.nameInputValue} onChange={this.nameValueChange}/>
-      </div>
+        <input
+            className="profile-input"
+            type="text"
+            placeholder="Enter new name"
+            value={this.state.nameInputValue}
+            onChange={this.nameValueChange}/>
     );
 
     let avatarInitials;
@@ -171,7 +180,7 @@ class Profile extends React.Component {
         avatarInitials = avatarInitials.slice(0, 2);
     }
 
-      if (avatarInitials.length === 0) {
+      if (!avatarInitials.length) {
           avatarInitials = "GK";
       }
 
@@ -181,54 +190,48 @@ class Profile extends React.Component {
           </div>
       );*/
 
-    const table = (
-      <div className="tableWrapper">
-        <div className="profileTopWrapper">
-          <h1 className="profileHeader">Account Details</h1>
-          <div>
-              <div className="avatar">
-                  <div className="avatarText">{avatarInitials}</div>
-              </div>
-
-          </div>
+    const props = (
+      <div className="profile-wrapper lt-col">
+        <div className="avatar">
+          <div className="avatarText">{avatarInitials}</div>
         </div>
-        <table className="table">
-          <tbody>
-            <tr>
-              <th scope="row">Display name</th>
-              <td className="makeItFlex">{changeNameForm}{changeNameButton}</td>
-            </tr>
-            {/*<tr>
-                <th scope="row">Avatar</th>
-                <td className="makeItFlex">{uploadAvatar}</td>
-            </tr>*/}
-            <tr>
-              <th scope="row">Email</th>
-              <td className="makeItFlex">{userEmail} {userVerified ? verifiedText : verifyButton}</td>
-            </tr>
-            <tr>
-              <th scope="row">Permissions</th>
-              <td>{adminSign}</td>
-            </tr>
-            <tr>
-              <th scope="row">Privacy Policy</th>
-              <td>{privacyButton}</td>
-            </tr>
-            {this.props.userData.admin ? manageDevelopers : null}
-            {this.props.userData.admin ? manageSuggested : null}
-            {this.props.userData.admin ? adminMaker : null}
-            <tr>
-              <th scope="row"/>
-              <td/>
-            </tr>
-          </tbody>
-        </table>
+        <div className="lt-col">
+          <div className="profile-property lt-row">
+            <span className="property-name">Display name</span>
+            <div className="lt-row">
+              {changeNameForm}
+              {changeNameButton}
+            </div>
+          </div>
+          <div className="profile-property lt-row">
+            <span className="property-name">Email</span>
+            <div className="lt-row">
+              <span className="property-value">{userEmail}</span>
+              {userVerified ? verifiedText : verifyButton}
+            </div>
+          </div>
+          <div className="profile-property lt-row">
+            <span className="property-name">Permissions</span>
+            <div className="lt-row">
+              {adminSign}
+            </div>
+          </div>
+          <div className="profile-property lt-row">
+            <span className="property-name">Privacy Policy</span>
+            <div className="lt-row">
+              {privacyButton}
+            </div>
+          </div>
+          {this.props.userData.admin ? manageDevelopers : null}
+          {this.props.userData.admin ? manageSuggested : null}
+          {this.props.userData.admin ? adminMaker : null}
+        </div>
       </div>
     );
 
     return (
-      <div className="profileWrapper">
-        {table}
+      <div className="profile-general-wrapper">
+        {props}
       </div>
     )
   }
