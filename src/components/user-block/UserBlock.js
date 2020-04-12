@@ -86,7 +86,6 @@ class UserBlock extends React.Component {
             </div>
           </div>
         </button>
-
         {this.state.showModalWindow ? modalWindow : ""}
       </div>
     )

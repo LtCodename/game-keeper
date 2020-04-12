@@ -11,10 +11,6 @@
   font-weight: 600;
 }
 
-.block-modal #modalWarning {
-  margin-left: -17px;
-}
-
 .modalParagraph {
   color: var(--first-color);
 }

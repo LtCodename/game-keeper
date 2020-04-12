@@ -57,6 +57,10 @@
   display: flex;
 }
 
+.cardWrapper #modalWarning {
+  padding-right: 0 !important;
+}
+
 .gameBlock_alice-blue {
   background-color: var(--color-alice-blue);
 }
