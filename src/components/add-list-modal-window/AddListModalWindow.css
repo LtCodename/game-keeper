@@ -1,5 +1,12 @@
-.modal-header {
-  padding: 10px;
+.add-list-modal .modal-content {
+  border-radius: 0;
+  border: none;
+  background: #fef9de;
+}
+
+.add-list-header {
+  border-bottom: none !important;
+  padding: 16px 16px 0 16px !important;
 }
 
 .warningWrapper {

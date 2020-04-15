@@ -3,8 +3,8 @@ import './Nav.css';
 import AddListModalWindow from '../add-list-modal-window/AddListModalWindow.js';
 import indexActions from '../../redux/reducers/selectedListIndexReducer';
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom';
-declare var $;
+import LogInModalWindow from "../log-in-modal-window/LogInModalWindow";
+/*import { NavLink } from 'react-router-dom';*/
 
 class Nav extends React.Component {
   constructor(props) {
@@ -19,21 +19,14 @@ class Nav extends React.Component {
   openAddListWindow = () => {
     this.setState({
       showAddListWindow: true
-    }, () => {
-      $("#addListWindow").modal('show');
-      $("#addListWindow").on('hidden.bs.modal', this.resetState);
     });
   };
 
-  resetState = () => {
+  closeAddListWindow = () => {
     this.setState({
       showAddListWindow: false
-    })
+    });
   };
-
-  componentWillUnmount() {
-    $("#addListWindow").unbind('hidden.bs.modal');
-  }
 
   switchBetweenTabs = (index) => {
     this.props.changeListIndex(index, this.props.userLists.length);
@@ -70,7 +63,7 @@ class Nav extends React.Component {
 
     const addListButton = (
       <div>
-        <button className="btn btn-warning btnAddList" onClick={this.openAddListWindow}>Add List</button>
+        <button className="btnAddList" onClick={this.openAddListWindow}>Add List</button>
       </div>
     );
 
@@ -85,7 +78,7 @@ class Nav extends React.Component {
     }
 
     const modalAddListWindow = (
-      <AddListModalWindow/>
+      <AddListModalWindow show={this.state.showAddListWindow} hideWindow={this.closeAddListWindow.bind(this)}/>
     );
 
     return (

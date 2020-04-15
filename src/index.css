@@ -130,19 +130,3 @@ h2 {
     font-size: 30px;
   }
 }
-
-@media (max-width: 1050px) {
-  .contentWrapper {
-    padding-top: 0;
-  }
-
-  * {
-    --content-gap: 120px;
-  }
-}
-
-@media (max-width: 580px) {
-  * {
-    /* --content-gap: 166px; */
-  }
-}

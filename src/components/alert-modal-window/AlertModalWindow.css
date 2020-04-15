@@ -1,3 +1,9 @@
+.alert-modal .modal-content {
+  border-radius: 0;
+  border: none;
+  background: #fef9de;
+}
+
 .title-row {
   display: flex;
   width: 100%;
@@ -21,11 +27,10 @@
   font-weight: 700;
 }
 
-.buttons-wrapper {
+.alert-buttons-wrapper {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-bottom: 10px;
 }
 
 .close-button {

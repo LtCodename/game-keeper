@@ -2,7 +2,7 @@ import React from 'react';
 import './AddListModalWindow.css';
 import { connect } from 'react-redux'
 import fire from "../../Firebase";
-declare var $;
+import { Modal } from 'react-bootstrap';
 
 class AddListModalWindow extends React.Component {
   constructor(props) {
@@ -20,6 +20,10 @@ class AddListModalWindow extends React.Component {
       warningMode: false
     });
   };
+
+  closeModal = () => {
+    this.props.hideWindow();
+  }
 
   onProceed = () => {
     if (this.state.nameInputValue === ``) {
@@ -39,11 +43,10 @@ class AddListModalWindow extends React.Component {
     fire.firestore().collection('users').doc(this.props.userData.uid).update({
       lists: copy
     }).then((data) => {
+      this.props.hideWindow();
     }).catch(error => {
       console.log(error.message);
     });
-
-    $("#addListWindow").modal('hide');
   };
 
   render() {
@@ -53,7 +56,7 @@ class AddListModalWindow extends React.Component {
 
     const buttonsWrapper = (
       <div>
-        <button type="button" className="addListButton" data-dismiss="modal">Cancel</button>
+        <button type="button" className="addListButton" onClick={this.closeModal}>Cancel</button>
         <button type="button" className="addListButton" onClick={this.onProceed}>Proceed</button>
       </div>
     );
@@ -65,22 +68,19 @@ class AddListModalWindow extends React.Component {
     );
 
     return (
-      <div className="modal fade" id="addListWindow" tabIndex="-1" role="dialog">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <div className={"name-wrapper"}>
-                {/*list title*/}
-                {listName}
-              </div>
-            </div>
-            {(this.state.warningMode) ? warning : ""}
-            <div className={"buttons-wrapper"}>
-              {buttonsWrapper}
-            </div>
+      <Modal show={this.props.show} onHide={this.closeModal} dialogClassName={'add-list-modal'}>
+        <Modal.Header className="add-list-header">
+          <div className={"name-wrapper"}>
+            {listName}
           </div>
-        </div>
-      </div>
+        </Modal.Header>
+        <Modal.Body>
+          {(this.state.warningMode) ? warning : ""}
+          <div className={"buttons-wrapper"}>
+            {buttonsWrapper}
+          </div>
+        </Modal.Body>
+      </Modal>
     )
   }
 }

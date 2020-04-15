@@ -1,10 +1,11 @@
 import React from 'react';
 import './AlertModalWindow.css';
+import { Modal } from "react-bootstrap";
 
-const AlertModalWindow = ({title, message}) => {
+const AlertModalWindow = ({title, message, show, hideWindow}) => {
   const buttonsWrapper = (
       <div>
-        <button type="button" className="close-button" data-dismiss="modal">Close</button>
+        <button type="button" className="close-button" onClick={hideWindow}>Close</button>
       </div>
   );
 
@@ -15,21 +16,19 @@ const AlertModalWindow = ({title, message}) => {
   );
 
   return (
-    <div className="modal fade" id="versionAlert" tabIndex="-1" role="dialog">
-      <div className="modal-dialog" role="document">
-        <div className="modal-content">
-          <div className="modal-header">
-            <div className="title-row">
-              <span className="title">{title}</span>
-            </div>
-          </div>
-          {message.length ? messageWrapper : ''}
-          <div className="buttons-wrapper">
-            {buttonsWrapper}
-          </div>
-        </div>
-      </div>
-    </div>
+      <Modal show={show} onHide={hideWindow} dialogClassName={'alert-modal'}>
+          <Modal.Body>
+              <div className="lt-col">
+                  <div className="title-row">
+                      <span className="title">{title}</span>
+                  </div>
+                  {message.length ? messageWrapper : ''}
+                  <div className="alert-buttons-wrapper">
+                      {buttonsWrapper}
+                  </div>
+              </div>
+          </Modal.Body>
+      </Modal>
   );
 };
 

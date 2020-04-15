@@ -38,6 +38,7 @@
   position: relative;
   z-index: 5;
   padding: 0 10px;
+  background: var(--third-color);
 }
 
 .signPanelWrapper {
@@ -104,10 +105,6 @@
 @media (max-width: 1050px) {
   .profileButtonAlt {
     display: block;
-  }
-
-  .ultimateHeaderWrapper {
-    box-shadow: none;
   }
 }
 

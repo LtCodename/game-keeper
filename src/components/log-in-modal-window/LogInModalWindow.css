@@ -1,3 +1,9 @@
+.login-modal .modal-content {
+  border-radius: 0;
+  border: none;
+  background: #fef9de;
+}
+
 .loginFormButton {
   margin: 5px 10px 0 0;
   background: var(--first-color);
@@ -32,7 +38,7 @@
 .login-title {
   color: var(--first-color);
   font-weight: 800;
-  margin: 18px 0 5px 0;
+  margin: 0 0 5px 0;
 }
 
 .loginLabel {
@@ -61,8 +67,4 @@
 
 .input-col {
   margin-bottom: 5px;
-}
-
-.login-buttons-row {
-  margin-bottom: 18px;
 }

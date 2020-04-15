@@ -5,10 +5,9 @@ import './Dashboard.css'
 import AddListModalWindow from '../add-list-modal-window/AddListModalWindow.js';
 import SignUpModalWindow from '../sign-up-modal-window/SignUpModalWindow.js';
 import LogInModalWindow from '../log-in-modal-window/LogInModalWindow.js';
-import { NavLink } from 'react-router-dom';
+/*import { NavLink } from 'react-router-dom';*/
 import { connect } from 'react-redux'
 import fire from "../../Firebase";
-declare var $;
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -21,71 +20,59 @@ class Dashboard extends React.Component {
     };
   }
 
-  onSignUpClick = () => {
-    this.setState({
-      showSignUpWindow: true
-    }, () => {
-      $("#signUpWindow").modal('show');
-      $("#signUpWindow").on('hidden.bs.modal', this.resetState);
-    });
-  };
-
   onLogInClick = () => {
     this.setState({
       showLogInWindow: true
-    }, () => {
-      $("#logInWindow").modal('show');
-      $("#logInWindow").on('hidden.bs.modal', this.resetState);
+    })
+  };
+
+  onSignUpClick = () => {
+    this.setState({
+      showSignUpWindow: true
     });
   };
 
   onDemoClick = (event) => {
     event.preventDefault();
     fire.auth().signInWithEmailAndPassword('fake@email.com', '1234567890').then(credential => {
+      console.log(credential);
     }).catch(error => {
       console.log(error.message);
     });
   };
 
   closeSignUpModal = () => {
-    $("#signUpWindow").modal('hide');
+    this.setState({
+      showSignUpWindow: false
+    });
   };
 
   closeLogInModal = () => {
-    $("#logInWindow").modal('hide');
+    this.setState({
+      showLogInWindow: false
+    });
   };
 
   openAddListWindow = () => {
     this.setState({
       showAddListWindow: true
-    }, () => {
-      $("#addListWindow").modal('show');
-      $("#addListWindow").on('hidden.bs.modal', this.resetState);
     });
   };
 
-  resetState = () => {
+  hideAddListWindow = () => {
     this.setState({
-      showAddListWindow: false,
-      showSignUpWindow: false,
-      showLogInWindow: false
-    })
+      showAddListWindow: false
+    });
   };
-
-  componentWillUnmount() {
-    $("#addListWindow").unbind('hidden.bs.modal');
-    $("#signUpWindow").unbind('hidden.bs.modal');
-    $("#logInWindow").unbind('hidden.bs.modal');
-  }
 
   render() {
     const listsToRender = this.props.userLists.map((elem, index) => {
-      const route = elem.name.replace(/\s+/g, '-').toLowerCase();
+      /*const route = elem.name.replace(/\s+/g, '-').toLowerCase();*/
       //return <NavLink key={elem.id} to={"/list/" + route}><ListBlock key={elem.id} listBlockIndex={index}/></NavLink>;
       return <ListBlock key={elem.id} listBlockIndex={index}/>
     });
 
-    let btnAddListClassName = "btn btnAddListFromDashboard";
+    let btnAddListClassName = "btnAddListFromDashboard";
 
     if (this.props.userLists.length === 0) {
       btnAddListClassName += " btnAddListFromDashboardSpecial";
@@ -96,7 +83,7 @@ class Dashboard extends React.Component {
     );
 
     const modalAddListWindow = (
-      <AddListModalWindow/>
+      <AddListModalWindow show={this.state.showAddListWindow} hideWindow={this.hideAddListWindow.bind(this)}/>
     );
 
     let matrixClassName = "listsMatrix listsMatrixPanel";
@@ -129,7 +116,7 @@ class Dashboard extends React.Component {
       <div>
         <div className="authButtonsMatrix">
           <button
-              className="btn authButton"
+              className="authButton"
               onClick={this.onSignUpClick}>
             Sign Up
             <img
@@ -137,7 +124,7 @@ class Dashboard extends React.Component {
               alt="" src={process.env.PUBLIC_URL + '/icons/auth-signup-blue.svg'}/>
           </button>
           <button
-              className="btn authButton"
+              className="authButton"
               onClick={this.onLogInClick}>
             Log In
             <img
@@ -145,7 +132,7 @@ class Dashboard extends React.Component {
                 alt="" src={process.env.PUBLIC_URL + '/icons/auth-login-blue.svg'}/>
           </button>
           <button
-              className="btn authButton"
+              className="authButton"
               onClick={this.onDemoClick}>
             Demo
             <img
@@ -157,11 +144,11 @@ class Dashboard extends React.Component {
     );
 
     const signUpWindow = (
-      <SignUpModalWindow close={this.closeSignUpModal} />
+      <SignUpModalWindow show={this.state.showSignUpWindow} hideWindow={this.closeSignUpModal.bind(this)} />
     );
 
     const logInWindow = (
-      <LogInModalWindow close={this.closeLogInModal}/>
+      <LogInModalWindow show={this.state.showLogInWindow} hideWindow={this.closeLogInModal.bind(this)}/>
     );
 
     return (
@@ -169,10 +156,9 @@ class Dashboard extends React.Component {
         <div className="dashboard">
           {this.props.userData ? authorized : authPanel}
         </div>
-
-        {this.state.showAddListWindow ? modalAddListWindow : ""}
-        {this.state.showLogInWindow ? logInWindow : ""}
-        {this.state.showSignUpWindow ? signUpWindow : ""}
+        {modalAddListWindow}
+        {logInWindow}
+        {signUpWindow}
       </div>
     )
   }

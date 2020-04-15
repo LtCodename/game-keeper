@@ -96,28 +96,28 @@ class Profile extends React.Component {
         id="adminEmail"
         value={this.state.emailInputValue} onChange={this.emailValueChange} required/>
       <label className="emailInputLabel sr-only" htmlFor="adminEmail">Email address</label>
-      <button className="btn profileButtons">Submit</button>
+      <button className="profileButtons">Submit</button>
     </form>
     );
 
     const developersButton = (
-      <NavLink to="/developers"><button className="btn profileButtons">Manage</button></NavLink>
+      <NavLink to="/developers"><button className="profileButtons">Manage</button></NavLink>
     );
 
     const suggestedDevelopersButton = (
-      <NavLink to="/suggested"><button className="btn profileButtons">Manage</button></NavLink>
+      <NavLink to="/suggested"><button className="profileButtons">Manage</button></NavLink>
     );
 
     const changeNameButton = (
-      <button className="btn profileButtons buttonWithMarginLeft" onClick={this.onChangeName}>Change</button>
+      <button className="profileButtons" onClick={this.onChangeName}>Change</button>
     );
 
     const verifyButton = (
-      <button className="btn profileButtons buttonWithMarginLeft" onClick={this.onVerify}>{this.state.verifyButtonText}</button>
+      <button className="profileButtons" onClick={this.onVerify}>{this.state.verifyButtonText}</button>
     );
 
     const privacyButton = (
-      <NavLink to="/privacy"><button className="btn profileButtons">Read</button></NavLink>
+      <NavLink to="/privacy"><button className="profileButtons">Read</button></NavLink>
     );
 
     let adminSign = (<span className="property-value"/>);

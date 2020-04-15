@@ -1,7 +1,7 @@
 import React from 'react';
 import './Footer.css';
 import AlertModalWindow from '../alert-modal-window/AlertModalWindow.js';
-declare var $;
+import LogInModalWindow from "../log-in-modal-window/LogInModalWindow";
 
 class Footer extends React.Component {
   constructor(props) {
@@ -15,21 +15,15 @@ class Footer extends React.Component {
   onVersionClick = () => {
     this.setState({
       showAlertWindow: true
-    }, () => {
-      $("#versionAlert").modal('show');
-      $("#versionAlert").on('hidden.bs.modal', this.resetState);
     });
   };
 
-  resetState = () => {
+  closeAlertModal = () => {
+    console.log('here')
     this.setState({
       showAlertWindow: false
-    })
+    });
   };
-
-  componentWillUnmount() {
-    $("#versionAlert").unbind('hidden.bs.modal');
-  }
 
   render() {
     const rightIcons = (
@@ -71,7 +65,9 @@ class Footer extends React.Component {
     const alertWindow = (
       <AlertModalWindow
         title={`Game Keeper Alpha`}
-        message={`Version: 0.55. Release date: Apr 10, 2020.`}/>
+        message={`Version: 0.55. Release date: Apr 10, 2020.`}
+        show={this.state.showAlertWindow}
+        hideWindow={this.closeAlertModal.bind(this)}/>
     );
 
     return (
@@ -81,7 +77,7 @@ class Footer extends React.Component {
           {copyright}
           {rightIcons}
         </div>
-        {this.state.showAlertWindow ? alertWindow : ""}
+        {alertWindow}
       </div>
     )
   }

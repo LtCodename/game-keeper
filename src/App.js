@@ -129,7 +129,6 @@ class App extends React.Component {
       doc => {
         if (doc.exists) {
            console.log("User collections data:", doc.data());
-           console.log("User collections data:", doc.data());
            const allUserData = doc.data() || {};
            this.props.setListsToStore(allUserData.lists || []);
            this.props.setSectionsToStore(allUserData.sections || []);
