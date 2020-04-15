@@ -19,7 +19,6 @@ class Footer extends React.Component {
   };
 
   closeAlertModal = () => {
-    console.log('here')
     this.setState({
       showAlertWindow: false
     });

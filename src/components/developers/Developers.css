@@ -1,4 +1,4 @@
-.developersWrapperP {
+.developers-info {
   color: var(--third-color);
 }
 
@@ -11,24 +11,5 @@
 .blocksWrapper {
   display: flex;
   flex-wrap: wrap;
-}
-
-.developersBlock {
-  background-color: var(--third-color);
-  color: var(--first-color);
-  margin: 0 5px 5px 0;
-  text-transform: uppercase;
-  font-family: var(--main-font);
-  font-size: 25px;
-  padding: 0 5px;
-}
-
-.deleteIcon {
-  height: 25px;
-}
-
-.actionButton {
-  margin: 0 0 0 5px;;
-  padding: 0;
-  background-color: var(--third-color);
+  margin-top: 10px;
 }

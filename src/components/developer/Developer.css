@@ -1,0 +1,28 @@
+.developers-block {
+    background-color: var(--third-color);
+    color: var(--first-color);
+    margin: 0 5px 5px 0;
+    font-family: var(--main-font);
+    padding: 5px;
+    font-weight: 800;
+}
+
+.developer-action-button {
+    margin: 0 0 0 5px;
+    border: none;
+    padding: 0;
+    background-color: var(--third-color);
+    outline: none;
+}
+
+.developer-action-button:focus {
+    outline: none;
+}
+
+.developer-action-button:active {
+    outline: none;
+}
+
+.dev-action-icon {
+    height: 25px;
+}

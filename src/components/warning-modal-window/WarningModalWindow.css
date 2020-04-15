@@ -1,3 +1,9 @@
+.warning-modal .modal-content {
+  border-radius: 0;
+  border: none;
+  background: #fef9de;
+}
+
 .modal-header {
   border-bottom: 0;
 }
@@ -41,11 +47,10 @@
   font-weight: 800;
 }
 
-.buttons-wrapper {
+.warning-buttons-wrapper {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-bottom: 10px;
 }
 
 .warning-button {
