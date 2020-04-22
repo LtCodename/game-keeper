@@ -8,6 +8,7 @@ import LogInModalWindow from '../log-in-modal-window/LogInModalWindow.js';
 /*import { NavLink } from 'react-router-dom';*/
 import { connect } from 'react-redux'
 import fire from "../../Firebase";
+import {DemoIcon, LogInIcon, SignUpIcon} from "../../IconsLibrary";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -119,25 +120,19 @@ class Dashboard extends React.Component {
               className="authButton"
               onClick={this.onSignUpClick}>
             Sign Up
-            <img
-              className="authButtonIcon"
-              alt="" src={process.env.PUBLIC_URL + '/icons/auth-signup-blue.svg'}/>
+            <span className="auth-button-icon-wrapper">{SignUpIcon}</span>
           </button>
           <button
               className="authButton"
               onClick={this.onLogInClick}>
             Log In
-            <img
-                className="authButtonIcon"
-                alt="" src={process.env.PUBLIC_URL + '/icons/auth-login-blue.svg'}/>
+            <span className="auth-button-icon-wrapper">{LogInIcon}</span>
           </button>
           <button
               className="authButton"
               onClick={this.onDemoClick}>
             Demo
-            <img
-                className="authButtonIcon"
-                alt="" src={process.env.PUBLIC_URL + '/icons/demo.svg'}/>
+            <span className="auth-button-icon-wrapper">{DemoIcon}</span>
           </button>
         </div>
       </div>

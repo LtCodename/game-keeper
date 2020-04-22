@@ -2,6 +2,7 @@ import React from 'react';
 import './Footer.css';
 import AlertModalWindow from '../alert-modal-window/AlertModalWindow.js';
 import LogInModalWindow from "../log-in-modal-window/LogInModalWindow";
+import {TrelloIcon, TwitterIcon, VersionIcon} from "../../IconsLibrary";
 
 class Footer extends React.Component {
   constructor(props) {
@@ -31,8 +32,7 @@ class Footer extends React.Component {
               className="right-a"
               href="https://twitter.com/LtCodename"
               target="blank">
-            <img
-              className="icon" alt="" src={process.env.PUBLIC_URL + '/icons/share-twitter.svg'}/>
+              {TwitterIcon}
           </a>
       </div>
     );
@@ -42,13 +42,13 @@ class Footer extends React.Component {
           <a
               className="left-a version-a"
               onClick={this.onVersionClick}>
-            <img className="icon" alt="" src={process.env.PUBLIC_URL + '/icons/version.svg'}/>
+            {VersionIcon}
           </a>
           <a
               className="left-a"
               href="https://trello.com/b/GT6AY0oi/game-keeper-roadmap"
               target="blank">
-            <img className="icon" alt="" src={process.env.PUBLIC_URL + '/icons/share-trello.svg'}/>
+            {TrelloIcon}
           </a>
       </div>
     );

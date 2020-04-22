@@ -2,6 +2,7 @@ import React from 'react';
 import UserBlock from '../user-block/UserBlock.js';
 import './SearchPanel.css';
 import { connect } from 'react-redux'
+import {SearchIcon} from "../../IconsLibrary";
 
 class SearchPanel extends React.Component {
   constructor(props) {
@@ -10,7 +11,8 @@ class SearchPanel extends React.Component {
     this.state = {
       searchInputValue: '',
       foundGames: [],
-      searchMode: "name"
+      searchMode: "name",
+      showPanel: false
     };
   }
 
@@ -53,7 +55,8 @@ class SearchPanel extends React.Component {
   onCollapse = () => {
     this.setState({
       searchInputValue: '',
-      foundGames: []
+      foundGames: [],
+      showPanel: !this.state.showPanel
     });
   };
 
@@ -140,6 +143,22 @@ class SearchPanel extends React.Component {
         </select>
     );
 
+    const panel = (
+        <div className="lt-col search-panel-wrapper">
+          {searchModeSelector}
+          <textarea
+              className="search-input"
+              rows={1}
+              placeholder={searchPlaceholderText}
+              value={this.state.searchInputValue}
+              onChange={this.searchInputValueChange}/>
+          <span className={foundTextClass}>{`Games found in Game Keeper: ${foundTextValue}`}</span>
+          <div className={matrixClassName}>
+            {gamesToRender}
+          </div>
+        </div>
+    );
+
     return (
       <div className="searchPanel">
         <button
@@ -150,23 +169,9 @@ class SearchPanel extends React.Component {
             aria-expanded="false"
             aria-controls="collapseExample"
             onClick={this.onCollapse}>
-          <img className="searchIcon" alt="" src={process.env.PUBLIC_URL + '/icons/search.svg'}/>
+          {SearchIcon}
         </button>
-        <div className="collapse" id="collapseExample">
-          <div className="card card-body">
-            {searchModeSelector}
-            <input
-                className="search-input"
-                type="search"
-                placeholder={searchPlaceholderText}
-                value={this.state.searchInputValue}
-                onChange={this.searchInputValueChange}/>
-            <p className={foundTextClass}>{`Games found in Game Keeper: ${foundTextValue}`}</p>
-            <div className={matrixClassName}>
-              {gamesToRender}
-            </div>
-          </div>
-        </div>
+        {this.state.showPanel ? panel : ''}
       </div>
     )
   }

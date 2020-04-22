@@ -1,15 +1,18 @@
-.searchIcon {
-  height: 35px;
-  color: var(--second-color)
-}
-
 .search-input {
   margin: 0;
   border: none;
   background: inherit;
   outline: none;
-  font-weight: 700;
+  background: var(--second-color);
+  padding-left: 5px;
   color: var(--first-color);
+  font-weight: 800;
+  resize: none;
+}
+
+.search-panel-wrapper {
+  background: #fef9de;
+  padding: 10px;
 }
 
 .search-input:focus {
@@ -61,7 +64,7 @@
 
 .foundText {
   display: none;
-  margin: 0 0 10px 0;
+  margin: 0 0 2px 0;
   color: var(--first-color);
   padding: 0;
 }

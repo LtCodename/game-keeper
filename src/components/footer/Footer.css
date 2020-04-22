@@ -17,10 +17,6 @@
   margin-right: 10px;
 }
 
-.icon {
-  height: 35px;
-}
-
 .copyright {
   color: var(--first-color);
   font-family: var(--main-font);
