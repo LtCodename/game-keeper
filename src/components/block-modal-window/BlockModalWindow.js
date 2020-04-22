@@ -80,7 +80,6 @@ class BlockModalWindow extends React.Component {
   };
 
   openModalWarningWindow = () => {
-    console.log('here')
     this.setState({
       showModalWindow: true
     });
@@ -199,8 +198,6 @@ class BlockModalWindow extends React.Component {
     }else {
       this.updateBlock(mappedPlatforms);
     }
-
-    this.props.hideWindow();
   };
 
   updateBlock(platforms) {
@@ -239,6 +236,7 @@ class BlockModalWindow extends React.Component {
         blocks: allBlocks,
         sections: allSections,
       }).then((data) => {
+        this.props.hideWindow();
       }).catch(error => {
         console.log(error.message);
       });
@@ -262,6 +260,8 @@ class BlockModalWindow extends React.Component {
     }).catch(error => {
       console.log(error.message);
     });
+
+    this.props.hideWindow();
   }
 
   render() {

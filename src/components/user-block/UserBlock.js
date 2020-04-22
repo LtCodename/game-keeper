@@ -20,7 +20,6 @@ class UserBlock extends React.Component {
   };
 
   openModalWindow = () => {
-    console.log('hey')
     this.setState({
       showModalWindow: true
     });

@@ -244,7 +244,7 @@ class UserSection extends React.Component {
           {gamesToRender}
         </div>
         {modalWarningWindow}
-        {addGameWindow}
+        {this.state.showAddGameWindow ? addGameWindow : ''}
       </div>
     );
   }
