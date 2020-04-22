@@ -6,7 +6,6 @@ import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
 import BlockModalWindow from '../block-modal-window/BlockModalWindow.js';
 import { connect } from 'react-redux'
 import fire from "../../Firebase";
-declare var $;
 
 class UserSection extends React.Component {
   constructor(props) {
@@ -55,32 +54,17 @@ class UserSection extends React.Component {
     });
   };
 
-  closeAddGameModal() {
-    $("#addGame").modal('hide');
-  }
-
   openModalWarningWindow = () => {
     this.setState({
       showModalWindow: true
-    }, () => {
-      $("#modalWarning").modal('show');
-      $("#modalWarning").on('hidden.bs.modal', this.resetState);
     });
   };
 
   openAddGameWindow = () => {
     this.setState({
       showAddGameWindow: true
-    }, () => {
-      $("#addGame").modal('show');
-      $("#addGame").on('hidden.bs.modal', this.resetState);
     });
   };
-
-  componentWillUnmount() {
-    $("#modalWarning").unbind('hidden.bs.modal');
-    $("#addGame").unbind('hidden.bs.modal');
-  }
 
   resetState = () => {
     this.setState({
@@ -238,7 +222,9 @@ class UserSection extends React.Component {
     const modalWarningWindow = (
       <WarningModalWindow
         onProceed={this.sectionDelete}
-        message={`Are you sure you want to delete section ${this.props.name}?`} />
+        message={`Are you sure you want to delete section ${this.props.name}?`}
+        show={this.state.showModalWindow}
+        hideWindow={this.resetState.bind(this)}/>
     );
 
     const addGameWindow = (
@@ -246,8 +232,9 @@ class UserSection extends React.Component {
         modalId={"addGame"}
         gameData={{name:"New game"}}
         fullMode={false}
-        sectionId={this.props.id}
-        closeModal={this.closeAddGameModal}/>
+        show={this.state.showAddGameWindow}
+        hideWindow={this.resetState.bind(this)}
+        sectionId={this.props.id}/>
     );
 
     return (
@@ -256,8 +243,8 @@ class UserSection extends React.Component {
         <div className="inner-section">
           {gamesToRender}
         </div>
-        {this.state.showModalWindow ? modalWarningWindow : ""}
-        {this.state.showAddGameWindow ? addGameWindow : ""}
+        {modalWarningWindow}
+        {addGameWindow}
       </div>
     );
   }

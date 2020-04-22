@@ -3,7 +3,6 @@ import BlockModalWindow from '../block-modal-window/BlockModalWindow.js';
 import './UserBlock.css';
 import * as moment from 'moment';
 import { connect } from 'react-redux'
-declare var $;
 
 class UserBlock extends React.Component {
   constructor(props) {
@@ -14,10 +13,6 @@ class UserBlock extends React.Component {
     };
   }
 
-  componentWillUnmount() {
-    $("#blockModalWindow").unbind('hidden.bs.modal');
-  }
-
   resetState = () => {
     this.setState({
       showModalWindow: false
@@ -25,16 +20,10 @@ class UserBlock extends React.Component {
   };
 
   openModalWindow = () => {
+    console.log('hey')
     this.setState({
       showModalWindow: true
-    }, () => {
-      $("#blockModalWindow").modal('show');
-      $("#blockModalWindow").on('hidden.bs.modal', this.resetState);
     });
-  };
-
-  closeModal = () => {
-    $("#blockModalWindow").modal('hide');
   };
 
   render() {
@@ -70,9 +59,10 @@ class UserBlock extends React.Component {
         modalId={"blockModalWindow"}
         gameData={this.props.gameData}
         fullMode={true}
+        show={this.state.showModalWindow}
         listId={this.props.listId}
         sectionId={this.props.sectionId}
-        closeModal={this.closeModal}/>
+        hideWindow={this.resetState}/>
     );
 
     return (
@@ -86,7 +76,7 @@ class UserBlock extends React.Component {
             </div>
           </div>
         </button>
-        {this.state.showModalWindow ? modalWindow : ""}
+        {modalWindow}
       </div>
     )
   }

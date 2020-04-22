@@ -3,7 +3,7 @@ import './BlockModalWindow.css';
 import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
 import { connect } from 'react-redux'
 import fire from "../../Firebase";
-declare var $;
+import { Modal } from "react-bootstrap";
 
 class BlockModalWindow extends React.Component {
   constructor(props) {
@@ -20,8 +20,6 @@ class BlockModalWindow extends React.Component {
       newListForBlock: this.props.listId || this.props.userLists[this.props.listIndex].id,
       newSectionForBlock: this.props.sectionId
     };
-
-    console.log(this.props.gameData)
   }
 
   newListSelectChangeHandler = (event) => {
@@ -53,7 +51,7 @@ class BlockModalWindow extends React.Component {
       copy.splice(targetBlockIndex, 1);
     }
 
-    this.props.closeModal();
+    this.props.hideWindow();
 
     fire.firestore().collection('users').doc(this.props.userData.uid).update({
       blocks: copy
@@ -82,17 +80,11 @@ class BlockModalWindow extends React.Component {
   };
 
   openModalWarningWindow = () => {
+    console.log('here')
     this.setState({
       showModalWindow: true
-    }, () => {
-      $("#modalWarning").modal('show');
-      $("#modalWarning").on('hidden.bs.modal', this.resetState);
     });
   };
-
-  componentWillUnmount() {
-    $("#modalWarning").unbind('hidden.bs.modal');
-  }
 
   resetState = () => {
     this.setState({
@@ -208,7 +200,7 @@ class BlockModalWindow extends React.Component {
       this.updateBlock(mappedPlatforms);
     }
 
-    this.props.closeModal();
+    this.props.hideWindow();
   };
 
   updateBlock(platforms) {
@@ -305,7 +297,9 @@ class BlockModalWindow extends React.Component {
     const modalWarningWindow = (
       <WarningModalWindow
         onProceed={this.deleteBlock}
-        message={`Are you sure you want to delete game ${this.state.localGameData.name}?`} />
+        message={`Are you sure you want to delete game ${this.state.localGameData.name}?`}
+        show={this.state.showModalWindow}
+        hideWindow={this.resetState.bind(this)}/>
     );
 
     let newHomeSelector = "";
@@ -418,11 +412,10 @@ class BlockModalWindow extends React.Component {
     );
 
     return (
-      <div className="block-modal blockModalWindow">
-        <div className="modal fade" id={this.props.modalId} tabIndex="-1" role="dialog">
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-body properties-wrapper">
+        <>
+          <Modal show={this.props.show} onHide={this.props.hideWindow} dialogClassName={'block-modal'}>
+            <Modal.Body>
+              <div className="lt-col">
                 {/*title*/}
                 {name}
                 {/*New list and section selector*/}
@@ -439,16 +432,15 @@ class BlockModalWindow extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className="modal-footer">
-                <button type="button" className="block-button" data-dismiss="modal">Cancel</button>
+              <div className="lt-row">
+                <button type="button" className="block-button" onClick={this.props.hideWindow}>Cancel</button>
                 {deleteButton}
                 <button type="button" className="block-button" onClick={this.modalSave}>Save</button>
               </div>
-            </div>
-          </div>
-        </div>
-        {this.state.showModalWindow ? modalWarningWindow : ""}
-      </div>
+            </Modal.Body>
+          </Modal>
+          {modalWarningWindow}
+        </>
     )
   }
 }

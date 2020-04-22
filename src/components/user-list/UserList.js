@@ -6,7 +6,6 @@ import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
 import indexActions from '../../redux/reducers/selectedListIndexReducer';
 import { connect } from 'react-redux'
 import fire from "../../Firebase";
-declare var $;
 
 class UserList extends React.Component {
   constructor(props) {
@@ -73,15 +72,8 @@ class UserList extends React.Component {
   openModalWarningWindow = () => {
     this.setState({
       showModalWindow: true
-    }, () => {
-      $("#modalWarning").modal('show');
-      $("#modalWarning").on('hidden.bs.modal', this.resetState);
     });
   };
-
-  componentWillUnmount() {
-    $("#modalWarning").unbind('hidden.bs.modal');
-  }
 
   resetState = () => {
     this.setState({
@@ -228,7 +220,9 @@ class UserList extends React.Component {
     const modalWarningWindow = (
       <WarningModalWindow
         onProceed={this.onDeleteList}
-        message={`Are you sure you want to delete list ${this.props.userLists[this.props.listIndex].name}?`} />
+        show={this.state.showModalWindow}
+        hideWindow={this.resetState.bind(this)}
+        message={`Are you sure you want to delete list ${this.props.userLists[this.props.listIndex].name}?`}/>
     );
 
     const positionOptions = this.props.userLists.map((elem, index) => {
@@ -305,7 +299,7 @@ class UserList extends React.Component {
       <div className="allContent">
         {this.state.renameListMode ? editListNameForm : this.state.addSectionMode ? addNewSectionForm : nameAndButtonsBlock}
         {sectionsToRender}
-        {this.state.showModalWindow ? modalWarningWindow : ""}
+        {modalWarningWindow}
       </div>
     );
   }

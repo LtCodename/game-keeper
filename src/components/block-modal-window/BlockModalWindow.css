@@ -1,14 +1,15 @@
+.block-modal .modal-content {
+  border-radius: 0;
+  border: none;
+  background: #fef9de;
+}
+
 .block-modal #blockModalWindow {
   padding-right: 0 !important;
 }
 
 .properties-wrapper {
   padding: 15px 15px 0 15px;
-}
-
-.blockModalWindow {
-  color: var(--first-color);
-  font-weight: 600;
 }
 
 .modalParagraph {
@@ -101,7 +102,7 @@ option {
 }
 
 .block-button {
-  margin: 5px 0 0 0;
+  margin: 5px 5px 0 0;
   border: none;
   border-radius: 0;
   background: #0079c5;
