@@ -3,6 +3,7 @@ import BlockModalWindow from '../block-modal-window/BlockModalWindow.js';
 import './UserBlock.css';
 import * as moment from 'moment';
 import { connect } from 'react-redux'
+import {iOSIcon, MacIcon, PCIcon, PS4Icon, SwitchIcon, XboxOneIcon} from "../../IconsLibrary";
 
 class UserBlock extends React.Component {
   constructor(props) {
@@ -33,11 +34,21 @@ class UserBlock extends React.Component {
       className += color;
     }
 
+    const platformsIcons = {
+      ios: iOSIcon,
+      mac: MacIcon,
+      pc: PCIcon,
+      ps4: PS4Icon,
+      switch: SwitchIcon,
+      xboxone: XboxOneIcon
+    }
+
     const platformsToShow = (this.props.gameData.hasOwnProperty('platforms')) ? (
       this.props.gameData.platforms.map((elem, index) => {
-        const path = `${elem.iconName}`;
-        let fullPath = '/icons/' + path + '.svg';
-        return (<img key={index} className="platformIcon" alt="" src={process.env.PUBLIC_URL + fullPath}/>);
+        /*const path = `${elem.iconName}`;
+        let fullPath = '/icons/' + path + '.svg';*/
+        /*return (<img key={index} className="platformIcon" alt="" src={process.env.PUBLIC_URL + fullPath}/>);*/
+        return (<span key={index}>{platformsIcons[elem.iconName]}</span>)
       })) : [];
 
     const platfotmsOnBlock = (
