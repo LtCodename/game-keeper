@@ -4,6 +4,7 @@ import indexActions from '../../redux/reducers/selectedListIndexReducer';
 import { connect } from 'react-redux'
 import { NavLink, withRouter } from 'react-router-dom';
 import fire from "../../Firebase";
+import {LogOutIcon, LogOutIconMobile, ProfileIcon, ProfileIconMobile} from "../../IconsLibrary";
 
 const Header = ({changeListIndex, history, userLists, userData}) => {
   const onLogOutClick = () => {
@@ -32,7 +33,8 @@ const Header = ({changeListIndex, history, userLists, userData}) => {
             className="profileButton"
             onClick={onLogOutClick}>
           Log Out
-          <img className="authIcon" alt="" src={process.env.PUBLIC_URL + '/icons/auth-logout.svg'}/></button>
+            {LogOutIcon}
+        </button>
       </div>
   );
 
@@ -44,32 +46,32 @@ const Header = ({changeListIndex, history, userLists, userData}) => {
               className="profileButton"
               onClick={() => changeListIndex(null, userLists.length)}>
             Profile
-            <img className="authIcon" alt="" src={process.env.PUBLIC_URL + '/icons/auth-profile.svg'}/>
+            {ProfileIcon}
           </button>
         </NavLink>
       </div>
   );
 
   const profileAltButton = (
-      <div className="authButtonWrapper">
+      <div className="">
         <NavLink
             to="/profile">
           <button
-              className="btn profileButtonAlt"
+              className="profileButtonAlt"
               onClick={() => changeListIndex(null, userLists.length)}>
-            <img
-                className="authIconAlt" alt="" src={process.env.PUBLIC_URL + '/icons/auth-profile.svg'}/>
+            {ProfileIconMobile}
           </button>
         </NavLink>
       </div>
   );
 
   const logOutAltButton = (
-      <div className="authButtonWrapper">
+      <div className="">
         <button
-            className="btn profileButtonAlt"
+            className="profileButtonAlt"
             onClick={onLogOutClick}>
-          <img className="authIconAlt" alt="" src={process.env.PUBLIC_URL + '/icons/auth-logout.svg'}/></button>
+            {LogOutIconMobile}
+        </button>
       </div>
   );
 

@@ -3,6 +3,7 @@ import './Developer.css';
 import fire from "../../Firebase";
 import WarningModalWindow from "../warning-modal-window/WarningModalWindow";
 import EditNameModalWindow from "../edit-name-modal-window/EditNameModalWindow";
+import {DeleteDeveloperIcon, EditDeveloperIcon} from "../../IconsLibrary";
 
 class Developer extends React.Component {
     constructor(props) {
@@ -111,15 +112,12 @@ class Developer extends React.Component {
                     <button
                         className="developer-action-button"
                         onClick={() => this.onDeleteItem(this.props.devData.id)}>
-                        <img className="dev-action-icon"
-                             alt=""
-                             src={process.env.PUBLIC_URL + '/icons/action-delete-developer.svg'}/>
+                        {DeleteDeveloperIcon}
                     </button>
-                    <button className="developer-action-button">
-                        <img className="dev-action-icon"
-                             onClick={() => this.onEditItem(this.props.devData.id, this.props.devData.name)}
-                             alt=""
-                             src={process.env.PUBLIC_URL + '/icons/action-edit-developer.svg'}/>
+                    <button
+                        className="developer-action-button"
+                        onClick={() => this.onEditItem(this.props.devData.id, this.props.devData.name)}>
+                        {EditDeveloperIcon}
                     </button>
                 </div>
                 {modalWarningWindow}

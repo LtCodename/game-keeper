@@ -46,27 +46,33 @@
 }
 
 .profileButtonAlt {
-  background-color: var(--first-color);
+  background-color: transparent;
   color: var(--third-color);
   border-radius: 0;
   font-family: var(--main-font);
-  margin: 0;
-  padding: 5px;
+  padding: 0;
   display: none;
   width: 100%;
+  border: none;
+  margin: 0 5px;
 }
 
-.authIcon {
+.profileButtonAlt:focus {
+  outline: none;
+}
+
+.profileButtonAlt:active {
+  outline: none;
+}
+
+.auth-icon {
   height: 25px;
   margin-left: 5px;
 }
 
-.authIconAlt {
-  height: 25px;
-}
-
 .altButtonsWrapper {
   display: none;
+  padding-bottom: 10px;
 }
 
 .authButtonWrapper:nth-child(2n+1) {

@@ -1,5 +1,5 @@
 .preloaderContent {
-  height: calc(100vh - var(--content-gap) + 5px);
+  height: calc(100vh - var(--content-gap));
   background-color: var(--first-color);
 }
 

@@ -4,6 +4,7 @@ import AddListModalWindow from '../add-list-modal-window/AddListModalWindow.js';
 import indexActions from '../../redux/reducers/selectedListIndexReducer';
 import { connect } from 'react-redux'
 import LogInModalWindow from "../log-in-modal-window/LogInModalWindow";
+import {NavArrowIcon} from "../../IconsLibrary";
 /*import { NavLink } from 'react-router-dom';*/
 
 class Nav extends React.Component {
@@ -68,7 +69,9 @@ class Nav extends React.Component {
     );
 
     const hideButton = (
-      <button className="hideNavButton" onClick={this.toggleNavbar}><img className="hideArrow" alt="" src={process.env.PUBLIC_URL + '/icons/navbar-arrow.svg'}/></button>
+      <button className="hideNavButton" onClick={this.toggleNavbar}>
+        {NavArrowIcon}
+      </button>
     );
 
     let navClassName = "navBar";

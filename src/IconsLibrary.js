@@ -56,3 +56,135 @@ export const DemoIcon = (
     d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z"/>
     </svg>
 )
+
+export const NavArrowIcon = (
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down"
+         role="img" height='30px' xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 448 512">
+        <path fill="#0079c5"
+    d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"/>
+    </svg>
+)
+
+export const ListActionPanelIcon = (
+    <svg className="listsEditIcon toggleButton" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down"
+         role="img" height='35px' xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 448 512"><path fill="#fff68f"
+    d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"/>
+    </svg>
+)
+
+export const AddListIcon = (
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus-square"
+         className="listsEditIcon" height='35px' role="img" xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 448 512"><path fill="#fff68f"
+    d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-32 252c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92H92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"/>
+    </svg>
+)
+
+export const EditListIcon = (
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen-square"
+         className="listsEditIcon" height='35px' role="img" xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 448 512"><path fill="#fff68f"
+    d="M400 480H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zM238.1 177.9L102.4 313.6l-6.3 57.1c-.8 7.6 5.6 14.1 13.3 13.3l57.1-6.3L302.2 242c2.3-2.3 2.3-6.1 0-8.5L246.7 178c-2.5-2.4-6.3-2.4-8.6-.1zM345 165.1L314.9 135c-9.4-9.4-24.6-9.4-33.9 0l-23.1 23.1c-2.3 2.3-2.3 6.1 0 8.5l55.5 55.5c2.3 2.3 6.1 2.3 8.5 0L345 199c9.3-9.3 9.3-24.5 0-33.9z"/>
+    </svg>
+)
+
+export const DeleteListIcon = (
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="minus-square"
+         className="listsEditIcon" height='35px' role="img" xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 448 512"><path fill="#fff68f"
+    d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM92 296c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h264c6.6 0 12 5.4 12 12v56c0 6.6-5.4 12-12 12H92z"/>
+    </svg>
+)
+
+export const SectionActionPanelIcon = (
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down"
+         className="sectionEditIcon toggleButton" height='35px' role="img" xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 448 512"><path fill="#fff9de"
+    d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"/>
+    </svg>
+)
+
+export const AddSectionIcon = (
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus-square"
+         className="sectionEditIcon" height='35px' role="img" xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 448 512"><path fill="#fff9de"
+    d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-32 252c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92H92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"/>
+    </svg>
+)
+
+export const EditSectionIcon = (
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen-square"
+         className="sectionEditIcon" height='35px' role="img" xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 448 512"><path fill="#fff9de"
+    d="M400 480H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zM238.1 177.9L102.4 313.6l-6.3 57.1c-.8 7.6 5.6 14.1 13.3 13.3l57.1-6.3L302.2 242c2.3-2.3 2.3-6.1 0-8.5L246.7 178c-2.5-2.4-6.3-2.4-8.6-.1zM345 165.1L314.9 135c-9.4-9.4-24.6-9.4-33.9 0l-23.1 23.1c-2.3 2.3-2.3 6.1 0 8.5l55.5 55.5c2.3 2.3 6.1 2.3 8.5 0L345 199c9.3-9.3 9.3-24.5 0-33.9z"/>
+    </svg>
+)
+
+export const DeleteSectionIcon = (
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="minus-square"
+         className="sectionEditIcon" height='35px' role="img" xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 448 512"><path fill="#fff9de"
+    d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM92 296c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h264c6.6 0 12 5.4 12 12v56c0 6.6-5.4 12-12 12H92z"/>
+    </svg>
+)
+
+export const ProfileIcon = (
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-alt"
+         className="auth-icon" role="img" height='25px' xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 512 512">
+        <path fill="#fff9de"
+    d="M256 288c79.5 0 144-64.5 144-144S335.5 0 256 0 112 64.5 112 144s64.5 144 144 144zm128 32h-55.1c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16H128C57.3 320 0 377.3 0 448v16c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48v-16c0-70.7-57.3-128-128-128z"/>
+    </svg>
+)
+
+export const LogOutIcon = (
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sign-out-alt"
+         className="auth-icon" height='25px' role="img" xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 512 512">
+        <path fill="#fff9de"
+    d="M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z"/>
+    </svg>
+)
+
+export const LogOutIconMobile = (
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sign-in-alt"
+         className="auth-icon" role="img" xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 512 512"><path fill="#0079c5"
+    d="M416 448h-84c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h84c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32h-84c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h84c53 0 96 43 96 96v192c0 53-43 96-96 96zm-47-201L201 79c-15-15-41-4.5-41 17v96H24c-13.3 0-24 10.7-24 24v96c0 13.3 10.7 24 24 24h136v96c0 21.5 26 32 41 17l168-168c9.3-9.4 9.3-24.6 0-34z"/>
+    </svg>
+)
+
+export const ProfileIconMobile = (
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-alt"
+         className="auth-icon" role="img" height='25px' xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 512 512">
+        <path fill="#0079c5"
+              d="M256 288c79.5 0 144-64.5 144-144S335.5 0 256 0 112 64.5 112 144s64.5 144 144 144zm128 32h-55.1c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16H128C57.3 320 0 377.3 0 448v16c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48v-16c0-70.7-57.3-128-128-128z"/>
+    </svg>
+)
+
+export const AddDeveloperIcon = (
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus-square"
+         height='25px' role="img" xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 448 512"><path fill="#00b16a"
+    d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-32 252c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92H92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"/>
+    </svg>
+)
+
+export const DeleteDeveloperIcon = (
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="minus-square"
+         height='25px' role="img" xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 448 512"><path fill="#f64747"
+    d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM92 296c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h264c6.6 0 12 5.4 12 12v56c0 6.6-5.4 12-12 12H92z"/>
+    </svg>
+)
+
+export const EditDeveloperIcon = (
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen-square"
+         height='25px' role="img" xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 448 512"><path fill="#a96dad"
+    d="M400 480H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zM238.1 177.9L102.4 313.6l-6.3 57.1c-.8 7.6 5.6 14.1 13.3 13.3l57.1-6.3L302.2 242c2.3-2.3 2.3-6.1 0-8.5L246.7 178c-2.5-2.4-6.3-2.4-8.6-.1zM345 165.1L314.9 135c-9.4-9.4-24.6-9.4-33.9 0l-23.1 23.1c-2.3 2.3-2.3 6.1 0 8.5l55.5 55.5c2.3 2.3 6.1 2.3 8.5 0L345 199c9.3-9.3 9.3-24.5 0-33.9z"/>
+    </svg>
+)

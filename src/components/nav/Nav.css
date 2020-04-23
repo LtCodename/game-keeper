@@ -14,10 +14,6 @@
   border-radius: 0;
 }
 
-.hideArrow {
-  height: 30px;
-}
-
 .navButton {
   font-family: var(--main-font);
   color: var(--first-color);

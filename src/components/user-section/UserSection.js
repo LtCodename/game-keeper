@@ -6,6 +6,7 @@ import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
 import BlockModalWindow from '../block-modal-window/BlockModalWindow.js';
 import { connect } from 'react-redux'
 import fire from "../../Firebase";
+import {AddSectionIcon, DeleteSectionIcon, EditSectionIcon, SectionActionPanelIcon} from "../../IconsLibrary";
 
 class UserSection extends React.Component {
   constructor(props) {
@@ -178,7 +179,7 @@ class UserSection extends React.Component {
 
     const positionPicker = (
       <div className="positionPickerWrapper">
-        <select value={this.props.sectionIndex} className="custom-select sectionPositionPicker" onChange={this.sectionPositionChangeHandler}>
+        <select value={this.props.sectionIndex} className="section-position-picker" onChange={this.sectionPositionChangeHandler}>
           {positionOptions}
         </select>
       </div>
@@ -191,10 +192,18 @@ class UserSection extends React.Component {
         <span className="sectionName">{this.props.name}</span>
         <div className="sectionActions">
           <div className={actionButtonsClassName}>
-            <button className="btn" onClick={this.toggleButtons}><img className="sectionEditIcon toggleButton" alt="" src={process.env.PUBLIC_URL + '/icons/navbar-arrow-sections.svg'}/></button>
-            <button className="btn" onClick={this.openAddGameWindow}><img className="sectionEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-add-section.svg'}/></button>
-            <button className="btn" onClick={this.doOnEdit}><img className="sectionEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-section.svg'}/></button>
-            <button className="btn" onClick={this.openModalWarningWindow}><img className="sectionEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-section.svg'}/></button>
+            <button className="btn" onClick={this.toggleButtons}>
+              {SectionActionPanelIcon}
+            </button>
+            <button className="btn" onClick={this.openAddGameWindow}>
+              {AddSectionIcon}
+            </button>
+            <button className="btn" onClick={this.doOnEdit}>
+              {EditSectionIcon}
+            </button>
+            <button className="btn" onClick={this.openModalWarningWindow}>
+              {DeleteSectionIcon}
+            </button>
             {positionPicker}
           </div>
         </div>

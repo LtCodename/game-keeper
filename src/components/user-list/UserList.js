@@ -6,6 +6,7 @@ import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
 import indexActions from '../../redux/reducers/selectedListIndexReducer';
 import { connect } from 'react-redux'
 import fire from "../../Firebase";
+import { AddListIcon, DeleteListIcon, EditListIcon, ListActionPanelIcon } from "../../IconsLibrary";
 
 class UserList extends React.Component {
   constructor(props) {
@@ -232,7 +233,10 @@ class UserList extends React.Component {
     });
 
     const listPositionPicker = (
-        <select value={this.props.listIndex} className="custom-select listPositionPicker" onChange={this.listPositionChangeHandler}>
+        <select
+            value={this.props.listIndex}
+            className="list-position-picker"
+            onChange={this.listPositionChangeHandler}>
           {positionOptions}
         </select>
     );
@@ -243,16 +247,20 @@ class UserList extends React.Component {
       <div className="listWrapper">
         <span className="listName">{this.props.userLists[this.props.listIndex].name}</span>
         <div className={actionButtonsClassName}>
-          <button className="btn" onClick={this.toggleButtons}><img className="listsEditIcon toggleButton" alt="" src={process.env.PUBLIC_URL + '/icons/navbar-arrow-lists.svg'}/></button>
-          <button className="btn" onClick={this.doOnAddSection}><img className="listsEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-add-list.svg'}/></button>
-          <button className="btn" onClick={this.doOnEdit}><img className="listsEditIcon" alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-list.svg'}/></button>
+          <button className="btn" onClick={this.toggleButtons}>
+            {ListActionPanelIcon}
+          </button>
+          <button className="btn" onClick={this.doOnAddSection}>
+            {AddListIcon}
+          </button>
+          <button className="btn" onClick={this.doOnEdit}>
+            {EditListIcon}
+          </button>
           <button
               className="btn"
               onClick={this.openModalWarningWindow}>
-            <img
-                className="listsEditIcon"
-                alt=""
-                src={process.env.PUBLIC_URL + '/icons/action-delete-list.svg'}/></button>
+            {DeleteListIcon}
+          </button>
           {listPositionPicker}
         </div>
       </div>

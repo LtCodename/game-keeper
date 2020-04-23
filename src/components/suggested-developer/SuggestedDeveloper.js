@@ -3,6 +3,7 @@ import './SuggestedDeveloper.css';
 import WarningModalWindow from "../warning-modal-window/WarningModalWindow";
 import EditNameModalWindow from "../edit-name-modal-window/EditNameModalWindow";
 import fire from "../../Firebase";
+import { AddDeveloperIcon, DeleteDeveloperIcon, EditDeveloperIcon } from "../../IconsLibrary";
 
 class SuggestedDeveloper extends React.Component {
     constructor(props) {
@@ -141,13 +142,13 @@ class SuggestedDeveloper extends React.Component {
                 <div className="developers-block">
                     {this.props.devData.name}
                     <button className="developer-action-button" onClick={() => this.onDeleteItem(this.props.devData.id)}>
-                        <img className="dev-action-icon" alt="" src={process.env.PUBLIC_URL + '/icons/action-delete-developer.svg'}/>
+                        {DeleteDeveloperIcon}
                     </button>
                     <button className="developer-action-button" onClick={() => this.onAddItem(this.props.devData.name, this.props.devData.id)}>
-                        <img className="dev-action-icon" alt="" src={process.env.PUBLIC_URL + '/icons/action-add-developer.svg'}/>
+                        {AddDeveloperIcon}
                     </button>
-                    <button className="developer-action-button">
-                        <img className="dev-action-icon" onClick={() => this.onEditItem(this.props.devData.id, this.props.devData.name)} alt="" src={process.env.PUBLIC_URL + '/icons/action-edit-developer.svg'}/>
+                    <button className="developer-action-button" onClick={() => this.onEditItem(this.props.devData.id, this.props.devData.name)}>
+                        {EditDeveloperIcon}
                     </button>
                 </div>
                 {modalDeleteWindow}

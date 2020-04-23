@@ -22,7 +22,7 @@
 }
 
 .sectionActionButtonsVisible {
-  width: 224px;
+  width: 205px;
 }
 
 .sectionActionButtons .btn {
@@ -83,10 +83,9 @@
   align-items: center;
 }
 
-.sectionPositionPicker {
-  width: 60px;
+.section-position-picker {
+  width: 45px;
   height: 35px;
-  margin-left: 4px;
   background-color: var(--third-color);
 }
 
@@ -108,10 +107,6 @@
 
 .sectionEditIcon:hover {
   opacity: 0.8;
-}
-
-.sectionEditIcon {
-  height: 35px;
 }
 
 @media (max-width: 1050px) {

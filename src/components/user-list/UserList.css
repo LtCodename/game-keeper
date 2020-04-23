@@ -15,7 +15,7 @@
 }
 
 .listActionButtonsVisible {
-  width: 224px;
+  width: 205px;
 }
 
 .listActionButtons .btn {
@@ -107,10 +107,9 @@
   align-items: center;
 }
 
-.listPositionPicker {
-  width: 60px;
+.list-position-picker {
+  width: 45px;
   height: 35px;
-  margin: 0 0 0 4px;
   background-color: var(--second-color);
 }
 
@@ -120,16 +119,12 @@
   justify-content: space-between;
 }
 
-.listsEditIcon {
-  height: 35px;
-}
-
 .listsEditIcon:hover {
   opacity: 0.8;
 }
 
 @media (max-width: 575px) {
-  .listPositionPicker {
+  .list-position-picker {
     display: none;
   }
 
