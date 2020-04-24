@@ -105,11 +105,11 @@ class SignUpModalWindow extends React.Component {
           confirmPasswordInputValue: "",
           nameInputValue: ""
         });
-        this.props.close();
+        this.props.hideWindow();
     }).catch(error => {
       console.log(error.message);
       this.setState({
-        errorText: error.message + "."
+        errorText: error.message
       });
     });
   };
