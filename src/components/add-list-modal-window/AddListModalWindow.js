@@ -10,6 +10,7 @@ class AddListModalWindow extends React.Component {
 
     this.state = {
       warningMode: false,
+      warningText: '',
       nameInputValue: ``
     };
   }
@@ -28,7 +29,8 @@ class AddListModalWindow extends React.Component {
   onProceed = () => {
     if (this.state.nameInputValue === ``) {
       this.setState({
-        warningMode: true
+        warningMode: true,
+        warningText: "You have to enter new name to proceed!"
       });
       return;
     }
@@ -63,21 +65,21 @@ class AddListModalWindow extends React.Component {
 
     const warning = (
       <div className="warningWrapper">
-        <span className="warning">You have to enter new name to proceed!</span>
+        <span className="warning">{this.state.warningText}</span>
       </div>
     );
 
     return (
       <Modal show={this.props.show} onHide={this.closeModal} dialogClassName={'add-list-modal'}>
         <Modal.Header className="add-list-header">
-          <div className={"name-wrapper"}>
+          <div className="name-wrapper">
             {listName}
           </div>
         </Modal.Header>
         <Modal.Body>
-          {(this.state.warningMode) ? warning : ""}
-          <div className={"buttons-wrapper"}>
+          <div className="buttons-wrapper lt-col">
             {buttonsWrapper}
+            {(this.state.warningMode) ? warning : ""}
           </div>
         </Modal.Body>
       </Modal>

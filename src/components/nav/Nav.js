@@ -80,7 +80,7 @@ class Nav extends React.Component {
         </div>
         <div className={navClassName}>
           {buttonsToRender}
-          {addListButton}
+          {this.props.userData.email === 'fake@email.com' ? '' : addListButton}
         </div>
         {this.state.showAddListWindow ? modalAddListWindow : ""}
       </nav>
@@ -91,6 +91,7 @@ class Nav extends React.Component {
 const stateToProps = (state = {}) => {
   return {
     userLists: state.userLists,
+    userData: state.userData,
     listIndex: state.selectedListIndex
   }
 };

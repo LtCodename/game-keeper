@@ -21,6 +21,10 @@ class UserBlock extends React.Component {
   };
 
   openModalWindow = () => {
+    if (this.props.userData.email === 'fake@email.com') {
+      return;
+    }
+
     this.setState({
       showModalWindow: true
     });
@@ -45,9 +49,6 @@ class UserBlock extends React.Component {
 
     const platformsToShow = (this.props.gameData.hasOwnProperty('platforms')) ? (
       this.props.gameData.platforms.map((elem, index) => {
-        /*const path = `${elem.iconName}`;
-        let fullPath = '/icons/' + path + '.svg';*/
-        /*return (<img key={index} className="platformIcon" alt="" src={process.env.PUBLIC_URL + fullPath}/>);*/
         return (<span key={index}>{platformsIcons[elem.iconName]}</span>)
       })) : [];
 
@@ -93,7 +94,8 @@ class UserBlock extends React.Component {
 
 const stateToProps = (state = {}) => {
   return {
-    userBlocks: state.userBlocks
+    userBlocks: state.userBlocks,
+    userData: state.userData
   }
 };
 

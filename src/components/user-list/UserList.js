@@ -245,9 +245,7 @@ class UserList extends React.Component {
 
     let actionButtonsClassName = `listActionButtons ${this.state.buttonsVisible ? 'listActionButtonsVisible' : ''}`;
 
-    const nameAndButtonsBlock = (
-      <div className="listWrapper">
-        <span className="listName">{this.props.list.name}</span>
+    const actionButtonsNode = (
         <div className={actionButtonsClassName}>
           <button className="btn" onClick={this.toggleButtons}>
             {ListActionPanelIcon}
@@ -265,6 +263,12 @@ class UserList extends React.Component {
           </button>
           {listPositionPicker}
         </div>
+    );
+
+    const nameAndButtonsBlock = (
+      <div className="listWrapper">
+        <span className="listName">{this.props.list.name}</span>
+        {this.props.userData.email === 'fake@email.com' ? '' : actionButtonsNode}
       </div>
     );
 

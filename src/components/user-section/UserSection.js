@@ -6,7 +6,7 @@ import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
 import BlockModalWindow from '../block-modal-window/BlockModalWindow.js';
 import { connect } from 'react-redux'
 import fire from "../../Firebase";
-import {AddSectionIcon, DeleteSectionIcon, EditSectionIcon, SectionActionPanelIcon} from "../../IconsLibrary";
+import { AddSectionIcon, DeleteSectionIcon, EditSectionIcon, SectionActionPanelIcon } from "../../IconsLibrary";
 
 class UserSection extends React.Component {
   constructor(props) {
@@ -187,9 +187,7 @@ class UserSection extends React.Component {
 
     let actionButtonsClassName = `sectionActionButtons ${this.state.buttonsVisible ? 'sectionActionButtonsVisible' : ''}`;
 
-    const nameAndButtonsBlock = (
-      <div className="nameAndButtonsWrapper">
-        <span className="sectionName">{this.props.name}</span>
+    const actionButtonsNode = (
         <div className="sectionActions">
           <div className={actionButtonsClassName}>
             <button className="btn" onClick={this.toggleButtons}>
@@ -207,6 +205,12 @@ class UserSection extends React.Component {
             {positionPicker}
           </div>
         </div>
+    );
+
+    const nameAndButtonsBlock = (
+      <div className="nameAndButtonsWrapper">
+        <span className="sectionName">{this.props.name}</span>
+        {this.props.userData.email === 'fake@email.com' ? '' : actionButtonsNode}
       </div>
     );
 
