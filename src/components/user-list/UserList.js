@@ -7,6 +7,8 @@ import indexActions from '../../redux/reducers/selectedListIndexReducer';
 import { connect } from 'react-redux'
 import fire from "../../Firebase";
 import { AddListIcon, DeleteListIcon, EditListIcon, ListActionPanelIcon } from "../../IconsLibrary";
+import Nav from "../nav/Nav";
+import { withRouter } from "react-router-dom";
 
 class UserList extends React.Component {
   constructor(props) {
@@ -15,7 +17,7 @@ class UserList extends React.Component {
     this.state = {
       renameListMode: false,
       addSectionMode: false,
-      listNameInputValue: this.props.userLists[this.props.listIndex].name,
+      listNameInputValue: this.props.list.name,
       sectionNameInputValue: "",
       colorFofNewSection: "",
       showModalWindow: false,
@@ -36,7 +38,7 @@ class UserList extends React.Component {
       id: `id${new Date().getTime()}`,
       name: this.state.sectionNameInputValue,
       color: this.state.colorForNewSection || "witch-haze",
-      listId: this.props.userLists[this.props.listIndex].id
+      listId: this.props.listRealId
     };
 
     const allSections = [...this.props.userSections, newSection];
@@ -114,7 +116,7 @@ class UserList extends React.Component {
     if (!this.state.renameListMode) {
       this.setState({
         renameListMode: true,
-        listNameInputValue: this.props.userLists[this.props.listIndex].name
+        listNameInputValue: this.props.list.name
       }, () => {
         if (this.linkToRenameListTextarea) {
           this.linkToRenameListTextarea.focus();
@@ -127,7 +129,7 @@ class UserList extends React.Component {
     this.setState({
       renameListMode: false,
       addSectionMode: false,
-      listNameInputValue: this.props.userLists[this.props.listIndex].name,
+      listNameInputValue: this.props.list.name,
       sectionNameInputValue: ""
     });
   };
@@ -187,7 +189,7 @@ class UserList extends React.Component {
 
     copy.splice(this.props.listIndex, 1);
 
-    this.props.changeListIndexOnDelete(this.props.userLists.length);
+    this.props.history.push('/');
     fire.firestore().collection('users').doc(this.props.userData.uid).update({
       lists: copy,
       sections: sectionCopy,
@@ -205,7 +207,7 @@ class UserList extends React.Component {
   };
 
   render() {
-    const sectionsToRender = this.props.userSections.filter((elem) => elem.listId === this.props.userLists[this.props.listIndex].id)
+    const sectionsToRender = this.props.userSections.filter((elem) => elem.listId === this.props.listRealId)
       .map((section, index, array) => {
         return (
           <UserSection
@@ -223,7 +225,7 @@ class UserList extends React.Component {
         onProceed={this.onDeleteList}
         show={this.state.showModalWindow}
         hideWindow={this.resetState.bind(this)}
-        message={`Are you sure you want to delete list ${this.props.userLists[this.props.listIndex].name}?`}/>
+        message={`Are you sure you want to delete list ${this.props.list.name}?`}/>
     );
 
     const positionOptions = this.props.userLists.map((elem, index) => {
@@ -245,7 +247,7 @@ class UserList extends React.Component {
 
     const nameAndButtonsBlock = (
       <div className="listWrapper">
-        <span className="listName">{this.props.userLists[this.props.listIndex].name}</span>
+        <span className="listName">{this.props.list.name}</span>
         <div className={actionButtonsClassName}>
           <button className="btn" onClick={this.toggleButtons}>
             {ListActionPanelIcon}
@@ -304,10 +306,13 @@ class UserList extends React.Component {
     );
 
     return (
-      <div className="allContent">
-        {this.state.renameListMode ? editListNameForm : this.state.addSectionMode ? addNewSectionForm : nameAndButtonsBlock}
-        {sectionsToRender}
-        {modalWarningWindow}
+      <div className="contentWrapper">
+        <Nav/>
+        <div className="allContent">
+          {this.state.renameListMode ? editListNameForm : this.state.addSectionMode ? addNewSectionForm : nameAndButtonsBlock}
+          {sectionsToRender}
+          {modalWarningWindow}
+        </div>
       </div>
     );
   }
@@ -317,16 +322,17 @@ const listDispatchToProps = (dispatch) => {
   return {
     changeListIndex: (newListPosition, listsLength) => {
       dispatch({ type: indexActions.actions.SLI_CHANGE, index: newListPosition, listsLength: listsLength });
-    },
-    changeListIndexOnDelete: (listsLength) => {
-      dispatch({ type: indexActions.actions.SLI_CHANGE_ON_DELETE, listsLength: listsLength });
     }
   }
 };
 
-const stateToProps = (state = {}) => {
+const stateToProps = (state = {}, props = {}) => {
+  const listIndex = state.userLists.findIndex(elem => elem.id === props.match.params.listId);
+  const list = listIndex > -1 ? state.userLists[listIndex] : {};
   return {
-    listIndex: state.selectedListIndex,
+    listIndex: listIndex,
+    list: list,
+    listRealId: props.match.params.listId,
     userLists: state.userLists,
     userBlocks: state.userBlocks,
     userSections: state.userSections,
@@ -336,4 +342,4 @@ const stateToProps = (state = {}) => {
 
 const UserListConnected = connect(stateToProps, listDispatchToProps)(UserList);
 
-export default UserListConnected;
+export default withRouter(UserListConnected);

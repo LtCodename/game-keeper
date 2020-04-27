@@ -92,7 +92,10 @@ class SignUpModalWindow extends React.Component {
       return fire.firestore().collection('users').doc(credential.user.uid).set({
         lists: [{
           id: `id${new Date().getTime()}`,
-          name: "My List"
+          name: "Games I Love"
+        },{
+          id: `id${new Date().getTime()}1`,
+          name: "My Wishlist"
         }],
         sections: [],
         blocks: []

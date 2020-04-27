@@ -4,6 +4,7 @@ import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
 import { connect } from 'react-redux'
 import fire from "../../Firebase";
 import { Modal } from "react-bootstrap";
+import { withRouter } from "react-router-dom";
 
 class BlockModalWindow extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class BlockModalWindow extends React.Component {
       descriptionInputValue: this.props.gameData.description,
       platforms: this.preparePlatformsForState(),
       showModalWindow: false,
-      newListForBlock: this.props.listId || this.props.userLists[this.props.listIndex].id,
+      newListForBlock: this.props.listId,
       newSectionForBlock: this.props.sectionId
     };
   }
@@ -445,8 +446,9 @@ class BlockModalWindow extends React.Component {
   }
 }
 
-const stateToProps = (state = {}) => {
+const stateToProps = (state = {}, props = {}) => {
   return {
+    listId: props.match.params.listId,
     listIndex: state.selectedListIndex,
     developers: state.developers,
     platforms: state.platforms,
@@ -459,4 +461,4 @@ const stateToProps = (state = {}) => {
 
 const BlockModalWindowConnected = connect(stateToProps, null)(BlockModalWindow);
 
-export default BlockModalWindowConnected;
+export default withRouter(BlockModalWindowConnected);

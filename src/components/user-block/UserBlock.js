@@ -70,7 +70,6 @@ class UserBlock extends React.Component {
         gameData={this.props.gameData}
         fullMode={true}
         show={this.state.showModalWindow}
-        listId={this.props.listId}
         sectionId={this.props.sectionId}
         hideWindow={this.resetState}/>
     );
@@ -86,7 +85,7 @@ class UserBlock extends React.Component {
             </div>
           </div>
         </button>
-        {modalWindow}
+        {this.state.showModalWindow ? modalWindow : ''}
       </div>
     )
   }

@@ -5,7 +5,7 @@ import './Dashboard.css'
 import AddListModalWindow from '../add-list-modal-window/AddListModalWindow.js';
 import SignUpModalWindow from '../sign-up-modal-window/SignUpModalWindow.js';
 import LogInModalWindow from '../log-in-modal-window/LogInModalWindow.js';
-/*import { NavLink } from 'react-router-dom';*/
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux'
 import fire from "../../Firebase";
 import {DemoIcon, LogInIcon, SignUpIcon} from "../../IconsLibrary";
@@ -35,7 +35,7 @@ class Dashboard extends React.Component {
 
   onDemoClick = (event) => {
     event.preventDefault();
-    fire.auth().signInWithEmailAndPassword('fake@email.com', '1234567890').then(credential => {
+    fire.auth().signInWithEmailAndPassword('fake@email.com', '123456780').then(credential => {
       console.log(credential);
     }).catch(error => {
       console.log(error.message);
@@ -68,9 +68,7 @@ class Dashboard extends React.Component {
 
   render() {
     const listsToRender = this.props.userLists.map((elem, index) => {
-      /*const route = elem.name.replace(/\s+/g, '-').toLowerCase();*/
-      //return <NavLink key={elem.id} to={"/list/" + route}><ListBlock key={elem.id} listBlockIndex={index}/></NavLink>;
-      return <ListBlock key={elem.id} listBlockIndex={index}/>
+      return <NavLink key={elem.id} to={"/lists/" + elem.id}><ListBlock listBlockIndex={index}/></NavLink>;
     });
 
     let btnAddListClassName = "btnAddListFromDashboard";
@@ -147,14 +145,16 @@ class Dashboard extends React.Component {
     );
 
     return (
-      <div className="dashboardWrapper">
-        <div className="dashboard">
-          {this.props.userData ? authorized : authPanel}
+        <div className="contentWrapper">
+          <div className="dashboardWrapper">
+            <div className="dashboard">
+              {this.props.userData ? authorized : authPanel}
+            </div>
+            {modalAddListWindow}
+            {logInWindow}
+            {signUpWindow}
+          </div>
         </div>
-        {modalAddListWindow}
-        {logInWindow}
-        {signUpWindow}
-      </div>
     )
   }
 }

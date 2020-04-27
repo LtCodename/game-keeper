@@ -1,18 +1,16 @@
 import React from 'react';
 import './Header.css';
-import indexActions from '../../redux/reducers/selectedListIndexReducer';
 import { connect } from 'react-redux'
 import { NavLink, withRouter } from 'react-router-dom';
 import fire from "../../Firebase";
 import {LogOutIcon, LogOutIconMobile, ProfileIcon, ProfileIconMobile} from "../../IconsLibrary";
 
-const Header = ({changeListIndex, history, userLists, userData}) => {
+const Header = ({ history, userData}) => {
   const onLogOutClick = () => {
     fire.auth().signOut().then(() => {
     }).catch(error => {
       console.log(error.message);
     });
-    changeListIndex(null, userLists.length);
     history.push('/');
   };
 
@@ -20,7 +18,6 @@ const Header = ({changeListIndex, history, userLists, userData}) => {
       <div className="logoHolder">
         <NavLink
             className="logoLink"
-            onClick={() => changeListIndex(null, userLists.length)}
             to="/">
           Game Keeper
         </NavLink>
@@ -41,13 +38,10 @@ const Header = ({changeListIndex, history, userLists, userData}) => {
   const profileButton = (
       <div className="authButtonWrapper">
         <NavLink
+            className="profileButton"
             to="/profile">
-          <button
-              className="profileButton"
-              onClick={() => changeListIndex(null, userLists.length)}>
             Profile
             {ProfileIcon}
-          </button>
         </NavLink>
       </div>
   );
@@ -55,12 +49,9 @@ const Header = ({changeListIndex, history, userLists, userData}) => {
   const profileAltButton = (
       <div className="">
         <NavLink
+            className="profileButtonAlt"
             to="/profile">
-          <button
-              className="profileButtonAlt"
-              onClick={() => changeListIndex(null, userLists.length)}>
             {ProfileIconMobile}
-          </button>
         </NavLink>
       </div>
   );
@@ -92,21 +83,12 @@ const Header = ({changeListIndex, history, userLists, userData}) => {
   )
 };
 
-const headerDispatchToProps = (dispatch) => {
-  return {
-    changeListIndex: (index, listsLength) => {
-      dispatch({ type: indexActions.actions.SLI_CHANGE, index: index, listsLength: listsLength });
-    }
-  }
-};
-
 const stateToProps = (state = {}) => {
   return {
-    userLists: state.userLists,
     userData: state.userData
   }
 };
 
-const HeaderConnected = connect(stateToProps, headerDispatchToProps)(Header);
+const HeaderConnected = connect(stateToProps, null)(Header);
 
 export default withRouter(HeaderConnected);

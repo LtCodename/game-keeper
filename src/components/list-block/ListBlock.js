@@ -1,21 +1,12 @@
 import React from 'react';
 import './ListBlock.css';
-import indexActions from '../../redux/reducers/selectedListIndexReducer';
 import { connect } from 'react-redux'
 
-const ListBlock = ({changeListIndex, listBlockIndex, userLists}) => {
+const ListBlock = ({listBlockIndex, userLists}) => {
 
   return (
-    <button className="listBlock" onClick={() => changeListIndex(listBlockIndex, userLists.length)}>{userLists[listBlockIndex].name}</button>
+    <button className="listBlock">{userLists[listBlockIndex].name}</button>
   )
-};
-
-const listBlockDispatchToProps = (dispatch) => {
-  return {
-    changeListIndex: (index, listsLength) => {
-      dispatch({ type: indexActions.actions.SLI_CHANGE, index: index, listsLength: listsLength  });
-    }
-  }
 };
 
 const stateToProps = (state = {}) => {
@@ -24,6 +15,6 @@ const stateToProps = (state = {}) => {
   }
 };
 
-const ListBlockConnected = connect(stateToProps, listBlockDispatchToProps)(ListBlock);
+const ListBlockConnected = connect(stateToProps, null)(ListBlock);
 
 export default ListBlockConnected;

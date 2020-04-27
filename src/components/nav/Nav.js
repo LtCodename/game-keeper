@@ -1,11 +1,9 @@
 import React from 'react';
 import './Nav.css';
 import AddListModalWindow from '../add-list-modal-window/AddListModalWindow.js';
-import indexActions from '../../redux/reducers/selectedListIndexReducer';
 import { connect } from 'react-redux'
-import LogInModalWindow from "../log-in-modal-window/LogInModalWindow";
 import {NavArrowIcon} from "../../IconsLibrary";
-/*import { NavLink } from 'react-router-dom';*/
+import { NavLink } from 'react-router-dom';
 
 class Nav extends React.Component {
   constructor(props) {
@@ -29,13 +27,6 @@ class Nav extends React.Component {
     });
   };
 
-  switchBetweenTabs = (index) => {
-    this.props.changeListIndex(index, this.props.userLists.length);
-    this.setState({
-      navbarVisible: false
-    });
-  };
-
   toggleNavbar = () => {
     if (!this.state.navbarVisible) {
       this.setState({
@@ -49,17 +40,15 @@ class Nav extends React.Component {
   };
 
   render() {
-    let buttonsToRender = this.props.userLists.map((elem, index) => {
-
-      let className = "navButton";
-
-      if (this.props.listIndex === index) {
-        className += " navButtonActive";
-      }
-
-      const route = elem.name.replace(/\s+/g, '-').toLowerCase();
-      //return <NavLink key={elem.id} to={"/list/" + route}><button className={className} type="button" key={elem.id} onClick={() => this.switchBetweenTabs(index)}>{elem.name}</button></NavLink>;
-      return <button className={className} type="button" key={elem.id} onClick={() => this.switchBetweenTabs(index)}>{elem.name}</button>;
+    let buttonsToRender = this.props.userLists.map((elem) => {
+      return (
+        <NavLink key={elem.id}
+                 to={"/lists/" + elem.id}
+                 className="navButton"
+                 activeClassName="navButtonActive">
+          {elem.name}
+        </NavLink>
+      )
     });
 
     const addListButton = (
@@ -99,14 +88,6 @@ class Nav extends React.Component {
   }
 }
 
-const listDispatchToProps = (dispatch) => {
-  return {
-    changeListIndex: (index, listsLength) => {
-      dispatch({ type: indexActions.actions.SLI_CHANGE, index: index, listsLength: listsLength });
-    }
-  }
-};
-
 const stateToProps = (state = {}) => {
   return {
     userLists: state.userLists,
@@ -114,6 +95,6 @@ const stateToProps = (state = {}) => {
   }
 };
 
-const NavConnected = connect(stateToProps, listDispatchToProps)(Nav);
+const NavConnected = connect(stateToProps, null)(Nav);
 
 export default NavConnected;

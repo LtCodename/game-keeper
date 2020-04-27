@@ -1,6 +1,5 @@
 import React from 'react';
 import UserList from './components/user-list/UserList.js';
-import Nav from './components/nav/Nav.js';
 import Footer from './components/footer/Footer.js';
 import Header from './components/header/Header.js';
 import Dashboard from './components/dashboard/Dashboard.js';
@@ -148,23 +147,6 @@ class App extends React.Component {
   };
 
   render() {
-    const dashboard = (
-      <Route exact path="/" component={Dashboard} />
-    );
-
-    let listOrDashboard;
-
-    if (this.props.selectedListIndex === null) {
-      listOrDashboard = dashboard;
-    }else {
-      listOrDashboard = <UserList/>;
-      //listOrDashboard = <Route path="/list/:list_name" component={UserList} />
-    }
-
-    const nav = (
-      <Nav/>
-    );
-
     const footer = (
       <Footer/>
     );
@@ -179,6 +161,8 @@ class App extends React.Component {
         <Route path="/developers" component={Developers} />
         <Route path="/suggested" component={Suggested} />
         <Route path="/privacy" component={Privacy} />
+        <Route path="/lists/:listId" component={UserList}/>
+        <Route exact path="/" component={Dashboard} />
       </div>
     );
 
@@ -186,12 +170,8 @@ class App extends React.Component {
       <div className="appWrapper">
         <header>
           {header}
-          {routes}
         </header>
-        <div className="contentWrapper">
-            {(this.props.selectedListIndex === null) ? "" : nav}
-            {listOrDashboard}
-        </div>
+        {routes}
         <footer>
           {footer}
         </footer>
