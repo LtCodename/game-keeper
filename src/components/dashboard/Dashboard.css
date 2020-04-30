@@ -8,32 +8,12 @@
 .dashboard {
   display: flex;
   justify-content: center;
-  padding-top: 20px;
+  padding: 20px;
 }
 
-.listsMatrix {
-  display: grid;
-  grid-gap: 4px;
-}
-
-.listsMatrixPanel {
-  padding: 10px;
-}
-
-.fourCells {
-  grid-template-columns: repeat(4, minmax(300px, auto));
-}
-
-.threeCells {
-  grid-template-columns: repeat(3, minmax(300px, auto));
-}
-
-.twoCells {
-  grid-template-columns: repeat(2, minmax(300px, auto));
-}
-
-.oneCell {
-  grid-template-columns: minmax(300px, auto);
+.lists-dashboard-wrapper {
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .btnAddListFromDashboard {
@@ -44,7 +24,8 @@
   font-weight: 700;
   color: var(--first-color);
   padding: 9px;
-  margin: 0;
+  margin: 0 5px 5px 0;
+  min-width: 150px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
   border: none;
@@ -57,10 +38,6 @@
 
 .btnAddListFromDashboard:active {
   outline: none;
-}
-
-.btnAddListFromDashboardSpecial {
-  width: 270px;
 }
 
 .btnAddListFromDashboard:hover {
@@ -103,42 +80,4 @@
 
 .auth-button-icon-wrapper {
   margin-left: 5px;
-}
-
-@media (max-width: 1260px) {
-  .listsMatrix {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
-
-  .btnAddListFromDashboard {
-    height: auto;
-  }
-}
-
-@media (max-width: 500px) {
-  .fourCells {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .btnAddListFromDashboard {
-    height: auto;
-  }
-}
-
-@media (max-width: 550px) {
-  .listsMatrix {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .authButton {
-    font-size: 25px;
-  }
-
-  .authButtonIcon {
-    height: 25px;
-  }
-
-  .authButtonsMatrix {
-    grid-template-columns: repeat(1, minmax(200px, auto));
-  }
 }

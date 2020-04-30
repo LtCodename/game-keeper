@@ -448,7 +448,7 @@ class BlockModalWindow extends React.Component {
 
 const stateToProps = (state = {}, props = {}) => {
   return {
-    listId: props.match.params.listId,
+    listId: props.listId || props.match.params.listId,
     listIndex: state.selectedListIndex,
     developers: state.developers,
     platforms: state.platforms,

@@ -10,9 +10,15 @@
   resize: none;
 }
 
+.searchMatrix {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .search-panel-wrapper {
   background: #fef9de;
   padding: 10px;
+  margin-bottom: 10px;
 }
 
 .search-input:focus {
@@ -54,12 +60,6 @@
 
 .card {
   border-radius: 0;
-}
-
-.searchPanel .gameBlock {
-  width: 100%;
-  margin-right: 0;
-  max-width: 300px;
 }
 
 .foundText {

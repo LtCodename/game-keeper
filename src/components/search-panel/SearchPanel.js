@@ -87,26 +87,6 @@ class SearchPanel extends React.Component {
       return 0;
     });
 
-    let matrixClassName = "listsMatrix";
-
-    switch(this.props.userLists.length) {
-      case 2:
-        matrixClassName += " threeCells";
-        break;
-      case 1:
-        matrixClassName += " twoCells";
-        break;
-      case 0:
-        matrixClassName += " oneCell";
-        break;
-      default:
-        matrixClassName += " fourCells"
-    }
-
-    if (this.state.foundGames.length) {
-      matrixClassName += " findedWrapper"
-    }
-
     let foundTextClass = "foundText";
     let foundTextValue = 0;
 
@@ -153,7 +133,7 @@ class SearchPanel extends React.Component {
               value={this.state.searchInputValue}
               onChange={this.searchInputValueChange}/>
           <span className={foundTextClass}>{`Games found in Game Keeper: ${foundTextValue}`}</span>
-          <div className={matrixClassName}>
+          <div className="searchMatrix">
             {gamesToRender}
           </div>
         </div>

@@ -71,40 +71,18 @@ class Dashboard extends React.Component {
       return <NavLink key={elem.id} to={"/lists/" + elem.id}><ListBlock listBlockIndex={index}/></NavLink>;
     });
 
-    let btnAddListClassName = "btnAddListFromDashboard";
-
-    if (this.props.userLists.length === 0) {
-      btnAddListClassName += " btnAddListFromDashboardSpecial";
-    }
-
     const addListButton = (
-      <button className={btnAddListClassName} onClick={this.openAddListWindow}>Add List</button>
+      <button className='btnAddListFromDashboard' onClick={this.openAddListWindow}>Add List</button>
     );
 
     const modalAddListWindow = (
       <AddListModalWindow show={this.state.showAddListWindow} hideWindow={this.hideAddListWindow.bind(this)}/>
     );
 
-    let matrixClassName = "listsMatrix listsMatrixPanel";
-
-    switch(this.props.userLists.length) {
-      case 2:
-        matrixClassName += " threeCells";
-        break;
-      case 1:
-        matrixClassName += " twoCells";
-        break;
-      case 0:
-        matrixClassName += " oneCell";
-        break;
-      default:
-        matrixClassName += " fourCells"
-    }
-
     const authorized = (
       <div>
         <SearchPanel />
-        <div className={matrixClassName}>
+        <div className='lists-dashboard-wrapper lt-row'>
           {listsToRender}
           {addListButton}
         </div>

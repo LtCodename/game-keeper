@@ -72,6 +72,7 @@ class UserBlock extends React.Component {
         fullMode={true}
         show={this.state.showModalWindow}
         sectionId={this.props.sectionId}
+        listId={this.props.listId}
         hideWindow={this.resetState}/>
     );
 
