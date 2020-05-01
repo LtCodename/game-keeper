@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import fire from "../../Firebase";
 import { Modal } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
+import NameSearchResults from "./NameSearchResults";
+import { searchGamesByName } from "../../igdbApi";
 
 class BlockModalWindow extends React.Component {
   constructor(props) {
@@ -19,7 +21,8 @@ class BlockModalWindow extends React.Component {
       platforms: this.preparePlatformsForState(),
       showModalWindow: false,
       newListForBlock: this.props.listId,
-      newSectionForBlock: this.props.sectionId
+      newSectionForBlock: this.props.sectionId,
+      displaySearchResults: false
     };
   }
 
@@ -172,10 +175,18 @@ class BlockModalWindow extends React.Component {
     });
   };
 
+  searchApi() {
+    searchGamesByName(this.state.nameInputValue).then(response => console.log(response));
+  }
+
   nameInputValueChange = (event) => {
     this.setState({
       nameInputValue: event.target.value,
       localGameData: {...this.state.localGameData, name:event.target.value}
+    },() => {
+      if (this.state.nameInputValue.length >= 3) {
+        this.searchApi();
+      }
     });
   };
 
@@ -409,6 +420,7 @@ class BlockModalWindow extends React.Component {
             rows={1}
             value={this.state.nameInputValue}
             onChange={this.nameInputValueChange}/>
+        {this.state.displaySearchResults ? <NameSearchResults/> : ''}
       </div>
     );
 
@@ -427,7 +439,7 @@ class BlockModalWindow extends React.Component {
                 {datePicker}
                 {/*platform*/}
                 <div className="modalPiece">
-                  <p className="littleHeaders">Select platform</p>
+                  <p className="littleHeaders">My Platform</p>
                   <div className="checkboxWrapper">
                     {platformPicker}
                   </div>

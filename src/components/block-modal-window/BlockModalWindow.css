@@ -84,10 +84,18 @@ option {
   border-top: none;
   border-left: none;
   border-right: none;
+  position: relative;
   border-bottom: 5px solid #0079c5;
   background: var(--third-color);
   color: #0079c5;
   font-weight: 800;
+}
+
+.search-results-wrapper {
+  position: absolute;
+  padding: 10px;
+  background: #FFFFFF;
+  top: 50px;
 }
 
 .block-input {
