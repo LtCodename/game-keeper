@@ -6,7 +6,7 @@ import fire from "../../Firebase";
 import { Modal } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 import NameSearchResults from "./NameSearchResults";
-import { searchGamesByName } from "../../igdbApi";
+import {searchGamesByMultipleIDs, searchGamesByName} from "../../igdbApi";
 
 class BlockModalWindow extends React.Component {
   constructor(props) {
@@ -176,7 +176,13 @@ class BlockModalWindow extends React.Component {
   };
 
   searchApi() {
-    searchGamesByName(this.state.nameInputValue).then(response => console.log(response));
+    /*searchGamesByName(this.state.nameInputValue).then(response => {
+      console.log(response);
+    });*/
+
+    searchGamesByMultipleIDs([8,9,10]).then(r => {
+      console.log(r);
+    })
   }
 
   nameInputValueChange = (event) => {
