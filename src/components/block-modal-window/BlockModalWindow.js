@@ -20,7 +20,8 @@ class BlockModalWindow extends React.Component {
       newSectionForBlock: this.props.sectionId,
       displaySearchResults: false,
       searchResult: [],
-      foundGameInfo: {}
+      foundGameInfo: {},
+      saveButtonText: 'Save'
     };
   }
 
@@ -162,10 +163,11 @@ class BlockModalWindow extends React.Component {
   }
 
   hideResults = () => {
-    this.setState({
+    console.log('blur')
+    /*this.setState({
       displaySearchResults: false,
       searchResult: []
-    })
+    })*/
   }
 
   nameInputValueChange = (event) => {
@@ -181,6 +183,10 @@ class BlockModalWindow extends React.Component {
   };
 
   modalSave = () => {
+    this.setState({
+      saveButtonText: "Wait..."
+    })
+
     const mappedPlatforms = this.state.platforms
       .filter((elem) => elem.checked)
       .map((elem) => {
@@ -236,7 +242,9 @@ class BlockModalWindow extends React.Component {
         blocks: allBlocks,
         sections: allSections,
       }).then((data) => {
-        this.props.hideWindow();
+        this.setState({
+          saveButtonText: "Done"
+        }, () => this.props.hideWindow())
       }).catch(error => {
         console.log(error.message);
       });
@@ -257,11 +265,12 @@ class BlockModalWindow extends React.Component {
     fire.firestore().collection('users').doc(this.props.userData.uid).update({
       blocks: allBlocks
     }).then((data) => {
+      this.setState({
+        saveButtonText: "Done"
+      }, () => this.props.hideWindow())
     }).catch(error => {
       console.log(error.message);
     });
-
-    this.props.hideWindow();
   }
 
   render() {
@@ -350,27 +359,19 @@ class BlockModalWindow extends React.Component {
       </div>
     );
 
-    let apiDeveloper = "";
+    const apiDeveloper = (
+        <div className="modalPiece">
+          <p className="littleHeaders">Developer</p>
+          <span>{this.state.localGameData.developers || 'No Data'}</span>
+        </div>
+    )
 
-    if (this.state.localGameData.developers) {
-      apiDeveloper = (
-          <div className="modalPiece">
-            <p className="littleHeaders">Developer</p>
-            <span>{this.state.localGameData.developers}</span>
-          </div>
-      )
-    }
-
-    let apiDate = "";
-
-    if (this.state.localGameData.releaseDate) {
-      apiDate = (
-          <div className="modalPiece">
-            <p className="littleHeaders">Release Date</p>
-            <span>{this.state.localGameData.releaseDate}</span>
-          </div>
-      )
-    }
+    const apiDate = (
+        <div className="modalPiece">
+          <p className="littleHeaders">Release Date</p>
+          <span>{this.state.localGameData.releaseDate || 'No Data'}</span>
+        </div>
+    )
 
     return (
         <>
@@ -396,7 +397,7 @@ class BlockModalWindow extends React.Component {
               <div className="lt-row">
                 <button type="button" className="block-button" onClick={this.props.hideWindow}>Cancel</button>
                 {deleteButton}
-                <button type="button" className="block-button" onClick={this.modalSave}>Save</button>
+                <button type="button" className="block-button" onClick={this.modalSave}>{this.state.saveButtonText}</button>
               </div>
             </Modal.Body>
           </Modal>
@@ -410,7 +411,6 @@ const stateToProps = (state = {}, props = {}) => {
   return {
     listId: props.listId || props.match.params.listId,
     listIndex: state.selectedListIndex,
-    developers: state.developers,
     platforms: state.platforms,
     userData: state.userData,
     userBlocks: state.userBlocks,

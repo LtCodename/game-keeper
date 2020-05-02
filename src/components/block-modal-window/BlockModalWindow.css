@@ -114,6 +114,7 @@ option {
   transition: all .1s;
   padding-top: 5px;
   border-bottom: 5px solid transparent;
+  text-align: left;
 }
 
 .found-game-button:hover {

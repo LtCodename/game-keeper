@@ -8,10 +8,8 @@ import Privacy from './components/privacy/Privacy.js';
 import Preloader from './components/preloader/Preloader.js';
 import { BrowserRouter, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
-import developersActions from './redux/reducers/developersReducer';
 import colorsActions from './redux/reducers/colorsReducer';
 import platformsActions from './redux/reducers/platformsReducer';
-import suggestedReducer from './redux/reducers/suggestedReducer';
 import userBlocksReducer from './redux/reducers/userBlocksReducer';
 import userListsReducer from './redux/reducers/userListsReducer';
 import userReducer from './redux/reducers/userReducer';
@@ -25,8 +23,6 @@ class App extends React.Component {
     this.state = {
       listsSectionsBlocksLoaded: false,
       userAuthDataLoaded: false,
-      developersDataLoaded: false,
-      suggestedDataLoaded: false,
       colorsDataLoaded: false,
       platformsDataLoaded: false,
       unauthorized: false,
@@ -39,24 +35,9 @@ class App extends React.Component {
 
   fetchEverything = () => {
     this.fetchUser();
-    this.fetchDevelopers();
     this.fetchColors();
-    this.fetchSuggested();
     this.fetchPlatforms();
   };
-
-  fetchDevelopers() {
-    fire.firestore().collection('developers').orderBy("name").onSnapshot(snapshot => {
-      this.props.fetchDevelopers(snapshot);
-      setTimeout(() => {
-        this.setState({
-          developersDataLoaded: true
-        });
-      }, 0);
-    }, error => {
-      console.log(error.message);
-    });
-  }
 
   fetchColors() {
     fire.firestore().collection('availableColors').onSnapshot(snapshot => {
@@ -64,19 +45,6 @@ class App extends React.Component {
       setTimeout(() => {
         this.setState({
           colorsDataLoaded: true
-        });
-      }, 0);
-    }, error => {
-      console.log(error.message);
-    });
-  }
-
-  fetchSuggested() {
-    fire.firestore().collection('suggestedDevelopers').orderBy("name").onSnapshot(snapshot => {
-      this.props.fetchSuggestedDevelopers(snapshot);
-      setTimeout(() => {
-        this.setState({
-          suggestedDataLoaded: true
         });
       }, 0);
     }, error => {
@@ -183,8 +151,6 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         {((this.state.listsSectionsBlocksLoaded
-           && this.state.developersDataLoaded
-           && this.state.suggestedDataLoaded
            && this.state.colorsDataLoaded
            && this.state.userAuthDataLoaded
            && this.state.platformsDataLoaded) || this.state.unauthorized) ? content : fake}
@@ -204,14 +170,8 @@ const appDispatchToProps = (dispatch) => {
     checkUserPresence: (user) => {
       dispatch({ type: userReducer.actions.USER_CHECK, user: user });
     },
-    fetchDevelopers: (snapshot) => {
-      dispatch({ type: developersActions.actions.DEVELOPERS_FETCH, snapshot: snapshot });
-    },
     fetchColors: (snapshot) => {
       dispatch({ type: colorsActions.actions.COLORS_FETCH, snapshot: snapshot });
-    },
-    fetchSuggestedDevelopers: (snapshot) => {
-      dispatch({ type: suggestedReducer.actions.SUGGESTED_FETCH, snapshot: snapshot });
     },
     fetchPlatforms: (snapshot) => {
       dispatch({ type: platformsActions.actions.PLATFORMS_FETCH, snapshot: snapshot });

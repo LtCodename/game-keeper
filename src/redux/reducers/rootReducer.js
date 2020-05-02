@@ -1,5 +1,3 @@
-import developersReducer from './developersReducer';
-import suggestedReducer from './suggestedReducer';
 import colorsReducer from './colorsReducer';
 import userListsReducer from './userListsReducer';
 import userSectionsReducer from './userSectionsReducer';
@@ -16,9 +14,7 @@ const rootReducer = combineReducers({
   platforms: platformsReducer.reducer,
   userLists: userListsReducer.reducer,
   userSections: userSectionsReducer.reducer,
-  userBlocks: userBlocksReducer.reducer,
-  developers: developersReducer.reducer,
-  suggestedDevelopers: suggestedReducer.reducer
+  userBlocks: userBlocksReducer.reducer
 });
 
 export default rootReducer;
