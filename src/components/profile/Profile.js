@@ -104,14 +104,6 @@ class Profile extends React.Component {
         </form>
     );
 
-    const developersButton = (
-        <NavLink to="/developers"><button className="profileButtons">Manage</button></NavLink>
-    );
-
-    const suggestedDevelopersButton = (
-        <NavLink to="/suggested"><button className="profileButtons">Manage</button></NavLink>
-    );
-
     const changeNameButton = (
         <button className="profileButtons" onClick={this.onChangeName}>Change</button>
     );
@@ -130,24 +122,6 @@ class Profile extends React.Component {
           <span className="property-value">{this.props.userData.admin ? "Admin" : "User"}</span>
       );
     }
-
-    const manageDevelopers = (
-        <div className="profile-property lt-row">
-          <span className="property-name">Developers</span>
-          <div className="lt-row">
-            {developersButton}
-          </div>
-        </div>
-    );
-
-    const manageSuggested = (
-        <div className="profile-property lt-row">
-          <span className="property-name">Suggested Developers</span>
-          <div className="lt-row">
-            {suggestedDevelopersButton}
-          </div>
-        </div>
-    );
 
     const adminMaker = (
         <div className="profile-property lt-row">
@@ -195,42 +169,40 @@ class Profile extends React.Component {
     );*/
 
     const props = (
-        <div className="profile-wrapper lt-col">
-          <div className="avatar">
-            <div className="avatarText">{avatarInitials}</div>
-          </div>
-          <div className="lt-col">
-            <div className="profile-property lt-row">
-              <span className="property-name">Display name</span>
-              <div className="lt-row">
-                {changeNameForm}
-                {changeNameButton}
-              </div>
-            </div>
-            <div className="profile-property lt-row">
-              <span className="property-name">Email</span>
-              <div className="lt-row">
-                <span className="property-value">{userEmail}</span>
-                {userVerified ? verifiedText : verifyButton}
-              </div>
-            </div>
-            <div className="profile-property lt-row">
-              <span className="property-name">Permissions</span>
-              <div className="lt-row">
-                {adminSign}
-              </div>
-            </div>
-            <div className="profile-property lt-row">
-              <span className="property-name">Privacy Policy</span>
-              <div className="lt-row">
-                {privacyButton}
-              </div>
-            </div>
-            {this.props.userData.admin ? manageDevelopers : null}
-            {this.props.userData.admin ? manageSuggested : null}
-            {this.props.userData.admin ? adminMaker : null}
-          </div>
+      <div className="profile-wrapper lt-col">
+        <div className="avatar">
+          <div className="avatarText">{avatarInitials}</div>
         </div>
+        <div className="lt-col">
+          <div className="profile-property lt-row">
+            <span className="property-name">Display name</span>
+            <div className="lt-row">
+              {changeNameForm}
+              {changeNameButton}
+            </div>
+          </div>
+          <div className="profile-property lt-row">
+            <span className="property-name">Email</span>
+            <div className="lt-row">
+              <span className="property-value">{userEmail}</span>
+              {userVerified ? verifiedText : verifyButton}
+            </div>
+          </div>
+          <div className="profile-property lt-row">
+            <span className="property-name">Permissions</span>
+            <div className="lt-row">
+              {adminSign}
+            </div>
+          </div>
+          <div className="profile-property lt-row">
+            <span className="property-name">Privacy Policy</span>
+            <div className="lt-row">
+              {privacyButton}
+            </div>
+          </div>
+          {this.props.userData.admin ? adminMaker : null}
+        </div>
+      </div>
     );
 
     return (

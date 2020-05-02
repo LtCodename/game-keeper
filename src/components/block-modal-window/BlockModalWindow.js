@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 import fire from "../../Firebase";
 import { Modal } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
-
+import NameSearchResults from "./NameSearchResults";
+import { getGameInformation, searchGamesByName } from "../../rawgApi";
 class BlockModalWindow extends React.Component {
   constructor(props) {
     super(props);
@@ -13,13 +14,14 @@ class BlockModalWindow extends React.Component {
     this.state = {
       localGameData: {...this.props.gameData, releaseDate: this.props.gameData.releaseDate || ""},
       nameInputValue: this.props.gameData.name,
-      developerInputValue: "",
-      developerSuggestInputValue: "",
-      descriptionInputValue: this.props.gameData.description,
       platforms: this.preparePlatformsForState(),
       showModalWindow: false,
       newListForBlock: this.props.listId,
-      newSectionForBlock: this.props.sectionId
+      newSectionForBlock: this.props.sectionId,
+      displaySearchResults: false,
+      searchResult: [],
+      foundGameInfo: {},
+      saveButtonText: 'Save'
     };
   }
 
@@ -56,27 +58,9 @@ class BlockModalWindow extends React.Component {
 
     fire.firestore().collection('users').doc(this.props.userData.uid).update({
       blocks: copy
-    }).then((data) => {
+    }).then(() => {
     }).catch(error => {
       console.log(error.message);
-    });
-  };
-
-  developerChangeHandler = (event) => {
-    this.setState({
-      localGameData: {...this.state.localGameData, developer:event.target.value}
-    });
-  };
-
-  developerInputValueChange = (event) => {
-    this.setState({
-      developerInputValue: event.target.value
-    });
-  };
-
-  developerSuggestInputValueChange = (event) => {
-    this.setState({
-      developerSuggestInputValue: event.target.value
     });
   };
 
@@ -115,85 +99,102 @@ class BlockModalWindow extends React.Component {
     return this.props.platforms.map((elem, index) => {
       return {
         id: index,
-        name: elem.name,
-        iconName: elem.iconName,
-        checked: Boolean(selectedPlatforms.find(platform => elem.name === platform.name))
+        name: elem['name'],
+        iconName: elem['iconName'],
+        checked: Boolean(selectedPlatforms.find(platform => elem['name'] === platform.name))
       };
     });
   }
 
-  doOnAddDeveloper = () => {
-    if (!this.state.developerInputValue) {
-      return;
-    }
-
-    fire.firestore().collection('developers').add({
-      name: this.state.developerInputValue
-    }).then(() => {
-      fire.firestore().collection('developers').get().then(snapshot => {
+  searchApi() {
+    console.log('searching...');
+    searchGamesByName(this.state.nameInputValue).then(response => {
+      console.log(response);
+      this.setState({
+        searchResult: response
+      }, () => {
         this.setState({
-          developerInputValue: ""
-        });
-      }).catch(error => {
-        console.log(error.message);
-      });
+          displaySearchResults: true
+        })
+      })
     });
-  };
+  }
 
-  doOnSuggestDeveloper = () => {
-    if (!this.state.developerSuggestInputValue) {
-      return;
-    }
+  getGameData(id) {
+    console.log('retrieving game info..');
 
-    fire.firestore().collection('suggestedDevelopers').add({
-      name: this.state.developerSuggestInputValue
-    }).then(() => {
-      fire.firestore().collection('suggestedDevelopers').get().then(snapshot => {
+    getGameInformation(id).then(r => {
+      this.setState({
+        foundGameInfo: r
+      }, () => {
+        console.log(this.state.foundGameInfo);
+
+        let developersNames = [];
+        this.state.foundGameInfo.developers.map((elem) => {
+          if (developersNames.length === 0) {
+            return developersNames += elem.name;
+          } else {
+            return developersNames += `, ${elem.name}`;
+          }
+        })
+
         this.setState({
-          developerSuggestInputValue: ""
-        });
-      }).catch(error => {
-        console.log(error.message);
-      });
-    });
-  };
+          localGameData: {
+            ...this.state.localGameData,
+            releaseDate: this.state.foundGameInfo['released'],
+            developers: developersNames,
+            name: this.state.foundGameInfo['name'],
+            apiId: this.state.foundGameInfo['id']
+          },
+          nameInputValue: this.state.foundGameInfo['name']
+        }, () => {
+          console.log(this.state.localGameData);
+        })
+      })
+    })
+  }
 
-  doOnCancel = () => {
+  passIdBack = (gameId) => {
+    console.log(gameId);
     this.setState({
-      descriptionInputValue: "",
-      nameInputValue: this.props.gameData.name
-    });
-  };
+      displaySearchResults: false
+    })
+    this.getGameData(gameId);
+  }
 
-  descriptionInputValueChange = (event) => {
-    this.setState({
-      descriptionInputValue: event.target.value,
-      localGameData: {...this.state.localGameData, description:event.target.value}
-    });
-  };
+  hideResults = () => {
+    console.log('blur')
+    /*this.setState({
+      displaySearchResults: false,
+      searchResult: []
+    })*/
+  }
 
   nameInputValueChange = (event) => {
     this.setState({
       nameInputValue: event.target.value,
       localGameData: {...this.state.localGameData, name:event.target.value}
+    },() => {
+      //server
+      if (this.state.nameInputValue.length >= 3) {
+        this.searchApi();
+      }
     });
   };
 
-  dateInputValueChange = (event) => {
+  modalSave = () => {
     this.setState({
-      localGameData: {...this.state.localGameData, releaseDate:event.target.value}
-    });
-  };
+      saveButtonText: "Wait..."
+    })
 
-  modalSave = (event) => {
     const mappedPlatforms = this.state.platforms
-                                              .filter((elem) => elem.checked)
-                                              .map((elem) => {
-                                                return {
-                                                  name: elem.name,
-                                                  iconName: elem.iconName
-                                                }
-                                              });
+      .filter((elem) => elem.checked)
+      .map((elem) => {
+        return {
+          name: elem.name,
+          iconName: elem.iconName
+        }
+      });
     if (!this.props.fullMode) {
       this.addNewBlock(mappedPlatforms);
     }else {
@@ -233,11 +234,17 @@ class BlockModalWindow extends React.Component {
         sectionId: sectionId
       };
 
+      //console.log(this.props.gameData);
+      //console.log(this.state.localGameData);
+      //console.log(allBlocks[targetBlockIndex]);
+
       fire.firestore().collection('users').doc(this.props.userData.uid).update({
         blocks: allBlocks,
         sections: allSections,
       }).then((data) => {
-        this.props.hideWindow();
+        this.setState({
+          saveButtonText: "Done"
+        }, () => this.props.hideWindow())
       }).catch(error => {
         console.log(error.message);
       });
@@ -258,25 +265,15 @@ class BlockModalWindow extends React.Component {
     fire.firestore().collection('users').doc(this.props.userData.uid).update({
       blocks: allBlocks
     }).then((data) => {
+      this.setState({
+        saveButtonText: "Done"
+      }, () => this.props.hideWindow())
     }).catch(error => {
       console.log(error.message);
     });
-
-    this.props.hideWindow();
   }
 
   render() {
-    const datePicker = (
-      <div className="modalPiece lt-col">
-        <span className="littleHeaders">Release Date</span>
-        <input
-            className="block-date"
-            type="date"
-            value={this.state.localGameData.releaseDate}
-            onChange={this.dateInputValueChange}/>
-      </div>
-    );
-
     const platformPicker = this.state.platforms.map((elem) => {
       return (
           <div className="form-check checkbox" key={elem.id}>
@@ -346,71 +343,35 @@ class BlockModalWindow extends React.Component {
 
     const deleteButton = (this.props.fullMode) ? <button type="button" className="block-button" onClick={this.openModalWarningWindow}>Delete</button> : "";
 
-    const developerSectionOptions = this.props.developers.map((elem) => {
-      return (
-        <option key={elem.id} value={elem.id}>{elem.name}</option>
-      );
-    });
-
-    developerSectionOptions.unshift(<option value="" key={"default"}>Select</option>);
-
-    const devSelectValue = this.state.localGameData.developer || '';
-
-    const addDeveloper = (
-      <div className="lt-col">
-        <span className="littleHeaders">Add developer</span>
-        <input
-            className="block-input"
-            type="text"
-            placeholder="Developer Name"
-            value={this.state.developerInputValue}
-            onChange={this.developerInputValueChange}/>
-        <button className="block-button" onClick={this.doOnAddDeveloper}>Add</button>
-      </div>
-    );
-
-    const suggestDeveloper = (
-      <div className="lt-col">
-        <span className="littleHeaders">Suggest developer</span>
-        <input
-            className="block-input"
-            type="text"
-            placeholder="Developer Name"
-            value={this.state.developerSuggestInputValue}
-            onChange={this.developerSuggestInputValueChange}/>
-        <button
-            className="block-button"
-            onClick={this.doOnSuggestDeveloper}>
-          Suggest
-        </button>
-      </div>
-    );
-
-    const developerSelector = (
-      <div className="modalPiece">
-        <p className="littleHeaders">Assign developer</p>
-        <select
-            className="block-select"
-            value={devSelectValue}
-            onChange={this.developerChangeHandler}>
-          {developerSectionOptions}
-        </select>
-        {suggestDeveloper}
-        {this.props.userData.admin ? addDeveloper : ""}
-      </div>
-    );
-
     const name = (
-      <div className="lt-col">
+      <div className="lt-row search-row">
         <textarea
             placeholder="Enter name"
             className="block-textarea"
             id="name"
             rows={1}
+            onBlur={this.hideResults}
             value={this.state.nameInputValue}
             onChange={this.nameInputValueChange}/>
+        {this.state.displaySearchResults ? <NameSearchResults
+            results={this.state.searchResult}
+            passIdBack={(gameId) => this.passIdBack(gameId)}/> : ''}
       </div>
     );
+
+    const apiDeveloper = (
+        <div className="modalPiece">
+          <p className="littleHeaders">Developer</p>
+          <span>{this.state.localGameData.developers || 'No Data'}</span>
+        </div>
+    )
+
+    const apiDate = (
+        <div className="modalPiece">
+          <p className="littleHeaders">Release Date</p>
+          <span>{this.state.localGameData.releaseDate || 'No Data'}</span>
+        </div>
+    )
 
     return (
         <>
@@ -422,12 +383,12 @@ class BlockModalWindow extends React.Component {
                 {/*New list and section selector*/}
                 {newHomeSelector}
                 {/*developer*/}
-                {developerSelector}
+                {apiDeveloper}
                 {/*release date*/}
-                {datePicker}
+                {apiDate}
                 {/*platform*/}
                 <div className="modalPiece">
-                  <p className="littleHeaders">Select platform</p>
+                  <p className="littleHeaders">I've played it on</p>
                   <div className="checkboxWrapper">
                     {platformPicker}
                   </div>
@@ -436,11 +397,11 @@ class BlockModalWindow extends React.Component {
               <div className="lt-row">
                 <button type="button" className="block-button" onClick={this.props.hideWindow}>Cancel</button>
                 {deleteButton}
-                <button type="button" className="block-button" onClick={this.modalSave}>Save</button>
+                <button type="button" className="block-button" onClick={this.modalSave}>{this.state.saveButtonText}</button>
               </div>
             </Modal.Body>
           </Modal>
-          {modalWarningWindow}
+          {this.state.showModalWindow ? modalWarningWindow : ''}
         </>
     )
   }
@@ -450,7 +411,6 @@ const stateToProps = (state = {}, props = {}) => {
   return {
     listId: props.listId || props.match.params.listId,
     listIndex: state.selectedListIndex,
-    developers: state.developers,
     platforms: state.platforms,
     userData: state.userData,
     userBlocks: state.userBlocks,

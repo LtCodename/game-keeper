@@ -161,8 +161,7 @@ const stateToProps = (state = {}) => {
   return {
     userBlocks: state.userBlocks,
     userSections: state.userSections,
-    userLists: state.userLists,
-    developers: state.developers
+    userLists: state.userLists
   }
 };
 
