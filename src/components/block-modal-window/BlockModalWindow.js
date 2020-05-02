@@ -156,18 +156,15 @@ class BlockModalWindow extends React.Component {
 
   passIdBack = (gameId) => {
     console.log(gameId);
-    this.setState({
-      displaySearchResults: false
-    })
     this.getGameData(gameId);
+    this.resetSearchResults();
   }
 
-  hideResults = () => {
-    console.log('blur')
-    /*this.setState({
+  resetSearchResults = () => {
+    this.setState({
       displaySearchResults: false,
       searchResult: []
-    })*/
+    })
   }
 
   nameInputValueChange = (event) => {
@@ -345,12 +342,12 @@ class BlockModalWindow extends React.Component {
 
     const name = (
       <div className="lt-row search-row">
+        {this.state.displaySearchResults ? <span className='search-overlay' onClick={this.resetSearchResults}/> : ''}
         <textarea
             placeholder="Enter name"
             className="block-textarea"
             id="name"
             rows={1}
-            onBlur={this.hideResults}
             value={this.state.nameInputValue}
             onChange={this.nameInputValueChange}/>
         {this.state.displaySearchResults ? <NameSearchResults

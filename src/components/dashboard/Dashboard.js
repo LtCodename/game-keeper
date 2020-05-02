@@ -80,12 +80,9 @@ class Dashboard extends React.Component {
     );
 
     const authorized = (
-      <div>
-        <SearchPanel />
-        <div className='lists-dashboard-wrapper lt-row'>
-          {listsToRender}
-          {addListButton}
-        </div>
+      <div className='lists-dashboard-wrapper lt-row'>
+        {listsToRender}
+        {addListButton}
       </div>
     );
 

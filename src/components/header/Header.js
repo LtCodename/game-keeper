@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { NavLink, withRouter } from 'react-router-dom';
 import fire from "../../Firebase";
 import {LogOutIcon, LogOutIconMobile, ProfileIcon, ProfileIconMobile} from "../../IconsLibrary";
+import SearchPanelConnected from "../search-panel/SearchPanel";
 
 const Header = ({ history, userData}) => {
   const onLogOutClick = () => {
@@ -70,14 +71,17 @@ const Header = ({ history, userData}) => {
       <div className="ultimateHeaderWrapper">
         <div className="headerWrapper">
           {logo}
+          <SearchPanelConnected/>
           <div className="signPanelWrapper">
             {userData ? logOutButton : ""}
             {userData ? profileButton : ""}
           </div>
         </div>
         <div className="altButtonsWrapper">
-          {userData ? logOutAltButton : ""}
-          {userData ? profileAltButton : ""}
+          <div className="alt-buttons-inner-wrapper">
+              {userData ? logOutAltButton : ""}
+              {userData ? profileAltButton : ""}
+          </div>
         </div>
       </div>
   )

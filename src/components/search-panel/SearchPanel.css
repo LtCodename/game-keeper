@@ -1,24 +1,30 @@
 .search-input {
-  margin: 0;
   border: none;
-  background: inherit;
   outline: none;
   background: var(--second-color);
   padding-left: 5px;
   color: var(--first-color);
   font-weight: 800;
   resize: none;
-}
-
-.searchMatrix {
-  display: flex;
-  flex-wrap: wrap;
+  width: 400px;
 }
 
 .search-panel-wrapper {
+  position: relative;
+  display: flex;
+}
+
+.search-matrix {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  margin-top: 5px;
   background: #fef9de;
   padding: 10px;
-  margin-bottom: 10px;
+  max-height: 500px;
+  overflow: auto;
+  width: 100%;
 }
 
 .search-input:focus {
@@ -29,46 +35,14 @@
   outline: none;
 }
 
-.card-body {
-  background-color: var(--third-color);
+@media (max-width: 800px) {
+  .search-input {
+    width: 200px;
+  }
 }
 
-.searchModeSelector {
-  margin-bottom: 5px;
-}
-
-.testHeader {
-  color: black;
-  width: 100%;
-  text-align: center;
-}
-
-.searchButton {
-  margin: 0 auto 10px;
-  padding: 0;
-  background-color: var(--first-color);
-  border: none;
-  display: block;
-  cursor: pointer;
-  outline: none;
-}
-
-.searchButton:hover, .searchButton:focus, .searchButton:active {
-  background-color: var(--first-color);
-  outline: none;
-}
-
-.card {
-  border-radius: 0;
-}
-
-.foundText {
-  display: none;
-  margin: 0 0 2px 0;
-  color: var(--first-color);
-  padding: 0;
-}
-
-.foundTextVisible {
-  display: block;
+@media (max-width: 580px) {
+  .search-panel-wrapper {
+    margin: 5px 0;
+  }
 }

@@ -88,19 +88,28 @@ option {
   background: var(--third-color);
   color: #0079c5;
   font-weight: 800;
-  width: -webkit-fill-available;
+  width: 100%;
   margin-right: 10px;
+  z-index: 1;
+}
+
+.search-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
 }
 
 .search-results-wrapper {
   position: absolute;
-  padding: 5px 5px 0px 5px;
+  padding: 5px 5px 0 5px;
   background: #fef9de;
-  top: 37px;
+  top: 100%;
   width: 100%;
   z-index: 1;
   max-height: 600px;
-  overflow: overlay;;
+  overflow: auto;
 }
 
 .found-game-button {
