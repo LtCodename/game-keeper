@@ -100,14 +100,6 @@ class Profile extends React.Component {
     </form>
     );
 
-    const developersButton = (
-      <NavLink to="/developers"><button className="profileButtons">Manage</button></NavLink>
-    );
-
-    const suggestedDevelopersButton = (
-      <NavLink to="/suggested"><button className="profileButtons">Manage</button></NavLink>
-    );
-
     const changeNameButton = (
       <button className="profileButtons" onClick={this.onChangeName}>Change</button>
     );
@@ -126,24 +118,6 @@ class Profile extends React.Component {
         <span className="property-value">{this.props.userData.admin ? "Admin" : "User"}</span>
       );
     }
-
-    const manageDevelopers = (
-        <div className="profile-property lt-row">
-          <span className="property-name">Developers</span>
-          <div className="lt-row">
-            {developersButton}
-          </div>
-        </div>
-    );
-
-    const manageSuggested = (
-        <div className="profile-property lt-row">
-          <span className="property-name">Suggested Developers</span>
-          <div className="lt-row">
-            {suggestedDevelopersButton}
-          </div>
-        </div>
-    );
 
     const adminMaker = (
         <div className="profile-property lt-row">
@@ -222,8 +196,6 @@ class Profile extends React.Component {
               {privacyButton}
             </div>
           </div>
-          {this.props.userData.admin ? manageDevelopers : null}
-          {this.props.userData.admin ? manageSuggested : null}
           {this.props.userData.admin ? adminMaker : null}
         </div>
       </div>

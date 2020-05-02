@@ -4,8 +4,6 @@ import Footer from './components/footer/Footer.js';
 import Header from './components/header/Header.js';
 import Dashboard from './components/dashboard/Dashboard.js';
 import Profile from './components/profile/Profile.js';
-import Developers from './components/developers/Developers.js';
-import Suggested from './components/suggested/Suggested.js';
 import Privacy from './components/privacy/Privacy.js';
 import Preloader from './components/preloader/Preloader.js';
 import { BrowserRouter, Route } from 'react-router-dom'
@@ -158,8 +156,6 @@ class App extends React.Component {
     const routes = (
       <div>
         <Route path="/profile" component={Profile} />
-        <Route path="/developers" component={Developers} />
-        <Route path="/suggested" component={Suggested} />
         <Route path="/privacy" component={Privacy} />
         <Route path="/lists/:listId" component={UserList}/>
         <Route exact path="/" component={Dashboard} />

@@ -84,66 +84,102 @@ option {
   border-top: none;
   border-left: none;
   border-right: none;
-  position: relative;
   border-bottom: 5px solid #0079c5;
   background: var(--third-color);
   color: #0079c5;
   font-weight: 800;
+  width: -webkit-fill-available;
+  margin-right: 10px;
 }
 
 .search-results-wrapper {
   position: absolute;
-  padding: 10px;
-  background: #FFFFFF;
-  top: 50px;
+  padding: 5px 5px 0px 5px;
+  background: #fef9de;
+  top: 37px;
+  width: 100%;
+  z-index: 1;
+  max-height: 600px;
+  overflow: overlay;;
+}
+
+.found-game-button {
+  border: none;
+  background: var(--second-color);
+  margin-bottom: 5px;
+  cursor: pointer;
+  color: var(--first-color);
+  font-weight: 600;
+  outline: none;
+  transition: all .1s;
+  padding-top: 5px;
+  border-bottom: 5px solid transparent;
+}
+
+.found-game-button:hover {
+  outline: none;
+  border-bottom: 5px solid var(--first-color);
+}
+
+.found-game-button:active {
+  outline: none;
+}
+
+.found-game-button:focus {
+  outline: none;
+}
+
+.search-row {
+  justify-content: space-between;
+  position: relative;
 }
 
 .block-input {
-  outline: none;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: 5px solid #0079c5;
-  background: var(--third-color);
-  color: #0079c5;
-  font-weight: 800;
+outline: none;
+border-top: none;
+border-left: none;
+border-right: none;
+border-bottom: 5px solid #0079c5;
+background: var(--third-color);
+color: #0079c5;
+font-weight: 800;
 }
 
 .block-button {
-  margin: 5px 5px 0 0;
-  border: none;
-  border-radius: 0;
-  background: #0079c5;
-  color: var(--third-color);
-  outline: none;
-  cursor: pointer;
-  padding: 5px 10px;
-  font-weight: 600;
-  width: fit-content;
+margin: 5px 5px 0 0;
+border: none;
+border-radius: 0;
+background: #0079c5;
+color: var(--third-color);
+outline: none;
+cursor: pointer;
+padding: 5px 10px;
+font-weight: 600;
+width: fit-content;
 }
 
 .block-button:focus {
-  outline: none;
+outline: none;
 }
 
 .block-button:hover {
-  outline: none;
+outline: none;
 }
 
 .block-date {
-  border: none;
-  background: #fef9de;
-  color: #0178c5;
-  font-weight: 800;
-  border-bottom: 5px solid;
-  outline: none;
-  cursor: pointer;
+border: none;
+background: #fef9de;
+color: #0178c5;
+font-weight: 800;
+border-bottom: 5px solid;
+outline: none;
+cursor: pointer;
 }
 
 .block-date:focus {
-  outline: none;
+outline: none;
 }
 
 .block-date:hover {
-  outline: none;
+outline: none;
 }
