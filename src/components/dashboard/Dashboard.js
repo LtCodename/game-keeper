@@ -72,7 +72,7 @@ class Dashboard extends React.Component {
     });
 
     const addListButton = (
-      <button className='btnAddListFromDashboard' onClick={this.openAddListWindow}>Add List</button>
+      <button className='btnAddListFromDashboard' onClick={this.openAddListWindow}>New Collection</button>
     );
 
     const modalAddListWindow = (

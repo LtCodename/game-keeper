@@ -1,7 +1,6 @@
 import React from 'react';
 import './Footer.css';
 import AlertModalWindow from '../alert-modal-window/AlertModalWindow.js';
-import LogInModalWindow from "../log-in-modal-window/LogInModalWindow";
 import {TrelloIcon, TwitterIcon, VersionIcon} from "../../IconsLibrary";
 
 class Footer extends React.Component {
@@ -64,7 +63,7 @@ class Footer extends React.Component {
     const alertWindow = (
       <AlertModalWindow
         title={`Game Keeper Alpha`}
-        message={`Version: 0.81. Release date: May 2, 2020.`}
+        message={`Version: 0.82. Release date: May 3, 2020.`}
         show={this.state.showAlertWindow}
         hideWindow={this.closeAlertModal.bind(this)}/>
     );

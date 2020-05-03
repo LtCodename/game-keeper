@@ -53,26 +53,6 @@
   width: 100%;
 }
 
-.warning-button {
-  margin: 0 5px;
-  border: none;
-  border-radius: 0;
-  background: #0079c5;
-  color: var(--third-color);
-  outline: none;
-  cursor: pointer;
-  padding: 5px 10px;
-  font-weight: 600;
-}
-
-.warning-button:hover {
-  outline: none;
-}
-
-.warning-button:focus {
-  outline: none;
-}
-
 .mainContent {
   border: 10px solid #dc3545;
 }

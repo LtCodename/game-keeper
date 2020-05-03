@@ -3,6 +3,7 @@ import './AddListModalWindow.css';
 import { connect } from 'react-redux'
 import fire from "../../Firebase";
 import { Modal } from 'react-bootstrap';
+import Button from "../button/Button";
 
 class AddListModalWindow extends React.Component {
   constructor(props) {
@@ -11,7 +12,8 @@ class AddListModalWindow extends React.Component {
     this.state = {
       warningMode: false,
       warningText: '',
-      nameInputValue: ``
+      nameInputValue: ``,
+      addButtonDisabled: false
     };
   }
 
@@ -27,11 +29,18 @@ class AddListModalWindow extends React.Component {
   }
 
   onProceed = () => {
+    this.setState({
+      addButtonDisabled: true
+    })
+
     if (this.state.nameInputValue === ``) {
       this.setState({
         warningMode: true,
         warningText: "You have to enter new name to proceed!"
       });
+      this.setState({
+        addButtonDisabled: false
+      })
       return;
     }
 
@@ -45,21 +54,35 @@ class AddListModalWindow extends React.Component {
     fire.firestore().collection('users').doc(this.props.userData.uid).update({
       lists: copy
     }).then((data) => {
+      this.setState({
+        addButtonDisabled: false
+      })
       this.props.hideWindow();
     }).catch(error => {
       console.log(error.message);
+      this.setState({
+        addButtonDisabled: false
+      })
     });
   };
 
   render() {
     const listName = (
-      <textarea placeholder="Enter List Name" className="addListTextarea" id="listName" rows="1" value={this.state.nameInputValue} onChange={this.nameInputValueChange}/>
+      <textarea placeholder="Collection Name" className="addListTextarea" id="listName" rows="1" value={this.state.nameInputValue} onChange={this.nameInputValueChange}/>
     );
 
     const buttonsWrapper = (
       <div>
-        <button type="button" className="addListButton" onClick={this.closeModal}>Cancel</button>
-        <button type="button" className="addListButton" onClick={this.onProceed}>Proceed</button>
+        <Button
+            buttonAction={this.closeModal}
+            text={'Cancel'}
+            margin={'right'}
+        />
+        <Button
+            disabled={this.state.addButtonDisabled}
+            buttonAction={this.onProceed}
+            text={'Proceed'}
+        />
       </div>
     );
 

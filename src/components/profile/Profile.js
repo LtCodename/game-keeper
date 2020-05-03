@@ -125,7 +125,9 @@ class Profile extends React.Component {
           <Button
             disabled={this.state.adminButtonDisabled}
             buttonAction={this.makeAdmin}
-            text={'Submit'}/>
+            text={'Submit'}
+            margin={'left'}
+          />
         </form>
     );
 
@@ -134,6 +136,7 @@ class Profile extends React.Component {
             disabled={this.state.changeButtonDisabled}
             buttonAction={this.onChangeName}
             text={'Change'}
+            margin={'left'}
         />
     );
 
@@ -142,12 +145,13 @@ class Profile extends React.Component {
             disabled={this.state.verifyButtonDisabled}
             buttonAction={this.onVerify}
             text={'Verify'}
+            margin={'left'}
         />
     );
 
     const privacyButton = (
         <NavLink to="/privacy">
-          <Button text={'Read'}/>
+          <Button text={'Read'} margin={'left'}/>
         </NavLink>
     );
 

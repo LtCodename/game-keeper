@@ -145,51 +145,30 @@ option {
 }
 
 .block-input {
-outline: none;
-border-top: none;
-border-left: none;
-border-right: none;
-border-bottom: 5px solid #0079c5;
-background: var(--third-color);
-color: #0079c5;
-font-weight: 800;
-}
-
-.block-button {
-margin: 5px 5px 0 0;
-border: none;
-border-radius: 0;
-background: #0079c5;
-color: var(--third-color);
-outline: none;
-cursor: pointer;
-padding: 5px 10px;
-font-weight: 600;
-width: fit-content;
-}
-
-.block-button:focus {
-outline: none;
-}
-
-.block-button:hover {
-outline: none;
+  outline: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 5px solid #0079c5;
+  background: var(--third-color);
+  color: #0079c5;
+  font-weight: 800;
 }
 
 .block-date {
-border: none;
-background: #fef9de;
-color: #0178c5;
-font-weight: 800;
-border-bottom: 5px solid;
-outline: none;
-cursor: pointer;
+  border: none;
+  background: #fef9de;
+  color: #0178c5;
+  font-weight: 800;
+  border-bottom: 5px solid;
+  outline: none;
+  cursor: pointer;
 }
 
 .block-date:focus {
-outline: none;
+  outline: none;
 }
 
 .block-date:hover {
-outline: none;
+  outline: none;
 }

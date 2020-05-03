@@ -278,7 +278,7 @@ class UserList extends React.Component {
             ref={node => {
               this.linkToRenameListTextarea = node;
             }}
-            placeholder="Enter List Name"
+            placeholder="Collection Name"
             className="edit-list-input"
             rows="1"
             value={this.state.listNameInputValue}

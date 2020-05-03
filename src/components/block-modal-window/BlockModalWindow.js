@@ -7,6 +7,7 @@ import { Modal } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 import NameSearchResults from "./NameSearchResults";
 import { getGameInformation, searchGamesByName } from "../../rawgApi";
+import Button from "../button/Button";
 class BlockModalWindow extends React.Component {
   constructor(props) {
     super(props);
@@ -21,7 +22,8 @@ class BlockModalWindow extends React.Component {
       displaySearchResults: false,
       searchResult: [],
       foundGameInfo: {},
-      saveButtonText: 'Save'
+      saveButtonDisabled: false,
+      deleteButtonDisabled: false
     };
   }
 
@@ -44,6 +46,10 @@ class BlockModalWindow extends React.Component {
   };
 
   deleteBlock = () => {
+    this.setState({
+      deleteButtonDisabled: true
+    })
+
     const copy = [...this.props.userBlocks];
 
     const targetBlockIndex = copy.findIndex((elem) => {
@@ -59,8 +65,14 @@ class BlockModalWindow extends React.Component {
     fire.firestore().collection('users').doc(this.props.userData.uid).update({
       blocks: copy
     }).then(() => {
+      this.setState({
+        deleteButtonDisabled: false
+      })
     }).catch(error => {
       console.log(error.message);
+      this.setState({
+        deleteButtonDisabled: false
+      })
     });
   };
 
@@ -181,7 +193,7 @@ class BlockModalWindow extends React.Component {
 
   modalSave = () => {
     this.setState({
-      saveButtonText: "Wait..."
+      saveButtonDisabled: true
     })
 
     const mappedPlatforms = this.state.platforms
@@ -240,10 +252,13 @@ class BlockModalWindow extends React.Component {
         sections: allSections,
       }).then((data) => {
         this.setState({
-          saveButtonText: "Done"
+          saveButtonDisabled: false
         }, () => this.props.hideWindow())
       }).catch(error => {
         console.log(error.message);
+        this.setState({
+          saveButtonDisabled: false
+        })
       });
     }
   }
@@ -338,7 +353,12 @@ class BlockModalWindow extends React.Component {
       );
     }
 
-    const deleteButton = (this.props.fullMode) ? <button type="button" className="block-button" onClick={this.openModalWarningWindow}>Delete</button> : "";
+    const deleteButton = (this.props.fullMode) ?
+        <Button
+            buttonAction={this.openModalWarningWindow}
+            disabled={this.state.deleteButtonDisabled}
+            text={'Delete'}
+            margin={'right'}/> : '';
 
     const name = (
       <div className="lt-row search-row">
@@ -366,7 +386,7 @@ class BlockModalWindow extends React.Component {
     const apiDate = (
         <div className="modalPiece">
           <p className="littleHeaders">Release Date</p>
-          <span>{this.state.localGameData.releaseDate || 'No Data'}</span>
+          <span>{this.state.localGameData.releaseDate || 'TBA'}</span>
         </div>
     )
 
@@ -392,9 +412,17 @@ class BlockModalWindow extends React.Component {
                 </div>
               </div>
               <div className="lt-row">
-                <button type="button" className="block-button" onClick={this.props.hideWindow}>Cancel</button>
+                <Button
+                    buttonAction={this.props.hideWindow}
+                    text={'Cancel'}
+                    margin={'right'}
+                />
                 {deleteButton}
-                <button type="button" className="block-button" onClick={this.modalSave}>{this.state.saveButtonText}</button>
+                <Button
+                    buttonAction={this.modalSave}
+                    disabled={this.state.saveButtonDisabled}
+                    text={'Save'}
+                />
               </div>
             </Modal.Body>
           </Modal>

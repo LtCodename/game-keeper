@@ -32,23 +32,3 @@
   justify-content: center;
   width: 100%;
 }
-
-.close-button {
-  margin: 0 5px;
-  border: none;
-  border-radius: 0;
-  background: #0079c5;
-  color: var(--third-color);
-  outline: none;
-  cursor: pointer;
-  padding: 5px 10px;
-  font-weight: 600;
-}
-
-.close-button:hover {
-  outline: none;
-}
-
-.close-button:focus {
-  outline: none;
-}

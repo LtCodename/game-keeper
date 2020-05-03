@@ -1,11 +1,15 @@
 import React from 'react';
 import './AlertModalWindow.css';
 import { Modal } from "react-bootstrap";
+import Button from "../button/Button";
 
 const AlertModalWindow = ({title, message, show, hideWindow}) => {
   const buttonsWrapper = (
       <div>
-        <button type="button" className="close-button" onClick={hideWindow}>Close</button>
+          <Button
+              buttonAction={hideWindow}
+              text={'Close'}
+          />
       </div>
   );
 

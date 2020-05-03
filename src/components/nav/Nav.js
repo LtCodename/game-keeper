@@ -53,7 +53,7 @@ class Nav extends React.Component {
 
     const addListButton = (
       <div>
-        <button className="btnAddList" onClick={this.openAddListWindow}>Add List</button>
+        <button className="btnAddList" onClick={this.openAddListWindow}>New Collection</button>
       </div>
     );
 

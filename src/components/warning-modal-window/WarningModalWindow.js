@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './WarningModalWindow.css';
 import { Modal } from "react-bootstrap";
+import Button from "../button/Button";
 
 const WarningModalWindow = ({message, onProceed, show, hideWindow}) => {
 
+  const [proceedButtonDisabled, setProceedButtonDisabled] = useState(false);
+
   const doOnProceed = () => {
+    setProceedButtonDisabled(true);
     onProceed();
     hideWindow();
   };
@@ -20,8 +24,16 @@ const WarningModalWindow = ({message, onProceed, show, hideWindow}) => {
             <span className="alert-message">{message}</span>
           </div>
           <div className="warning-buttons-wrapper">
-            <button type="button" className="warning-button" onClick={hideWindow}>Cancel</button>
-            <button type="button" className="warning-button" onClick={doOnProceed}>Proceed</button>
+            <Button
+                buttonAction={hideWindow}
+                text={'Cancel'}
+                margin={'right'}
+            />
+            <Button
+                disabled={proceedButtonDisabled}
+                buttonAction={doOnProceed}
+                text={'Proceed'}
+            />
           </div>
         </div>
       </Modal.Body>
