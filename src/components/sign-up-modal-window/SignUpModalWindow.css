@@ -1,51 +1,15 @@
-.modalBody {
-  padding-left: 18px;
+.policy-button {
+  display: flex;
 }
 
-.modal-header {
-  padding-bottom: 10px;
-}
-
-.signupInput {
-  margin-right: 10px;
-}
-
-.requiredText {
-  color: #000000;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.signUpLabel {
-  margin: 0;
-}
-
-.signupInput {
-  background-color: var(--third-color);
-  color: #000000;
-  border-radius: 0;
-}
-
-.signupInput {
-  background-color: var(--third-color);
-  color: #000000;
-  border-radius: 0;
-}
-
-.signupInput::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #000000;
-  opacity: 1; /* Firefox */
-}
-
-.signupInput:-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: #000000;
-}
-
-.signupInput::-ms-input-placeholder { /* Microsoft Edge */
-  color: #000000;
-}
-
-.policyButton:hover {
+.policy-button:hover {
   text-decoration: none;
-  color: var(--third-color);
+}
+
+.signUp-buttons-row {
+  margin-top: 5px;
+}
+
+.error-text {
+  color: var(--first-color);
 }

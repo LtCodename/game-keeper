@@ -190,16 +190,16 @@ class UserSection extends React.Component {
     const actionButtonsNode = (
         <div className="sectionActions">
           <div className={actionButtonsClassName}>
-            <button className="btn" onClick={this.toggleButtons}>
+            <button className="TODO btn" onClick={this.toggleButtons}>
               {SectionActionPanelIcon}
             </button>
-            <button className="btn" onClick={this.openAddGameWindow}>
+            <button className="TODO btn" onClick={this.openAddGameWindow}>
               {AddSectionIcon}
             </button>
-            <button className="btn" onClick={this.doOnEdit}>
+            <button className="TODO btn" onClick={this.doOnEdit}>
               {EditSectionIcon}
             </button>
-            <button className="btn" onClick={this.openModalWarningWindow}>
+            <button className="TODO btn" onClick={this.openModalWarningWindow}>
               {DeleteSectionIcon}
             </button>
             {positionPicker}
@@ -225,8 +225,8 @@ class UserSection extends React.Component {
               rows="1" value={this.state.sectionInputValue}
               onChange={this.sectionInputValueChange}/>
           <div>
-            <button className="section-edit-button" onClick={this.doOnSubmit}>OK</button>
-            <button className="section-edit-button" onClick={this.doOnCancel}>Cancel</button>
+            <button className="TODO section-edit-button" onClick={this.doOnSubmit}>OK</button>
+            <button className="TODO section-edit-button" onClick={this.doOnCancel}>Cancel</button>
           </div>
           <Colors sectionId={this.props.id} color={this.props.color}/>
         </div>

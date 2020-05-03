@@ -3,6 +3,7 @@ import './SignUpModalWindow.css';
 import { NavLink } from 'react-router-dom';
 import fire from "../../Firebase";
 import { Modal } from "react-bootstrap";
+import Button from "../button/Button";
 
 class SignUpModalWindow extends React.Component {
   constructor(props) {
@@ -11,13 +12,12 @@ class SignUpModalWindow extends React.Component {
     this.state = {
       emailInputValue: "",
       confirmEmailInputValue: "",
-      confirmEmailError: false,
-      confirmPasswordError: false,
-      confirmErrorMessage: "",
       passwordInputValue: "",
       confirmPasswordInputValue: "",
       nameInputValue: "",
-      errorText: ""
+      errorText: "",
+      showErrorNode: false,
+      signButtonDisabled: false
     };
   }
 
@@ -59,28 +59,53 @@ class SignUpModalWindow extends React.Component {
     event.preventDefault();
 
     this.setState({
-      confirmPasswordError: false,
-      confirmEmailError: false,
-      confirmErrorMessage: ""
+      signButtonDisabled: true,
+      showErrorNode: false,
+      errorText: ""
     });
 
     if (this.state.emailInputValue !== this.state.confirmEmailInputValue) {
       this.setState({
-        confirmEmailError: true,
-        confirmErrorMessage: "Please enter equal email addresses."
+        showErrorNode: true,
+        errorText: 'Email addresses are not identical!',
+        signButtonDisabled: false
       });
       return;
     }
 
     if (this.state.passwordInputValue !== this.state.confirmPasswordInputValue) {
       this.setState({
-        confirmPasswordError: true,
-        confirmErrorMessage: "Please enter equal passwords."
+        showErrorNode: true,
+        errorText: 'Passwords are not identical!',
+        signButtonDisabled: false
       });
       return;
     }
 
-    if (!this.state.emailInputValue || !this.state.passwordInputValue) {
+    if (!this.state.emailInputValue) {
+      this.setState({
+        signButtonDisabled: false,
+        showErrorNode: true,
+        errorText: 'Please enter valid Email address!',
+      });
+      return;
+    }
+
+    if (!this.state.passwordInputValue) {
+      this.setState({
+        signButtonDisabled: false,
+        showErrorNode: true,
+        errorText: 'Please enter valid password!',
+      });
+      return;
+    }
+
+    if (!this.state.nameInputValue) {
+      this.setState({
+        showErrorNode: true,
+        errorText: 'Please enter your display name!',
+        signButtonDisabled: false
+      });
       return;
     }
 
@@ -106,28 +131,32 @@ class SignUpModalWindow extends React.Component {
           confirmEmailInputValue: "",
           passwordInputValue: "",
           confirmPasswordInputValue: "",
-          nameInputValue: ""
+          nameInputValue: "",
+          signButtonDisabled: false,
+          showErrorNode: false,
+          errorText: ''
         });
         this.props.hideWindow();
     }).catch(error => {
-      console.log(error.message);
       this.setState({
-        errorText: error.message
+        errorText: error.message,
+        showErrorNode: true,
+        signButtonDisabled: false
       });
     });
   };
 
   closeModal = () => {
+    this.setState({
+      showErrorNode: false,
+      errorText: ""
+    });
     this.props.hideWindow();
   }
 
   render() {
-    const confirmErrorDisplay = (
-      <p className="signupErrorText">{this.state.confirmErrorMessage}</p>
-    );
-
     const errorNode = (
-        <span className="errorText">{this.state.errorText}</span>
+        <span className="error-text">{this.state.errorText}</span>
     )
 
     return (
@@ -135,7 +164,7 @@ class SignUpModalWindow extends React.Component {
       <Modal.Body>
         <div className="lt-col">
           <span className="login-title">Sign Up</span>
-          <form id="signupForm" onSubmit={this.createUser}>
+          <form>
             <div className="input-col">
               <input className="loginInput" autoComplete="username email" placeholder="Enter email" type="email" id="signupEmail" value={this.state.emailInputValue} onChange={this.emailValueChange} required/>
             </div>
@@ -158,17 +187,25 @@ class SignUpModalWindow extends React.Component {
             <div className="input-col">
               <input className="loginInput" placeholder="Enter display name" type="text" id="signupDisplayName" value={this.state.nameInputValue} onChange={this.nameValueChange} required/>
             </div>
-            {this.state.errorText.length ? errorNode : ""}
-            <div className="lt-row login-buttons-row">
-              <button className="loginFormButton">Sign Up</button>
-              <button className="loginFormButton" onClick={this.closeModal}>Cancel</button>
-              <NavLink className="loginFormButton policyButton" to="/privacy" onClick={this.onPolicy}>
-                Privacy Policy
+            {this.state.showErrorNode ? errorNode : ""}
+            <div className="lt-row signUp-buttons-row">
+              <Button
+                  disabled={this.state.signButtonDisabled}
+                  buttonAction={this.createUser}
+                  text={'Sign Up'}
+                  margin={'right'}
+              />
+              <Button
+                  buttonAction={this.closeModal}
+                  text={'Cancel'}
+                  margin={'right'}
+              />
+              <NavLink to="/privacy" className="policy-button">
+                <Button text={'Privacy Policy'} onClick={this.onPolicy}/>
               </NavLink>
             </div>
           </form>
         </div>
-        {(this.state.confirmEmailError || this.state.confirmPasswordError) ? confirmErrorDisplay : ""}
       </Modal.Body>
     </Modal>
     )

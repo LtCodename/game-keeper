@@ -247,17 +247,17 @@ class UserList extends React.Component {
 
     const actionButtonsNode = (
         <div className={actionButtonsClassName}>
-          <button className="btn" onClick={this.toggleButtons}>
+          <button className="TODO btn" onClick={this.toggleButtons}>
             {ListActionPanelIcon}
           </button>
-          <button className="btn" onClick={this.doOnAddSection}>
+          <button className="TODO btn" onClick={this.doOnAddSection}>
             {AddListIcon}
           </button>
-          <button className="btn" onClick={this.doOnEdit}>
+          <button className="TODO btn" onClick={this.doOnEdit}>
             {EditListIcon}
           </button>
           <button
-              className="btn"
+              className="TODO btn"
               onClick={this.openModalWarningWindow}>
             {DeleteListIcon}
           </button>
@@ -284,8 +284,8 @@ class UserList extends React.Component {
             value={this.state.listNameInputValue}
             onChange={this.listNameInputValueChange}/>
         <div className="lt-row">
-          <button className="list-edit-button" onClick={this.doOnSubmitListName}>Confirm</button>
-          <button className="list-edit-button" onClick={this.doOnCancel}>Cancel</button>
+          <button className="TODO list-edit-button" onClick={this.doOnSubmitListName}>Confirm</button>
+          <button className="TODO list-edit-button" onClick={this.doOnCancel}>Cancel</button>
         </div>
       </div>
     );
@@ -303,8 +303,8 @@ class UserList extends React.Component {
             onChange={this.sectionNameInputValueChange}/>
         <Colors passColorToSection={this.holdColorForNewSection}/>
         <div>
-          <button className="section-edit-button" onClick={this.addNewSection}>OK</button>
-          <button className="section-edit-button" onClick={this.doOnCancel}>Cancel</button>
+          <button className="TODO section-edit-button" onClick={this.addNewSection}>OK</button>
+          <button className="TODO section-edit-button" onClick={this.doOnCancel}>Cancel</button>
         </div>
       </div>
     );
