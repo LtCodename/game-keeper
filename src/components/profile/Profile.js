@@ -3,6 +3,7 @@ import './Profile.css';
 import { connect } from 'react-redux'
 import { NavLink, Redirect } from 'react-router-dom';
 import fire from "../../Firebase";
+import Button from "../button/Button";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -16,7 +17,10 @@ class Profile extends React.Component {
     this.state = {
       emailInputValue: "",
       nameInputValue: userName,
-      verifyButtonText: "Verify"
+      changeButtonDisabled: false,
+      verifyButtonDisabled: false,
+      adminButtonDisabled: false,
+      verificationMessageSent: false
     };
   }
 
@@ -37,9 +41,18 @@ class Profile extends React.Component {
   };*/
 
   onChangeName = () => {
+    let that = this;
+
+    this.setState({
+      changeButtonDisabled: true
+    })
+
     fire.auth().currentUser.updateProfile({
       displayName: this.state.nameInputValue
     }).then(() => {
+      that.setState({
+        changeButtonDisabled: false
+      })
     }, function (error) {
       console.log(error.message);
     });
@@ -51,22 +64,31 @@ class Profile extends React.Component {
     };
 
     this.setState({
-      verifyButtonText:"..."
-    });
+      verifyButtonDisabled: true
+    })
 
     fire.auth().currentUser.sendEmailVerification(actionCodeSettings).then(() => {
       this.setState({
-        verifyButtonText:"Sent"
-      });
+        verifyButtonDisabled: false,
+        verificationMessageSent: true
+      })
     });
   };
 
   makeAdmin = (event) => {
     event.preventDefault();
+
+    this.setState({
+      adminButtonDisabled: true
+    })
+
     console.log(`I'm about to make ${this.state.emailInputValue} an admin`);
     const addAdminRole = fire.functions().httpsCallable('addAdminRole');
     addAdminRole({ email: this.state.emailInputValue }).then(result => {
       console.log(result);
+      this.setState({
+        adminButtonDisabled: false
+      })
     })
   };
 
@@ -91,7 +113,7 @@ class Profile extends React.Component {
     }
 
     const makeAdmin = (
-        <form onSubmit={this.makeAdmin} className="adminForm">
+        <form className="adminForm">
           <input
               className="profile-input"
               autoComplete="username email"
@@ -100,20 +122,33 @@ class Profile extends React.Component {
               id="adminEmail"
               value={this.state.emailInputValue} onChange={this.emailValueChange} required/>
           <label className="emailInputLabel sr-only" htmlFor="adminEmail">Email address</label>
-          <button className="profileButtons">Submit</button>
+          <Button
+            disabled={this.state.adminButtonDisabled}
+            buttonAction={this.makeAdmin}
+            text={'Submit'}/>
         </form>
     );
 
     const changeNameButton = (
-        <button className="profileButtons" onClick={this.onChangeName}>Change</button>
+        <Button
+            disabled={this.state.changeButtonDisabled}
+            buttonAction={this.onChangeName}
+            text={'Change'}
+        />
     );
 
     const verifyButton = (
-        <button className="profileButtons" onClick={this.onVerify}>{this.state.verifyButtonText}</button>
+        <Button
+            disabled={this.state.verifyButtonDisabled}
+            buttonAction={this.onVerify}
+            text={'Verify'}
+        />
     );
 
     const privacyButton = (
-        <NavLink to="/privacy"><button className="profileButtons">Read</button></NavLink>
+        <NavLink to="/privacy">
+          <Button text={'Read'}/>
+        </NavLink>
     );
 
     let adminSign = (<span className="property-value"/>);
@@ -168,6 +203,10 @@ class Profile extends React.Component {
         </div>
     );*/
 
+    const verificationMessage = (
+        <span className="verification-message">Please check your Email</span>
+    );
+
     const props = (
       <div className="profile-wrapper lt-col">
         <div className="avatar">
@@ -181,12 +220,15 @@ class Profile extends React.Component {
               {changeNameButton}
             </div>
           </div>
-          <div className="profile-property lt-row">
-            <span className="property-name">Email</span>
-            <div className="lt-row">
-              <span className="property-value">{userEmail}</span>
-              {userVerified ? verifiedText : verifyButton}
+          <div className="lt-col">
+            <div className="lt-row profile-property">
+              <span className="property-name">Email</span>
+              <div className="lt-row">
+                <span className="property-value">{userEmail}</span>
+                {userVerified ? verifiedText : verifyButton}
+              </div>
             </div>
+            {this.state.verificationMessageSent ? verificationMessage : ''}
           </div>
           <div className="profile-property lt-row">
             <span className="property-name">Permissions</span>

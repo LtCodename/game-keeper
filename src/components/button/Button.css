@@ -1,0 +1,27 @@
+.gk-button {
+    margin: 0 0 0 5px;
+    border-radius: 0;
+    background: #0079c5;
+    color: var(--third-color);
+    outline: none;
+    cursor: pointer;
+    min-width: 85px;
+    font-weight: 600;
+    border: 4px solid transparent;
+    transition: all .3s;
+}
+
+.gk-button:focus {
+    outline: none;
+}
+
+.gk-button:hover {
+    outline: none;
+    background: #fef9de;
+    border: 4px solid #0079c5;
+    color: #0079c5;
+}
+
+.gk-button:active {
+    outline: none;
+}

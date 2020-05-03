@@ -1,7 +1,35 @@
 .privacyWrapper {
   background-color: var(--first-color);
-  padding: 10px 20px;
+  padding: 10px;
   min-height: calc(100vh - var(--content-gap));
+}
+
+.privacy-text {
+  background: #fef9de;
+  padding: 10px 10px 10px 10px;
+}
+
+.privacy-text h1 {
+  color: var(--first-color)
+}
+
+.privacy-text h2 {
+  color: var(--first-color)
+}
+
+.privacy-text a {
+  color: var(--first-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.privacy-text a:hover {
+  color: var(--first-color);
+  text-decoration: underline;
+}
+
+.privacy-text span {
+  color: var(--first-color)
 }
 
 .privacyLink {
@@ -13,13 +41,15 @@
   color: var(--third-color);
 }
 
+.policy-segment-name {
+  display: block;
+  font-weight: 800;
+  margin: 10px 0;
+}
+
 
 @media (max-width: 580px) {
   .privacyWrapper {
     text-align: center;
-  }
-
-  .policyName {
-    font-size: 30px;
   }
 }

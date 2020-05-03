@@ -35,30 +35,16 @@
   min-height: calc(100vh - var(--content-gap));
 }
 
-.profileButtons {
-  margin: 0 0 0 5px;
-  border: none;
-  border-radius: 0;
-  background: #0079c5;
-  color: var(--third-color);
-  outline: none;
-  cursor: pointer;
-  padding: 5px 10px;
-  min-width: 85px;
-  font-weight: 600;
-}
-
-.profileButtons:focus {
-  outline: none;
-}
-
-.profileButtons:hover {
-  outline: none;
-}
-
 .property-value {
   color: #0178c5;
   font-weight: 300;
+}
+
+.verification-message {
+  color: #0178c5;
+  font-weight: 300;
+  margin-bottom: 10px;
+  text-align: right;
 }
 
 .profile-wrapper {
