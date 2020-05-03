@@ -4,33 +4,6 @@
   background: #fef9de;
 }
 
-.loginFormButton {
-  margin: 5px 10px 0 0;
-  background: var(--first-color);
-  color: var(--third-color);
-  border-radius: 0;
-  border: none;
-  cursor: pointer;
-  outline: none;
-  font-family: var(--main-font);
-  font-weight: 800;
-  padding: 5px;
-}
-
-.loginFormButton:active {
-  outline: none;
-}
-
-.loginFormButton:focus {
-  outline: none;
-}
-
-.errorText {
-  color: #dc3545;
-  margin: 5px 0;
-  font-weight: 500;
-}
-
 .loginForm {
   margin-right: 18px;
 }
@@ -67,4 +40,8 @@
 
 .input-col {
   margin-bottom: 5px;
+}
+
+.login-buttons-row {
+  margin-top: 5px;
 }

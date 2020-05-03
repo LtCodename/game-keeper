@@ -2,6 +2,7 @@ import React from 'react';
 import './LogInModalWindow.css';
 import fire from "../../Firebase";
 import { Modal } from "react-bootstrap";
+import Button from "../button/Button";
 
 class LogInModalWindow extends React.Component {
   constructor(props) {
@@ -10,7 +11,8 @@ class LogInModalWindow extends React.Component {
     this.state = {
       emailInputValue: "",
       passwordInputValue: "",
-      errorText: ""
+      errorText: "",
+      loginButtonDisabled: false
     };
   }
 
@@ -28,19 +30,39 @@ class LogInModalWindow extends React.Component {
 
   loginUser = (event) => {
     event.preventDefault();
-    if (!this.state.emailInputValue || !this.state.passwordInputValue) {
+
+    this.setState({
+      loginButtonDisabled: true
+    });
+
+    if (!this.state.emailInputValue) {
+      this.setState({
+        loginButtonDisabled: false,
+        errorText: "Please enter your Email!"
+      });
       return;
     }
-    fire.auth().signInWithEmailAndPassword(this.state.emailInputValue, this.state.passwordInputValue).then(credential => {
+
+    if (!this.state.passwordInputValue) {
+      this.setState({
+        loginButtonDisabled: false,
+        errorText: "Please enter your password!"
+      });
+      return;
+    }
+
+    fire.auth().signInWithEmailAndPassword(this.state.emailInputValue, this.state.passwordInputValue).then(() => {
       this.setState({
         emailInputValue: "",
-        passwordInputValue: ""
+        passwordInputValue: "",
+        loginButtonDisabled: false
       });
       this.closeModal();
     }).catch(error => {
       console.log(error.message);
       this.setState({
-        errorText: error.message
+        errorText: error.message,
+        loginButtonDisabled: false
       });
     });
   };
@@ -51,7 +73,7 @@ class LogInModalWindow extends React.Component {
 
   render() {
     const errorNode = (
-        <span className="errorText">{this.state.errorText}</span>
+        <span className="error-text">{this.state.errorText}</span>
     )
 
     return (
@@ -59,7 +81,7 @@ class LogInModalWindow extends React.Component {
         <Modal.Body>
           <div className="lt-col">
             <span className="login-title">Log In</span>
-            <form className="loginForm" onSubmit={this.loginUser}>
+            <form className="loginForm">
               <div className="lt-col input-col">
                 <input className="loginInput" autoComplete="username email" placeholder="Enter email" type="email" id="loginEmail" value={this.state.emailInputValue} onChange={this.emailValueChange} required/>
               </div>
@@ -68,8 +90,16 @@ class LogInModalWindow extends React.Component {
               </div>
               {this.state.errorText.length ? errorNode : ""}
               <div className="lt-row login-buttons-row">
-                <button className="loginFormButton">Log In</button>
-                <button className="loginFormButton" onClick={this.closeModal}>Cancel</button>
+                <Button
+                    disabled={this.state.loginButtonDisabled}
+                    buttonAction={this.loginUser}
+                    text={'Login'}
+                    margin={'right'}
+                />
+                <Button
+                    buttonAction={this.closeModal}
+                    text={'Cancel'}
+                />
               </div>
             </form>
           </div>
