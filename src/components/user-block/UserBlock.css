@@ -88,7 +88,10 @@
 
 .platformIcon {
   height: 25px;
-  margin-left: 5px;
+}
+
+.game-block-platform:not(:last-child) {
+  margin-right: 5px;
 }
 
 .gameBlockFooter {

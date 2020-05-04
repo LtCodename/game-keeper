@@ -8,6 +8,8 @@ import { withRouter } from "react-router-dom";
 import NameSearchResults from "./NameSearchResults";
 import { getGameInformation, searchGamesByName } from "../../rawgApi";
 import Button from "../button/Button";
+import PlatformsIcons from "../user-block/UserBlock";
+
 class BlockModalWindow extends React.Component {
   constructor(props) {
     super(props);
@@ -288,18 +290,19 @@ class BlockModalWindow extends React.Component {
   render() {
     const platformPicker = this.state.platforms.map((elem) => {
       return (
-          <div className="form-check checkbox" key={elem.id}>
+          <div className="checkbox-wrapper" key={elem.id}>
             <input
-              className="form-check-input"
+              className="platform-checkbox-input"
               type="checkbox"
               value={elem.id}
               checked={elem.checked}
               onChange={this.handleCheckboxInputChange}
               id={"" + elem.id + elem.name}>
             </input>
-            <label className="form-check-label" htmlFor={"" + elem.id + elem.name}>
-              {elem.name}
-            </label>
+            <span className="platform-checkbox-status">
+              <span className="platform-checkbox-icon">{PlatformsIcons[elem.iconName]}</span>
+            </span>
+            <span className="platform-tooltip">{elem.name}</span>
           </div>
         );
     });
@@ -379,14 +382,14 @@ class BlockModalWindow extends React.Component {
     const apiDeveloper = (
         <div className="modalPiece">
           <p className="littleHeaders">Developer</p>
-          <span>{this.state.localGameData.developers || 'No Data'}</span>
+          <span className="game-property">{this.state.localGameData.developers || 'No Data'}</span>
         </div>
     )
 
     const apiDate = (
         <div className="modalPiece">
           <p className="littleHeaders">Release Date</p>
-          <span>{this.state.localGameData.releaseDate || 'TBA'}</span>
+          <span className="game-property">{this.state.localGameData.releaseDate || 'TBA'}</span>
         </div>
     )
 
@@ -406,7 +409,7 @@ class BlockModalWindow extends React.Component {
                 {/*platform*/}
                 <div className="modalPiece">
                   <p className="littleHeaders">I've played it on</p>
-                  <div className="checkboxWrapper">
+                  <div className="checkbox-holder">
                     {platformPicker}
                   </div>
                 </div>

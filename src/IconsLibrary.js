@@ -182,6 +182,14 @@ export const iOSIcon = (
     </svg>
 )
 
+export const GooglePlayIcon = (
+    <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google-play"
+         className="platformIcon" role="img" xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 512 512">
+        <path fill="#0079c5" d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/>
+    </svg>
+)
+
 export const MacIcon = (
     <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="apple-alt"
          className="platformIcon" role="img" xmlns="http://www.w3.org/2000/svg"
@@ -214,9 +222,10 @@ export const XboxOneIcon = (
 )
 
 export const SwitchIcon = (
-    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="gamepad"
-         className="platformIcon" role="img" xmlns="http://www.w3.org/2000/svg"
-         viewBox="0 0 640 512">
-        <path fill="#0079c5" d="M480.07 96H160a160 160 0 1 0 114.24 272h91.52A160 160 0 1 0 480.07 96zM248 268a12 12 0 0 1-12 12h-52v52a12 12 0 0 1-12 12h-24a12 12 0 0 1-12-12v-52H84a12 12 0 0 1-12-12v-24a12 12 0 0 1 12-12h52v-52a12 12 0 0 1 12-12h24a12 12 0 0 1 12 12v52h52a12 12 0 0 1 12 12zm216 76a40 40 0 1 1 40-40 40 40 0 0 1-40 40zm64-96a40 40 0 1 1 40-40 40 40 0 0 1-40 40z"/>
+    <svg className="platformIcon" xmlns="http://www.w3.org/2000/svg"
+         width="25" height="25" viewBox="0 0 25 20">
+        <path fill="#0079c5"
+    d="M10 0h5c5.523 0 10 4.477 10 10s-4.477 10-10 10h-5C4.477 20 0 15.523 0 10S4.477 0 10 0zm-.5 2a7.5 7.5 0 000 15h6a7.5 7.5 0 000-15h-6zM8.005 5h2.719l3.62 6.21V5H17v8.995h-2.605l-3.754-6.238V14H8l.005-9z"
+    opacity="1"/>
     </svg>
 )
