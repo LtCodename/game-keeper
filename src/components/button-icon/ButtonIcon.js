@@ -1,7 +1,7 @@
 import React from 'react';
-import './Button.css';
+import './ButtonIcon.css';
 
-const Button = ({ text, buttonAction, disabled, margin }) => {
+const ButtonIcon = ({ text, buttonAction, disabled, margin, icon }) => {
     let marginClassName = '';
     switch(margin) {
         case 'top':
@@ -29,11 +29,12 @@ const Button = ({ text, buttonAction, disabled, margin }) => {
     return (
         <button disabled={disabled}
                 type="button"
-                className={`gk-button ${marginClassName}`}
+                className={`gk-button-icon ${marginClassName}`}
                 onClick={buttonAction}>
             {disabled ? 'Wait...' : text}
+            <span className="icon-holder">{icon}</span>
         </button>
     )
 };
 
-export default Button;
+export default ButtonIcon;

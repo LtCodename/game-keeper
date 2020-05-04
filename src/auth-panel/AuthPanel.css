@@ -1,0 +1,12 @@
+.auth-panel-alt {
+    display: none;
+}
+
+@media (max-width: 580px) {
+    .auth-panel-alt {
+        display: flex;
+    }
+    .auth-panel {
+        display: none;
+    }
+}
