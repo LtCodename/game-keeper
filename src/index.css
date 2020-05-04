@@ -18,7 +18,7 @@
     --first-color: rgba(0, 121, 197, 1);
     --second-color: rgba(255, 246, 143, 1);
     --third-color: rgba(255, 249, 222, 1);
-    --content-gap: 110px;
+    --content-gap: 55px;
 }
 
 body {

@@ -1,10 +1,10 @@
 import React from 'react';
 import './AuthPanel.css';
-import Button from "../components/button/Button";
-import { DemoIcon, DemoIconMobile, LogInIcon, LogInIconMobile, SignUpIcon, SignUpIconMobile } from "../IconsLibrary";
-import SignUpModalWindow from "../components/sign-up-modal-window/SignUpModalWindow";
-import LogInModalWindow from "../components/log-in-modal-window/LogInModalWindow";
-import fire from "../Firebase";
+import { DemoIcon, DemoIconMobile, LogInIcon, LogInIconMobile, SignUpIcon, SignUpIconMobile } from "../../IconsLibrary";
+import LogInModalWindow from "../log-in-modal-window/LogInModalWindow";
+import SignUpModalWindow from "../sign-up-modal-window/SignUpModalWindow";
+import Button from "../button/Button";
+import { App as fire } from "firebase";
 
 class AuthPanel extends React.Component {
     constructor(props) {

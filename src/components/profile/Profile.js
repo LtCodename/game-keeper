@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { NavLink, Redirect } from 'react-router-dom';
 import fire from "../../Firebase";
 import Button from "../button/Button";
+import { TrelloIcon, TwitterIcon } from "../../IconsLibrary";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -247,6 +248,26 @@ class Profile extends React.Component {
             </div>
           </div>
           {this.props.userData.admin ? adminMaker : null}
+          <div className="profile-property lt-row">
+            <span className="property-name">Trello Board</span>
+            <a
+                href="https://trello.com/b/GT6AY0oi/game-keeper-roadmap"
+                target="blank">
+              {TrelloIcon}
+            </a>
+          </div>
+          <div className="profile-property lt-row">
+            <span className="property-name">Contact Creator</span>
+            <a
+                href="https://twitter.com/LtCodename"
+                target="blank">
+              {TwitterIcon}
+            </a>
+          </div>
+          <div className="profile-property lt-row">
+            <span className="property-name">Version</span>
+            <span className="property-value">0.83, 5.3.2020</span>
+          </div>
         </div>
       </div>
     );

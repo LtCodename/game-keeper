@@ -1,5 +1,4 @@
 import React from 'react';
-import Footer from '../footer/Footer.js';
 import HeaderFake from '../header-fake/HeaderFake.js';
 import './Preloader.css';
 
@@ -16,7 +15,6 @@ const Preloader = () => {
       <div className="preloaderContent">
         {preloader}
       </div>
-      <Footer/>
     </div>
   );
 };

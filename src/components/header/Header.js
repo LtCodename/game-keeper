@@ -6,7 +6,7 @@ import fire from "../../Firebase";
 import { LogOutIcon, LogOutIconMobile, ProfileIcon, ProfileIconMobile } from "../../IconsLibrary";
 import SearchPanelConnected from "../search-panel/SearchPanel";
 import Button from "../button/Button";
-import AuthPanel from "../../auth-panel/AuthPanel";
+import AuthPanel from "../auth-panel/AuthPanel";
 
 const Header = ({history, userData}) => {
     const [logOutButtonDisabled, setLogOutButtonDisabled] = useState(false);

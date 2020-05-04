@@ -1,6 +1,5 @@
 import React from 'react';
 import UserList from './components/user-list/UserList.js';
-import Footer from './components/footer/Footer.js';
 import Header from './components/header/Header.js';
 import Dashboard from './components/dashboard/Dashboard.js';
 import Profile from './components/profile/Profile.js';
@@ -113,10 +112,6 @@ class App extends React.Component {
   };
 
   render() {
-    const footer = (
-      <Footer/>
-    );
-
     const header = (
       <Header/>
     );
@@ -136,9 +131,6 @@ class App extends React.Component {
           {header}
         </header>
         {routes}
-        <footer>
-          {footer}
-        </footer>
       </div>
     );
 
