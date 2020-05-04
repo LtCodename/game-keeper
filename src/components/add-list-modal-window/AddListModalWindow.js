@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import fire from "../../Firebase";
 import { Modal } from 'react-bootstrap';
 import Button from "../button/Button";
+import Textarea from "../textarea/Textarea";
 
 class AddListModalWindow extends React.Component {
   constructor(props) {
@@ -68,7 +69,11 @@ class AddListModalWindow extends React.Component {
 
   render() {
     const listName = (
-      <textarea placeholder="Collection Name" className="addListTextarea" id="listName" rows="1" value={this.state.nameInputValue} onChange={this.nameInputValueChange}/>
+        <Textarea
+            placeholder='Collection Name'
+            value={this.state.nameInputValue}
+            onChange={this.nameInputValueChange}
+        />
     );
 
     const buttonsWrapper = (

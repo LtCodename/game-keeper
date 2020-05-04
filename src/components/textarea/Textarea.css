@@ -1,0 +1,63 @@
+.textarea-gk {
+    outline: none;
+    background: var(--second-color);
+    padding-left: 5px;
+    color: var(--first-color);
+    font-weight: 800;
+    resize: none;
+    border: 1px solid transparent;
+    transition: .3s all;
+}
+
+.textarea-gk:hover {
+    outline: none;
+    border: 1px solid var(--first-color);
+}
+
+.textarea-gk:focus {
+    outline: none;
+}
+
+.textarea-gk:active {
+    outline: none;
+}
+
+.textarea-gk:-webkit-autofill,
+.textarea-gk:-webkit-autofill:hover,
+.textarea-gk:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--first-color);
+    -webkit-box-shadow: 0 0 0 1000px var(--second-color) inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/*.textarea-gk::placeholder { !* Chrome, Firefox, Opera, Safari 10.1+ *!
+    color: var(--first-color);
+}
+
+.textarea-gk:-ms-input-placeholder { !* Internet Explorer 10-11 *!
+    color: var(--first-color);
+}
+
+.textarea-gk::-ms-input-placeholder { !* Microsoft Edge *!
+    color: var(--first-color);
+}*/
+
+.global-search-textarea {
+    width: 400px;
+}
+
+.auth-input {
+    width: 100%;
+}
+
+@media (max-width: 800px) {
+  .global-search-textarea {
+    width: 190px;
+  }
+}
+
+@media (max-width: 450px) {
+  .profile-input {
+    max-width: 150px;
+  }
+}

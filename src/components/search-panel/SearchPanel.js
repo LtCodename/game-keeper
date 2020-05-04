@@ -2,6 +2,7 @@ import React from 'react';
 import './SearchPanel.css';
 import { connect } from 'react-redux'
 import UserBlockMiniConnected from "../user-block/UserBlockMini";
+import Textarea from "../textarea/Textarea";
 
 class SearchPanel extends React.Component {
   constructor(props) {
@@ -24,6 +25,12 @@ class SearchPanel extends React.Component {
       foundGames: gamesToDisplay
     });
   };
+
+  clearSearchValue = () => {
+    this.setState({
+      searchInputValue: ''
+    });
+  }
 
   render() {
     const gamesToRender = this.state.foundGames.map((elem) => {
@@ -53,12 +60,13 @@ class SearchPanel extends React.Component {
     });
 
     const panel = (
-        <textarea
-            className="search-input"
-            rows={1}
+        <Textarea
             placeholder='Search'
             value={this.state.searchInputValue}
-            onChange={this.searchInputValueChange}/>
+            onChange={this.searchInputValueChange}
+            additionalClass="global-search-textarea"
+            onBlur={this.clearSearchValue}
+        />
     );
 
     const results = (

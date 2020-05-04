@@ -1,11 +1,3 @@
-.policy-button {
-  display: flex;
-}
-
-.policy-button:hover {
-  text-decoration: none;
-}
-
 .signUp-buttons-row {
   margin-top: 5px;
 }

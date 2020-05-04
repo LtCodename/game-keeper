@@ -23,10 +23,6 @@
   width: 100%;
 }
 
-.adminForm {
-  display: flex;
-}
-
 .profile-general-wrapper {
   background-color: var(--first-color);
   padding: 20px;
@@ -65,20 +61,4 @@
   margin-right: 10px;
   color: #0178c5;
   font-weight: 800;
-}
-
-.profile-input {
-  margin: 0;
-  border: none;
-  background: var(--second-color);
-  padding-left: 5px;
-  color: var(--first-color);
-  font-weight: 800;
-  outline: none;
-}
-
-@media (max-width: 450px) {
-  .profile-input {
-    max-width: 150px;
-  }
 }

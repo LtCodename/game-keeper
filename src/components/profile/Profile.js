@@ -5,6 +5,7 @@ import { NavLink, Redirect } from 'react-router-dom';
 import fire from "../../Firebase";
 import Button from "../button/Button";
 import { TrelloIcon, TwitterIcon } from "../../IconsLibrary";
+import Textarea from "../textarea/Textarea";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -114,22 +115,20 @@ class Profile extends React.Component {
     }
 
     const makeAdmin = (
-        <form className="adminForm">
-          <input
-              className="profile-input"
-              autoComplete="username email"
-              placeholder="Enter email"
-              type="email"
-              id="adminEmail"
-              value={this.state.emailInputValue} onChange={this.emailValueChange} required/>
-          <label className="emailInputLabel sr-only" htmlFor="adminEmail">Email address</label>
+        <>
+          <Textarea
+              placeholder='Enter Email'
+              value={this.state.emailInputValue}
+              onChange={this.emailValueChange}
+              additionalClass="profile-input"
+          />
           <Button
             disabled={this.state.adminButtonDisabled}
             buttonAction={this.makeAdmin}
             text={'Submit'}
             margin={'left'}
           />
-        </form>
+        </>
     );
 
     const changeNameButton = (
@@ -173,12 +172,12 @@ class Profile extends React.Component {
     );
 
     const changeNameForm = (
-        <input
-            className="profile-input"
-            type="text"
-            placeholder="Enter new name"
+        <Textarea
+            placeholder='Enter New Name'
             value={this.state.nameInputValue}
-            onChange={this.nameValueChange}/>
+            onChange={this.nameValueChange}
+            additionalClass="profile-input"
+        />
     );
 
     let avatarInitials;
@@ -265,8 +264,16 @@ class Profile extends React.Component {
             </a>
           </div>
           <div className="profile-property lt-row">
+            <span className="property-name">Games API</span>
+            <a
+                href="https://rawg.io/apidocs"
+                target="blank">
+              <span className="property-value">RAWG</span>
+            </a>
+          </div>
+          <div className="profile-property lt-row">
             <span className="property-name">Version</span>
-            <span className="property-value">0.83, 5.3.2020</span>
+            <span className="property-value">0.84, 5.3.2020</span>
           </div>
         </div>
       </div>

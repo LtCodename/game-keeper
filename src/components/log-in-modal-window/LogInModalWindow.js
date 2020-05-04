@@ -3,6 +3,7 @@ import './LogInModalWindow.css';
 import fire from "../../Firebase";
 import { Modal } from "react-bootstrap";
 import Button from "../button/Button";
+import Input from "../textarea/Input";
 
 class LogInModalWindow extends React.Component {
   constructor(props) {
@@ -83,10 +84,22 @@ class LogInModalWindow extends React.Component {
             <span className="login-title">Log In</span>
             <form className="loginForm">
               <div className="lt-col input-col">
-                <input className="loginInput" autoComplete="username email" placeholder="Enter email" type="email" id="loginEmail" value={this.state.emailInputValue} onChange={this.emailValueChange} required/>
+                <Input
+                    autoComplete="username email"
+                    placeholder='Enter Email'
+                    type="email"
+                    value={this.state.emailInputValue}
+                    onChange={this.emailValueChange}
+                />
               </div>
               <div className="lt-col input-col">
-                <input className="loginInput" autoComplete="current-password" placeholder="Enter password" type="password" id="loginPassword"  value={this.state.passwordInputValue} onChange={this.passwordValueChange} required/>
+                <Input
+                    autoComplete="current-password"
+                    placeholder='Enter Password'
+                    type="password"
+                    value={this.state.passwordInputValue}
+                    onChange={this.passwordValueChange}
+                />
               </div>
               {this.state.errorText.length ? errorNode : ""}
               <div className="lt-row login-buttons-row">

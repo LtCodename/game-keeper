@@ -1,9 +1,9 @@
 import React from 'react';
 import './SignUpModalWindow.css';
-import { NavLink } from 'react-router-dom';
 import fire from "../../Firebase";
 import { Modal } from "react-bootstrap";
 import Button from "../button/Button";
+import Input from "../textarea/Input";
 
 class SignUpModalWindow extends React.Component {
   constructor(props) {
@@ -25,10 +25,6 @@ class SignUpModalWindow extends React.Component {
     this.setState({
       nameInputValue: event.target.value
     });
-  };
-
-  onPolicy = () => {
-      this.closeModal();
   };
 
   passwordValueChange = (event) => {
@@ -166,26 +162,53 @@ class SignUpModalWindow extends React.Component {
           <span className="login-title">Sign Up</span>
           <form>
             <div className="input-col">
-              <input className="loginInput" autoComplete="username email" placeholder="Enter email" type="email" id="signupEmail" value={this.state.emailInputValue} onChange={this.emailValueChange} required/>
+              <Input
+                  additionalClass="auth-input"
+                  autoComplete="username email"
+                  placeholder='Enter Email'
+                  type="email"
+                  value={this.state.emailInputValue}
+                  onChange={this.emailValueChange}
+              />
             </div>
             <div className="input-col">
-              <input
-                className="loginInput"
-                autoComplete="username email"
-                placeholder="Confirm email"
-                type="email"
-                id="confirmEmail"
-                value={this.state.confirmEmailInputValue}
-                onChange={this.confirmEmailValueChange} required/>
+              <Input
+                  additionalClass="auth-input"
+                  autoComplete="username email"
+                  placeholder='Confirm Email'
+                  type="email"
+                  value={this.state.confirmEmailInputValue}
+                  onChange={this.confirmEmailValueChange}
+              />
             </div>
             <div className="input-col">
-              <input className="loginInput" autoComplete="current-password" placeholder="Enter password" type="password" id="signupPassword" value={this.state.passwordInputValue} onChange={this.passwordValueChange} required/>
+              <Input
+                  additionalClass="auth-input"
+                  autoComplete="current-password"
+                  placeholder='Enter Password'
+                  type="password"
+                  value={this.state.passwordInputValue}
+                  onChange={this.passwordValueChange}
+              />
             </div>
             <div className="input-col">
-              <input className="loginInput" autoComplete="current-password" placeholder="Confirm password" type="password" id="confirmPassword" value={this.state.confirmPasswordInputValue} onChange={this.confirmPasswordValueChange} required/>
+              <Input
+                  additionalClass="auth-input"
+                  autoComplete="current-password"
+                  placeholder='Confirm Password'
+                  type="password"
+                  value={this.state.confirmPasswordInputValue}
+                  onChange={this.confirmPasswordValueChange}
+              />
             </div>
             <div className="input-col">
-              <input className="loginInput" placeholder="Enter display name" type="text" id="signupDisplayName" value={this.state.nameInputValue} onChange={this.nameValueChange} required/>
+              <Input
+                  additionalClass="auth-input"
+                  placeholder='Enter Display Name'
+                  type="text"
+                  value={this.state.nameInputValue}
+                  onChange={this.nameValueChange}
+              />
             </div>
             {this.state.showErrorNode ? errorNode : ""}
             <div className="lt-row signUp-buttons-row">
@@ -200,9 +223,6 @@ class SignUpModalWindow extends React.Component {
                   text={'Cancel'}
                   margin={'right'}
               />
-              <NavLink to="/privacy" className="policy-button">
-                <Button text={'Privacy Policy'} onClick={this.onPolicy}/>
-              </NavLink>
             </div>
           </form>
         </div>

@@ -37,6 +37,10 @@
   font-size: 19px;
 }
 
+.title-row {
+  text-align: center;
+}
+
 .alert-message {
   color: #747474;
   font-weight: 700;

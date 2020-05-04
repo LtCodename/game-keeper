@@ -31,15 +31,3 @@
   justify-content: center;
   align-items: center;
 }
-
-.addListTextarea {
-  outline: none;
-  resize: none;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: 5px solid #0079c5;
-  background: var(--third-color);
-  color: #0079c5;
-  font-weight: 800;
-}

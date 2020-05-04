@@ -19,25 +19,6 @@
   color: var(--first-color);
 }
 
-.loginInput {
-  margin: 0;
-  border: none;
-  background: var(--second-color);
-  padding-left: 5px;
-  color: var(--first-color);
-  font-weight: 800;
-  outline: none;
-  width: -webkit-fill-available;
-}
-
-.loginInput:focus {
-  outline: none;
-}
-
-.loginInput:active {
-  outline: none;
-}
-
 .input-col {
   margin-bottom: 5px;
 }

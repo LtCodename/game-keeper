@@ -10,6 +10,7 @@
     font-weight: 600;
     border: 2px solid transparent;
     transition: all .3s;
+    text-align: center;
 }
 
 .gk-button:hover {
