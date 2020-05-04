@@ -5,7 +5,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 import fire from "../../Firebase";
 import { LogOutIcon, LogOutIconMobile, ProfileIcon, ProfileIconMobile } from "../../IconsLibrary";
 import SearchPanelConnected from "../search-panel/SearchPanel";
-import ButtonIcon from "../button-icon/ButtonIcon";
+import Button from "../button/Button";
 import AuthPanel from "../../auth-panel/AuthPanel";
 
 const Header = ({history, userData}) => {
@@ -34,7 +34,7 @@ const Header = ({history, userData}) => {
 
     const logOutButton = (
         <div className="authButtonWrapper">
-            <ButtonIcon
+            <Button
                 text={'Log Out'}
                 icon={LogOutIcon}
                 buttonAction={onLogOutClick}
@@ -48,29 +48,27 @@ const Header = ({history, userData}) => {
             <NavLink
                 className="header-link"
                 to="/profile">
-                <ButtonIcon text={'Profile'} icon={ProfileIcon}/>
+                <Button text={'Profile'} icon={ProfileIcon}/>
             </NavLink>
         </div>
     );
 
     const profileAltButton = (
-        <div className="">
-            <NavLink
-                className="profileButtonAlt"
-                to="/profile">
-                {ProfileIconMobile}
-            </NavLink>
-        </div>
+        <NavLink
+            to="/profile"
+            className="lt-row">
+            <Button
+                icon={ProfileIconMobile}
+            />
+        </NavLink>
     );
 
     const logOutAltButton = (
-        <div className="">
-            <button
-                className="profileButtonAlt"
-                onClick={onLogOutClick}>
-                {LogOutIconMobile}
-            </button>
-        </div>
+        <Button
+            buttonAction={onLogOutClick}
+            icon={LogOutIconMobile}
+            margin={'right'}
+        />
     );
 
     return (

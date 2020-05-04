@@ -40,30 +40,11 @@
   z-index: 5;
   padding: 0 10px;
   background: var(--third-color);
+  display: flex;
 }
 
 .signPanelWrapper {
   display: flex;
-}
-
-.profileButtonAlt {
-  background-color: transparent;
-  color: var(--third-color);
-  border-radius: 0;
-  font-family: var(--main-font);
-  padding: 0;
-  display: none;
-  width: 100%;
-  border: none;
-  margin: 0 5px;
-}
-
-.profileButtonAlt:focus {
-  outline: none;
-}
-
-.profileButtonAlt:active {
-  outline: none;
 }
 
 .altButtonsWrapper {
@@ -82,12 +63,6 @@
   text-decoration: none;
 }
 
-@media (max-width: 1050px) {
-  .profileButtonAlt {
-    display: block;
-  }
-}
-
 @media (max-width: 580px) {
   .headerWrapper {
     justify-content: space-between;
@@ -101,6 +76,7 @@
     display: flex;
     justify-content: flex-end;
     padding-bottom: 5px;
+    margin-left: 10px;
   }
 
   .alt-buttons-inner-wrapper {

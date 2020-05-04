@@ -1,7 +1,7 @@
 import React from 'react';
 import './AuthPanel.css';
-import ButtonIcon from "../components/button-icon/ButtonIcon";
-import {DemoIcon, DemoIconMobile, LogInIcon, LogInIconMobile, SignUpIcon, SignUpIconMobile} from "../IconsLibrary";
+import Button from "../components/button/Button";
+import { DemoIcon, DemoIconMobile, LogInIcon, LogInIconMobile, SignUpIcon, SignUpIconMobile } from "../IconsLibrary";
 import SignUpModalWindow from "../components/sign-up-modal-window/SignUpModalWindow";
 import LogInModalWindow from "../components/log-in-modal-window/LogInModalWindow";
 import fire from "../Firebase";
@@ -64,19 +64,19 @@ class AuthPanel extends React.Component {
     render() {
         const authPanel = (
             <div className="auth-panel lt-row">
-                <ButtonIcon
+                <Button
                     text={'Sign Up'}
                     icon={SignUpIcon}
                     margin={'right'}
                     buttonAction={this.onSignUpClick}
                 />
-                <ButtonIcon
+                <Button
                     text={'Log In'}
                     icon={LogInIcon}
                     margin={'right'}
                     buttonAction={this.onLogInClick}
                 />
-                <ButtonIcon
+                <Button
                     text={'Demo'}
                     icon={DemoIcon}
                     buttonAction={this.onDemoClick}
@@ -87,19 +87,20 @@ class AuthPanel extends React.Component {
 
         const authPanelAlt = (
             <div className="auth-panel-alt lt-row">
-                <button
-                    className="profileButtonAlt"
-                    onClick={this.onSignUpClick}
-                >{SignUpIconMobile}</button>
-                <button
-                    className="profileButtonAlt"
-                    onClick={this.onLogInClick}
-                >{LogInIconMobile}</button>
-                <button
-                    className="profileButtonAlt"
-                    onClick={this.onDemoClick}
-                    disabled={this.state.demoButtonDisabled}
-                >{DemoIconMobile}</button>
+                <Button
+                    buttonAction={this.onSignUpClick}
+                    icon={SignUpIconMobile}
+                    margin={'right'}
+                />
+                <Button
+                    buttonAction={this.onLogInClick}
+                    icon={LogInIconMobile}
+                    margin={'right'}
+                />
+                <Button
+                    buttonAction={this.onDemoClick}
+                    icon={DemoIconMobile}
+                />
             </div>
         );
 
@@ -112,7 +113,7 @@ class AuthPanel extends React.Component {
         );
 
         return (
-            <div>
+            <div className="lt-row">
                 {authPanel}
                 {authPanelAlt}
                 {this.state.showLogInWindow ? logInWindow : ""}
