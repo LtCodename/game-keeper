@@ -1,0 +1,24 @@
+.add-game-button {
+    margin: 2px 0;
+    border: none;
+    width: fit-content;
+    background: rgba(255, 249, 222, 0.5);
+    padding: 10px;
+    color: #0178c5;
+    font-weight: 800;
+    cursor: pointer;
+    min-height: 89px;
+    transition: .3s all;
+}
+
+.add-game-button:hover {
+    background: rgba(255, 249, 222, 1);
+}
+
+.add-game-button:active {
+    outline: none;
+}
+
+.add-game-button:focus {
+    outline: none;
+}

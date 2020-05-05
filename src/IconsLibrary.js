@@ -32,35 +32,11 @@ export const ListOptionsButton = (
     </svg>
 )
 
-export const SectionActionPanelIcon = (
-    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down"
-         className="sectionEditIcon toggleButton" height='35px' role="img" xmlns="http://www.w3.org/2000/svg"
-         viewBox="0 0 448 512">
-        <path fill="#fff9de" d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"/>
-    </svg>
-)
-
-export const AddSectionIcon = (
-    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus-square"
-         className="sectionEditIcon" height='35px' role="img" xmlns="http://www.w3.org/2000/svg"
-         viewBox="0 0 448 512">
-        <path fill="#fff9de" d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-32 252c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92H92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"/>
-    </svg>
-)
-
-export const EditSectionIcon = (
-    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen-square"
-         className="sectionEditIcon" height='35px' role="img" xmlns="http://www.w3.org/2000/svg"
-         viewBox="0 0 448 512">
-        <path fill="#fff9de" d="M400 480H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zM238.1 177.9L102.4 313.6l-6.3 57.1c-.8 7.6 5.6 14.1 13.3 13.3l57.1-6.3L302.2 242c2.3-2.3 2.3-6.1 0-8.5L246.7 178c-2.5-2.4-6.3-2.4-8.6-.1zM345 165.1L314.9 135c-9.4-9.4-24.6-9.4-33.9 0l-23.1 23.1c-2.3 2.3-2.3 6.1 0 8.5l55.5 55.5c2.3 2.3 6.1 2.3 8.5 0L345 199c9.3-9.3 9.3-24.5 0-33.9z"/>
-    </svg>
-)
-
-export const DeleteSectionIcon = (
-    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="minus-square"
-         className="sectionEditIcon" height='35px' role="img" xmlns="http://www.w3.org/2000/svg"
-         viewBox="0 0 448 512">
-        <path fill="#fff9de" d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM92 296c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h264c6.6 0 12 5.4 12 12v56c0 6.6-5.4 12-12 12H92z"/>
+export const SectionOptionsButton = (
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis-h"
+         height='35px' role="img" xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 512 512">
+        <path fill="#fff9de" d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/>
     </svg>
 )
 

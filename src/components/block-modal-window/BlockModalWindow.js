@@ -367,7 +367,7 @@ class BlockModalWindow extends React.Component {
       <div className="lt-row search-row">
         {this.state.displaySearchResults ? <span className='search-overlay' onClick={this.resetSearchResults}/> : ''}
         <textarea
-            placeholder="Enter name"
+            placeholder=""
             className="block-textarea"
             id="name"
             rows={1}

@@ -11,6 +11,7 @@ const ListSettingsMenu = ({ listName, userLists, listIndex, userData, userSectio
     const [deleteTitleText, setDeleteTitleText] = useState("Delete Collection");
     const [renameButtonDisabled, setRenameButtonDisabled] = useState(false);
     const [listIsDeleted, setListIsDeleted] = useState(false);
+    const [deleteButtonDisabled, setDeleteButtonDisabled] = useState(false);
 
     const listValueChange = (event) => {
         setListInputValue(event.target.value);
@@ -51,6 +52,8 @@ const ListSettingsMenu = ({ listName, userLists, listIndex, userData, userSectio
     };
 
     const deleteList = () => {
+        setDeleteButtonDisabled(true);
+
         const deletedSectionsIds = [];
         const copy = [...userLists];
 
@@ -74,8 +77,10 @@ const ListSettingsMenu = ({ listName, userLists, listIndex, userData, userSectio
             sections: sectionCopy,
             blocks: blocksCopy
         }).then(() => {
+            setDeleteButtonDisabled(false);
             setListIsDeleted(true);
         }).catch(error => {
+            setDeleteButtonDisabled(false);
             console.log(error.message);
         });
     };
@@ -125,6 +130,7 @@ const ListSettingsMenu = ({ listName, userLists, listIndex, userData, userSectio
                 text={'Yes'}
                 margin={'right'}
                 buttonAction={deleteList}
+                disabled={deleteButtonDisabled}
             />
             <Button
                 text={'No'}

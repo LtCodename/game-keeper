@@ -95,10 +95,6 @@
   transform: translateX(-50%);
 }
 
-.form-control::placeholder {
-  color: var(--first-color);
-}
-
 .littleHeaders {
   color: var(--first-color);
   margin-bottom: 5px;
