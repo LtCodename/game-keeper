@@ -56,7 +56,8 @@ class AddListModalWindow extends React.Component {
       lists: copy
     }).then((data) => {
       this.setState({
-        addButtonDisabled: false
+        addButtonDisabled: false,
+        nameInputValue: ""
       })
       this.props.hideWindow();
     }).catch(error => {

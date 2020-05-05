@@ -1,73 +1,28 @@
-.listsEditIcon.toggleButton {
-  transform: rotate(90deg);
-  transition: all 1s;
-}
-
-.listActionButtonsVisible .listsEditIcon.toggleButton {
-  transform: rotate(-90deg);
-}
-
-.listActionButtons {
-  display: flex;
-  overflow: hidden;
-  width: 35px;
-  transition: width 1s;
-}
-
-.listActionButtonsVisible {
-  width: 205px;
-}
-
-.listActionButtons .btn {
-  border: 0;
-  margin-top: 0;
-  margin-bottom: 0;
-  padding: 0;
-  width: 30px;
-  margin-right: 10px;
-  background-color: var(--first-color);
-}
-
-.listActionButtons .btn:first-child {
-  margin-right: 0;
-}
-
-.listActionButtons .btn:nth-child(2) {
-  margin-left: 5px;
-}
-
-.edit-list-input {
-  resize: none;
+.list-options-button {
+  background: transparent;
   border: none;
-  background: inherit;
-  color: #fff68f;
-  font-size: 30px;
-  font-weight: 800;
-  outline: none;
   padding: 0;
+  position: relative;
 }
 
-.edit-list-input:focus {
+.list-settings-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+.list-options-holder {
+  position: relative;
+}
+
+.list-options-button:focus {
   outline: none;
 }
 
-.edit-list-input:active {
+.list-options-button:active {
   outline: none;
-}
-
-.list-edit-wrapper {
-  align-items: center;
-}
-
-.list-edit-button {
-  margin-right: 10px;
-  border: none;
-  outline: none;
-  color: #0178c5;
-  background: #fef9de;
-  font-weight: 800;
-  cursor: pointer;
-  height: 30px;
 }
 
 .listName {
@@ -80,64 +35,8 @@
   color: var(--second-color);
 }
 
-.addSectionInput {
-  resize: none;
-  border: none;
-  background: inherit;
-  color: var(--third-color);
-  font-size: 25px;
-  font-weight: 800;
-  outline: none;
-  padding: 0;
-}
-
-.addSectionInput::placeholder {
-  color: var(--third-color);
-}
-
-.addSectionInput:-ms-input-placeholder {
-  color: var(--third-color);
-}
-
-.addSectionInput::-webkit-input-placeholder {
-  color: var(--third-color);
-}
-
-.addSectionWrapper {
-  align-items: center;
-}
-
-.list-position-picker {
-  width: 45px;
-  height: 35px;
-  background-color: var(--second-color);
-}
-
 .listWrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.listsEditIcon:hover {
-  opacity: 0.8;
-}
-
-@media (max-width: 575px) {
-  .list-position-picker {
-    display: none;
-  }
-
-  .listActionButtonsVisible {
-    width: 155px;
-  }
-
-  .list-position-button {
-    display: none;
-  }
-
-  .listActionButtons {
-    justify-content: flex-start;
-    margin: 0 auto;
-  }
 }

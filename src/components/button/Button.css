@@ -6,6 +6,7 @@
     outline: none;
     cursor: pointer;
     min-width: 85px;
+    width: fit-content;
     max-height: 35px;
     font-weight: 600;
     border: 2px solid transparent;
@@ -88,6 +89,10 @@
 
 .margin-right {
     margin-right: 5px;
+}
+
+.margin-top {
+    margin-top: 5px;
 }
 
 .icon-holder-gk-button-icon {

@@ -27,18 +27,21 @@
 }
 
 .colorsSpan {
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   display: block;
   float: left;
   margin-right: 10px;
   line-height: 25px;
   text-align: center;
   border-radius: 25px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 1px 7px 0 7px;
 }
 
 .colorsSpan:hover {
-  border: 2px solid black;
+  border: 2px solid #0079c5;
 }
 
 .colorsContainer {

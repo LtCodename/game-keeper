@@ -49,7 +49,7 @@ class Colors extends React.Component {
           key={elem.id}
           className={classNameReal}
           onClick={() => this.colorMagic(elem.name)}>
-          {(this.state.currentColor === elem.name) ? "X" : ""}
+          {(this.state.currentColor === elem.name) ? <span>X</span> : ""}
         </span>
       );
     });

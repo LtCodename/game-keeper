@@ -8,7 +8,7 @@ import { withRouter } from "react-router-dom";
 import NameSearchResults from "./NameSearchResults";
 import { getGameInformation, searchGamesByName } from "../../rawgApi";
 import Button from "../button/Button";
-import PlatformsIcons from "../user-block/UserBlock";
+import { PlatformsIcons } from "../user-block/UserBlock";
 
 class BlockModalWindow extends React.Component {
   constructor(props) {

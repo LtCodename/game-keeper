@@ -273,7 +273,7 @@ class Profile extends React.Component {
           </div>
           <div className="profile-property lt-row">
             <span className="property-name">Version</span>
-            <span className="property-value">0.85, 5.4.2020</span>
+            <span className="property-value">0.87, 5.5.2020</span>
           </div>
         </div>
       </div>

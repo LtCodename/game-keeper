@@ -1,13 +1,5 @@
 import React from "react";
 
-export const VersionIcon = (
-    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="code-branch"
-         role="img" height='35px' xmlns="http://www.w3.org/2000/svg"
-         viewBox="0 0 384 512">
-        <path fill="#0178c5" d="M384 144c0-44.2-35.8-80-80-80s-80 35.8-80 80c0 36.4 24.3 67.1 57.5 76.8-.6 16.1-4.2 28.5-11 36.9-15.4 19.2-49.3 22.4-85.2 25.7-28.2 2.6-57.4 5.4-81.3 16.9v-144c32.5-10.2 56-40.5 56-76.3 0-44.2-35.8-80-80-80S0 35.8 0 80c0 35.8 23.5 66.1 56 76.3v199.3C23.5 365.9 0 396.2 0 432c0 44.2 35.8 80 80 80s80-35.8 80-80c0-34-21.2-63.1-51.2-74.6 3.1-5.2 7.8-9.8 14.9-13.4 16.2-8.2 40.4-10.4 66.1-12.8 42.2-3.9 90-8.4 118.2-43.4 14-17.4 21.1-39.8 21.6-67.9 31.6-10.8 54.4-40.7 54.4-75.9zM80 64c8.8 0 16 7.2 16 16s-7.2 16-16 16-16-7.2-16-16 7.2-16 16-16zm0 384c-8.8 0-16-7.2-16-16s7.2-16 16-16 16 7.2 16 16-7.2 16-16 16zm224-320c8.8 0 16 7.2 16 16s-7.2 16-16 16-16-7.2-16-16 7.2-16 16-16z"/>
-    </svg>
-)
-
 export const TrelloIcon = (
     <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="trello"
          role="img" height='35px' xmlns="http://www.w3.org/2000/svg"
@@ -32,35 +24,11 @@ export const NavArrowIcon = (
     </svg>
 )
 
-export const ListActionPanelIcon = (
-    <svg className="listsEditIcon toggleButton" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down"
-         role="img" height='35px' xmlns="http://www.w3.org/2000/svg"
-         viewBox="0 0 448 512">
-        <path fill="#fff68f" d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"/>
-    </svg>
-)
-
-export const AddListIcon = (
-    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus-square"
-         className="listsEditIcon" height='35px' role="img" xmlns="http://www.w3.org/2000/svg"
-         viewBox="0 0 448 512">
-        <path fill="#fff68f" d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-32 252c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92H92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"/>
-    </svg>
-)
-
-export const EditListIcon = (
-    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen-square"
-         className="listsEditIcon" height='35px' role="img" xmlns="http://www.w3.org/2000/svg"
-         viewBox="0 0 448 512">
-        <path fill="#fff68f" d="M400 480H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zM238.1 177.9L102.4 313.6l-6.3 57.1c-.8 7.6 5.6 14.1 13.3 13.3l57.1-6.3L302.2 242c2.3-2.3 2.3-6.1 0-8.5L246.7 178c-2.5-2.4-6.3-2.4-8.6-.1zM345 165.1L314.9 135c-9.4-9.4-24.6-9.4-33.9 0l-23.1 23.1c-2.3 2.3-2.3 6.1 0 8.5l55.5 55.5c2.3 2.3 6.1 2.3 8.5 0L345 199c9.3-9.3 9.3-24.5 0-33.9z"/>
-    </svg>
-)
-
-export const DeleteListIcon = (
-    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="minus-square"
-         className="listsEditIcon" height='35px' role="img" xmlns="http://www.w3.org/2000/svg"
-         viewBox="0 0 448 512">
-        <path fill="#fff68f" d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM92 296c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h264c6.6 0 12 5.4 12 12v56c0 6.6-5.4 12-12 12H92z"/>
+export const ListOptionsButton = (
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ellipsis-h"
+         height='35px' role="img" xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 512 512">
+        <path fill="#fff68f" d="M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z"/>
     </svg>
 )
 
