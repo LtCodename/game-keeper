@@ -3,7 +3,7 @@ import './ListSettingsMenu.css';
 import Textarea from "../textarea/Textarea";
 import Button from "../button/Button";
 import fire from "../../Firebase";
-import { Redirect } from 'react-router';
+import { Redirect } from 'react-router-dom';
 
 const ListSettingsMenu = ({ listName, userLists, listIndex, userData, userSections, userBlocks, changeListIndex }) => {
     const [listInputValue, setListInputValue] = useState(listName);
@@ -168,7 +168,7 @@ const ListSettingsMenu = ({ listName, userLists, listIndex, userData, userSectio
     )
 
     if (listIsDeleted) {
-        return <Redirect to="/" />;
+        return <Redirect to="/"/>;
     }
 
     return (

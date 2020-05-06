@@ -43,8 +43,8 @@ class Dashboard extends React.Component {
             <div className="lt-col dashboard-elements">
                 <div className='lists-dashboard-wrapper lt-row'>
                     {listsToRender}
+                    {addListNode}
                 </div>
-                {addListNode}
             </div>
         );
 

@@ -14,6 +14,7 @@ import userListsReducer from './redux/reducers/userListsReducer';
 import userReducer from './redux/reducers/userReducer';
 import userSectionsReducer from './redux/reducers/userSectionsReducer';
 import fire from "./Firebase";
+import { Redirect, Switch } from "react-router-dom";
 
 class App extends React.Component {
   constructor(props) {
@@ -117,12 +118,13 @@ class App extends React.Component {
     );
 
     const routes = (
-      <div>
+      <Switch>
         <Route path="/profile" component={Profile} />
         <Route path="/privacy" component={Privacy} />
         <Route path="/lists/:listId" component={UserList}/>
         <Route exact path="/" component={Dashboard} />
-      </div>
+        <Redirect to="/" />
+      </Switch>
     );
 
     const content = (
