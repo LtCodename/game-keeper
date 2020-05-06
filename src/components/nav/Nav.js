@@ -50,7 +50,7 @@ class Nav extends React.Component {
         <button
             className="nav-add-list-button"
             onClick={this.showAddListTool}>
-          Add Collection
+          Add
         </button>
       </div>
     );

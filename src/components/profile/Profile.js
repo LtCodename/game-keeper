@@ -120,7 +120,6 @@ class Profile extends React.Component {
               placeholder='Enter Email'
               value={this.state.emailInputValue}
               onChange={this.emailValueChange}
-              additionalClass="profile-input"
           />
           <Button
             disabled={this.state.adminButtonDisabled}
@@ -163,7 +162,7 @@ class Profile extends React.Component {
     }
 
     const adminMaker = (
-        <div className="profile-property lt-row">
+        <div className="profile-property">
           <span className="property-name">Make Admin</span>
           <div className="lt-row">
             {makeAdmin}
@@ -176,7 +175,6 @@ class Profile extends React.Component {
             placeholder='Enter New Name'
             value={this.state.nameInputValue}
             onChange={this.nameValueChange}
-            additionalClass="profile-input"
         />
     );
 
@@ -217,7 +215,7 @@ class Profile extends React.Component {
           <div className="avatarText">{avatarInitials}</div>
         </div>
         <div className="lt-col">
-          <div className="profile-property lt-row">
+          <div className="profile-property">
             <span className="property-name">Display name</span>
             <div className="lt-row">
               {changeNameForm}
@@ -225,29 +223,29 @@ class Profile extends React.Component {
             </div>
           </div>
           <div className="lt-col">
-            <div className="lt-row profile-property">
+            <div className="profile-property">
               <span className="property-name">Email</span>
-              <div className="lt-row">
+              <div className="lt-row profile-verify-row">
                 <span className="property-value">{userEmail}</span>
                 {userVerified ? verifiedText : verifyButton}
               </div>
             </div>
             {this.state.verificationMessageSent ? verificationMessage : ''}
           </div>
-          <div className="profile-property lt-row">
+          <div className="profile-property">
             <span className="property-name">Permissions</span>
             <div className="lt-row">
               {adminSign}
             </div>
           </div>
-          <div className="profile-property lt-row">
+          <div className="profile-property">
             <span className="property-name">Privacy Policy</span>
             <div className="lt-row">
               {privacyButton}
             </div>
           </div>
           {this.props.userData.admin ? adminMaker : null}
-          <div className="profile-property lt-row">
+          <div className="profile-property">
             <span className="property-name">Trello Board</span>
             <a
                 href="https://trello.com/b/GT6AY0oi/game-keeper-roadmap"
@@ -255,7 +253,7 @@ class Profile extends React.Component {
               {TrelloIcon}
             </a>
           </div>
-          <div className="profile-property lt-row">
+          <div className="profile-property">
             <span className="property-name">Contact Creator</span>
             <a
                 href="https://twitter.com/LtCodename"
@@ -263,7 +261,7 @@ class Profile extends React.Component {
               {TwitterIcon}
             </a>
           </div>
-          <div className="profile-property lt-row">
+          <div className="profile-property">
             <span className="property-name">Games API</span>
             <a
                 href="https://rawg.io/apidocs"
@@ -271,9 +269,9 @@ class Profile extends React.Component {
               <span className="property-value">RAWG</span>
             </a>
           </div>
-          <div className="profile-property lt-row">
+          <div className="profile-property">
             <span className="property-name">Version</span>
-            <span className="property-value">0.892, 5.5.2020</span>
+            <span className="property-value">0.891, 5.5.2020</span>
           </div>
         </div>
       </div>

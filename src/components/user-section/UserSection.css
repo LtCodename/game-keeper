@@ -51,7 +51,6 @@
 @media (max-width: 575px) {
   .nameAndButtonsWrapper {
     text-align: center;
-    margin-top: 5px;
   }
 
   .sectionActions {
@@ -67,7 +66,6 @@
   .inner-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
-    margin-right: 10px;
+    grid-gap: 5px;
   }
 }

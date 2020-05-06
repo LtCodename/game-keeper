@@ -1,19 +1,5 @@
 import React from 'react';
-import styled from "styled-components";
-import {NavLink} from "react-router-dom";
-
-const LogoButton = styled.button`
-    font-size: 41px;
-    font-weight: 800;
-    outline: none !important;
-    font-family: var(--main-font);
-    background-color: var(--third-color);
-    color: var(--first-color);
-    padding: 0;
-    margin: 0;
-    border: none;
-    cursor: pointer;
-`;
+import { NavLink } from "react-router-dom";
 
 const HeaderFake = () => {
   const logo = (

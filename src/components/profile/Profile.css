@@ -1,7 +1,7 @@
 .avatar {
   background-color: var(--first-color);
   border-radius: 50%;
-  padding: 20px 20px;
+  padding: 20px;
   width: 100px;
   height: 100px;
   position: relative;
@@ -52,13 +52,54 @@
 }
 
 .profile-property {
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  margin-bottom: 10px;
   justify-content: space-between;
+}
+
+.profile-property:not(:last-child) {
+  margin-bottom: 10px;
 }
 
 .property-name {
   margin-right: 10px;
   color: #0178c5;
   font-weight: 800;
+}
+
+@media (max-width: 510px) {
+  .profile-property {
+    flex-direction: column;
+  }
+
+  .property-name {
+    margin-bottom: 5px;
+    margin-right: 0;
+  }
+
+  .verification-message {
+    text-align: center;
+  }
+
+  .profile-verify-row {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .profile-wrapper {
+    padding: 10px;
+  }
+
+  .verification-message {
+    margin-bottom: 5px;
+  }
+
+  .profile-property:not(:last-child) {
+    margin-bottom: 5px;
+  }
+
+  .avatar {
+    margin: 0 0 5px 0;
+  }
 }

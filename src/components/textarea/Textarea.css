@@ -56,12 +56,12 @@
 
 @media (max-width: 800px) {
   .global-search-textarea {
-    width: 190px;
+    width: 300px;
   }
 }
 
 @media (max-width: 450px) {
-  .profile-input {
-    max-width: 150px;
-  }
+    .global-search-textarea {
+        width: 240px;
+    }
 }

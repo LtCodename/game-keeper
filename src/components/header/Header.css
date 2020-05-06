@@ -21,6 +21,14 @@
   text-decoration: none;
 }
 
+.site-name {
+  display: block;
+}
+
+.site-name-short {
+  display: none
+}
+
 .logoLink:hover {
   text-decoration: none;
   color: var(--first-color);
@@ -90,5 +98,15 @@
 
   .authButtonWrapper:nth-child(2n) {
     margin: 5px 0 10px 0;
+  }
+}
+
+@media (max-width: 680px) {
+  .site-name {
+    display: none;
+  }
+
+  .site-name-short {
+    display: block
   }
 }

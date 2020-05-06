@@ -22,12 +22,21 @@ const Header = ({history, userData}) => {
         });
     };
 
+    const siteName = (
+        <span className="site-name">Game Keeper</span>
+    )
+
+    const siteNameShort = (
+        <span className="site-name-short">GK</span>
+    )
+
     const logo = (
         <div className="logoHolder">
             <NavLink
                 className="logoLink"
                 to="/">
-                Game Keeper
+                {siteName}
+                {siteNameShort}
             </NavLink>
         </div>
     );
@@ -81,12 +90,12 @@ const Header = ({history, userData}) => {
                     {userData ? profileButton : ""}
                     {!userData ? <AuthPanel/> : ""}
                 </div>
-            </div>
-            <div className="altButtonsWrapper">
-                <div className="alt-buttons-inner-wrapper">
-                    {userData ? logOutAltButton : ""}
-                    {userData ? profileAltButton : ""}
-                    {!userData ? <AuthPanel/> : ""}
+                <div className="altButtonsWrapper">
+                    <div className="alt-buttons-inner-wrapper">
+                        {userData ? logOutAltButton : ""}
+                        {userData ? profileAltButton : ""}
+                        {!userData ? <AuthPanel/> : ""}
+                    </div>
                 </div>
             </div>
         </div>

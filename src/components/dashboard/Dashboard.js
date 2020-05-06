@@ -29,7 +29,7 @@ class Dashboard extends React.Component {
             <button
                 className='dashboard-add-list-button'
                 onClick={this.showAddListTool}>
-                Add Collection
+                Add
             </button>
         );
 

@@ -65,7 +65,7 @@ input {
 }
 
 .allContent {
-  padding: 10px;
+  padding: 0 10px 10px 10px;
   flex: 1;
   background-color: var(--first-color);
 }
