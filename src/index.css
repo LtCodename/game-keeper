@@ -25,7 +25,11 @@ body {
   font-family: var(--main-font);
   padding: 0;
   margin: 0;
-  background-color: var(--third-color);
+  background-color: #0079c5;
+}
+
+html {
+    background-color: #0079c5;
 }
 
 .lt-row {
@@ -53,18 +57,16 @@ input {
 }
 
 .contentWrapper {
-  display: flex;
-  /*padding-top: 5px;*/
-  position: relative;
-  align-items: flex-start;
-  background-color: var(--first-color);
-  /* box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); */
+    display: flex;
+    position: relative;
+    background-color: var(--first-color);
+    min-height: calc(100vh - var(--content-gap));
+    justify-content: center;
 }
 
 .allContent {
   padding: 10px;
   flex: 1;
-  min-height: calc(100vh - var(--content-gap));
   background-color: var(--first-color);
 }
 

@@ -102,12 +102,12 @@ class Profile extends React.Component {
     let userEmail = "";
     let userVerified = "";
 
-    if (this.props.userData !== null) {
+    if (this.props.userData) {
       userEmail = this.props.userData.email;
       userVerified = this.props.userData.emailVerified;
     }
 
-    let verifiedText = "";
+    let verifiedText;
     if (userVerified) {
       verifiedText = "";
     }else {
@@ -156,7 +156,7 @@ class Profile extends React.Component {
     );
 
     let adminSign = (<span className="property-value"/>);
-    if (this.props.userData !== null) {
+    if (this.props.userData) {
       adminSign = (
           <span className="property-value">{this.props.userData.admin ? "Admin" : "User"}</span>
       );
@@ -273,7 +273,7 @@ class Profile extends React.Component {
           </div>
           <div className="profile-property lt-row">
             <span className="property-name">Version</span>
-            <span className="property-value">0.87, 5.5.2020</span>
+            <span className="property-value">0.89, 5.5.2020</span>
           </div>
         </div>
       </div>

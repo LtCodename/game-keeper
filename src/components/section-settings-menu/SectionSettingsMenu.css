@@ -5,6 +5,7 @@
     right: 0;
     top: 100%;
     padding: 10px 10px 0 10px;
+    margin-bottom: 10px;
 }
 
 .section-settings-segment:not(:last-child) {

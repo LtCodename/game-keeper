@@ -1,7 +1,6 @@
 .privacyWrapper {
   background-color: var(--first-color);
   padding: 10px;
-  min-height: calc(100vh - var(--content-gap));
 }
 
 .privacy-text {

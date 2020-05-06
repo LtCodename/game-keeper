@@ -49,11 +49,9 @@ class Dashboard extends React.Component {
         return (
             <div className="contentWrapper">
                 <div className="dashboardWrapper">
-                    <div className="dashboard">
-                        {this.props.userData ? authorized : ""}
-                    </div>
-                    {modalAddListWindow}
+                    {this.props.userData ? authorized : ""}
                 </div>
+                {modalAddListWindow}
             </div>
         )
     }
