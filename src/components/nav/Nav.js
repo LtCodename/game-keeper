@@ -1,9 +1,9 @@
 import React from 'react';
 import './Nav.css';
-import AddListModalWindow from '../add-list-modal-window/AddListModalWindow.js';
 import { connect } from 'react-redux'
-import {NavArrowIcon} from "../../IconsLibrary";
+import { NavArrowIcon } from "../../IconsLibrary";
 import { NavLink } from 'react-router-dom';
+import AddListTool from "../add-list-tool/AddListTool";
 
 class Nav extends React.Component {
   constructor(props) {
@@ -11,19 +11,13 @@ class Nav extends React.Component {
 
     this.state = {
       navbarVisible: false,
-      showAddListWindow: false
+      showAddListTool: false
     };
   }
 
-  openAddListWindow = () => {
+  showAddListTool = () => {
     this.setState({
-      showAddListWindow: true
-    });
-  };
-
-  closeAddListWindow = () => {
-    this.setState({
-      showAddListWindow: false
+      showAddListTool: !this.state.showAddListTool
     });
   };
 
@@ -53,7 +47,11 @@ class Nav extends React.Component {
 
     const addListButton = (
       <div>
-        <button className="btnAddList" onClick={this.openAddListWindow}>New Collection</button>
+        <button
+            className="nav-add-list-button"
+            onClick={this.showAddListTool}>
+          Add Collection
+        </button>
       </div>
     );
 
@@ -69,9 +67,11 @@ class Nav extends React.Component {
         navClassName += " navBarVisible";
     }
 
-    const modalAddListWindow = (
-      <AddListModalWindow show={this.state.showAddListWindow} hideWindow={this.closeAddListWindow.bind(this)}/>
-    );
+    const addListNode = this.state.showAddListTool ? <AddListTool
+        changeMode={this.showAddListTool}
+        userLists={this.props.userLists}
+        userData={this.props.userData}
+    /> : addListButton;
 
     return (
       <nav className="navbarWrapper">
@@ -80,9 +80,8 @@ class Nav extends React.Component {
         </div>
         <div className={navClassName}>
           {buttonsToRender}
-          {this.props.userData.email === 'fake@email.com' ? '' : addListButton}
+          {this.props.userData.email === 'fake@email.com' ? '' : addListNode}
         </div>
-        {this.state.showAddListWindow ? modalAddListWindow : ""}
       </nav>
     )
   }

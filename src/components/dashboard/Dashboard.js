@@ -1,28 +1,22 @@
 import React from 'react';
 import ListBlock from '../list-block/ListBlock.js';
 import './Dashboard.css'
-import AddListModalWindow from '../add-list-modal-window/AddListModalWindow.js';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux'
+import AddListTool from "../add-list-tool/AddListTool";
 
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            showAddListWindow: false
+            showAddListTool: false
         };
     }
 
-    openAddListWindow = () => {
+    showAddListTool = () => {
         this.setState({
-            showAddListWindow: true
-        });
-    };
-
-    hideAddListWindow = () => {
-        this.setState({
-            showAddListWindow: false
+            showAddListTool: !this.state.showAddListTool
         });
     };
 
@@ -32,17 +26,25 @@ class Dashboard extends React.Component {
         });
 
         const addListButton = (
-            <button className='btnAddListFromDashboard' onClick={this.openAddListWindow}>New Collection</button>
+            <button
+                className='dashboard-add-list-button'
+                onClick={this.showAddListTool}>
+                Add Collection
+            </button>
         );
 
-        const modalAddListWindow = (
-            <AddListModalWindow show={this.state.showAddListWindow} hideWindow={this.hideAddListWindow.bind(this)}/>
-        );
+        const addListNode = this.state.showAddListTool ? <AddListTool
+            changeMode={this.showAddListTool}
+            userLists={this.props.userLists}
+            userData={this.props.userData}
+        /> : addListButton;
 
         const authorized = (
-            <div className='lists-dashboard-wrapper lt-row'>
-                {listsToRender}
-                {addListButton}
+            <div className="lt-col dashboard-elements">
+                <div className='lists-dashboard-wrapper lt-row'>
+                    {listsToRender}
+                </div>
+                {addListNode}
             </div>
         );
 
@@ -51,7 +53,6 @@ class Dashboard extends React.Component {
                 <div className="dashboardWrapper">
                     {this.props.userData ? authorized : ""}
                 </div>
-                {modalAddListWindow}
             </div>
         )
     }

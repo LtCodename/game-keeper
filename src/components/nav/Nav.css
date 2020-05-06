@@ -4,16 +4,6 @@
   background-color: var(--first-color);
 }
 
-.inputBit button {
-  width: 50%;
-  margin: 0;
-  border-radius: 0;
-}
-
-.inputBit input {
-  border-radius: 0;
-}
-
 .navButton {
   text-align: center;
   font-family: var(--main-font);
@@ -47,40 +37,31 @@
 }
 
 .navButtonActive {
-  /*box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);*/
   font-weight: 800;
   outline: none !important;
 }
 
-.btnAddList {
-  font-family: var(--main-font);
+.nav-add-list-button {
+  border: none;
+  background: rgba(255, 249, 222, 0.5);
   width: 100%;
-  border-radius: 0;
-  color: var(--first-color);
+  color: #0178c5;
   font-size: 19px;
   font-weight: 700;
-  background-color: var(--third-color);
-  text-align: center;
-  border: none;
-  margin: 0;
-  padding: 0;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  cursor: pointer;
+  transition: .3s all;
+}
+
+.nav-add-list-button:hover {
+  background: rgba(255, 249, 222, 1);
+}
+
+.nav-add-list-button:active {
   outline: none;
 }
 
-.btnAddList:focus {
+.nav-add-list-button:focus {
   outline: none;
-}
-
-.btnAddList:active {
-  outline: none;
-}
-
-.btnAddList:hover {
-  color: var(--first-color);
-  background-color: var(--third-color);
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 .hideButtonWrapper {

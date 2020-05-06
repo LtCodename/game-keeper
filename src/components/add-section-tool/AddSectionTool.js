@@ -89,7 +89,7 @@ const AddSectionTool = ({ listId, sections, userData }) => {
 
     const addModeFalseNode = (
         <div className="add-section-panel lt-row" onClick={changeSectionState}>
-            <span className="add-section-panel-name">New Section</span>
+            <span className="add-section-panel-name">Add Section</span>
         </div>
     );
 

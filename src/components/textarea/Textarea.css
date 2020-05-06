@@ -50,6 +50,10 @@
     width: 100%;
 }
 
+.add-list-input {
+    width: 100%;
+}
+
 @media (max-width: 800px) {
   .global-search-textarea {
     width: 190px;
