@@ -4,6 +4,20 @@
   background: #fef9de;
 }
 
+.game-window-buttons {
+  justify-content: space-between;
+}
+
+.game-window-confirm-delete-message {
+  margin-right: 5px;
+  color: #0178c5;
+  font-weight: 300;
+}
+
+.game-window-confirm-delete-row {
+  align-items: center;
+}
+
 .block-modal #blockModalWindow {
   padding-right: 0 !important;
 }

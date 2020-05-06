@@ -1,6 +1,5 @@
 import React from 'react';
 import './BlockModalWindow.css';
-import WarningModalWindow from '../warning-modal-window/WarningModalWindow.js';
 import { connect } from 'react-redux'
 import fire from "../../Firebase";
 import { Modal } from "react-bootstrap";
@@ -18,15 +17,21 @@ class BlockModalWindow extends React.Component {
       localGameData: {...this.props.gameData, releaseDate: this.props.gameData.releaseDate || ""},
       nameInputValue: this.props.gameData.name,
       platforms: this.preparePlatformsForState(),
-      showModalWindow: false,
       newListForBlock: this.props.listId,
       newSectionForBlock: this.props.sectionId,
       displaySearchResults: false,
       searchResult: [],
       foundGameInfo: {},
       saveButtonDisabled: false,
-      deleteButtonDisabled: false
+      deleteButtonDisabled: false,
+      deleteMode: false
     };
+  }
+
+  changeDeleteMode = () => {
+    this.setState({
+      deleteMode: !this.state.deleteMode
+    });
   }
 
   newListSelectChangeHandler = (event) => {
@@ -76,18 +81,6 @@ class BlockModalWindow extends React.Component {
         deleteButtonDisabled: false
       })
     });
-  };
-
-  openModalWarningWindow = () => {
-    this.setState({
-      showModalWindow: true
-    });
-  };
-
-  resetState = () => {
-    this.setState({
-      showModalWindow: false
-    })
   };
 
   handleCheckboxInputChange = (event) => {
@@ -252,7 +245,7 @@ class BlockModalWindow extends React.Component {
       fire.firestore().collection('users').doc(this.props.userData.uid).update({
         blocks: allBlocks,
         sections: allSections,
-      }).then((data) => {
+      }).then(() => {
         this.setState({
           saveButtonDisabled: false
         }, () => this.props.hideWindow())
@@ -278,7 +271,7 @@ class BlockModalWindow extends React.Component {
 
     fire.firestore().collection('users').doc(this.props.userData.uid).update({
       blocks: allBlocks
-    }).then((data) => {
+    }).then(() => {
       this.setState({
         saveButtonText: "Done"
       }, () => this.props.hideWindow())
@@ -306,14 +299,6 @@ class BlockModalWindow extends React.Component {
           </div>
         );
     });
-
-    const modalWarningWindow = (
-      <WarningModalWindow
-        onProceed={this.deleteBlock}
-        message={`Are you sure you want to delete game ${this.state.localGameData.name}?`}
-        show={this.state.showModalWindow}
-        hideWindow={this.resetState.bind(this)}/>
-    );
 
     let newHomeSelector = "";
 
@@ -358,16 +343,16 @@ class BlockModalWindow extends React.Component {
 
     const deleteButton = (this.props.fullMode) ?
         <Button
-            buttonAction={this.openModalWarningWindow}
-            disabled={this.state.deleteButtonDisabled}
+            buttonAction={this.changeDeleteMode}
             text={'Delete'}
-            margin={'right'}/> : '';
+            margin={'right'}
+        /> : '';
 
     const name = (
       <div className="lt-row search-row">
         {this.state.displaySearchResults ? <span className='search-overlay' onClick={this.resetSearchResults}/> : ''}
         <textarea
-            placeholder=""
+            placeholder="Enter Game Name"
             className="block-textarea"
             id="name"
             rows={1}
@@ -393,6 +378,22 @@ class BlockModalWindow extends React.Component {
         </div>
     )
 
+    const confirmDelete = (
+        <div className="lt-row game-window-confirm-delete-row">
+          <span className="game-window-confirm-delete-message">Are You Sure?</span>
+          <Button
+              text={'Yes'}
+              margin={'right'}
+              buttonAction={this.deleteBlock}
+              disabled={this.state.deleteButtonDisabled}
+          />
+          <Button
+              text={'No'}
+              buttonAction={this.changeDeleteMode}
+          />
+        </div>
+    )
+
     return (
         <>
           <Modal show={this.props.show} onHide={this.props.hideWindow} dialogClassName={'block-modal'}>
@@ -414,22 +415,23 @@ class BlockModalWindow extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className="lt-row">
-                <Button
-                    buttonAction={this.props.hideWindow}
-                    text={'Cancel'}
-                    margin={'right'}
-                />
-                {deleteButton}
-                <Button
-                    buttonAction={this.modalSave}
-                    disabled={this.state.saveButtonDisabled}
-                    text={'Save'}
-                />
+              <div className="lt-row game-window-buttons">
+                <div className="lt-row">
+                  <Button
+                      buttonAction={this.props.hideWindow}
+                      text={'Cancel'}
+                      margin={'right'}
+                  />
+                  <Button
+                      buttonAction={this.modalSave}
+                      disabled={this.state.saveButtonDisabled}
+                      text={'Save'}
+                  />
+                </div>
+                {this.state.deleteMode ? confirmDelete : deleteButton}
               </div>
             </Modal.Body>
           </Modal>
-          {this.state.showModalWindow ? modalWarningWindow : ''}
         </>
     )
   }

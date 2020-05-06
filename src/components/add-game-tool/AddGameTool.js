@@ -12,7 +12,7 @@ const AddGameTool = ({ sectionId }) => {
     const addGameWindow = (
         <BlockModalWindow
             modalId={"addGame"}
-            gameData={{name:"Enter name"}}
+            gameData={{name:""}}
             fullMode={false}
             show={showAddWindow}
             hideWindow={showGameBlockWindow}
