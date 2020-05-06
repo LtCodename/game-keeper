@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './AddGameTool.css';
 import BlockModalWindow from "../block-modal-window/BlockModalWindow";
+import AddButton from "../add-button/AddButton";
 
 const AddGameTool = ({ sectionId }) => {
     const [showAddWindow, setShowAddWindow] = useState(false);
@@ -22,9 +23,11 @@ const AddGameTool = ({ sectionId }) => {
 
     return (
         <>
-            <button className="add-game-button" onClick={showGameBlockWindow}>
-                <span>Add</span>
-            </button>
+            <AddButton
+                onClick={showGameBlockWindow}
+                text={'Add'}
+                additionalClass={'gk-add-button-game'}
+            />
             {showAddWindow ? addGameWindow : ''}
         </>
     )

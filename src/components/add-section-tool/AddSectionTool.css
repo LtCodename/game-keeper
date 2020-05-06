@@ -4,21 +4,6 @@
     justify-content: center;
 }
 
-.add-section-panel {
-    width: fit-content;
-    background: rgba(255, 249, 222, 0.5);
-    padding: 10px;
-    color: #0178c5;
-    font-weight: 800;
-    cursor: pointer;
-    align-items: center;
-    transition: .3s all;
-}
-
-.add-section-panel:hover {
-    background: rgba(255, 249, 222, 1);
-}
-
 .add-section-panel-true {
     width: fit-content;
     background: rgba(255, 249, 222, 1);
@@ -26,10 +11,6 @@
     color: #0178c5;
     font-weight: 800;
     align-items: center;
-}
-
-.add-section-panel-name {
-    margin-right: 5px;
 }
 
 .add-panel-section {

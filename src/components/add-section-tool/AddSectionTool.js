@@ -4,6 +4,7 @@ import Textarea from "../textarea/Textarea";
 import Button from "../button/Button";
 import Colors from "../colors/Colors";
 import fire from "../../Firebase";
+import AddButton from "../add-button/AddButton";
 
 const AddSectionTool = ({ listId, sections, userData }) => {
     const [addMode, setAddMode] = useState(false);
@@ -88,9 +89,7 @@ const AddSectionTool = ({ listId, sections, userData }) => {
     );
 
     const addModeFalseNode = (
-        <div className="add-section-panel lt-row" onClick={changeSectionState}>
-            <span className="add-section-panel-name">Add</span>
-        </div>
+        <AddButton text={'Add'} onClick={changeSectionState}/>
     );
 
     return (

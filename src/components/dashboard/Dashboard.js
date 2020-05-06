@@ -4,6 +4,7 @@ import './Dashboard.css'
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux'
 import AddListTool from "../add-list-tool/AddListTool";
+import AddButton from "../add-button/AddButton";
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -26,11 +27,7 @@ class Dashboard extends React.Component {
         });
 
         const addListButton = (
-            <button
-                className='dashboard-add-list-button'
-                onClick={this.showAddListTool}>
-                Add
-            </button>
+            <AddButton text={'Add'} onClick={this.showAddListTool} additionalClass={'gk-add-button-dashboard'}/>
         );
 
         const addListNode = this.state.showAddListTool ? <AddListTool

@@ -1,0 +1,39 @@
+.gk-add-button {
+    border: none;
+    width: fit-content;
+    background: rgba(255, 249, 222, 0.5);
+    padding: 10px;
+    color: #0178c5;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .3s all;
+}
+
+.gk-add-button:hover {
+    background: rgba(255, 249, 222, 1);
+}
+
+.gk-add-button:active {
+    outline: none;
+}
+
+.gk-add-button:focus {
+    outline: none;
+}
+
+.gk-add-button-game {
+    margin: 2px 0;
+    min-height: 89px;
+}
+
+.gk-add-button-list {
+    width: 100%;
+    padding: 0;
+    font-size: 19px;
+}
+
+.gk-add-button-dashboard {
+    font-size: 19px;
+    max-height: 48px;
+}
+

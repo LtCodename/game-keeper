@@ -41,29 +41,6 @@
   outline: none !important;
 }
 
-.nav-add-list-button {
-  border: none;
-  background: rgba(255, 249, 222, 0.5);
-  width: 100%;
-  color: #0178c5;
-  font-size: 19px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: .3s all;
-}
-
-.nav-add-list-button:hover {
-  background: rgba(255, 249, 222, 1);
-}
-
-.nav-add-list-button:active {
-  outline: none;
-}
-
-.nav-add-list-button:focus {
-  outline: none;
-}
-
 .hideButtonWrapper {
   display: flex;
   justify-content: space-between;

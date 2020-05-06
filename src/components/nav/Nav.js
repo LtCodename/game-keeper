@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { NavArrowIcon } from "../../IconsLibrary";
 import { NavLink } from 'react-router-dom';
 import AddListTool from "../add-list-tool/AddListTool";
+import AddButton from "../add-button/AddButton";
 
 class Nav extends React.Component {
   constructor(props) {
@@ -47,11 +48,7 @@ class Nav extends React.Component {
 
     const addListButton = (
       <div>
-        <button
-            className="nav-add-list-button"
-            onClick={this.showAddListTool}>
-          Add
-        </button>
+        <AddButton text={'Add'} onClick={this.showAddListTool} additionalClass={'gk-add-button-list'}/>
       </div>
     );
 
