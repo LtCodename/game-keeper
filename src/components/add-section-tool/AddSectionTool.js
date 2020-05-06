@@ -89,7 +89,7 @@ const AddSectionTool = ({ listId, sections, userData }) => {
     );
 
     const addModeFalseNode = (
-        <AddButton text={'Add'} onClick={changeSectionState}/>
+        <AddButton text={'Add Section'} onClick={changeSectionState}/>
     );
 
     return (

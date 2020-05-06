@@ -66,6 +66,7 @@ class SearchPanel extends React.Component {
             onChange={this.searchInputValueChange}
             additionalClass="global-search-textarea"
             onBlur={this.clearSearchValue}
+            noAutosize={true}
         />
     );
 
