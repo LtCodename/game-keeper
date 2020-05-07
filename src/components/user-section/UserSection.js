@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { SectionColorButton, SectionOptionsButton } from "../../IconsLibrary";
 import AddGameTool from "../add-game-tool/AddGameTool";
 import SectionSettingsMenu from "../section-settings-menu/SectionSettingsMenu";
+import { DemoUser } from "../../App";
 
 class UserSection extends React.Component {
   constructor(props) {
@@ -80,7 +81,7 @@ class UserSection extends React.Component {
     const nameAndButtonsBlock = (
       <div className={namesButtonWrapperClass}>
         {this.props.type === 'hidden' ? "" : <span className="sectionName">{this.props.name}</span>}
-        {this.props.userData.email === 'fake@email.com' ? '' : editSectionButton}
+        {this.props.userData.email === DemoUser ? '' : editSectionButton}
       </div>
     );
 
@@ -89,7 +90,7 @@ class UserSection extends React.Component {
           {nameAndButtonsBlock}
           <div className="inner-section">
             {gamesToRender}
-            <AddGameTool sectionId={this.props.id}/>
+            {this.props.userData.email === DemoUser ? '' : <AddGameTool sectionId={this.props.id}/>}
           </div>
         </>
     )

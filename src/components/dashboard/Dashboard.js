@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux'
 import AddListTool from "../add-list-tool/AddListTool";
 import AddButton from "../add-button/AddButton";
+import { DemoUser } from "../../App";
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -41,7 +42,7 @@ class Dashboard extends React.Component {
             <div className="lt-col dashboard-elements">
                 <div className='lists-dashboard-wrapper lt-row'>
                     {listsToRender}
-                    {addListNode}
+                    {(this.props.userData && this.props.userData.email === DemoUser) ? '' : addListNode}
                 </div>
             </div>
         );

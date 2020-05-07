@@ -4,7 +4,8 @@ import { DemoIcon, DemoIconMobile, LogInIcon, LogInIconMobile, SignUpIcon, SignU
 import LogInModalWindow from "../log-in-modal-window/LogInModalWindow";
 import SignUpModalWindow from "../sign-up-modal-window/SignUpModalWindow";
 import Button from "../button/Button";
-import { App as fire } from "firebase";
+import fire from "../../Firebase";
+import { DemoPassword, DemoUser } from "../../App";
 
 class AuthPanel extends React.Component {
     constructor(props) {
@@ -36,7 +37,7 @@ class AuthPanel extends React.Component {
             demoButtonDisabled: true
         })
 
-        fire.auth().signInWithEmailAndPassword('fake@email.com', '123456780').then(credential => {
+        fire.auth().signInWithEmailAndPassword(DemoUser, DemoPassword).then(credential => {
             console.log(credential);
             this.setState({
                 demoButtonDisabled: false

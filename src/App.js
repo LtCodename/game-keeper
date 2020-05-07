@@ -16,6 +16,9 @@ import userSectionsReducer from './redux/reducers/userSectionsReducer';
 import fire from "./Firebase";
 import { Redirect, Switch } from "react-router-dom";
 
+export const DemoUser = 'ltcodename92@gmail.com';
+export const DemoPassword = '22121992';
+
 class App extends React.Component {
   constructor(props) {
     super(props);

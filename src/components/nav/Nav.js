@@ -5,6 +5,7 @@ import { NavArrowIcon } from "../../IconsLibrary";
 import { NavLink } from 'react-router-dom';
 import AddListTool from "../add-list-tool/AddListTool";
 import AddButton from "../add-button/AddButton";
+import { DemoUser } from "../../App";
 
 class Nav extends React.Component {
   constructor(props) {
@@ -78,7 +79,7 @@ class Nav extends React.Component {
         </div>
         <div className={navClassName}>
           {buttonsToRender}
-          {this.props.userData.email === 'fake@email.com' ? '' : addListNode}
+          {this.props.userData.email === DemoUser ? '' : addListNode}
         </div>
       </nav>
     )

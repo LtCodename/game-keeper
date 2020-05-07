@@ -217,7 +217,7 @@ class BlockModalWindow extends React.Component {
     if (targetBlockIndex > -1) {
       let sectionId = this.state.newSectionForBlock;
 
-      if (this.state.newSectionForBlock === 0) {
+      /*if (this.state.newSectionForBlock === 0) {
         const newSectionId = `id${new Date().getTime()}`;
         sectionId = newSectionId;
 
@@ -229,7 +229,7 @@ class BlockModalWindow extends React.Component {
         };
 
         allSections.push(newSection);
-      }
+      }*/
 
       allBlocks[targetBlockIndex] = {
         ...this.props.gameData,

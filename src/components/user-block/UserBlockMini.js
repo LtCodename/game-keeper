@@ -4,6 +4,7 @@ import './UserBlock.css';
 import * as moment from 'moment';
 import { connect } from 'react-redux'
 import {iOSIcon, MacIcon, PCIcon, PS4Icon, SwitchIcon, XboxOneIcon} from "../../IconsLibrary";
+import { DemoUser } from "../../App";
 
 class UserBlockMini extends React.Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class UserBlockMini extends React.Component {
     };
 
     openModalWindow = () => {
-        if (this.props.userData.email === 'fake@email.com') {
+        if (this.props.userData.email === DemoUser) {
             return;
         }
 
