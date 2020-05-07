@@ -3,7 +3,7 @@ import './AddGameTool.css';
 import BlockModalWindow from "../block-modal-window/BlockModalWindow";
 import AddButton from "../add-button/AddButton";
 
-const AddGameTool = ({ sectionId }) => {
+const AddGameTool = ({ sectionId, hiddenSection }) => {
     const [showAddWindow, setShowAddWindow] = useState(false);
 
     const showGameBlockWindow = () => {
@@ -21,12 +21,15 @@ const AddGameTool = ({ sectionId }) => {
         />
     );
 
+    let addButtonClass = 'gk-add-button-game';
+    if (hiddenSection) addButtonClass = 'gk-add-button-game-hidden';
+
     return (
         <>
             <AddButton
                 onClick={showGameBlockWindow}
-                text={'Add'}
-                additionalClass={'gk-add-button-game'}
+                text={hiddenSection ? "Add Game" : "Add Game"}
+                additionalClass={addButtonClass}
             />
             {showAddWindow ? addGameWindow : ''}
         </>

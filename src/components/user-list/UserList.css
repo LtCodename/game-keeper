@@ -1,10 +1,3 @@
-.list-options-button {
-  background: transparent;
-  border: none;
-  padding: 0;
-  position: relative;
-}
-
 .list-settings-overlay {
   position: fixed;
   width: 100%;
@@ -17,6 +10,14 @@
   position: relative;
 }
 
+.list-options-button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  position: relative;
+  transition: all 2s;
+}
+
 .list-options-button:focus {
   outline: none;
 }
@@ -25,18 +26,19 @@
   outline: none;
 }
 
+.list-options-button:hover {
+  transform: rotate(180deg);
+}
+
 .listName {
   text-overflow: ellipsis;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  flex: 1;
   font-weight: 800;
   font-size: 30px;
   color: var(--second-color);
+  margin-right: 5px;
 }
 
 .listWrapper {
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }

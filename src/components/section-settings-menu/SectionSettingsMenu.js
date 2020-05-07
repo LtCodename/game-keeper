@@ -5,7 +5,7 @@ import Button from "../button/Button";
 import fire from "../../Firebase";
 import Colors from "../colors/Colors";
 
-const SectionSettingsMenu = ({ sectionName, userSections, sectionId ,userData, userBlocks, color, sectionIndex, sectionsArray }) => {
+const SectionSettingsMenu = ({ sectionName, userSections, sectionId ,userData, userBlocks, color, sectionIndex, sectionsArray, hidden }) => {
     const [sectionInputValue, setSectionInputValue] = useState(sectionName);
     const [renameButtonDisabled, setRenameButtonDisabled] = useState(false);
     const [deleteTitleText, setDeleteTitleText] = useState("Delete Section");
@@ -173,9 +173,9 @@ const SectionSettingsMenu = ({ sectionName, userSections, sectionId ,userData, u
 
     return (
         <div className="section-settings-menu-container lt-col">
-            {renameNode}
-            {deleteNode}
-            {positionNode}
+            {!hidden ? renameNode : ""}
+            {!hidden ? deleteNode : ""}
+            {!hidden ? positionNode : ""}
             {colorsNode}
         </div>
     )

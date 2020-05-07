@@ -4,7 +4,7 @@ import Textarea from "../textarea/Textarea";
 import Button from "../button/Button";
 import fire from "../../Firebase";
 
-const AddListTool = ({ changeMode, userLists, userData }) => {
+const AddListTool = ({ changeMode, userLists, userData, userSections }) => {
     const [listInputValue, setListInputValue] = useState("");
     const [addButtonDisabled, setAddButtonDisabled] = useState(false);
     const [showError, setShowError] = useState(false);
@@ -24,15 +24,27 @@ const AddListTool = ({ changeMode, userLists, userData }) => {
             return;
         }
 
+        const newListId = `id${new Date().getTime()}`;
+        const newSectionId = `id${new Date().getTime()}1`;
+
         const newList = {
-            id: `id${new Date().getTime()}`,
+            id: newListId,
             name: listInputValue
         };
 
-        const copy = [...userLists, newList];
+        const newSection = {
+            id: newSectionId,
+            name: "No Section",
+            listId: newListId,
+            type: 'hidden'
+        };
+
+        const listsCopy = [...userLists, newList];
+        const sectionsCopy = [...userSections, newSection];
 
         fire.firestore().collection('users').doc(userData.uid).update({
-            lists: copy
+            lists: listsCopy,
+            sections: sectionsCopy
         }).then(() => {
             setAddButtonDisabled(false);
             setListInputValue("");

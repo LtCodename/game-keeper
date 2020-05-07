@@ -27,13 +27,14 @@ class Dashboard extends React.Component {
         });
 
         const addListButton = (
-            <AddButton text={'Add'} onClick={this.showAddListTool} additionalClass={'gk-add-button-dashboard'}/>
+            <AddButton text={'Add Collection'} onClick={this.showAddListTool} additionalClass={'gk-add-button-dashboard'}/>
         );
 
         const addListNode = this.state.showAddListTool ? <AddListTool
             changeMode={this.showAddListTool}
             userLists={this.props.userLists}
             userData={this.props.userData}
+            userSections={this.props.userSections}
         /> : addListButton;
 
         const authorized = (
@@ -58,6 +59,7 @@ class Dashboard extends React.Component {
 const stateToProps = (state = {}) => {
     return {
         userLists: state.userLists,
+        userSections: state.userSections,
         userData: state.userData
     }
 };

@@ -48,7 +48,7 @@ class Nav extends React.Component {
 
     const addListButton = (
       <div>
-        <AddButton text={'Add'} onClick={this.showAddListTool} additionalClass={'gk-add-button-list'}/>
+        <AddButton text={'Add Collection'} onClick={this.showAddListTool} additionalClass={'gk-add-button-list'}/>
       </div>
     );
 
@@ -67,6 +67,7 @@ class Nav extends React.Component {
     const addListNode = this.state.showAddListTool ? <AddListTool
         changeMode={this.showAddListTool}
         userLists={this.props.userLists}
+        userSections={this.props.userSections}
         userData={this.props.userData}
     /> : addListButton;
 
@@ -87,6 +88,7 @@ class Nav extends React.Component {
 const stateToProps = (state = {}) => {
   return {
     userLists: state.userLists,
+    userSections: state.userSections,
     userData: state.userData,
     listIndex: state.selectedListIndex
   }

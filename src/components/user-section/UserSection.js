@@ -2,7 +2,7 @@ import React from 'react';
 import UserBlock from '../user-block/UserBlock.js';
 import './UserSection.css';
 import { connect } from 'react-redux'
-import { SectionOptionsButton } from "../../IconsLibrary";
+import { SectionColorButton, SectionOptionsButton } from "../../IconsLibrary";
 import AddGameTool from "../add-game-tool/AddGameTool";
 import SectionSettingsMenu from "../section-settings-menu/SectionSettingsMenu";
 
@@ -14,6 +14,7 @@ class UserSection extends React.Component {
       showSectionSettingsMenu: false
     };
   }
+
   showSectionSettingsMenu = () => {
     this.setState({
       showSectionSettingsMenu: !this.state.showSectionSettingsMenu
@@ -21,7 +22,9 @@ class UserSection extends React.Component {
   };
 
   render() {
-    const gamesToRender = this.props.userBlocks.filter((elem) => elem.sectionId === this.props.id).map((elem) => {
+    const gamesInThisSection = this.props.userBlocks.filter((elem) => elem.sectionId === this.props.id);
+
+    const gamesToRender = gamesInThisSection.map((elem) => {
       return <UserBlock
         key={elem.id}
         color={this.props.color}
@@ -40,11 +43,21 @@ class UserSection extends React.Component {
       return 0;
     });
 
+    const colorButton = (
+        <button className="section-color-button shake-little" onClick={this.showSectionSettingsMenu} >
+          {SectionColorButton}
+        </button>
+    )
+
+    const optionsButton = (
+        <button className="section-options-button" onClick={this.showSectionSettingsMenu} >
+          {SectionOptionsButton}
+        </button>
+    )
+
     const editSectionButton = (
         <div className="section-options-holder">
-          <button className="section-options-button" onClick={this.showSectionSettingsMenu} >
-            {SectionOptionsButton}
-          </button>
+          {this.props.type === 'hidden' ? colorButton : optionsButton}
           {this.state.showSectionSettingsMenu ?
               <SectionSettingsMenu
                   sectionName={this.props.name}
@@ -55,26 +68,42 @@ class UserSection extends React.Component {
                   color={this.props.color}
                   sectionIndex={this.props.sectionIndex}
                   sectionsArray={this.props.sectionsArray}
+                  hidden={this.props.type || false}
               /> : ""}
           {this.state.showSectionSettingsMenu ? <span className='section-settings-overlay' onClick={this.showSectionSettingsMenu}/> : ""}
         </div>
     );
 
+    let namesButtonWrapperClass = 'nameAndButtonsWrapper';
+    if (this.props.type === 'hidden') namesButtonWrapperClass += 'Hidden';
+
     const nameAndButtonsBlock = (
-      <div className="nameAndButtonsWrapper">
-        <span className="sectionName">{this.props.name}</span>
+      <div className={namesButtonWrapperClass}>
+        {this.props.type === 'hidden' ? "" : <span className="sectionName">{this.props.name}</span>}
         {this.props.userData.email === 'fake@email.com' ? '' : editSectionButton}
       </div>
     );
 
-    return (
-      <div className="section">
-        {nameAndButtonsBlock}
-        <div className="inner-section">
-          {gamesToRender}
-          <AddGameTool sectionId={this.props.id}/>
+    const haveGamesNode = (
+        <>
+          {nameAndButtonsBlock}
+          <div className="inner-section">
+            {gamesToRender}
+            <AddGameTool sectionId={this.props.id}/>
+          </div>
+        </>
+    )
+
+    const noGamesNode = (
+        <div className="no-games-node lt-row">
+          <AddGameTool sectionId={this.props.id} hiddenSection={true}/>
         </div>
-      </div>
+    )
+
+    return (
+        <div className="section">
+          {(!gamesInThisSection.length && this.props.type === 'hidden') ? noGamesNode : haveGamesNode}
+        </div>
     );
   }
 }

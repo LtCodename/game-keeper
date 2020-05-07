@@ -2,11 +2,22 @@
   position: relative;
 }
 
+.no-games-node {
+  justify-content: center;
+  margin-top: 5px;
+}
+
 .section-options-button {
   background: transparent;
   border: none;
   padding: 0;
   position: relative;
+  transition: all 2s;
+}
+
+.section-options-button:hover {
+  outline: none;
+  transform: rotate(180deg);
 }
 
 .section-options-button:focus {
@@ -14,6 +25,25 @@
 }
 
 .section-options-button:active {
+  outline: none;
+}
+
+.section-color-button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  position: relative;
+  transition: all 2s;
+}
+
+.section-color-button:hover {
+}
+
+.section-color-button:focus {
+  outline: none;
+}
+
+.section-color-button:active {
   outline: none;
 }
 
@@ -29,11 +59,16 @@
   font-weight: 800;
   font-size: 25px;
   color: var(--third-color);
+  margin-right: 5px;
 }
 
 .nameAndButtonsWrapper {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+}
+
+.nameAndButtonsWrapperHidden {
+  display: flex;
   align-items: center;
 }
 

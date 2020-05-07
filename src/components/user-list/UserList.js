@@ -25,17 +25,35 @@ class UserList extends React.Component {
   };
 
   render() {
-    const sectionsToRender = this.props.userSections.filter((elem) => elem.listId === this.props.listRealId)
-      .map((section, index, array) => {
+    const sectionsToRender = this.props.userSections.filter((elem) => {
+      return elem.listId === this.props.listRealId && !elem.type
+    }).map((section, index, array) => {
         return (
           <UserSection
             key={section.id}
             id={section.id}
             name={section.name}
+            type={section.type}
             color={section.color}
             listId={section.listId}
             sectionsArray={array}
             sectionIndex={index}
+          />);
+    });
+
+    const hiddenSection = this.props.userSections.filter((elem) => {
+      return elem.listId === this.props.listRealId && elem.type === 'hidden'
+    }).map((section, index, array) => {
+      return (
+          <UserSection
+              key={section.id}
+              id={section.id}
+              name={section.name}
+              type={section.type}
+              color={section.color}
+              listId={section.listId}
+              sectionsArray={array}
+              sectionIndex={index}
           />);
     });
 
@@ -70,6 +88,7 @@ class UserList extends React.Component {
         <Nav/>
         <div className="allContent">
           {nameAndButtonsBlock}
+          {hiddenSection}
           {sectionsToRender}
           <AddSectionTool
               listId={this.props.listRealId}

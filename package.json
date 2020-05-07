@@ -6,6 +6,7 @@
     "@types/styled-components": "^4.4.3",
     "autosize": "^4.0.2",
     "axios": "^0.19.2",
+    "csshake": "^1.5.3",
     "eslint-loader": "^3.0.3",
     "express": "^4.17.1",
     "firebase": "^7.14.0",

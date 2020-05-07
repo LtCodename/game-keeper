@@ -110,15 +110,30 @@ class SignUpModalWindow extends React.Component {
         displayName: this.state.nameInputValue
       });
 
+      const firstListId = `id${new Date().getTime()}`;
+      const secondListId = `id${new Date().getTime()}1`;
+      const firstSectionId = `id${new Date().getTime()}2`;
+      const secondSectionId = `id${new Date().getTime()}3`;
+
       return fire.firestore().collection('users').doc(credential.user.uid).set({
         lists: [{
-          id: `id${new Date().getTime()}`,
+          id: firstListId,
           name: "Games I Love"
         },{
-          id: `id${new Date().getTime()}1`,
+          id: secondListId,
           name: "My Wishlist"
         }],
-        sections: [],
+        sections: [{
+          id: firstSectionId,
+          name: "No Section",
+          listId: firstListId,
+          type: 'hidden'
+        },{
+          id: secondSectionId,
+          name: "No Section",
+          listId: secondListId,
+          type: 'hidden'
+        }],
         blocks: []
       });
     }).then(() => {

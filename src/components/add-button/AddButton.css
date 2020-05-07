@@ -24,6 +24,11 @@
 .gk-add-button-game {
     margin: 2px 0;
     min-height: 89px;
+    min-width: 175px;
+}
+
+.gk-add-button-game-hidden {
+    width: 113px;
 }
 
 .gk-add-button-list {
@@ -37,3 +42,8 @@
     max-height: 48px;
 }
 
+@media (max-width: 450px) {
+    .gk-add-button-game {
+        margin: 0;
+    }
+}
