@@ -41,10 +41,21 @@
     display: none;
 }
 
-.profile-avatar-delete {
+.profile-avatar-delete-wrapper {
     position: absolute;
     top: 0;
-    left: -10px;
+    right: -10px;
+    background: none;
+    border: none;
+    -webkit-appearance: none;
+}
+
+.profile-avatar-delete-wrapper:focus {
+    outline: none;
+}
+
+.profile-avatar-delete-wrapper:active {
+    outline: none;
 }
 
 .profile-avatar-delete-text {

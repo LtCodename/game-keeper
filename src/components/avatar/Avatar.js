@@ -64,22 +64,21 @@ const Avatar = ({ onImageLoad, src, userData }) => {
 
     const deleteAvatar = (event) => {
         event.preventDefault();
+        event.stopPropagation();
 
-        console.log('here')
-
-        /*const ref = fire.storage().ref();
+        const ref = fire.storage().ref();
         ref.child(`avatars/${userData.uid}`).delete().then(() => {
             setSource('https://u.o0bc.com/avatars/stock/_no-user-image.gif');
         }).catch((error) =>  {
             console.log(error);
-        });*/
+        });
     }
 
     const deleteButton = (
-        <div className={'profile-avatar-delete-wrapper'} onClick={deleteAvatar}>
+        <button className={'profile-avatar-delete-wrapper'} onClick={deleteAvatar}>
             <span className={'profile-avatar-delete shake-little'}>{DeleteAvatarIcon}</span>
             <span className={'profile-avatar-delete-text'}>Delete Avatar</span>
-        </div>
+        </button>
     );
 
     return (
