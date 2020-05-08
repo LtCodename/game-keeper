@@ -24,7 +24,7 @@
 .gk-add-button-game {
     margin: 2px 0;
     min-height: 89px;
-    min-width: 175px;
+    min-width: 150px;
 }
 
 .gk-add-button-game-hidden {
@@ -33,7 +33,7 @@
 
 .gk-add-button-list {
     width: 100%;
-    padding: 0;
+    padding: 0 10px;
     font-size: 19px;
 }
 
@@ -45,5 +45,9 @@
 @media (max-width: 450px) {
     .gk-add-button-game {
         margin: 0;
+    }
+
+    .gk-add-button-game {
+        min-width: 100%;
     }
 }

@@ -41,6 +41,7 @@ class Nav extends React.Component {
         <NavLink key={elem.id}
                  to={"/lists/" + elem.id}
                  className="navButton"
+                 onClick={this.toggleNavbar}
                  activeClassName="navButtonActive">
           {elem.name}
         </NavLink>
