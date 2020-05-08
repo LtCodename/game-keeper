@@ -15,6 +15,9 @@ import userReducer from './redux/reducers/userReducer';
 import userSectionsReducer from './redux/reducers/userSectionsReducer';
 import fire from "./Firebase";
 import { Redirect, Switch } from "react-router-dom";
+import Login from "./components/login/Login";
+import ResetPassword from "./components/reset-password/ResetPassword";
+import Register from "./components/register/Register";
 
 export const DemoUser = 'ltcodename92@gmail.com';
 export const DemoPassword = '22121992';
@@ -31,8 +34,9 @@ class App extends React.Component {
       colorsDataLoaded: false,
       platformsDataLoaded: false,
       unauthorized: false,
-      avatarSrc: "",
-      avatarLoaded: true
+      userForContext: {},
+      avatarLoaded: true,
+      userLoggedIn: false
     }
   }
 
@@ -61,6 +65,12 @@ class App extends React.Component {
   rewriteAvatar = (src) => {
     this.setState({
       avatarSrc: src
+    })
+  };
+
+  logOutUser = () => {
+    this.setState({
+      userLoggedIn: false
     })
   };
 
@@ -100,7 +110,8 @@ class App extends React.Component {
           this.props.checkUserPresence(user);
           setTimeout(() => {
             this.setState({
-              userAuthDataLoaded: true
+              userAuthDataLoaded: true,
+              userLoggedIn: true
             });
           }, 0);
           this.fetchAvatar();
@@ -146,10 +157,13 @@ class App extends React.Component {
     const routes = (
       <Switch>
         <Route path="/profile" component={Profile} />
+        <Route path="/login" component={Login} />
+        <Route path="/reset" component={ResetPassword} />
+        <Route path="/register" component={Register} />
         <Route path="/privacy" component={Privacy} />
         <Route path="/lists/:listId" component={UserList}/>
-        <Route exact path="/" component={Dashboard} />
-        <Redirect to="/" />
+        <Route exact path="/dashboard" component={Dashboard} />
+        <Redirect to="/dashboard" />
       </Switch>
     );
 
@@ -172,7 +186,9 @@ class App extends React.Component {
       <GameKeeperContext.Provider value={
         {
           avatarSrc: this.state.avatarSrc,
-          rewriteAvatar: this.rewriteAvatar
+          rewriteAvatar: this.rewriteAvatar,
+          userLoaded: this.state.userLoggedIn,
+          logOutUser: this.logOutUser
         }
       }>
         <BrowserRouter>

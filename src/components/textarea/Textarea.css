@@ -30,24 +30,18 @@
     transition: background-color 5000s ease-in-out 0s;
 }
 
-/*.textarea-gk::placeholder { !* Chrome, Firefox, Opera, Safari 10.1+ *!
-    color: var(--first-color);
-}
-
-.textarea-gk:-ms-input-placeholder { !* Internet Explorer 10-11 *!
-    color: var(--first-color);
-}
-
-.textarea-gk::-ms-input-placeholder { !* Microsoft Edge *!
-    color: var(--first-color);
-}*/
+/*Additional Styles*/
 
 .global-search-textarea {
     width: 400px;
 }
 
-.auth-input {
-    width: 100%;
+.auth-screen-input {
+    width: 300px;
+}
+
+.auth-screen-input-margin {
+    margin-bottom: 10px;
 }
 
 .add-list-input {

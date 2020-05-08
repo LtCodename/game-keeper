@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import './Header.css';
 import {connect} from 'react-redux'
 import { NavLink, withRouter } from 'react-router-dom';
@@ -6,17 +6,19 @@ import fire from "../../Firebase";
 import { LogOutIcon, LogOutIconMobile, ProfileIcon, ProfileIconMobile } from "../../IconsLibrary";
 import SearchPanelConnected from "../search-panel/SearchPanel";
 import Button from "../button/Button";
-import AuthPanel from "../auth-panel/AuthPanel";
+import { GameKeeperContext } from "../../App";
 
 const Header = ({history, userData}) => {
     const [logOutButtonDisabled, setLogOutButtonDisabled] = useState(false);
+    const { logOutUser } = useContext(GameKeeperContext);
 
     const onLogOutClick = () => {
         setLogOutButtonDisabled(true);
 
         fire.auth().signOut().then(() => {
             setLogOutButtonDisabled(false);
-            history.push('/');
+            logOutUser();
+            history.push('/login');
         }).catch(error => {
             console.log(error.message);
         });
@@ -88,13 +90,11 @@ const Header = ({history, userData}) => {
                 <div className="signPanelWrapper">
                     {userData ? logOutButton : ""}
                     {userData ? profileButton : ""}
-                    {!userData ? <AuthPanel/> : ""}
                 </div>
                 <div className="altButtonsWrapper">
                     <div className="alt-buttons-inner-wrapper">
                         {userData ? logOutAltButton : ""}
                         {userData ? profileAltButton : ""}
-                        {!userData ? <AuthPanel/> : ""}
                     </div>
                 </div>
             </div>

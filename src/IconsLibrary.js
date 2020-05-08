@@ -54,29 +54,6 @@ export const ProfileIcon = (
     </svg>
 )
 
-export const SignUpIcon = (
-    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-plus"
-         role="img" height='25px' xmlns="http://www.w3.org/2000/svg"
-         viewBox="0 0 640 512">
-        <path fill="#fff9de" d="M624 208h-64v-64c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v64h-64c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h64v64c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-64h64c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm-400 48c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"/>
-    </svg>
-)
-
-export const LogInIcon = (
-    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sign-in-alt"
-         role="img" height='25px' xmlns="http://www.w3.org/2000/svg"
-         viewBox="0 0 512 512">
-        <path fill="#fff9de" d="M416 448h-84c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h84c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32h-84c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h84c53 0 96 43 96 96v192c0 53-43 96-96 96zm-47-201L201 79c-15-15-41-4.5-41 17v96H24c-13.3 0-24 10.7-24 24v96c0 13.3 10.7 24 24 24h136v96c0 21.5 26 32 41 17l168-168c9.3-9.4 9.3-24.6 0-34z"/>
-    </svg>
-)
-
-export const DemoIcon = (
-    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="eye"
-         role="img" height='25px' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-        <path fill="#fff9de" d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z"/>
-    </svg>
-)
-
 export const LogOutIcon = (
     <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sign-out-alt"
          height='25px' role="img" xmlns="http://www.w3.org/2000/svg"
@@ -98,29 +75,6 @@ export const ProfileIconMobile = (
          role="img" height='25px' xmlns="http://www.w3.org/2000/svg"
          viewBox="0 0 512 512">
         <path fill="#0079c5" d="M256 288c79.5 0 144-64.5 144-144S335.5 0 256 0 112 64.5 112 144s64.5 144 144 144zm128 32h-55.1c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16H128C57.3 320 0 377.3 0 448v16c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48v-16c0-70.7-57.3-128-128-128z"/>
-    </svg>
-)
-
-export const SignUpIconMobile = (
-    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-plus"
-         role="img" height='25px' xmlns="http://www.w3.org/2000/svg"
-         viewBox="0 0 640 512">
-        <path fill="#0079c5" d="M624 208h-64v-64c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v64h-64c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h64v64c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-64h64c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm-400 48c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"/>
-    </svg>
-)
-
-export const LogInIconMobile = (
-    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sign-in-alt"
-         role="img" height='25px' xmlns="http://www.w3.org/2000/svg"
-         viewBox="0 0 512 512">
-        <path fill="#0079c5" d="M416 448h-84c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h84c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32h-84c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h84c53 0 96 43 96 96v192c0 53-43 96-96 96zm-47-201L201 79c-15-15-41-4.5-41 17v96H24c-13.3 0-24 10.7-24 24v96c0 13.3 10.7 24 24 24h136v96c0 21.5 26 32 41 17l168-168c9.3-9.4 9.3-24.6 0-34z"/>
-    </svg>
-)
-
-export const DemoIconMobile = (
-    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="eye"
-         role="img" height='25px' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-        <path fill="#0079c5" d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z"/>
     </svg>
 )
 

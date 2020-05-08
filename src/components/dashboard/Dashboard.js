@@ -1,7 +1,7 @@
 import React from 'react';
 import ListBlock from '../list-block/ListBlock.js';
 import './Dashboard.css'
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux'
 import AddListTool from "../add-list-tool/AddListTool";
 import AddButton from "../add-button/AddButton";
@@ -12,8 +12,17 @@ class Dashboard extends React.Component {
         super(props);
 
         this.state = {
-            showAddListTool: false
+            showAddListTool: false,
+            userPresent: true
         };
+    }
+
+    componentDidMount() {
+        if (!this.props.userData) {
+            this.setState({
+                userPresent: false
+            })
+        }
     }
 
     showAddListTool = () => {
@@ -46,6 +55,10 @@ class Dashboard extends React.Component {
                 </div>
             </div>
         );
+
+        if (!this.state.userPresent) {
+            return <Redirect to='/login' />;
+        }
 
         return (
             <div className="contentWrapper">

@@ -5,7 +5,7 @@ import indexActions from '../../redux/reducers/selectedListIndexReducer';
 import { connect } from 'react-redux'
 import { ListOptionsButton } from "../../IconsLibrary";
 import Nav from "../nav/Nav";
-import { withRouter } from "react-router-dom";
+import {Redirect, withRouter} from "react-router-dom";
 import AddSectionTool from "../add-section-tool/AddSectionTool";
 import ListSettingsMenu from "../list-settings-menu/ListSettingsMenu";
 import { DemoUser } from "../../App";
@@ -26,6 +26,10 @@ class UserList extends React.Component {
   };
 
   render() {
+    if (!this.props.userData) {
+      return <Redirect to='/login' />;
+    }
+
     const sectionsToRender = this.props.userSections.filter((elem) => {
       return elem.listId === this.props.listRealId && !elem.type
     }).map((section, index, array) => {
