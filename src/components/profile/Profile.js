@@ -7,6 +7,7 @@ import Button from "../button/Button";
 import { TrelloIcon, TwitterIcon } from "../../IconsLibrary";
 import Textarea from "../textarea/Textarea";
 import ProfileAvatar from "../profile-avatar/ProfileAvatar";
+import {VERSION} from "../../App";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -240,7 +241,7 @@ class Profile extends React.Component {
           </div>
           <div className="profile-property">
             <span className="property-name">Version</span>
-            <span className="property-value">1.0, 5.7.2020</span>
+            <span className="property-value">{`${VERSION}, 5.7.2020`}</span>
           </div>
         </div>
       </div>
