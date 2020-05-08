@@ -15,9 +15,9 @@ import userReducer from './redux/reducers/userReducer';
 import userSectionsReducer from './redux/reducers/userSectionsReducer';
 import fire from "./Firebase";
 import { Redirect, Switch } from "react-router-dom";
-import Login from "./components/login/Login";
-import ResetPassword from "./components/reset-password/ResetPassword";
-import Register from "./components/register/Register";
+import Login from "./components/authentication/Login";
+import ResetPassword from "./components/authentication/ResetPassword";
+import Register from "./components/authentication/Register";
 
 export const DemoUser = 'ltcodename92@gmail.com';
 export const DemoPassword = '22121992';

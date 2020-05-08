@@ -181,7 +181,7 @@ const Register = ({ }) => {
     );
 
     const errorNode = (
-        <span className={'login-margin-bottom auth-text-piece'}>{errorText}</span>
+        <span className={'auth-margin-bottom auth-text-piece'}>{errorText}</span>
     );
 
     if (registered) {
