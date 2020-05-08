@@ -5,7 +5,7 @@ const config = {
     authDomain: "the-game-keeper.firebaseapp.com",
     databaseURL: "https://the-game-keeper.firebaseio.com",
     projectId: "the-game-keeper",
-    storageBucket: ""
+    storageBucket: "the-game-keeper.appspot.com",
 };
 
 const fire = firebase.initializeApp(config);

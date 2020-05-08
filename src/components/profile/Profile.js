@@ -6,6 +6,7 @@ import fire from "../../Firebase";
 import Button from "../button/Button";
 import { TrelloIcon, TwitterIcon } from "../../IconsLibrary";
 import Textarea from "../textarea/Textarea";
+import ProfileAvatar from "../profile-avatar/ProfileAvatar";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -22,7 +23,8 @@ class Profile extends React.Component {
       changeButtonDisabled: false,
       verifyButtonDisabled: false,
       adminButtonDisabled: false,
-      verificationMessageSent: false
+      verificationMessageSent: false,
+      deleteButtonDisabled: false
     };
   }
 
@@ -37,10 +39,6 @@ class Profile extends React.Component {
       nameInputValue: event.target.value
     });
   };
-
-  /*avatarValueChange = (event) => {
-    console.log(event.target.files);
-  };*/
 
   onChangeName = () => {
     let that = this;
@@ -178,45 +176,16 @@ class Profile extends React.Component {
         />
     );
 
-    let avatarInitials;
-
-    if (this.state.nameInputValue.includes(" ")) {
-      let words = this.state.nameInputValue.split(" ");
-      avatarInitials = words[0][0] + words[1][0];
-    }else {
-      avatarInitials = this.state.nameInputValue.slice(0, 2);
-    }
-
-    if (avatarInitials) {
-      avatarInitials.toUpperCase();
-    }
-
-    if (avatarInitials.length > 2) {
-      avatarInitials = avatarInitials.slice(0, 2);
-    }
-
-    if (!avatarInitials.length) {
-      avatarInitials = "GK";
-    }
-
-    /*const uploadAvatar = (
-        <div className="uploadAvatarWrapper">
-            <input className="form-control" type="file" name="avatar" accept="image/png, image/jpeg" onChange={this.avatarValueChange}/>
-        </div>
-    );*/
-
     const verificationMessage = (
         <span className="verification-message">Please check your Email</span>
     );
 
     const props = (
       <div className="profile-wrapper lt-col">
-        <div className="avatar">
-          <div className="avatarText">{avatarInitials}</div>
-        </div>
+        <ProfileAvatar userData={this.props.userData}/>
         <div className="lt-col">
           <div className="profile-property">
-            <span className="property-name">Display name</span>
+            <span className="property-name">Display Name</span>
             <div className="lt-row">
               {changeNameForm}
               {changeNameButton}
@@ -271,7 +240,7 @@ class Profile extends React.Component {
           </div>
           <div className="profile-property">
             <span className="property-name">Version</span>
-            <span className="property-value">0.894, 5.5.2020</span>
+            <span className="property-value">1.0, 5.7.2020</span>
           </div>
         </div>
       </div>

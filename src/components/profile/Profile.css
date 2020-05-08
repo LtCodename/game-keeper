@@ -9,20 +9,6 @@
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
-.avatarText {
-  color: var(--third-color);
-  font-size: 50px;
-  font-weight: 800;
-  font-family: var(--main-font);
-  position: absolute;
-  text-transform: uppercase;
-  top: 0;
-  left: 0;
-  text-align: center;
-  line-height: 100px;
-  width: 100%;
-}
-
 .profile-general-wrapper {
   background-color: var(--first-color);
   padding: 20px;
@@ -41,6 +27,17 @@
   font-weight: 300;
   margin-bottom: 10px;
   text-align: right;
+}
+
+.avatar-row {
+  align-items: center;
+}
+
+.avatar-message {
+  color: #0178c5;
+  font-weight: 300;
+  text-align: right;
+  margin-right: 5px;
 }
 
 .profile-wrapper {

@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import './AddGameTool.css';
+import React, { useState } from 'react';
 import BlockModalWindow from "../block-modal-window/BlockModalWindow";
 import AddButton from "../add-button/AddButton";
 

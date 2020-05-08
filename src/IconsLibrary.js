@@ -179,3 +179,20 @@ export const SwitchIcon = (
     opacity="1"/>
     </svg>
 )
+
+export const CameraIcon = (
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="camera"
+         className="svg-inline--fa fa-camera fa-w-16" height={'45px'} role="img" xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 512 512">
+        <path fill="#FFFFFF" d="M512 144v288c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48h88l12.3-32.9c7-18.7 24.9-31.1 44.9-31.1h125.5c20 0 37.9 12.4 44.9 31.1L376 96h88c26.5 0 48 21.5 48 48zM376 288c0-66.2-53.8-120-120-120s-120 53.8-120 120 53.8 120 120 120 120-53.8 120-120zm-32 0c0 48.5-39.5 88-88 88s-88-39.5-88-88 39.5-88 88-88 88 39.5 88 88z"/>
+    </svg>
+)
+
+export const DeleteAvatarIcon = (
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-alt"
+         height="20px" role="img" xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 448 512">
+        <path fill="#0079c5" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"/>
+    </svg>
+)
+

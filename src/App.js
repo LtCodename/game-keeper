@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import UserList from './components/user-list/UserList.js';
 import Header from './components/header/Header.js';
 import Dashboard from './components/dashboard/Dashboard.js';
@@ -19,6 +19,8 @@ import { Redirect, Switch } from "react-router-dom";
 export const DemoUser = 'ltcodename92@gmail.com';
 export const DemoPassword = '22121992';
 
+export const GameKeeperContext = createContext({});
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -29,6 +31,8 @@ class App extends React.Component {
       colorsDataLoaded: false,
       platformsDataLoaded: false,
       unauthorized: false,
+      avatarSrc: "",
+      avatarLoaded: true
     }
   }
 
@@ -40,6 +44,24 @@ class App extends React.Component {
     this.fetchUser();
     this.fetchColors();
     this.fetchPlatforms();
+  };
+
+  fetchAvatar() {
+    const ref = fire.storage().ref();
+    ref.child(`avatars/${this.props.userData.uid}`).getDownloadURL().then((url) => {
+      this.setState({
+        avatarSrc: url,
+        avatarLoaded: true
+      })
+    }).catch(function(error) {
+      console.log(error)
+    });
+  }
+
+  rewriteAvatar = (src) => {
+    this.setState({
+      avatarSrc: src
+    })
   };
 
   fetchColors() {
@@ -81,6 +103,7 @@ class App extends React.Component {
               userAuthDataLoaded: true
             });
           }, 0);
+          this.fetchAvatar();
         });
         this.fetchData(user.uid);
       }else {
@@ -146,19 +169,28 @@ class App extends React.Component {
     );
 
     return (
-      <BrowserRouter>
-        {((this.state.listsSectionsBlocksLoaded
-           && this.state.colorsDataLoaded
-           && this.state.userAuthDataLoaded
-           && this.state.platformsDataLoaded) || this.state.unauthorized) ? content : fake}
-      </BrowserRouter>
+      <GameKeeperContext.Provider value={
+        {
+          avatarSrc: this.state.avatarSrc,
+          rewriteAvatar: this.rewriteAvatar
+        }
+      }>
+        <BrowserRouter>
+          {((this.state.listsSectionsBlocksLoaded
+             && this.state.colorsDataLoaded
+             && this.state.userAuthDataLoaded
+             && this.state.avatarLoaded
+             && this.state.platformsDataLoaded) || this.state.unauthorized) ? content : fake}
+        </BrowserRouter>
+      </GameKeeperContext.Provider>
     );
   }
 }
 
 const stateToProps = (state = {}) => {
   return {
-    selectedListIndex: state.selectedListIndex
+    selectedListIndex: state.selectedListIndex,
+    userData: state.userData
   }
 };
 
