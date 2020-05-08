@@ -9,7 +9,6 @@
     margin-bottom: 20px;
     cursor: pointer;
     position: relative;
-    /*box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);*/
     border-radius: 50%;
 }
 
@@ -76,4 +75,15 @@
 
 .profile-avatar-delete-wrapper:hover .profile-avatar-delete-text {
     visibility: visible;
+}
+
+@media (max-width: 510px) {
+    .profile-avatar {
+        height: 100px;
+        width: 100px;
+    }
+
+    .profile-avatar-delete-wrapper {
+        right: -25px;
+    }
 }
