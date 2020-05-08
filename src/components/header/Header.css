@@ -4,7 +4,7 @@
 }
 
 .logoHolderFake {
-  padding: 13.5px 0;
+  padding: 13px 0;
 }
 
 .logoLink {
@@ -26,7 +26,8 @@
 }
 
 .site-name-short {
-  display: none
+  display: none;
+  margin-right: 5px;
 }
 
 .logoLink:hover {
@@ -59,14 +60,6 @@
   display: none;
 }
 
-.authButtonWrapper:nth-child(2n+1) {
-  margin: 10px 10px 10px 0;
-}
-
-.authButtonWrapper:nth-child(2n) {
-  margin: 10px 0;
-}
-
 .header-link:hover {
   text-decoration: none;
 }
@@ -76,28 +69,15 @@
     justify-content: space-between;
   }
 
-  .signPanelWrapper {
-    display: none;
-  }
-
   .altButtonsWrapper {
     display: flex;
     justify-content: flex-end;
-    padding-bottom: 5px;
     margin-left: 10px;
   }
 
   .alt-buttons-inner-wrapper {
     display: flex;
     flex-direction: row;
-  }
-
-  .authButtonWrapper:nth-child(2n+1) {
-    margin: 5px 10px 10px 0;
-  }
-
-  .authButtonWrapper:nth-child(2n) {
-    margin: 5px 0 10px 0;
   }
 }
 

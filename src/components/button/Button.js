@@ -1,12 +1,12 @@
 import React from 'react';
 import './Button.css';
 
-const Button = ({ text, buttonAction, disabled, margin, icon }) => {
+const Button = ({ text, buttonAction, disabled, margin, icon, additionalClass }) => {
     let buttonClassName = 'gk-button';
     if (icon) buttonClassName = 'gk-button-icon';
     if (!text) buttonClassName = 'gk-button-mobile';
 
-    let marginClassName = '';
+    let marginClassName;
     switch(margin) {
         case 'top':
             marginClassName = 'margin-top';
@@ -35,7 +35,7 @@ const Button = ({ text, buttonAction, disabled, margin, icon }) => {
     return (
         <button disabled={disabled}
                 type="button"
-                className={`${buttonClassName} ${marginClassName}`}
+                className={`${buttonClassName} ${marginClassName} ${additionalClass}`}
                 onClick={buttonAction}>
             {text ? textNode : ""}
             {icon ? <span className={`icon-holder-${buttonClassName}`}>{icon}</span> : ""}

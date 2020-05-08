@@ -46,23 +46,7 @@ export const SectionColorButton = (
     </svg>
 )
 
-export const ProfileIcon = (
-    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-alt"
-         role="img" height='25px' xmlns="http://www.w3.org/2000/svg"
-         viewBox="0 0 512 512">
-        <path fill="#fff9de" d="M256 288c79.5 0 144-64.5 144-144S335.5 0 256 0 112 64.5 112 144s64.5 144 144 144zm128 32h-55.1c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16H128C57.3 320 0 377.3 0 448v16c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48v-16c0-70.7-57.3-128-128-128z"/>
-    </svg>
-)
-
 export const LogOutIcon = (
-    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sign-out-alt"
-         height='25px' role="img" xmlns="http://www.w3.org/2000/svg"
-         viewBox="0 0 512 512">
-        <path fill="#fff9de" d="M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z"/>
-    </svg>
-)
-
-export const LogOutIconMobile = (
     <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sign-in-alt"
          role="img" height='25px' xmlns="http://www.w3.org/2000/svg"
          viewBox="0 0 512 512">
@@ -70,7 +54,7 @@ export const LogOutIconMobile = (
     </svg>
 )
 
-export const ProfileIconMobile = (
+export const ProfileIcon = (
     <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-alt"
          role="img" height='25px' xmlns="http://www.w3.org/2000/svg"
          viewBox="0 0 512 512">

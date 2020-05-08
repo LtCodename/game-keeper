@@ -3,7 +3,7 @@ import './Header.css';
 import {connect} from 'react-redux'
 import { NavLink, withRouter } from 'react-router-dom';
 import fire from "../../Firebase";
-import { LogOutIcon, LogOutIconMobile, ProfileIcon, ProfileIconMobile } from "../../IconsLibrary";
+import { LogOutIcon, ProfileIcon} from "../../IconsLibrary";
 import SearchPanelConnected from "../search-panel/SearchPanel";
 import Button from "../button/Button";
 import { GameKeeperContext } from "../../App";
@@ -44,42 +44,24 @@ const Header = ({history, userData}) => {
     );
 
     const logOutButton = (
-        <div className="authButtonWrapper">
-            <Button
-                text={'Log Out'}
-                icon={LogOutIcon}
-                buttonAction={onLogOutClick}
-                disabled={logOutButtonDisabled}
-            />
-        </div>
+        <Button
+            icon={LogOutIcon}
+            buttonAction={onLogOutClick}
+            disabled={logOutButtonDisabled}
+            margin={'right'}
+            additionalClass={'auth-header-button shake-little'}
+        />
     );
 
     const profileButton = (
-        <div className="authButtonWrapper">
-            <NavLink
-                className="header-link"
-                to="/profile">
-                <Button text={'Profile'} icon={ProfileIcon}/>
-            </NavLink>
-        </div>
-    );
-
-    const profileAltButton = (
         <NavLink
-            to="/profile"
-            className="lt-row">
+            className="header-link"
+            to="/profile">
             <Button
-                icon={ProfileIconMobile}
+                icon={ProfileIcon}
+                additionalClass={'auth-header-button shake-little'}
             />
         </NavLink>
-    );
-
-    const logOutAltButton = (
-        <Button
-            buttonAction={onLogOutClick}
-            icon={LogOutIconMobile}
-            margin={'right'}
-        />
     );
 
     return (
@@ -90,12 +72,6 @@ const Header = ({history, userData}) => {
                 <div className="signPanelWrapper">
                     {userData ? logOutButton : ""}
                     {userData ? profileButton : ""}
-                </div>
-                <div className="altButtonsWrapper">
-                    <div className="alt-buttons-inner-wrapper">
-                        {userData ? logOutAltButton : ""}
-                        {userData ? profileAltButton : ""}
-                    </div>
                 </div>
             </div>
         </div>

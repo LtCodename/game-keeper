@@ -94,3 +94,10 @@
 .margin-top {
     margin-top: 5px;
 }
+
+/*Additional Rules*/
+
+.auth-header-button {
+    padding: 4px;
+    background: #fff68f;
+}
