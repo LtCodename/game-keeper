@@ -97,7 +97,7 @@ h2 {
   font-family: var(--main-font);
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 650px) {
   .contentWrapper {
     display: block;
     height: auto;

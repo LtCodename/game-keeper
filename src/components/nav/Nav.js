@@ -49,9 +49,7 @@ class Nav extends React.Component {
     });
 
     const addListButton = (
-      <div>
         <AddButton text={'Add Collection'} onClick={this.showAddListTool} additionalClass={'gk-add-button-list'}/>
-      </div>
     );
 
     const hideButton = (
