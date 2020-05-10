@@ -32,6 +32,13 @@ class SearchPanel extends React.Component {
     });
   }
 
+  clearSearchResults = () => {
+    this.clearSearchValue();
+    this.setState({
+      foundGames: []
+    });
+  }
+
   render() {
     const gamesToRender = this.state.foundGames.map((elem) => {
       const selectedSection = this.props.userSections.find(section => {
@@ -79,6 +86,7 @@ class SearchPanel extends React.Component {
     return (
         <div className="search-panel-wrapper">
           {panel}
+          {this.state.foundGames.length ? <span className='search-result-overlay' onClick={this.clearSearchResults}/> : ''}
           {this.state.foundGames.length ? results : ""}
         </div>
     )

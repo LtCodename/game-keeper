@@ -31,14 +31,23 @@
 }
 
 .listName {
-  text-overflow: ellipsis;
+  /*text-overflow: ellipsis;
   font-weight: 800;
   font-size: 30px;
   color: var(--second-color);
+  margin-right: 5px;*/
+  text-overflow: ellipsis;
+  font-weight: 800;
+  font-size: 19px;
+  color: rgb(1, 120, 197);
   margin-right: 5px;
+  background-color: #fff68f;
+  padding: 4px 10px;
+  text-transform: uppercase;
 }
 
 .listWrapper {
   display: flex;
   align-items: center;
+  margin-bottom: 5px;
 }

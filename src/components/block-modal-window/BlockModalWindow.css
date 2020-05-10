@@ -51,6 +51,7 @@
   font-weight: 700;
   background: #fff68f;
   padding: 5px;
+  display: block;
 }
 
 .checkbox-holder {

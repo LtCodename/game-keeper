@@ -21,7 +21,7 @@ import Register from "./components/authentication/Register";
 
 export const DemoUser = 'ltcodename92@gmail.com';
 export const DemoPassword = '22121992';
-export const VERSION = '1.24';
+export const VERSION = '1.3';
 
 export const GameKeeperContext = createContext({});
 

@@ -50,7 +50,7 @@ class UserBlockMini extends React.Component {
 
         const platformsToShow = (this.props.gameData.hasOwnProperty('platforms')) ? (
             this.props.gameData.platforms.map((elem, index) => {
-                return (<span key={index}>{platformsIcons[elem.iconName]}</span>)
+                return (<span className={'mini-block-icon'} key={index}>{platformsIcons[elem.iconName]}</span>)
             })) : [];
 
         const platfotmsOnBlock = (

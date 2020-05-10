@@ -16,6 +16,14 @@
   width: 100%;
 }
 
+.search-result-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
 @media (max-width: 580px) {
   .search-panel-wrapper {
     margin: 5px 0;

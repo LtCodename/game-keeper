@@ -1,5 +1,4 @@
 import React from 'react';
-import HeaderFake from '../header-fake/HeaderFake.js';
 import './Preloader.css';
 
 const Preloader = () => {
@@ -10,12 +9,9 @@ const Preloader = () => {
   );
 
   return (
-    <div className="preloaderWrapper">
-      <HeaderFake/>
       <div className="preloaderContent">
-        {preloader}
+          {preloader}
       </div>
-    </div>
   );
 };
 
