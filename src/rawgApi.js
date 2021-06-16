@@ -18,7 +18,7 @@ export async function searchGamesByName(gameName) {
 export async function getGameInformation(gameName) {
   try {
     const { data } = await axios.get(
-      `https://api.rawg.io/api/games/${gameName}&key=${"81d6a9bfb35d4a1c8fa5b2ad3b3b97fb"}`,
+      `https://api.rawg.io/api/games/${gameName}?key=${"81d6a9bfb35d4a1c8fa5b2ad3b3b97fb"}`,
       {
         headers: {
           /*'User-Agent': 'Game Keeper'*/
