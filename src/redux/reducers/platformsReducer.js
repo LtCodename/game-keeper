@@ -1,15 +1,15 @@
 const initState = [];
 
-const PLATFORMS_FETCH = 'PLATFORMS_FETCH';
+const PLATFORMS_FETCH = "PLATFORMS_FETCH";
 
 const platformsReducer = (state = initState, action) => {
   const copy = [];
-  switch(action.type) {
+  switch (action.type) {
     case PLATFORMS_FETCH:
-      action.snapshot.forEach(doc => {
+      action.snapshot.forEach((doc) => {
         let data = doc.data();
         copy.push({
-          ...data
+          ...data,
         });
       });
       return copy;
@@ -18,4 +18,4 @@ const platformsReducer = (state = initState, action) => {
   }
 };
 
-export default {reducer: platformsReducer,  actions: { PLATFORMS_FETCH }};
+export default { reducer: platformsReducer, actions: { PLATFORMS_FETCH } };

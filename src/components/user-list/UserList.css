@@ -31,11 +31,6 @@
 }
 
 .listName {
-  /*text-overflow: ellipsis;
-  font-weight: 800;
-  font-size: 30px;
-  color: var(--second-color);
-  margin-right: 5px;*/
   text-overflow: ellipsis;
   font-weight: 800;
   font-size: 19px;

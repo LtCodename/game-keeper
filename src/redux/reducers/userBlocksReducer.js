@@ -1,9 +1,9 @@
 const initState = [];
 
-const BLOCKS_SET = 'BLOCKS_SET';
+const BLOCKS_SET = "BLOCKS_SET";
 
 const userBlocksReducer = (state = initState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case BLOCKS_SET:
       return action.blocks;
     default:
@@ -11,4 +11,4 @@ const userBlocksReducer = (state = initState, action) => {
   }
 };
 
-export default {reducer: userBlocksReducer,  actions: { BLOCKS_SET }};
+export default { reducer: userBlocksReducer, actions: { BLOCKS_SET } };

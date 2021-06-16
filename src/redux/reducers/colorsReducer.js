@@ -1,16 +1,16 @@
 const initState = [];
 
-const COLORS_FETCH = 'COLORS_FETCH';
+const COLORS_FETCH = "COLORS_FETCH";
 
 const colorsReducer = (state = initState, action) => {
   const copy = [];
-  switch(action.type) {
+  switch (action.type) {
     case COLORS_FETCH:
-      action.snapshot.forEach(doc => {
+      action.snapshot.forEach((doc) => {
         let otherData = doc.data();
         copy.push({
           id: doc.id,
-          ...otherData
+          ...otherData,
         });
       });
       return copy;
@@ -19,4 +19,4 @@ const colorsReducer = (state = initState, action) => {
   }
 };
 
-export default {reducer: colorsReducer,  actions: { COLORS_FETCH }};
+export default { reducer: colorsReducer, actions: { COLORS_FETCH } };

@@ -1,18 +1,17 @@
 .add-list-section-wrapper {
-    width: fit-content;
-    background: rgba(255, 249, 222, 1);
-    padding: 10px;
-    color: #0178c5;
-    font-weight: 800;
-    align-items: center;
+  width: fit-content;
+  background: rgba(255, 249, 222, 1);
+  padding: 10px;
+  color: #0178c5;
+  font-weight: 800;
+  align-items: center;
 }
 
 .add-list-section {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .add-list-error-message {
-    font-weight: 200;
-    margin-bottom: 5px;
+  font-weight: 200;
+  margin-bottom: 5px;
 }
-

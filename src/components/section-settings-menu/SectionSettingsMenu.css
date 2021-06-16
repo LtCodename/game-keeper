@@ -1,35 +1,35 @@
 .section-settings-menu-container {
-    position: absolute;
-    background: #fef9de;
-    z-index: 1;
-    top: 120%;
-    padding: 10px 10px 0 10px;
-    margin-bottom: 10px;
+  position: absolute;
+  background: #fef9de;
+  z-index: 1;
+  top: 120%;
+  padding: 10px 10px 0 10px;
+  margin-bottom: 10px;
 }
 
 .section-settings-segment:not(:last-child) {
-    padding-bottom: 5px;
+  padding-bottom: 5px;
 }
 
 .section-settings-segment {
-    color: #0178c5;
-    font-weight: 300;
+  color: #0178c5;
+  font-weight: 300;
 }
 
 .section-settings-segment-title {
-    color: #0178c5;
-    font-weight: 300;
+  color: #0178c5;
+  font-weight: 300;
 }
 
 .new-section-position-select {
-    width: fit-content;
-    margin-top: 5px;
+  width: fit-content;
+  margin-top: 5px;
 }
 
 .new-section-position-select:focus {
-    outline: none;
+  outline: none;
 }
 
 .new-section-position-select:active {
-    outline: none;
+  outline: none;
 }

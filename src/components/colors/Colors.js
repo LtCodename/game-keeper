@@ -1,6 +1,6 @@
-import React from 'react';
-import './Colors.css';
-import { connect } from 'react-redux'
+import React from "react";
+import "./Colors.css";
+import { connect } from "react-redux";
 import fire from "../../Firebase";
 
 class Colors extends React.Component {
@@ -8,14 +8,14 @@ class Colors extends React.Component {
     super(props);
 
     this.state = {
-      currentColor: this.props.color
+      currentColor: this.props.color,
     };
   }
 
   colorMagic = (color) => {
     if (typeof this.props.passColorToSection === "function") {
       this.props.passColorToSection(color);
-    }else {
+    } else {
       const copy = [...this.props.userSections];
 
       let targetSection = copy.find((elem) => {
@@ -26,17 +26,22 @@ class Colors extends React.Component {
         targetSection.color = color;
       }
 
-      fire.firestore().collection('users').doc(this.props.userData.uid).update({
-        sections: copy
-      }).then((data) => {
-      }).catch(error => {
-        console.log(error.message);
-      });
+      fire
+        .firestore()
+        .collection("users")
+        .doc(this.props.userData.uid)
+        .update({
+          sections: copy,
+        })
+        .then((data) => {})
+        .catch((error) => {
+          console.log(error.message);
+        });
     }
 
     this.setState({
-      currentColor: color
-    })
+      currentColor: color,
+    });
   };
 
   render() {
@@ -48,17 +53,20 @@ class Colors extends React.Component {
         <span
           key={elem.id}
           className={classNameReal}
-          onClick={() => this.colorMagic(elem.name)}>
-          {(this.state.currentColor === elem.name) ? <span className="colors-x">X</span> : ""}
+          onClick={() => this.colorMagic(elem.name)}
+        >
+          {this.state.currentColor === elem.name ? (
+            <span className="colors-x">X</span>
+          ) : (
+            ""
+          )}
         </span>
       );
     });
 
     return (
-      <div >
-        <div className="colorsContainer">
-          {colorsToRender}
-        </div>
+      <div>
+        <div className="colorsContainer">{colorsToRender}</div>
       </div>
     );
   }
@@ -68,8 +76,8 @@ const stateToProps = (state = {}) => {
   return {
     userData: state.userData,
     colors: state.colors,
-    userSections: state.userSections
-  }
+    userSections: state.userSections,
+  };
 };
 
 const ConnectedColors = connect(stateToProps, null)(Colors);

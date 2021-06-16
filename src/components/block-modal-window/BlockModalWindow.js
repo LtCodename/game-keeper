@@ -1,6 +1,6 @@
-import React from 'react';
-import './BlockModalWindow.css';
-import { connect } from 'react-redux'
+import React from "react";
+import "./BlockModalWindow.css";
+import { connect } from "react-redux";
 import fire from "../../Firebase";
 import { Modal } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
@@ -14,7 +14,10 @@ class BlockModalWindow extends React.Component {
     super(props);
 
     this.state = {
-      localGameData: {...this.props.gameData, releaseDate: this.props.gameData.releaseDate || ""},
+      localGameData: {
+        ...this.props.gameData,
+        releaseDate: this.props.gameData.releaseDate || "",
+      },
       nameInputValue: this.props.gameData.name,
       platforms: this.preparePlatformsForState(),
       newListForBlock: this.props.listId,
@@ -24,15 +27,15 @@ class BlockModalWindow extends React.Component {
       foundGameInfo: {},
       saveButtonDisabled: false,
       deleteButtonDisabled: false,
-      deleteMode: false
+      deleteMode: false,
     };
   }
 
   changeDeleteMode = () => {
     this.setState({
-      deleteMode: !this.state.deleteMode
+      deleteMode: !this.state.deleteMode,
     });
-  }
+  };
 
   newListSelectChangeHandler = (event) => {
     const sections = this.props.userSections.filter((elem) => {
@@ -42,20 +45,20 @@ class BlockModalWindow extends React.Component {
 
     this.setState({
       newListForBlock: event.target.value,
-      newSectionForBlock: firstSectionId
+      newSectionForBlock: firstSectionId,
     });
   };
 
   newSectionSelectChangeHandler = (event) => {
     this.setState({
-      newSectionForBlock: event.target.value
+      newSectionForBlock: event.target.value,
     });
   };
 
   deleteBlock = () => {
     this.setState({
-      deleteButtonDisabled: true
-    })
+      deleteButtonDisabled: true,
+    });
 
     const copy = [...this.props.userBlocks];
 
@@ -69,18 +72,24 @@ class BlockModalWindow extends React.Component {
 
     this.props.hideWindow();
 
-    fire.firestore().collection('users').doc(this.props.userData.uid).update({
-      blocks: copy
-    }).then(() => {
-      this.setState({
-        deleteButtonDisabled: false
+    fire
+      .firestore()
+      .collection("users")
+      .doc(this.props.userData.uid)
+      .update({
+        blocks: copy,
       })
-    }).catch(error => {
-      console.log(error.message);
-      this.setState({
-        deleteButtonDisabled: false
+      .then(() => {
+        this.setState({
+          deleteButtonDisabled: false,
+        });
       })
-    });
+      .catch((error) => {
+        console.log(error.message);
+        this.setState({
+          deleteButtonDisabled: false,
+        });
+      });
   };
 
   handleCheckboxInputChange = (event) => {
@@ -96,112 +105,129 @@ class BlockModalWindow extends React.Component {
 
   rewriteLists = (newData) => {
     this.setState({
-      platforms: newData
+      platforms: newData,
     });
   };
 
-  preparePlatformsForState(){
+  preparePlatformsForState() {
     const selectedPlatforms = this.props.gameData.platforms || [];
 
     return this.props.platforms.map((elem, index) => {
       return {
         id: index,
-        name: elem['name'],
-        iconName: elem['iconName'],
-        checked: Boolean(selectedPlatforms.find(platform => elem['name'] === platform.name))
+        name: elem["name"],
+        iconName: elem["iconName"],
+        checked: Boolean(
+          selectedPlatforms.find((platform) => elem["name"] === platform.name)
+        ),
       };
     });
   }
 
   searchApi() {
-    console.log('searching...');
-    searchGamesByName(this.state.nameInputValue).then(response => {
+    console.log("searching...");
+    searchGamesByName(this.state.nameInputValue).then((response) => {
       console.log(response);
-      this.setState({
-        searchResult: response
-      }, () => {
-        this.setState({
-          displaySearchResults: true
-        })
-      })
+      this.setState(
+        {
+          searchResult: response,
+        },
+        () => {
+          this.setState({
+            displaySearchResults: true,
+          });
+        }
+      );
     });
   }
 
   getGameData(id) {
-    console.log('retrieving game info..');
+    console.log("retrieving game info..");
 
-    getGameInformation(id).then(r => {
-      this.setState({
-        foundGameInfo: r
-      }, () => {
-        console.log(this.state.foundGameInfo);
+    getGameInformation(id).then((r) => {
+      this.setState(
+        {
+          foundGameInfo: r,
+        },
+        () => {
+          console.log(this.state.foundGameInfo);
 
-        let developersNames = [];
-        this.state.foundGameInfo.developers.map((elem) => {
-          if (developersNames.length === 0) {
-            return developersNames += elem.name;
-          } else {
-            return developersNames += `, ${elem.name}`;
-          }
-        })
+          let developersNames = [];
+          this.state.foundGameInfo.developers.map((elem) => {
+            if (developersNames.length === 0) {
+              return (developersNames += elem.name);
+            } else {
+              return (developersNames += `, ${elem.name}`);
+            }
+          });
 
-        this.setState({
-          localGameData: {
-            ...this.state.localGameData,
-            releaseDate: this.state.foundGameInfo['released'],
-            developers: developersNames,
-            name: this.state.foundGameInfo['name'],
-            apiId: this.state.foundGameInfo['id']
-          },
-          nameInputValue: this.state.foundGameInfo['name']
-        }, () => {
-          console.log(this.state.localGameData);
-        })
-      })
-    })
+          this.setState(
+            {
+              localGameData: {
+                ...this.state.localGameData,
+                releaseDate: this.state.foundGameInfo["released"],
+                developers: developersNames,
+                name: this.state.foundGameInfo["name"],
+                apiId: this.state.foundGameInfo["id"],
+              },
+              nameInputValue: this.state.foundGameInfo["name"],
+            },
+            () => {
+              console.log(this.state.localGameData);
+            }
+          );
+        }
+      );
+    });
   }
 
   passIdBack = (gameId) => {
     console.log(gameId);
     this.getGameData(gameId);
     this.resetSearchResults();
-  }
+  };
 
   resetSearchResults = () => {
     this.setState({
       displaySearchResults: false,
-      searchResult: []
-    })
-  }
+      searchResult: [],
+    });
+  };
 
   nameInputValueChange = (event) => {
-    this.setState({
-      nameInputValue: event.target.value,
-      localGameData: {...this.state.localGameData, name:event.target.value}
-    },() => {
-      //server
-      if (this.state.nameInputValue.length >= 3) {
-        this.searchApi();
+    this.setState(
+      {
+        nameInputValue: event.target.value,
+        localGameData: {
+          ...this.state.localGameData,
+          name: event.target.value,
+        },
+      },
+      () => {
+        //server
+        if (this.state.nameInputValue.length >= 3) {
+          this.searchApi();
+        }
       }
-    });
+    );
   };
 
   modalSave = () => {
     this.setState({
-      saveButtonDisabled: true
-    })
+      saveButtonDisabled: true,
+    });
 
     const mappedPlatforms = this.state.platforms
       .filter((elem) => elem.checked)
       .map((elem) => {
         return {
           name: elem.name,
-          iconName: elem.iconName
-        }
+          iconName: elem.iconName,
+        };
       });
     if (!this.props.fullMode) {
       this.addNewBlock(mappedPlatforms);
-    }else {
+    } else {
       this.updateBlock(mappedPlatforms);
     }
   };
@@ -210,8 +236,8 @@ class BlockModalWindow extends React.Component {
     const allBlocks = [...this.props.userBlocks];
     const allSections = [...this.props.userSections];
 
-    let targetBlockIndex = allBlocks.findIndex(elem => {
-      return elem.id === this.props.gameData.id
+    let targetBlockIndex = allBlocks.findIndex((elem) => {
+      return elem.id === this.props.gameData.id;
     });
 
     if (targetBlockIndex > -1) {
@@ -235,26 +261,35 @@ class BlockModalWindow extends React.Component {
         ...this.props.gameData,
         ...this.state.localGameData,
         platforms: platforms,
-        sectionId: sectionId
+        sectionId: sectionId,
       };
 
       //console.log(this.props.gameData);
       //console.log(this.state.localGameData);
       //console.log(allBlocks[targetBlockIndex]);
 
-      fire.firestore().collection('users').doc(this.props.userData.uid).update({
-        blocks: allBlocks,
-        sections: allSections,
-      }).then(() => {
-        this.setState({
-          saveButtonDisabled: false
-        }, () => this.props.hideWindow())
-      }).catch(error => {
-        console.log(error.message);
-        this.setState({
-          saveButtonDisabled: false
+      fire
+        .firestore()
+        .collection("users")
+        .doc(this.props.userData.uid)
+        .update({
+          blocks: allBlocks,
+          sections: allSections,
         })
-      });
+        .then(() => {
+          this.setState(
+            {
+              saveButtonDisabled: false,
+            },
+            () => this.props.hideWindow()
+          );
+        })
+        .catch((error) => {
+          console.log(error.message);
+          this.setState({
+            saveButtonDisabled: false,
+          });
+        });
     }
   }
 
@@ -264,40 +299,51 @@ class BlockModalWindow extends React.Component {
       ...this.state.localGameData,
       id: `id${new Date().getTime()}`,
       platforms: platforms,
-      sectionId: this.props.sectionId
+      sectionId: this.props.sectionId,
     };
 
     const allBlocks = [...this.props.userBlocks, newBlock];
 
-    fire.firestore().collection('users').doc(this.props.userData.uid).update({
-      blocks: allBlocks
-    }).then(() => {
-      this.setState({
-        saveButtonText: "Done"
-      }, () => this.props.hideWindow())
-    }).catch(error => {
-      console.log(error.message);
-    });
+    fire
+      .firestore()
+      .collection("users")
+      .doc(this.props.userData.uid)
+      .update({
+        blocks: allBlocks,
+      })
+      .then(() => {
+        this.setState(
+          {
+            saveButtonText: "Done",
+          },
+          () => this.props.hideWindow()
+        );
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   }
 
   render() {
     const platformPicker = this.state.platforms.map((elem) => {
       return (
-          <div className="checkbox-wrapper" key={elem.id}>
-            <input
-              className="platform-checkbox-input"
-              type="checkbox"
-              value={elem.id}
-              checked={elem.checked}
-              onChange={this.handleCheckboxInputChange}
-              id={"" + elem.id + elem.name}>
-            </input>
-            <span className="platform-checkbox-status">
-              <span className="platform-checkbox-icon">{PlatformsIcons[elem.iconName]}</span>
+        <div className="checkbox-wrapper" key={elem.id}>
+          <input
+            className="platform-checkbox-input"
+            type="checkbox"
+            value={elem.id}
+            checked={elem.checked}
+            onChange={this.handleCheckboxInputChange}
+            id={"" + elem.id + elem.name}
+          ></input>
+          <span className="platform-checkbox-status">
+            <span className="platform-checkbox-icon">
+              {PlatformsIcons[elem.iconName]}
             </span>
-            <span className="platform-tooltip">{elem.name}</span>
-          </div>
-        );
+          </span>
+          <span className="platform-tooltip">{elem.name}</span>
+        </div>
+      );
     });
 
     let newHomeSelector = "";
@@ -305,35 +351,43 @@ class BlockModalWindow extends React.Component {
     if (this.props.fullMode) {
       const listSectionOptions = this.props.userLists.map((elem, index) => {
         return (
-          <option key={index} value={elem.id}>{elem.name}</option>
+          <option key={index} value={elem.id}>
+            {elem.name}
+          </option>
         );
       });
 
-      const sectionSectionOptions = this.props.userSections.filter((elem) => {
-        return elem.listId === this.state.newListForBlock;
-      }).map((elem, index) => {
-        return (
-          <option key={index} value={elem.id}>{elem.name}</option>
-        );
-      });
+      const sectionSectionOptions = this.props.userSections
+        .filter((elem) => {
+          return elem.listId === this.state.newListForBlock;
+        })
+        .map((elem, index) => {
+          return (
+            <option key={index} value={elem.id}>
+              {elem.name}
+            </option>
+          );
+        });
 
       newHomeSelector = (
         <div className="modalPiece lt-row">
           <div className="lt-col home-selector">
             <span className="littleHeaders">List</span>
             <select
-                className="block-select"
-                value={this.state.newListForBlock}
-                onChange={this.newListSelectChangeHandler}>
+              className="block-select"
+              value={this.state.newListForBlock}
+              onChange={this.newListSelectChangeHandler}
+            >
               {listSectionOptions}
             </select>
           </div>
           <div className="lt-col">
             <span className="littleHeaders">Pick a Section</span>
             <select
-                className="block-select"
-                value={this.state.newSectionForBlock}
-                onChange={this.newSectionSelectChangeHandler}>
+              className="block-select"
+              value={this.state.newSectionForBlock}
+              onChange={this.newSectionSelectChangeHandler}
+            >
               {sectionSectionOptions}
             </select>
           </div>
@@ -341,99 +395,117 @@ class BlockModalWindow extends React.Component {
       );
     }
 
-    const deleteButton = (this.props.fullMode) ?
-        <Button
-            buttonAction={this.changeDeleteMode}
-            text={'Delete'}
-            margin={'right'}
-        /> : '';
+    const deleteButton = this.props.fullMode ? (
+      <Button
+        buttonAction={this.changeDeleteMode}
+        text={"Delete"}
+        margin={"right"}
+      />
+    ) : (
+      ""
+    );
 
     const name = (
       <div className="lt-row search-row">
-        {this.state.displaySearchResults ? <span className='search-overlay' onClick={this.resetSearchResults}/> : ''}
+        {this.state.displaySearchResults ? (
+          <span className="search-overlay" onClick={this.resetSearchResults} />
+        ) : (
+          ""
+        )}
         <textarea
-            placeholder="Enter Game Name"
-            className="block-textarea"
-            id="name"
-            rows={1}
-            value={this.state.nameInputValue}
-            onChange={this.nameInputValueChange}/>
-        {this.state.displaySearchResults ? <NameSearchResults
+          placeholder="Enter Game Name"
+          className="block-textarea"
+          id="name"
+          rows={1}
+          value={this.state.nameInputValue}
+          onChange={this.nameInputValueChange}
+        />
+        {this.state.displaySearchResults ? (
+          <NameSearchResults
             results={this.state.searchResult}
-            passIdBack={(gameId) => this.passIdBack(gameId)}/> : ''}
+            passIdBack={(gameId) => this.passIdBack(gameId)}
+          />
+        ) : (
+          ""
+        )}
       </div>
     );
 
     const apiDeveloper = (
-        <div className="modalPiece">
-          <p className="littleHeaders">Developer</p>
-          <span className="game-property">{this.state.localGameData.developers || 'No Data'}</span>
-        </div>
-    )
+      <div className="modalPiece">
+        <p className="littleHeaders">Developer</p>
+        <span className="game-property">
+          {this.state.localGameData.developers || "No Data"}
+        </span>
+      </div>
+    );
 
     const apiDate = (
-        <div className="modalPiece">
-          <p className="littleHeaders">Release Date</p>
-          <span className="game-property">{this.state.localGameData.releaseDate || 'TBA'}</span>
-        </div>
-    )
+      <div className="modalPiece">
+        <p className="littleHeaders">Release Date</p>
+        <span className="game-property">
+          {this.state.localGameData.releaseDate || "TBA"}
+        </span>
+      </div>
+    );
 
     const confirmDelete = (
-        <div className="lt-row game-window-confirm-delete-row">
-          <span className="game-window-confirm-delete-message">Are You Sure?</span>
-          <Button
-              text={'Yes'}
-              margin={'right'}
-              buttonAction={this.deleteBlock}
-              disabled={this.state.deleteButtonDisabled}
-          />
-          <Button
-              text={'No'}
-              buttonAction={this.changeDeleteMode}
-          />
-        </div>
-    )
+      <div className="lt-row game-window-confirm-delete-row">
+        <span className="game-window-confirm-delete-message">
+          Are You Sure?
+        </span>
+        <Button
+          text={"Yes"}
+          margin={"right"}
+          buttonAction={this.deleteBlock}
+          disabled={this.state.deleteButtonDisabled}
+        />
+        <Button text={"No"} buttonAction={this.changeDeleteMode} />
+      </div>
+    );
 
     return (
-        <>
-          <Modal show={this.props.show} onHide={this.props.hideWindow} dialogClassName={'block-modal'}>
-            <Modal.Body>
-              <div className="lt-col">
-                {/*title*/}
-                {name}
-                {/*New list and section selector*/}
-                {newHomeSelector}
-                {/*developer*/}
-                {apiDeveloper}
-                {/*release date*/}
-                {apiDate}
-                {/*platform*/}
-                <div className="modalPiece">
-                  <p className="littleHeaders">I've played it on</p>
-                  <div className="checkbox-holder">
-                    {platformPicker}
-                  </div>
-                </div>
+      <>
+        <Modal
+          show={this.props.show}
+          onHide={this.props.hideWindow}
+          dialogClassName={"block-modal"}
+        >
+          <Modal.Body>
+            <div className="lt-col">
+              {/*title*/}
+              {name}
+              {/*New list and section selector*/}
+              {newHomeSelector}
+              {/*developer*/}
+              {apiDeveloper}
+              {/*release date*/}
+              {apiDate}
+              {/*platform*/}
+              <div className="modalPiece">
+                <p className="littleHeaders">I've played it on</p>
+                <div className="checkbox-holder">{platformPicker}</div>
               </div>
-              <div className="lt-row game-window-buttons">
-                <div className="lt-row">
-                  <Button
-                      buttonAction={this.props.hideWindow}
-                      text={'Cancel'}
-                      margin={'right'}
-                  />
-                  <Button
-                      buttonAction={this.modalSave}
-                      disabled={this.state.saveButtonDisabled}
-                      text={'Save'}
-                  />
-                </div>
-                {this.state.deleteMode ? confirmDelete : deleteButton}
+            </div>
+            <div className="lt-row game-window-buttons">
+              <div className="lt-row">
+                <Button
+                  buttonAction={this.props.hideWindow}
+                  text={"Cancel"}
+                  margin={"right"}
+                />
+                <Button
+                  buttonAction={this.modalSave}
+                  disabled={this.state.saveButtonDisabled}
+                  text={"Save"}
+                />
               </div>
-            </Modal.Body>
-          </Modal>
-        </>
-    )
+              {this.state.deleteMode ? confirmDelete : deleteButton}
+            </div>
+          </Modal.Body>
+        </Modal>
+      </>
+    );
   }
 }
 
@@ -445,8 +517,8 @@ const stateToProps = (state = {}, props = {}) => {
     userData: state.userData,
     userBlocks: state.userBlocks,
     userSections: state.userSections,
-    userLists: state.userLists
-  }
+    userLists: state.userLists,
+  };
 };
 
 const BlockModalWindowConnected = connect(stateToProps, null)(BlockModalWindow);

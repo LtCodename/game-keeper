@@ -1,60 +1,60 @@
 .auth-screen-wrapper {
-    background-color: var(--first-color);
-    padding: 20px;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - var(--content-gap));
+  background-color: var(--first-color);
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - var(--content-gap));
 }
 
 .auth-content {
-    padding: 20px;
-    background-color: var(--third-color);
-    max-width: 340px;
+  padding: 20px;
+  background-color: var(--third-color);
+  max-width: 340px;
 }
 
 .auth-screen-title {
-    color: #0178c5;
-    font-size: 19px;
-    font-weight: 800;
-    text-align: center;
-    margin-bottom: 5px;
+  color: #0178c5;
+  font-size: 19px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 5px;
 }
 
 .auth-input-label {
-    color: #0178c5;
-    font-weight: 300;
-    margin-bottom: 10px;
+  color: #0178c5;
+  font-weight: 300;
+  margin-bottom: 10px;
 }
 
 .auth-buttons-area {
-    margin-top: 10px;
-    justify-content: space-between;
+  margin-top: 10px;
+  justify-content: space-between;
 }
 
 .auth-text-piece {
-    color: #0178c5;
-    font-weight: 300;
+  color: #0178c5;
+  font-weight: 300;
 }
 
 .auth-bold-text-piece {
-    color: #0178c5;
-    font-weight: 700;
+  color: #0178c5;
+  font-weight: 700;
 }
 
 .auth-margin-top {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .auth-margin-bottom {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .auth-demo-button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .auth-demo-button:hover {
-    cursor: pointer;
-    text-decoration: underline;
-    color: #0056b3;
+  cursor: pointer;
+  text-decoration: underline;
+  color: #0056b3;
 }

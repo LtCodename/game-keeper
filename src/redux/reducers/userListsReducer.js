@@ -1,9 +1,9 @@
 const initState = [];
 
-const LISTS_SET = 'LISTS_SET';
+const LISTS_SET = "LISTS_SET";
 
 const userListsReducer = (state = initState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case LISTS_SET:
       return action.lists;
     default:
@@ -11,4 +11,4 @@ const userListsReducer = (state = initState, action) => {
   }
 };
 
-export default {reducer: userListsReducer,  actions: { LISTS_SET }};
+export default { reducer: userListsReducer, actions: { LISTS_SET } };

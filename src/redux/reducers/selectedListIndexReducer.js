@@ -1,11 +1,15 @@
 const initState = null;
 
-const SLI_CHANGE = 'SLI_CHANGE';
+const SLI_CHANGE = "SLI_CHANGE";
 
 const selectedListIndexReducer = (state = initState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case SLI_CHANGE:
-      if (state !== action.index && action.index >= 0 && action.index < action.listsLength) {
+      if (
+        state !== action.index &&
+        action.index >= 0 &&
+        action.index < action.listsLength
+      ) {
         return action.index;
       }
       return state;
@@ -14,4 +18,4 @@ const selectedListIndexReducer = (state = initState, action) => {
   }
 };
 
-export default {reducer: selectedListIndexReducer,  actions: { SLI_CHANGE }};
+export default { reducer: selectedListIndexReducer, actions: { SLI_CHANGE } };

@@ -1,51 +1,51 @@
 .textarea-gk {
-    outline: none;
-    background: var(--second-color);
-    padding-left: 5px;
-    color: var(--first-color);
-    font-weight: 800;
-    resize: none;
-    border: 1px solid transparent;
-    transition: .3s all;
+  outline: none;
+  background: var(--second-color);
+  padding-left: 5px;
+  color: var(--first-color);
+  font-weight: 800;
+  resize: none;
+  border: 1px solid transparent;
+  transition: 0.3s all;
 }
 
 .textarea-gk:hover {
-    outline: none;
-    border: 1px solid var(--first-color);
+  outline: none;
+  border: 1px solid var(--first-color);
 }
 
 .textarea-gk:focus {
-    outline: none;
+  outline: none;
 }
 
 .textarea-gk:active {
-    outline: none;
+  outline: none;
 }
 
 .textarea-gk:-webkit-autofill,
 .textarea-gk:-webkit-autofill:hover,
 .textarea-gk:-webkit-autofill:focus {
-    -webkit-text-fill-color: var(--first-color);
-    -webkit-box-shadow: 0 0 0 1000px var(--second-color) inset;
-    transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: var(--first-color);
+  -webkit-box-shadow: 0 0 0 1000px var(--second-color) inset;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 /*Additional Styles*/
 
 .global-search-textarea {
-    width: 400px;
+  width: 400px;
 }
 
 .auth-screen-input {
-    width: 300px;
+  width: 300px;
 }
 
 .auth-screen-input-margin {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .add-list-input {
-    width: 100%;
+  width: 100%;
 }
 
 @media (max-width: 800px) {
@@ -55,7 +55,7 @@
 }
 
 @media (max-width: 450px) {
-    .global-search-textarea {
-        width: 240px;
-    }
+  .global-search-textarea {
+    width: 240px;
+  }
 }

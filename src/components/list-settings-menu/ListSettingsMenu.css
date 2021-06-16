@@ -1,29 +1,29 @@
 .list-settings-menu-container {
-    position: absolute;
-    background: #fef9de;
-    z-index: 1;
-    top: 120%;
-    padding: 10px;
+  position: absolute;
+  background: #fef9de;
+  z-index: 1;
+  top: 120%;
+  padding: 10px;
 }
 
 .list-settings-segment:not(:last-child) {
-    padding-bottom: 5px;
+  padding-bottom: 5px;
 }
 
 .list-settings-segment-title {
-    color: #0178c5;
-    font-weight: 300;
+  color: #0178c5;
+  font-weight: 300;
 }
 
 .new-list-position-select {
-    width: fit-content;
-    margin-top: 5px;
+  width: fit-content;
+  margin-top: 5px;
 }
 
 .new-list-position-select:focus {
-    outline: none;
+  outline: none;
 }
 
 .new-list-position-select:active {
-    outline: none;
+  outline: none;
 }

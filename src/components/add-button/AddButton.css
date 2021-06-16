@@ -1,59 +1,59 @@
 .gk-add-button {
-    border: none;
-    width: fit-content;
-    background: rgba(255, 249, 222, 0.3);
-    padding: 10px;
-    color: #0178c5;
-    font-weight: 700;
-    cursor: pointer;
-    transition: .3s all;
+  border: none;
+  width: fit-content;
+  background: rgba(255, 249, 222, 0.3);
+  padding: 10px;
+  color: #0178c5;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s all;
 }
 
 .gk-add-button:hover {
-    background: rgba(255, 249, 222, 1);
+  background: rgba(255, 249, 222, 1);
 }
 
 .gk-add-button:active {
-    outline: none;
+  outline: none;
 }
 
 .gk-add-button:focus {
-    outline: none;
+  outline: none;
 }
 
 .gk-add-button-game {
-    margin-bottom: 5px;
-    min-height: 89px;
-    max-width: 65px;
+  margin-bottom: 5px;
+  min-height: 89px;
+  max-width: 65px;
 }
 
 .gk-add-button-game-hidden {
-    width: 114px;
+  width: 114px;
 }
 
 .gk-add-button-list {
-    width: 100%;
-    padding: 0 10px;
-    font-size: 19px;
+  width: 100%;
+  padding: 0 10px;
+  font-size: 19px;
 }
 
 .gk-add-button-dashboard {
-    font-size: 19px;
-    max-height: 48px;
+  font-size: 19px;
+  max-height: 48px;
 }
 
 @media (max-width: 450px) {
-    .gk-add-button-game {
-        margin: 0;
-    }
+  .gk-add-button-game {
+    margin: 0;
+  }
 
-    .gk-add-button-game {
-        min-width: 100%;
-    }
+  .gk-add-button-game {
+    min-width: 100%;
+  }
 }
 
 @media (max-width: 650px) {
-    .gk-add-button-list {
-        display: none;
-    }
+  .gk-add-button-list {
+    display: none;
+  }
 }

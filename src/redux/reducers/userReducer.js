@@ -1,9 +1,9 @@
 const initState = null;
 
-const USER_CHECK = 'USER_CHECK';
+const USER_CHECK = "USER_CHECK";
 
 const userReducer = (state = initState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case USER_CHECK:
       return action.user;
     default:
@@ -11,4 +11,4 @@ const userReducer = (state = initState, action) => {
   }
 };
 
-export default {reducer: userReducer,  actions: { USER_CHECK }};
+export default { reducer: userReducer, actions: { USER_CHECK } };

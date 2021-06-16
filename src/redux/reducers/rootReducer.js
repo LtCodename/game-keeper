@@ -1,11 +1,11 @@
-import colorsReducer from './colorsReducer';
-import userListsReducer from './userListsReducer';
-import userSectionsReducer from './userSectionsReducer';
-import userBlocksReducer from './userBlocksReducer';
-import platformsReducer from './platformsReducer';
-import userReducer from './userReducer';
-import selectedListIndexReducer from './selectedListIndexReducer';
-import { combineReducers } from 'redux';
+import colorsReducer from "./colorsReducer";
+import userListsReducer from "./userListsReducer";
+import userSectionsReducer from "./userSectionsReducer";
+import userBlocksReducer from "./userBlocksReducer";
+import platformsReducer from "./platformsReducer";
+import userReducer from "./userReducer";
+import selectedListIndexReducer from "./selectedListIndexReducer";
+import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
   colors: colorsReducer.reducer,
@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   platforms: platformsReducer.reducer,
   userLists: userListsReducer.reducer,
   userSections: userSectionsReducer.reducer,
-  userBlocks: userBlocksReducer.reducer
+  userBlocks: userBlocksReducer.reducer,
 });
 
 export default rootReducer;

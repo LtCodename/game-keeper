@@ -79,7 +79,7 @@
   display: block;
   padding: 5px 7px;
   background: var(--second-color);
-  transition: .3s all;
+  transition: 0.3s all;
   border: 2px solid transparent;
 }
 
@@ -93,7 +93,7 @@
   border: 2px solid var(--first-color);
 }
 
-.checkbox-wrapper:hover .platform-tooltip{
+.checkbox-wrapper:hover .platform-tooltip {
   visibility: visible;
 }
 
@@ -185,7 +185,7 @@ option {
   color: var(--first-color);
   font-weight: 600;
   outline: none;
-  transition: all .1s;
+  transition: all 0.1s;
   padding-top: 5px;
   border-bottom: 5px solid transparent;
   text-align: left;

@@ -1,9 +1,9 @@
 const initState = [];
 
-const SECTIONS_SET = 'SECTIONS_SET';
+const SECTIONS_SET = "SECTIONS_SET";
 
 const userSectionsReducer = (state = initState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case SECTIONS_SET:
       return action.sections;
     default:
@@ -11,4 +11,4 @@ const userSectionsReducer = (state = initState, action) => {
   }
 };
 
-export default {reducer: userSectionsReducer,  actions: { SECTIONS_SET }};
+export default { reducer: userSectionsReducer, actions: { SECTIONS_SET } };

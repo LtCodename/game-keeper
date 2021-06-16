@@ -10,12 +10,12 @@
   justify-content: space-around;
   align-items: center;
   position: relative;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .loader {
-  border: 16px solid #fff9de;/* Bigger Part */
-  border-top: 16px solid #3498db;/* Smaller part */
+  border: 16px solid #fff9de; /* Bigger Part */
+  border-top: 16px solid #3498db; /* Smaller part */
   border-radius: 50%;
   width: 120px;
   height: 120px;
@@ -23,6 +23,10 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

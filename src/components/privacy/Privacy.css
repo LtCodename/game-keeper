@@ -9,11 +9,11 @@
 }
 
 .privacy-text h1 {
-  color: var(--first-color)
+  color: var(--first-color);
 }
 
 .privacy-text h2 {
-  color: var(--first-color)
+  color: var(--first-color);
 }
 
 .privacy-text a {
@@ -28,7 +28,7 @@
 }
 
 .privacy-text span {
-  color: var(--first-color)
+  color: var(--first-color);
 }
 
 .privacyLink {
@@ -45,7 +45,6 @@
   font-weight: 800;
   margin: 10px 0;
 }
-
 
 @media (max-width: 580px) {
   .privacyWrapper {
