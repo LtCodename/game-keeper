@@ -12,7 +12,6 @@ import {
   SwitchIcon,
   XboxOneIcon,
 } from "../../IconsLibrary";
-import { DemoUser } from "../../App";
 
 export const PlatformsIcons = {
   ios: iOSIcon,
@@ -40,10 +39,6 @@ class UserBlock extends React.Component {
   };
 
   openModalWindow = () => {
-    if (this.props.userData.email === DemoUser) {
-      return;
-    }
-
     this.setState({
       showModalWindow: true,
     });

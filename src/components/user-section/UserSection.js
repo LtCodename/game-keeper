@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { SectionColorButton, SectionOptionsButton } from "../../IconsLibrary";
 import AddGameTool from "../add-game-tool/AddGameTool";
 import SectionSettingsMenu from "../section-settings-menu/SectionSettingsMenu";
-import { DemoUser } from "../../App";
 
 class UserSection extends React.Component {
   constructor(props) {
@@ -108,7 +107,7 @@ class UserSection extends React.Component {
         ) : (
           <span className="sectionName">{this.props.name}</span>
         )}
-        {this.props.userData.email === DemoUser ? "" : editSectionButton}
+        {editSectionButton}
       </div>
     );
 
@@ -117,11 +116,7 @@ class UserSection extends React.Component {
         {nameAndButtonsBlock}
         <div className="inner-section">
           {gamesToRender}
-          {this.props.userData.email === DemoUser ? (
-            ""
-          ) : (
-            <AddGameTool sectionId={this.props.id} />
-          )}
+          <AddGameTool sectionId={this.props.id} />
         </div>
       </>
     );

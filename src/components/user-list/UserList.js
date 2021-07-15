@@ -8,7 +8,6 @@ import Nav from "../nav/Nav";
 import { Redirect, withRouter } from "react-router-dom";
 import AddSectionTool from "../add-section-tool/AddSectionTool";
 import ListSettingsMenu from "../list-settings-menu/ListSettingsMenu";
-import { DemoUser } from "../../App";
 
 class UserList extends React.Component {
   constructor(props) {
@@ -105,7 +104,7 @@ class UserList extends React.Component {
     const nameAndButtonsBlock = (
       <div className="listWrapper">
         <span className="listName">{this.props.list.name}</span>
-        {this.props.userData.email === DemoUser ? "" : editListButton}
+        {editListButton}
       </div>
     );
 
@@ -116,15 +115,11 @@ class UserList extends React.Component {
           {nameAndButtonsBlock}
           {hiddenSection}
           {sectionsToRender}
-          {this.props.userData.email === DemoUser ? (
-            ""
-          ) : (
-            <AddSectionTool
-              listId={this.props.listRealId}
-              sections={this.props.userSections}
-              userData={this.props.userData}
-            />
-          )}
+          <AddSectionTool
+            listId={this.props.listRealId}
+            sections={this.props.userSections}
+            userData={this.props.userData}
+          />
         </div>
       </div>
     );

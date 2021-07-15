@@ -11,7 +11,6 @@ import {
   SwitchIcon,
   XboxOneIcon,
 } from "../../IconsLibrary";
-import { DemoUser } from "../../App";
 
 class UserBlockMini extends React.Component {
   constructor(props) {
@@ -29,10 +28,6 @@ class UserBlockMini extends React.Component {
   };
 
   openModalWindow = () => {
-    if (this.props.userData.email === DemoUser) {
-      return;
-    }
-
     this.setState({
       showModalWindow: true,
     });
