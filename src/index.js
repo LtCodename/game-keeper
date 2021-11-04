@@ -12,10 +12,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 ReactDOM.render(
-  <Provider store={store}>
-    <AppConnected />
-  </Provider>,
-  document.getElementById("root")
+	<Provider store={store}>
+		<AppConnected />
+	</Provider>,
+	document.getElementById("root"),
 );
 
 serviceWorker.unregister();

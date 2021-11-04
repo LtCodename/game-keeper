@@ -8,13 +8,13 @@ import selectedListIndexReducer from "./selectedListIndexReducer";
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
-  colors: colorsReducer.reducer,
-  userData: userReducer.reducer,
-  selectedListIndex: selectedListIndexReducer.reducer,
-  platforms: platformsReducer.reducer,
-  userLists: userListsReducer.reducer,
-  userSections: userSectionsReducer.reducer,
-  userBlocks: userBlocksReducer.reducer,
+	colors: colorsReducer.reducer,
+	userData: userReducer.reducer,
+	selectedListIndex: selectedListIndexReducer.reducer,
+	platforms: platformsReducer.reducer,
+	userLists: userListsReducer.reducer,
+	userSections: userSectionsReducer.reducer,
+	userBlocks: userBlocksReducer.reducer,
 });
 
 export default rootReducer;
